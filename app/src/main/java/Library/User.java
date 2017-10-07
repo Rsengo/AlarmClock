@@ -8,7 +8,7 @@ import java.io.*;
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class User implements IEdite, Serializable {
+public class User implements Serializable, IEdite {
     private String _name; //Имя
     private ArrayList<Alarm> _alarms = new ArrayList<>(); //Будильники
     private int _moneyQuantity; //Число монет
@@ -17,7 +17,7 @@ public class User implements IEdite, Serializable {
     private UserInterface _userInterface; //Пользовательский интерфейс
     private ArrayList<Day> _schedule = new ArrayList<>(); //Расписание
 
-    private static User user; //Ссылка на себя
+    private static User _user; //Ссылка на себя
     private User(File userFile) { //Загрузка данных из объекта
         /****Десериализация****/
     }
@@ -25,15 +25,15 @@ public class User implements IEdite, Serializable {
         /****Ссылка на какой-то хэлпер(регистрация)****/
         /**Только имя, остально в настройках**/
     }
-    public  static User getInstance(String path) { //Создание пользователя/
-        if (user == null) { //Если вход не выполнен
+    private static User getInstance(String path) { //Создание пользователя
+        if (_user == null) { //Если вход не выполнен
             if (new File(path).exists()) {  //Существование файла
-                user = new User(new File(path)); //Отправка файла на десериализацию
+                _user = new User(new File(path)); //Отправка файла на десериализацию
             } else { //Если файла нет
-                user = new User(); //Создание нового пользователя
+                _user = new User(); //Создание нового пользователя
             }
         }
-        return user; //Возврат ссылки
+        return _user; //Возврат ссылки
     }
 
     public String getName() {
@@ -75,5 +75,13 @@ public class User implements IEdite, Serializable {
     public void setUserInterface(UserInterface userInterface) {
         _userInterface = userInterface;
     }
+
+    @Override
+    public void OpenEditeDialog() { //Редактирование
+        //Открытие диалога редактирования
+    }
+
+    /****Добавление/удаление будильников с заходом в БД****/
+    /****Добавление/удаление дней с заходом в БД****/
 }
 
