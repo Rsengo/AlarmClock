@@ -36,5 +36,44 @@ public class User implements IEdite, Serializable {
         return user; //Возврат ссылки
     }
 
+    public String getName() {
+        return _name;
+    }
+
+    public void setName(String name) {
+        _name = name;
+    }
+
+    public int getMoneyQuantity() {
+        return _moneyQuantity;
+    }
+
+    public void setMoneyQuantity(int moneyQuantity) {
+        _moneyQuantity = moneyQuantity;
+    }
+
+    public SMS getSms() {
+        return _sms;
+    }
+
+    public void setSms(SMS sms) {
+        _sms = sms;
+    }
+
+    public Voice getVoice() {
+        return _voice;
+    }
+
+    public void setVoice(Voice voice) {
+        _voice = voice;
+    }
+
+    public UserInterface getUserInterface() {
+        return _userInterface;
+    }
+
+    public void setUserInterface(UserInterface userInterface) {
+        _userInterface = userInterface;
+    }
 }
 
