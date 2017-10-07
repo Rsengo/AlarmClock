@@ -5,5 +5,5 @@ package Library;
  */
 
 interface IEdite<T> {
-    void Edite(T object);
+    //void Edite(T object);
 }
