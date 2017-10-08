@@ -18,9 +18,6 @@ public class User implements Serializable, IEdite {
     private ArrayList<Day> _schedule = new ArrayList<>(); //Расписание
 
     private static User _user; //Ссылка на себя
-    private User(File userFile) { //Загрузка данных из объекта
-        /****Десериализация****/
-    }
     private User() { //Новый пользователь
         /****Ссылка на какой-то хэлпер(регистрация)****/
         /**Только имя, остально в настройках**/
@@ -28,7 +25,7 @@ public class User implements Serializable, IEdite {
     private static User getInstance(String path) { //Создание пользователя
         if (_user == null) { //Если вход не выполнен
             if (new File(path).exists()) {  //Существование файла
-                _user = new User(new File(path)); //Отправка файла на десериализацию
+                _user = Deserialize(new File(path)); //Отправка файла на десериализацию
             } else { //Если файла нет
                 _user = new User(); //Создание нового пользователя
             }
@@ -78,10 +75,21 @@ public class User implements Serializable, IEdite {
 
     @Override
     public void OpenEditeDialog() { //Редактирование
-        //Открытие диалога редактирования
+        /****Открытие диалога редактирования****/
     }
 
-    /****Добавление/удаление будильников с заходом в БД****/
+    private static User Deserialize(File file) { //Загрузка данных из объекта
+        /****Десериализация****/
+        return null;
+    }
+
+    public void Serialize() {
+        /****Сериализация****/
+
+    }
+
+/****Добавление/удаление будильников с заходом в БД****/
     /****Добавление/удаление дней с заходом в БД****/
+
 }
 
