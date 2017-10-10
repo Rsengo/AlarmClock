@@ -20,7 +20,7 @@ public class User implements Serializable, IEdite {
     private static User _user; //Ссылка на себя
     private User() { //Новый пользователь
         /****Ссылка на какой-то хэлпер(регистрация)****/
-        /**Только имя, остально в настройках**/
+        /**Только имя, остальное в настройках**/
     }
     private static User getInstance(String path) { //Создание пользователя
         if (_user == null) { //Если вход не выполнен
