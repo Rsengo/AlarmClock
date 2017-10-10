@@ -21,4 +21,8 @@ public class Instruction {
         }
         return _instruction;
     }
+
+    public ArrayDeque<Slide> getSlides() {
+        return _slides;
+    }
 }
