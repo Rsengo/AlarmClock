@@ -10,7 +10,7 @@ import java.io.*;
 
 public class User implements Serializable, IEdite {
     private String _name; //Имя
-    private ArrayList<Alarm> _alarms = new ArrayList<>(); //Будильники
+    private ArrayList<Ring> _alarms = new ArrayList<>(); //Будильники
     private int _moneyQuantity; //Число монет
     private SMS _sms; //СМС
     private Voice _voice; //Голосовое отключение
