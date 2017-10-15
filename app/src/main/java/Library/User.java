@@ -10,12 +10,11 @@ import java.io.*;
 
 public class User implements Serializable, IEdite {
     private String _name; //Имя
-    private ArrayList<Ring> _alarms = new ArrayList<>(); //Будильники
+    private ArrayList<Signal> _alarms = new ArrayList<>(); //Будильники
+    private ArrayList<Signal> _cases = new ArrayList<>(); //События
     private int _moneyQuantity; //Число монет
-    private SMS _sms; //СМС
-    private Voice _voice; //Голосовое отключение
-    private UserInterface _userInterface; //Пользовательский интерфейс
-    private ArrayList<Day> _schedule = new ArrayList<>(); //Расписание
+    private UserInterface _userInterface; /****мб сделать абстракцию****/
+    //Пользовательский интерфейс
 
     private static User _user; //Ссылка на себя
     private User() { //Новый пользователь
@@ -49,22 +48,6 @@ public class User implements Serializable, IEdite {
         _moneyQuantity = moneyQuantity;
     }
 
-    public SMS getSms() {
-        return _sms;
-    }
-
-    public void setSms(SMS sms) {
-        _sms = sms;
-    }
-
-    public Voice getVoice() {
-        return _voice;
-    }
-
-    public void setVoice(Voice voice) {
-        _voice = voice;
-    }
-
     public UserInterface getUserInterface() {
         return _userInterface;
     }
@@ -72,6 +55,8 @@ public class User implements Serializable, IEdite {
     public void setUserInterface(UserInterface userInterface) {
         _userInterface = userInterface;
     }
+
+    /****Добавление/удаление будильников/событий с заходом в БД****/
 
     @Override
     public void OpenEditeDialog() { //Редактирование
@@ -87,9 +72,5 @@ public class User implements Serializable, IEdite {
         /****Сериализация****/
 
     }
-
-/****Добавление/удаление будильников с заходом в БД****/
-    /****Добавление/удаление дней с заходом в БД****/
-
 }
 
