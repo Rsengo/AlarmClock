@@ -5,5 +5,5 @@ package Library;
  */
 
 public abstract class Signal implements IEdite {
-    //abstracthfjgfjxffdgdgfdrg
+    //abstracthfjgfjxffdgdgfdrgfsg
 }
