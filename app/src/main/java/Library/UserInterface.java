@@ -6,9 +6,9 @@ import java.io.Serializable;
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class UserInterface implements IEdite {
+public class UserInterface implements IEdite, ISetting {
     /****Пока хз, что тут еще будет****/
-    /****Возможно добавить абстракции****/
+    /****Реализовать методы интерфейсов****/
     public static final byte NORMALFONT = 0;
     public static final byte SMALLFONT = 1;
     public static final byte BIGFONT = 2;
@@ -57,5 +57,10 @@ public class UserInterface implements IEdite {
     @Override
     public void OpenEditeDialog() {  //Редактирование
         /****Открытие диалога редактирования****/
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

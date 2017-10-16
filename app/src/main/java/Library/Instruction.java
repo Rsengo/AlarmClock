@@ -9,6 +9,8 @@ import java.util.Queue;
  */
 
 public class Instruction {
+    /****подгрузить слайды из БД****/
+    /****методы класса****/
     private ArrayDeque<Slide> _slides;
 
     private static Instruction _instruction;
@@ -24,5 +26,15 @@ public class Instruction {
 
     public ArrayDeque<Slide> getSlides() {
         return _slides;
+    }
+
+    public void skip()
+    {
+
+    }
+
+    public void restart()
+    {
+
     }
 }

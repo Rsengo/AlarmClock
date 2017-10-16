@@ -9,6 +9,8 @@ import java.sql.Time;
  */
 
 public abstract class Signal implements IEdite {
+    /****Методы интерфейсов****/
+    /****Методы класса****/
     protected String _name; // Название
     protected Time _signalTime; /****заменить на новый тип****/  //Время запуска
     protected Time _repeatSignalInterval; /****заменить на новый тип****/  //интервал повтора
@@ -103,7 +105,13 @@ public abstract class Signal implements IEdite {
     public abstract void OpenEditeDialog();  //Редактирование
         /****Открытие диалога редактирования****/
 
-    /****Методы класса****/
+    public void start()
+    {
 
+    }
 
+    public void stop()
+    {
+
+    }
 }

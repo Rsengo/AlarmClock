@@ -4,7 +4,8 @@ package Library;
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class Recepient implements IEdite {
+public class Recepient implements IEdite, IMessageRecepient {
+    /****Методы интерфейсов****/
     private String _name; //Имя
     private String _number; //Номер
 

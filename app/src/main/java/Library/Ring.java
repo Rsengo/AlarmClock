@@ -8,13 +8,15 @@ import java.sql.Time;
  */
 
 public class Ring extends Signal {
-    /****добавить абстракции****/
+    /****добавить абстракции для головоломки****/
+    /****Написать метод отложить будьник****/
+    /****Методы интефкйсов****/
     public static final byte SWIPE = 0;
     public static final byte PUZZLE = 1;
 
     private byte _turnOffMethod; //метод выключения
     private Puzzle _puzzle; //головоломка
-    private SMS _sms; //СМС
+    private IMessage _sms; //СМС
     private boolean[] _repeatDays; //Дни повтора
 
     public Ring(String name, Time signalTime, Time repeatSignalInterval, boolean vibrating,
@@ -45,7 +47,7 @@ public class Ring extends Signal {
         _puzzle = puzzle;
     }
 
-    public SMS getSms() {
+    public IMessage getSms() {
         return _sms;
     }
 
@@ -61,10 +63,10 @@ public class Ring extends Signal {
         /****отложить будильник****/
     }
 
-    /****Перегрузка методов Signal****/
-
     @Override
     public void OpenEditeDialog() {  //Редактирование
         /****Открытие диалога редактирования****/
     }
+
+
 }

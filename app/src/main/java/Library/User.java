@@ -9,12 +9,14 @@ import java.io.*;
  */
 
 public class User implements Serializable, IEdite {
-    /****добавить абстракции****/
+    /****Добавление/удаление сигналов с заходом в БД****/
+    /****Выйти из профиля****/
+    /****Кэширование****/
     private String _name; //Имя
     private ArrayList<Signal> _alarms = new ArrayList<>(); //Будильники
     private ArrayList<Signal> _cases = new ArrayList<>(); //События
     private int _moneyQuantity; //Число монет
-    private UserInterface _userInterface; /****мб сделать абстракцию****/
+    private ISetting _userInterface; /****мб сделать абстракцию****/
     //Пользовательский интерфейс
 
     private static User _user; //Ссылка на себя
@@ -49,7 +51,7 @@ public class User implements Serializable, IEdite {
         _moneyQuantity = moneyQuantity;
     }
 
-    public UserInterface getUserInterface() {
+    public ISetting getUserInterface() {
         return _userInterface;
     }
 
@@ -57,21 +59,28 @@ public class User implements Serializable, IEdite {
         _userInterface = userInterface;
     }
 
-    /****Добавление/удаление будильников/событий с заходом в БД****/
-    /****Выйти из профиля****/
-
     @Override
     public void OpenEditeDialog() { //Редактирование
         /****Открытие диалога редактирования****/
     }
 
     private static User Deserialize(File file) { //Загрузка данных из объекта
-        /****Десериализация****/
+        /****Десериализация(Кэш)****/
         return null;
     }
 
     public void Serialize() {
-        /****Сериализация****/
+        /****Сериализация(Кэш)****/
+
+    }
+
+    public void addSignal(Signal signal)
+    {
+
+    }
+
+    public void removeSignal(Signal signal)
+    {
 
     }
 }
