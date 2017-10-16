@@ -9,6 +9,7 @@ import java.io.*;
  */
 
 public class User implements Serializable, IEdite {
+    /****добавить абстракции****/
     private String _name; //Имя
     private ArrayList<Signal> _alarms = new ArrayList<>(); //Будильники
     private ArrayList<Signal> _cases = new ArrayList<>(); //События
@@ -57,6 +58,7 @@ public class User implements Serializable, IEdite {
     }
 
     /****Добавление/удаление будильников/событий с заходом в БД****/
+    /****Выйти из профиля****/
 
     @Override
     public void OpenEditeDialog() { //Редактирование

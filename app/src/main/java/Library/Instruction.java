@@ -9,11 +9,11 @@ import java.util.Queue;
  */
 
 public class Instruction {
-    private ArrayDeque<Slide> _slides = new ArrayDeque<>();
+    private ArrayDeque<Slide> _slides;
 
     private static Instruction _instruction;
     private Instruction() {
-        /****подгрузить слайды****/
+        /****подгрузить слайды из БД****/
     }
     public Instruction getInstance() {
         if (_instruction == null) {
