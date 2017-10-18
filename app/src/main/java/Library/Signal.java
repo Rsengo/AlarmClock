@@ -11,6 +11,7 @@ import java.sql.Time;
 public abstract class Signal implements IEdite {
     /****Методы интерфейсов****/
     /****Методы класса****/
+    /****Порождащий паттерн****/
     protected String _name; // Название
     protected Time _signalTime; /****заменить на новый тип****/  //Время запуска
     protected Time _repeatSignalInterval; /****заменить на новый тип****/  //интервал повтора
@@ -20,10 +21,6 @@ public abstract class Signal implements IEdite {
     protected  Time _turnOffTime; /****заменить на новый тип****/
     //Время автовыключения звукового сигнала
     protected boolean _onState; //Вкл/Выкл звукового сигнала
-
-    public Signal(String name) {
-        _name = name;
-    }
 
     public Signal(String name, Time signalTime, Time repeatSignalInterval, boolean vibrating,
                   File melody, byte melodyVolume, Time turnOffTime, boolean onState) {

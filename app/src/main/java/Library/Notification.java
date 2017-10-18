@@ -7,7 +7,7 @@ import java.sql.Time;
  * Created by ytgv8b on 16.10.2017.
  */
 
-public class Case extends Signal {
+public class Notification extends Signal {
     /****Методы интерфейсов****/
     public static final byte MIDPRIORITY = 0;
     public static final byte LOWPRIORITY = 1;
@@ -24,22 +24,17 @@ public class Case extends Signal {
     private byte _priority;
     private boolean _soundOn;
 
-    public Case(String name, byte priority, Time date, boolean soundOn)
-    {
-        super(name);
-        _priority = priority;
-        _date = date;
-        _soundOn = soundOn;
-    }
-    public Case(String name, Time signalTime, Time repeatSignalInterval, boolean vibrating,
-                File melody, byte melodyVolume, Time turnOffTime, boolean onState, Time date,
-                byte priority, boolean soundOn)
+    public Notification(String name, Time signalTime, Time repeatSignalInterval, boolean vibrating,
+                        File melody, byte melodyVolume, Time turnOffTime, boolean onState, Time date,
+                        byte priority, boolean soundOn, byte generalPeriodicity, byte specificPeriodicity)
     {
         super(name, signalTime, repeatSignalInterval, vibrating, melody, melodyVolume,
                 turnOffTime, onState);
         _date = date;
         _priority = priority;
         _soundOn = soundOn;
+        _generalPeriodicity = generalPeriodicity;
+        _specificPeriodicity = specificPeriodicity;
     }
 
     public byte getGeneralPeriodicity() {
