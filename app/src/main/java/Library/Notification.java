@@ -9,23 +9,15 @@ import java.sql.Time;
 
 public class Notification extends Signal {
     /****Методы интерфейсов****/
-    public static final byte MIDPRIORITY = 0;
-    public static final byte LOWPRIORITY = 1;
-    public static final byte HIGHPRIORITY = 2;
-    public static final byte NOREPEAT = 0;
-    public static final byte EVERYHOUR = 1;
-    public static final byte EVERYWEEK = 2;
-    public static final byte EVERYMOUNTH = 3;
-    public static final byte EVERYYEAR = 4;
 
-    private byte generalPeriodicity;
+    private GeneralPereodicity generalPeriodicity;
     private byte specificPeriodicity;
     private Time date;
-    private byte priority;
+    private Priority priority;
 
     public Notification(String name, Time signalTime, Time repeatSignalInterval, boolean vibrating,
                         File melody, byte melodyVolume, Time turnOffTime, boolean onState, Time date,
-                        byte priority, byte generalPeriodicity, byte specificPeriodicity)
+                        Priority priority, GeneralPereodicity generalPeriodicity, byte specificPeriodicity)
     {
         super(name, signalTime, repeatSignalInterval, vibrating, melody, melodyVolume,
                 turnOffTime, onState);
@@ -35,11 +27,11 @@ public class Notification extends Signal {
         this.specificPeriodicity = specificPeriodicity;
     }
 
-    public byte getGeneralPeriodicity() {
+    public GeneralPereodicity getGeneralPeriodicity() {
         return generalPeriodicity;
     }
 
-    public void setGeneralPeriodicity(byte generalPeriodicity) {
+    public void setGeneralPeriodicity(GeneralPereodicity generalPeriodicity) {
         this.generalPeriodicity = generalPeriodicity;
     }
 
@@ -59,11 +51,11 @@ public class Notification extends Signal {
         this.date = date;
     }
 
-    public byte getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
-    public void setPriority(byte priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 

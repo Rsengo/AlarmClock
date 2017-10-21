@@ -11,17 +11,16 @@ public class Ring extends Signal {
     /****добавить абстракции для головоломки****/
     /****Написать метод отложить будьник****/
     /****Методы интефкйсов****/
-    public static final byte SWIPE = 0;
-    public static final byte PUZZLE = 1;
 
-    private byte turnOffMethod; //метод выключения
+
+    private TurnOffMethod turnOffMethod; //метод выключения
     private Puzzle puzzle; //головоломка
     private IMessage sms; //СМС
     private boolean[] repeatDays; //Дни повтора
 
     public Ring(String name, Time signalTime, Time repeatSignalInterval, boolean vibrating,
                 File melody, byte melodyVolume, Time turnOffTime, boolean onState,
-                byte turnOffMethod, Puzzle puzzle, SMS sms, boolean[] repeatDays)
+                TurnOffMethod turnOffMethod, Puzzle puzzle, SMS sms, boolean[] repeatDays)
     {
         super(name, signalTime, repeatSignalInterval, vibrating, melody, melodyVolume, turnOffTime,
                 onState);
@@ -31,11 +30,11 @@ public class Ring extends Signal {
         this.repeatDays = repeatDays;
     }
 
-    public byte getTurnOffMethod() {
+    public TurnOffMethod getTurnOffMethod() {
         return turnOffMethod;
     }
 
-    public void setTurnOffMethod(byte turnOffMethod) {
+    public void setTurnOffMethod(TurnOffMethod turnOffMethod) {
         this.turnOffMethod = turnOffMethod;
     }
 
