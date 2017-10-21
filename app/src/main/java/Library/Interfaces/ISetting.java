@@ -1,9 +1,9 @@
-package Library;
+package Library.Interfaces;
 
 /**
  * Created by ytgv8b on 17.10.2017.
  */
 
-interface ISetting {
+public interface ISetting {
     void reset();
 }

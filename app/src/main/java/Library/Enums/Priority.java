@@ -1,10 +1,10 @@
-package Library;
+package Library.Enums;
 
 /**
  * Created by ytgv8b on 21.10.2017.
  */
 
-enum Priority {
+public enum Priority {
     LOW,
     MID,
     HIGH;

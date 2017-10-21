@@ -1,8 +1,9 @@
 package Library;
-import android.os.Vibrator;
 
 import java.io.File;
 import java.sql.Time;
+
+import Library.Interfaces.IEdite;
 
 /**
  * Created by ytgv8b on 16.10.2017.

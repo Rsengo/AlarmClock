@@ -1,8 +1,10 @@
 package Library;
 
-import java.io.Serializable;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+
+import Library.Interfaces.IEdite;
+import Library.Interfaces.IMessage;
+import Library.Interfaces.IMessageRecepient;
 
 /**
  * Created by ytgv8b on 08.10.2017.

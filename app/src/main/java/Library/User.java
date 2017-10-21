@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.io.*;
 
+import Library.Interfaces.IEdite;
+import Library.Interfaces.ISetting;
+
 /**
  * Created by ytgv8b on 08.10.2017.
  */

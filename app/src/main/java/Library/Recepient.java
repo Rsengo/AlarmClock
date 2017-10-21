@@ -1,5 +1,8 @@
 package Library;
 
+import Library.Interfaces.IEdite;
+import Library.Interfaces.IMessageRecepient;
+
 /**
  * Created by ytgv8b on 08.10.2017.
  */

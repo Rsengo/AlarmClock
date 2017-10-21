@@ -3,6 +3,9 @@ package Library;
 import java.io.File;
 import java.sql.Time;
 
+import Library.Enums.GeneralPereodicity;
+import Library.Enums.Priority;
+
 /**
  * Created by ytgv8b on 16.10.2017.
  */

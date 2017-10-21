@@ -1,9 +1,9 @@
-package Library;
+package Library.Interfaces;
 
 /**
  * Created by ytgv8b on 08.10.2017.
  */
 
-interface IEdite {
+public interface IEdite {
     void OpenEditeDialog(); //Редактирование
 }
