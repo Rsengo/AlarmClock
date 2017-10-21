@@ -22,17 +22,15 @@ public class Notification extends Signal {
     private byte specificPeriodicity;
     private Time date;
     private byte priority;
-    private boolean soundOn;
 
     public Notification(String name, Time signalTime, Time repeatSignalInterval, boolean vibrating,
                         File melody, byte melodyVolume, Time turnOffTime, boolean onState, Time date,
-                        byte priority, boolean soundOn, byte generalPeriodicity, byte specificPeriodicity)
+                        byte priority, byte generalPeriodicity, byte specificPeriodicity)
     {
         super(name, signalTime, repeatSignalInterval, vibrating, melody, melodyVolume,
                 turnOffTime, onState);
         this.date = date;
         this.priority = priority;
-        this.soundOn = soundOn;
         this.generalPeriodicity = generalPeriodicity;
         this.specificPeriodicity = specificPeriodicity;
     }
@@ -67,14 +65,6 @@ public class Notification extends Signal {
 
     public void setPriority(byte priority) {
         this.priority = priority;
-    }
-
-    public boolean isSoundOn() {
-        return soundOn;
-    }
-
-    public void setSoundOn(boolean soundOn) {
-        this.soundOn = soundOn;
     }
 
     @Override
