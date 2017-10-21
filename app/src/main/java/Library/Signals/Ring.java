@@ -1,10 +1,12 @@
-package Library;
+package Library.Signals;
 
 import java.io.File;
 import java.sql.Time;
 
 import Library.Enums.TurnOffMethod;
 import Library.Interfaces.IMessage;
+import Library.Puzzles.Puzzle;
+import Library.Messages.SMS;
 
 /**
  * Created by ytgv8b on 16.10.2017.

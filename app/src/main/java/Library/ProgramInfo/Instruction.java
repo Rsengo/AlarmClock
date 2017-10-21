@@ -1,8 +1,6 @@
-package Library;
+package Library.ProgramInfo;
 
 import java.util.ArrayDeque;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * Created by ytgv8b on 08.10.2017.

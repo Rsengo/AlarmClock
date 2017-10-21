@@ -6,6 +6,8 @@ import java.io.*;
 
 import Library.Interfaces.IEdite;
 import Library.Interfaces.ISetting;
+import Library.Settings.UserInterface;
+import Library.Signals.Signal;
 
 /**
  * Created by ytgv8b on 08.10.2017.

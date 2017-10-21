@@ -1,4 +1,4 @@
-package Library;
+package Library.Signals;
 
 import java.io.File;
 import java.sql.Time;

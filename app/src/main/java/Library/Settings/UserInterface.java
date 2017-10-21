@@ -1,4 +1,4 @@
-package Library;
+package Library.Settings;
 
 import Library.Interfaces.IEdite;
 import Library.Interfaces.ISetting;

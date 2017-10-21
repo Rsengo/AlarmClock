@@ -1,4 +1,4 @@
-package Library;
+package Library.ProgramInfo;
 
 import java.io.File;
 
@@ -6,7 +6,7 @@ import java.io.File;
  * Created by ytgv8b on 08.10.2017.
  */
 
-class Slide {
+public class Slide {
     /****Загрузка из БД****/
     private String text;
     private File picture;

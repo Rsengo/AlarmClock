@@ -1,4 +1,4 @@
-package Library;
+package Library.Messages;
 
 import Library.Interfaces.IEdite;
 import Library.Interfaces.IMessageRecepient;
