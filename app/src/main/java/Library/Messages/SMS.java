@@ -2,9 +2,7 @@ package Library.Messages;
 
 import java.util.ArrayList;
 
-import Library.Interfaces.IEdite;
-import Library.Interfaces.IMessage;
-import Library.Interfaces.IMessageRecepient;
+import Library.IEdite;
 
 /**
  * Created by ytgv8b on 08.10.2017.

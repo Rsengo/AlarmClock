@@ -18,18 +18,6 @@ public class Notification extends Signal {
     private Time date;
     private Priority priority;
 
-    public Notification(String name, Time signalTime, Time repeatSignalInterval, boolean vibrating,
-                        File melody, byte melodyVolume, Time turnOffTime, boolean onState, Time date,
-                        Priority priority, GeneralPereodicity generalPeriodicity, byte specificPeriodicity)
-    {
-        super(name, signalTime, repeatSignalInterval, vibrating, melody, melodyVolume,
-                turnOffTime, onState);
-        this.date = date;
-        this.priority = priority;
-        this.generalPeriodicity = generalPeriodicity;
-        this.specificPeriodicity = specificPeriodicity;
-    }
-
     public GeneralPereodicity getGeneralPeriodicity() {
         return generalPeriodicity;
     }

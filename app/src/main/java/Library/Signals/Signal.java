@@ -3,7 +3,7 @@ package Library.Signals;
 import java.io.File;
 import java.sql.Time;
 
-import Library.Interfaces.IEdite;
+import Library.IEdite;
 
 /**
  * Created by ytgv8b on 16.10.2017.
@@ -13,34 +13,21 @@ public abstract class Signal implements IEdite {
     /****Методы интерфейсов****/
     /****Методы класса****/
     /****Порождащий паттерн****/
-    protected String name; // Название
+    /****protected String name; // Название***/ /**Заменено на следующие id & description***/
+    protected long id;
     protected Time signalTime; /****заменить на новый тип****/  //Время запуска
     protected Time repeatSignalInterval; /****заменить на новый тип****/  //интервал повтора
     protected boolean vibrating; //вибрация(Вибрирующий)
     protected File melody; /****мб другой тип****/ //мелодия
     protected byte melodyVolume;/****мб int/long****/ //громкость
     protected  Time turnOffTime; /****заменить на новый тип****/
+    protected String description; /***Описание***/
     //Время автовыключения звукового сигнала
     protected boolean onState; //Вкл/Выкл звукового сигнала
 
-    public Signal(String name, Time signalTime, Time repeatSignalInterval, boolean vibrating,
-                  File melody, byte melodyVolume, Time turnOffTime, boolean onState) {
-        this.name = name;
-        this.signalTime = signalTime;
-        this.repeatSignalInterval = repeatSignalInterval;
-        this.vibrating = vibrating;
-        this.melody = melody;
-        this.melodyVolume = melodyVolume;
-        this.turnOffTime = turnOffTime;
-        this.onState = onState;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public long getId() {
+        return id;
     }
 
     public Time getSignalTime() {
@@ -97,6 +84,14 @@ public abstract class Signal implements IEdite {
 
     public void setOnState(boolean onState) {
         this.onState = onState;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

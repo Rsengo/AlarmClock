@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.io.*;
 
-import Library.Interfaces.IEdite;
-import Library.Interfaces.ISetting;
+import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
 import Library.Signals.Signal;
 

@@ -4,7 +4,7 @@ import java.io.File;
 import java.sql.Time;
 
 import Library.Enums.TurnOffMethod;
-import Library.Interfaces.IMessage;
+import Library.Messages.IMessage;
 import Library.Puzzles.Puzzle;
 import Library.Messages.SMS;
 
@@ -22,18 +22,6 @@ public class Ring extends Signal {
     private Puzzle puzzle; //головоломка
     private IMessage sms; //СМС
     private boolean[] repeatDays; //Дни повтора
-
-    public Ring(String name, Time signalTime, Time repeatSignalInterval, boolean vibrating,
-                File melody, byte melodyVolume, Time turnOffTime, boolean onState,
-                TurnOffMethod turnOffMethod, Puzzle puzzle, SMS sms, boolean[] repeatDays)
-    {
-        super(name, signalTime, repeatSignalInterval, vibrating, melody, melodyVolume, turnOffTime,
-                onState);
-        this.turnOffMethod = turnOffMethod;
-        this.puzzle = puzzle;
-        this.sms = sms;
-        this.repeatDays = repeatDays;
-    }
 
     public TurnOffMethod getTurnOffMethod() {
         return turnOffMethod;
