@@ -15,43 +15,43 @@ public class UserInterface implements IEdite, ISetting {
     public static final byte RUSSIAN = 0;
     public static final byte ENGLISH = 1;
 
-    private ColorScheme _colorScheme;
-    private byte _fontSize;
-    private byte _language;
+    private IUIAttribute colorScheme;
+    private byte fontSize;
+    private byte language;
 
-    private static UserInterface _userInterface;
+    private static UserInterface userInterface;
 
     private UserInterface() {}
 
     private UserInterface(ColorScheme colorScheme, byte fontSize, byte language)
     {
-        _colorScheme = colorScheme;
-        _fontSize = fontSize;
-        _language = language;
+        this.colorScheme = colorScheme;
+        this.fontSize = fontSize;
+        this.language = language;
     }
 
     public UserInterface getInstance() //Возврат ссылки на синглтон, либо создание объекта
     {
-        if (_userInterface == null) {
-            _userInterface = new UserInterface();
+        if (userInterface == null) {
+            userInterface = new UserInterface();
         }
-        return _userInterface;
+        return userInterface;
     }
 
     public UserInterface getInstance(ColorScheme colorScheme, byte fontSize, byte language) {
         //Возврат ссылки на синглтон, либо создание объекта
-        if (_userInterface == null) {
-            _userInterface = new UserInterface(colorScheme, fontSize, language);
+        if (userInterface == null) {
+            userInterface = new UserInterface(colorScheme, fontSize, language);
         }
-        return _userInterface;
+        return userInterface;
     }
 
-    public ColorScheme getColorScheme() {
-        return _colorScheme;
+    public IUIAttribute getColorScheme() {
+        return colorScheme;
     }
 
-    public void setColorScheme(ColorScheme colorScheme) {
-        _colorScheme = colorScheme;
+    public void setColorScheme(IUIAttribute colorScheme) {
+        this.colorScheme = colorScheme;
     }
 
     @Override

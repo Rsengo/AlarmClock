@@ -11,21 +11,21 @@ import java.util.Queue;
 public class Instruction {
     /****подгрузить слайды из БД****/
     /****методы класса****/
-    private ArrayDeque<Slide> _slides;
+    private ArrayDeque<Slide> slides;
 
-    private static Instruction _instruction;
+    private static Instruction instruction;
     private Instruction() {
         /****подгрузить слайды из БД****/
     }
     public Instruction getInstance() {
-        if (_instruction == null) {
-            _instruction = new Instruction();
+        if (instruction == null) {
+            instruction = new Instruction();
         }
-        return _instruction;
+        return instruction;
     }
 
     public ArrayDeque<Slide> getSlides() {
-        return _slides;
+        return slides;
     }
 
     public void skip()

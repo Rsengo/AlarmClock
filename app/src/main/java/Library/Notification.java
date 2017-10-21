@@ -18,11 +18,11 @@ public class Notification extends Signal {
     public static final byte EVERYMOUNTH = 3;
     public static final byte EVERYYEAR = 4;
 
-    private byte _generalPeriodicity;
-    private byte _specificPeriodicity;
-    private Time _date;
-    private byte _priority;
-    private boolean _soundOn;
+    private byte generalPeriodicity;
+    private byte specificPeriodicity;
+    private Time date;
+    private byte priority;
+    private boolean soundOn;
 
     public Notification(String name, Time signalTime, Time repeatSignalInterval, boolean vibrating,
                         File melody, byte melodyVolume, Time turnOffTime, boolean onState, Time date,
@@ -30,51 +30,51 @@ public class Notification extends Signal {
     {
         super(name, signalTime, repeatSignalInterval, vibrating, melody, melodyVolume,
                 turnOffTime, onState);
-        _date = date;
-        _priority = priority;
-        _soundOn = soundOn;
-        _generalPeriodicity = generalPeriodicity;
-        _specificPeriodicity = specificPeriodicity;
+        this.date = date;
+        this.priority = priority;
+        this.soundOn = soundOn;
+        this.generalPeriodicity = generalPeriodicity;
+        this.specificPeriodicity = specificPeriodicity;
     }
 
     public byte getGeneralPeriodicity() {
-        return _generalPeriodicity;
+        return generalPeriodicity;
     }
 
     public void setGeneralPeriodicity(byte generalPeriodicity) {
-        _generalPeriodicity = generalPeriodicity;
+        this.generalPeriodicity = generalPeriodicity;
     }
 
     public byte getSpecificPeriodicity() {
-        return _specificPeriodicity;
+        return specificPeriodicity;
     }
 
     public void setSpecificPeriodicity(byte specificPeriodicity) {
-        _specificPeriodicity = specificPeriodicity;
+        this.specificPeriodicity = specificPeriodicity;
     }
 
     public Time getDate() {
-        return _date;
+        return date;
     }
 
     public void setDate(Time date) {
-        _date = date;
+        this.date = date;
     }
 
     public byte getPriority() {
-        return _priority;
+        return priority;
     }
 
     public void setPriority(byte priority) {
-        _priority = priority;
+        this.priority = priority;
     }
 
     public boolean isSoundOn() {
-        return _soundOn;
+        return soundOn;
     }
 
     public void setSoundOn(boolean soundOn) {
-        _soundOn = soundOn;
+        this.soundOn = soundOn;
     }
 
     @Override

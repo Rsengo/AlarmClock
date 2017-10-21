@@ -7,24 +7,24 @@ import java.util.ArrayDeque;
  */
 
 public class Information {
-    private String _version;
-    private ArrayDeque<Developer> _developers;
-    private static Information _information;
+    private String version;
+    private ArrayDeque<Developer> developers;
+    private static Information information;
     private Information() {
         /****подгрузить разработчиков из БД****/
     }
     public Information getInstance() { //ссылка на singleton
-        if (_information == null) {
-            _information = new Information();
+        if (information == null) {
+            information = new Information();
         }
-        return _information;
+        return information;
     }
 
     public String getVersion() {
-        return _version;
+        return version;
     }
 
     public ArrayDeque<Developer> getDevelopers() {
-        return _developers;
+        return developers;
     }
 }

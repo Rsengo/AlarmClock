@@ -8,14 +8,14 @@ import java.io.File;
 
 class Slide {
     /****Загрузка из БД****/
-    private String _text;
-    private File _picture;
+    private String text;
+    private File picture;
 
     public File getPicture() {
-        return _picture;
+        return picture;
     }
 
     public String getText() {
-        return _text;
+        return text;
     }
 }

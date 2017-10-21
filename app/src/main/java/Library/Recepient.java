@@ -6,31 +6,31 @@ package Library;
 
 public class Recepient implements IEdite, IMessageRecepient {
     /****Методы интерфейсов****/
-    private String _name; //Имя
-    private String _number; //Номер
+    private String name; //Имя
+    private String number; //Номер
 
     public Recepient(String name, String number)
     {
-        _name = name;
-        _number = number;
+        this.name = name;
+        this.number = number;
     }
 
     public Recepient() {}
 
     public String getName() {
-        return _name;
+        return name;
     }
 
     public void setName(String name) {
-        _name = name;
+        this.name = name;
     }
 
     public String getNumber() {
-        return _number;
+        return number;
     }
 
     public void setNumber(String number) {
-        _number = number;
+        this.number = number;
     }
 
     @Override

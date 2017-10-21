@@ -12,51 +12,51 @@ public class User implements Serializable, IEdite {
     /****Добавление/удаление сигналов с заходом в БД****/
     /****Выйти из профиля****/
     /****Кэширование****/
-    private String _name; //Имя
-    private ArrayList<Signal> _alarms = new ArrayList<>(); //Будильники
-    private ArrayList<Signal> _cases = new ArrayList<>(); //События
-    private int _moneyQuantity; //Число монет
-    private ISetting _userInterface; /****мб сделать абстракцию****/
+    private String name; //Имя
+    private ArrayList<Signal> alarms = new ArrayList<>(); //Будильники
+    private ArrayList<Signal> notifications = new ArrayList<>(); //События
+    private int moneyQuantity; //Число монет
+    private ISetting userInterface; /****мб сделать абстракцию****/
     //Пользовательский интерфейс
 
-    private static User _user; //Ссылка на себя
+    private static User user; //Ссылка на себя
     private User() { //Новый пользователь
         /****Ссылка на какой-то хэлпер(регистрация)****/
         /**Только имя, остальное в настройках**/
     }
     private static User getInstance(String path) { //Создание пользователя
-        if (_user == null) { //Если вход не выполнен
+        if (user == null) { //Если вход не выполнен
             if (new File(path).exists()) {  //Существование файла
-                _user = Deserialize(new File(path)); //Отправка файла на десериализацию
+                user = Deserialize(new File(path)); //Отправка файла на десериализацию
             } else { //Если файла нет
-                _user = new User(); //Создание нового пользователя
+                user = new User(); //Создание нового пользователя
             }
         }
-        return _user; //Возврат ссылки
+        return user; //Возврат ссылки
     }
 
     public String getName() {
-        return _name;
+        return name;
     }
 
     public void setName(String name) {
-        _name = name;
+        this.name = name;
     }
 
     public int getMoneyQuantity() {
-        return _moneyQuantity;
+        return moneyQuantity;
     }
 
     public void setMoneyQuantity(int moneyQuantity) {
-        _moneyQuantity = moneyQuantity;
+        this.moneyQuantity = moneyQuantity;
     }
 
     public ISetting getUserInterface() {
-        return _userInterface;
+        return userInterface;
     }
 
     public void setUserInterface(UserInterface userInterface) {
-        _userInterface = userInterface;
+        this.userInterface = userInterface;
     }
 
     @Override

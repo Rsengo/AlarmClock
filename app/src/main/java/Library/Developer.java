@@ -6,14 +6,14 @@ package Library;
 
 public class Developer{
     /****подгрузка данных из БД****/
-    private String _name;
-    private String _information;
+    private String name;
+    private String information;
 
     public String getName() {
-        return _name;
+        return name;
     }
 
     public String getInformation() {
-        return _information;
+        return information;
     }
 }

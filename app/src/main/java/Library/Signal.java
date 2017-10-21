@@ -12,90 +12,90 @@ public abstract class Signal implements IEdite {
     /****Методы интерфейсов****/
     /****Методы класса****/
     /****Порождащий паттерн****/
-    protected String _name; // Название
-    protected Time _signalTime; /****заменить на новый тип****/  //Время запуска
-    protected Time _repeatSignalInterval; /****заменить на новый тип****/  //интервал повтора
-    protected boolean _vibrating; //вибрация(Вибрирующий)
-    protected File _melody; /****мб другой тип****/ //мелодия
-    protected byte _melodyVolume;/****мб int/long****/ //громкость
-    protected  Time _turnOffTime; /****заменить на новый тип****/
+    protected String name; // Название
+    protected Time signalTime; /****заменить на новый тип****/  //Время запуска
+    protected Time repeatSignalInterval; /****заменить на новый тип****/  //интервал повтора
+    protected boolean vibrating; //вибрация(Вибрирующий)
+    protected File melody; /****мб другой тип****/ //мелодия
+    protected byte melodyVolume;/****мб int/long****/ //громкость
+    protected  Time turnOffTime; /****заменить на новый тип****/
     //Время автовыключения звукового сигнала
-    protected boolean _onState; //Вкл/Выкл звукового сигнала
+    protected boolean onState; //Вкл/Выкл звукового сигнала
 
     public Signal(String name, Time signalTime, Time repeatSignalInterval, boolean vibrating,
                   File melody, byte melodyVolume, Time turnOffTime, boolean onState) {
-        _name = name;
-        _signalTime = signalTime;
-        _repeatSignalInterval = repeatSignalInterval;
-        _vibrating = vibrating;
-        _melody = melody;
-        _melodyVolume = melodyVolume;
-        _turnOffTime = turnOffTime;
-        _onState = onState;
+        this.name = name;
+        this.signalTime = signalTime;
+        this.repeatSignalInterval = repeatSignalInterval;
+        this.vibrating = vibrating;
+        this.melody = melody;
+        this.melodyVolume = melodyVolume;
+        this.turnOffTime = turnOffTime;
+        this.onState = onState;
     }
 
     public String getName() {
-        return _name;
+        return name;
     }
 
     public void setName(String name) {
-        _name = name;
+        this.name = name;
     }
 
     public Time getSignalTime() {
-        return _signalTime;
+        return signalTime;
     }
 
     public void setSignalTime(Time signalTime) {
-        _signalTime = signalTime;
+        this.signalTime = signalTime;
     }
 
     public Time getRepeatSignalInterval() {
-        return _repeatSignalInterval;
+        return repeatSignalInterval;
     }
 
     public void setRepeatSignalInterval(Time repeatSignalInterval) {
-        _repeatSignalInterval = repeatSignalInterval;
+        this.repeatSignalInterval = repeatSignalInterval;
     }
 
     public boolean isVibrating() {
-        return _vibrating;
+        return vibrating;
     }
 
     public void setVibration(boolean vibrating) {
-        _vibrating = vibrating;
+        this.vibrating = vibrating;
     }
 
     public File getMelody() {
-        return _melody;
+        return melody;
     }
 
     public void setMelody(File melody) {
-        _melody = melody;
+        this.melody = melody;
     }
 
     public byte getMelodyVolume() {
-        return _melodyVolume;
+        return melodyVolume;
     }
 
     public void setMelodyVolume(byte melodyVolume) {
-        _melodyVolume = melodyVolume;
+        this.melodyVolume = melodyVolume;
     }
 
     public Time getTurnOffTime() {
-        return _turnOffTime;
+        return turnOffTime;
     }
 
     public void setTurnOffTime(Time turnOffTime) {
-        _turnOffTime = turnOffTime;
+        this.turnOffTime = turnOffTime;
     }
 
     public boolean isOnState() {
-        return _onState;
+        return onState;
     }
 
     public void setOnState(boolean onState) {
-        _onState = onState;
+        this.onState = onState;
     }
 
     @Override
