@@ -4,12 +4,14 @@ import java.io.File;
 import java.sql.Time;
 
 import Library.IEdite;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by ytgv8b on 16.10.2017.
  */
 
-public abstract class Signal implements IEdite {
+public abstract class Signal extends RealmObject implements IEdite {
     /****Методы интерфейсов****/
     /****Методы класса****/
     /****Порождащий паттерн****/

@@ -2,14 +2,19 @@ package Library.ProgramInfo;
 
 import java.util.ArrayDeque;
 
+import io.realm.RealmList;
+import io.realm.annotations.Required;
+
 /**
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class Instruction {
+public class Instruction extends RealmList {
     /****подгрузить слайды из БД****/
     /****методы класса****/
-    private ArrayDeque<Slide> slides;
+
+    @Required
+    private RealmList<Slide> slides;
 
     private static Instruction instruction;
     private Instruction() {
@@ -22,7 +27,7 @@ public class Instruction {
         return instruction;
     }
 
-    public ArrayDeque<Slide> getSlides() {
+    public RealmList<Slide> getSlides() {
         return slides;
     }
 

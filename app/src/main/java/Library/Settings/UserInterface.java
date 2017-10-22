@@ -1,29 +1,29 @@
 package Library.Settings;
 
+import Library.Enums.FontSize;
+import Library.Enums.Language;
 import Library.IEdite;
+import io.realm.RealmObject;
+import io.realm.annotations.Required;
 
 /**
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class UserInterface implements IEdite, ISetting {
+public class UserInterface extends RealmObject implements IEdite, ISetting {
     /****Пока хз, что тут еще будет****/
     /****Реализовать методы интерфейсов****/
-    public static final byte NORMALFONT = 0;
-    public static final byte SMALLFONT = 1;
-    public static final byte BIGFONT = 2;
-    public static final byte RUSSIAN = 0;
-    public static final byte ENGLISH = 1;
 
     private IUIAttribute colorScheme;
-    private byte fontSize;
-    private byte language;
+
+    private FontSize fontSize;
+    private Language language;
 
     private static UserInterface userInterface;
 
     private UserInterface() {}
 
-    private UserInterface(ColorScheme colorScheme, byte fontSize, byte language)
+    private UserInterface(ColorScheme colorScheme, FontSize fontSize, Language language)
     {
         this.colorScheme = colorScheme;
         this.fontSize = fontSize;
@@ -38,7 +38,8 @@ public class UserInterface implements IEdite, ISetting {
         return userInterface;
     }
 
-    public UserInterface getInstance(ColorScheme colorScheme, byte fontSize, byte language) {
+    public UserInterface getInstance(ColorScheme colorScheme, FontSize fontSize,
+                                     Language language) {
         //Возврат ссылки на синглтон, либо создание объекта
         if (userInterface == null) {
             userInterface = new UserInterface(colorScheme, fontSize, language);

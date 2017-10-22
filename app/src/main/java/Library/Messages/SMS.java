@@ -3,41 +3,38 @@ package Library.Messages;
 import java.util.ArrayList;
 
 import Library.IEdite;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
 /**
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class SMS implements IEdite, IMessage {
+public class SMS extends RealmObject implements IEdite, IMessage {
     /****Добавление/удаление получателей с заходом в БД****/
     /****Переопределить методы интерфейсов****/
+
+//    @PrimaryKey
+//    private long id;
+
+    @Required
     private String text; //Текст
-    private ArrayList<IMessageRecepient> recepients = new ArrayList<>(); //Получатели
+
+    @Required
+    private RealmList<String> recepients = new RealmList<>(); //Получатели
 
     private static SMS sms; //Cсылка на себя
 
     private SMS() { }
 
-    private SMS (String text, ArrayList<IMessageRecepient> recepients)
+    public SMS (String text, RealmList<String> recepients)
     {
         this.text = text;
         this.recepients = recepients;
     }
 
-    public static SMS getInstance() { //Создание СМС
-        if (sms == null) { //Если еще не создано
-            sms = new SMS(); //Создние нового
-        }
-        return sms; //Возврат ссылки
-    }
-
-    public static SMS getInstance(String text, ArrayList<IMessageRecepient> recepients) {
-        //Создание СМС с начальными параметрами
-        if (sms == null) { //Если еще не создано
-            sms = new SMS(text, recepients); //Создние нового
-        }
-        return sms; //Возврат ссылки
-    }
 
     public String getText() {
         return text;
@@ -57,13 +54,15 @@ public class SMS implements IEdite, IMessage {
 
     }
 
-    @Override
-    public void addRecepient(IMessageRecepient recepient) {
-
+    public RealmList<String> getRecepients() {
+        return recepients;
     }
 
-    @Override
-    public void removeRecepient(IMessageRecepient recepient) {
-
+    public void setRecepients(RealmList<String> recepients) {
+        this.recepients = recepients;
     }
+
+//    public long getId() {
+//        return id;
+//    }
 }

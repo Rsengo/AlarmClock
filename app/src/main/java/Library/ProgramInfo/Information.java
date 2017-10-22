@@ -2,17 +2,27 @@ package Library.ProgramInfo;
 
 import java.util.ArrayDeque;
 
+import io.realm.RealmList;
+import io.realm.annotations.Required;
+
 /**
  * Created by ytgv8b on 08.10.2017.
  */
 
 public class Information {
+
+    @Required
     private String version;
-    private ArrayDeque<Developer> developers;
+
+    @Required
+    private RealmList<Developer> developers;
+
     private static Information information;
+
     private Information() {
         /****подгрузить разработчиков из БД****/
     }
+
     public Information getInstance() { //ссылка на singleton
         if (information == null) {
             information = new Information();
@@ -24,7 +34,7 @@ public class Information {
         return version;
     }
 
-    public ArrayDeque<Developer> getDevelopers() {
+    public RealmList<Developer> getDevelopers() {
         return developers;
     }
 }

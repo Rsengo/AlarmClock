@@ -6,6 +6,4 @@ package Library.Messages;
 
 public interface IMessage {
     void send();
-    void addRecepient(IMessageRecepient recepient);
-    void removeRecepient(IMessageRecepient recepient);
 }
