@@ -7,6 +7,7 @@ import java.io.*;
 import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
 import Library.Signals.Signal;
+import io.realm.RealmObject;
 
 /**
  * Created by ytgv8b on 08.10.2017.
