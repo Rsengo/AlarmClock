@@ -18,7 +18,20 @@ public class SignalDirector {
         builder.setTurnOffTime();
         builder.setDescription();
         builder.setOnState();
-        /***Методы наследников***/
+        if (builder instanceof RingBuilder)
+        {
+            ((RingBuilder) builder).setTurnOffMethod();
+            ((RingBuilder) builder).setPuzzle();
+            ((RingBuilder) builder).setSms();
+            ((RingBuilder) builder).setRepeatDays();
+        }
+        if (builder instanceof  NotificationBuilder)
+        {
+            ((NotificationBuilder) builder).setDate();
+            ((NotificationBuilder) builder).setPriority();
+            ((NotificationBuilder) builder).setGeneralPeriodicity();
+            ((NotificationBuilder) builder).setSpecificPeriodicity();
+        }
         return builder.getSignal();
     }
 }
