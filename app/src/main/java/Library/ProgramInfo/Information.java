@@ -1,8 +1,7 @@
 package Library.ProgramInfo;
 
-import java.util.ArrayDeque;
-
 import io.realm.RealmList;
+import io.realm.RealmObject;
 import io.realm.annotations.Required;
 
 /**
@@ -11,10 +10,8 @@ import io.realm.annotations.Required;
 
 public class Information {
 
-    @Required
     private String version;
 
-    @Required
     private RealmList<Developer> developers;
 
     private static Information information;

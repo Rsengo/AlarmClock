@@ -3,17 +3,17 @@ package Library.ProgramInfo;
 import java.util.ArrayDeque;
 
 import io.realm.RealmList;
+import io.realm.RealmObject;
 import io.realm.annotations.Required;
 
 /**
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class Instruction extends RealmList {
+public class Instruction {
     /****подгрузить слайды из БД****/
     /****методы класса****/
 
-    @Required
     private RealmList<Slide> slides;
 
     private static Instruction instruction;

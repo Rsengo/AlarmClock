@@ -22,12 +22,13 @@ public class SMS extends RealmObject implements IEdite, IMessage {
     @Required
     private String text; //Текст
 
-    @Required
     private RealmList<String> recepients = new RealmList<>(); //Получатели
 
-    private static SMS sms; //Cсылка на себя
+    public SMS(String text) {
+        this.text = text;
+    }
 
-    private SMS() { }
+    public SMS() { }
 
     public SMS (String text, RealmList<String> recepients)
     {

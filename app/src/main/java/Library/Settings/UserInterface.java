@@ -10,7 +10,7 @@ import io.realm.annotations.Required;
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class UserInterface extends RealmObject implements IEdite, ISetting {
+public class UserInterface implements IEdite, ISetting {
     /****Пока хз, что тут еще будет****/
     /****Реализовать методы интерфейсов****/
 

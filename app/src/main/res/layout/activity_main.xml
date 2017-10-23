@@ -11,7 +11,17 @@
     tools:context="com.example.ytgv8b.firsttry.MainActivity">
 
     <TextView
+        android:id="@+id/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
+
+    <Button
+        android:id="@+id/Yebash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="43dp"
+        android:text="Button"/>
 </RelativeLayout>

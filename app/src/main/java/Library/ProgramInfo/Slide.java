@@ -15,11 +15,11 @@ public class Slide extends RealmObject {
     @Required
     private String text;
 
-    private File picture;
+    //private File picture;
 
-    public File getPicture() {
-        return picture;
-    }
+//    public File getPicture() {
+//        return picture;
+//    }
 
     public String getText() {
         return text;
