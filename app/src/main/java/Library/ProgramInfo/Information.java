@@ -1,30 +1,27 @@
 package Library.ProgramInfo;
 
 import io.realm.RealmList;
+import io.realm.RealmModel;
 import io.realm.RealmObject;
+import io.realm.annotations.RealmClass;
 import io.realm.annotations.Required;
 
 /**
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class Information {
+@RealmClass
+public class Information implements RealmModel {
 
+    @Required
     private String version;
 
     private RealmList<Developer> developers;
 
     private static Information information;
 
-    private Information() {
-        /****подгрузить разработчиков из БД****/
-    }
+    public Information() {
 
-    public Information getInstance() { //ссылка на singleton
-        if (information == null) {
-            information = new Information();
-        }
-        return information;
     }
 
     public String getVersion() {

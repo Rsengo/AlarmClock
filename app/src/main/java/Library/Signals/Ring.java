@@ -7,6 +7,7 @@ import Library.Enums.TurnOffMethod;
 import Library.Messages.IMessage;
 import Library.Puzzles.Puzzle;
 import Library.Messages.SMS;
+import io.realm.annotations.Required;
 
 /**
  * Created by ytgv8b on 16.10.2017.
@@ -16,7 +17,6 @@ public class Ring extends Signal {
     /****добавить абстракции для головоломки****/
     /****Написать метод отложить будьник****/
     /****Методы интефкйсов****/
-
 
     private TurnOffMethod turnOffMethod; //метод выключения
     private Puzzle puzzle; //головоломка
