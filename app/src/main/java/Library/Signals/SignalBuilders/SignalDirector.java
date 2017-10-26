@@ -7,8 +7,14 @@ import Library.Signals.Signal;
  */
 
 public class SignalDirector {
+    SignalBuilder builder;
 
-    public Signal createSignal(SignalBuilder builder) {
+    public SignalDirector(SignalBuilder builder)
+    {
+        this.builder = builder;
+    }
+
+    public Signal construct() {
         builder.createSignal();
         builder.setId();
         builder.setRepeatSignalInterval();

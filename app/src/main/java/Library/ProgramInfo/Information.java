@@ -10,11 +10,9 @@ import io.realm.annotations.Required;
  * Created by ytgv8b on 08.10.2017.
  */
 
-@RealmClass
-public class Information implements RealmModel {
+public class Information {
 
-    @Required
-    private String version;
+    private float version;
 
     private RealmList<Developer> developers;
 
@@ -22,7 +20,7 @@ public class Information implements RealmModel {
 
     }
 
-    public String getVersion() {
+    public float getVersion() {
         return version;
     }
 

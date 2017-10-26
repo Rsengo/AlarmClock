@@ -2,6 +2,7 @@ package Library.Signals;
 
 import java.io.File;
 import java.sql.Time;
+import java.util.UUID;
 
 import Library.IEdite;
 import io.realm.RealmObject;
@@ -14,9 +15,9 @@ import io.realm.annotations.PrimaryKey;
 public abstract class Signal implements IEdite {
     /****Методы интерфейсов****/
     /****Методы класса****/
-    /****Порождащий паттерн****/
-    /****protected String name; // Название***/ /**Заменено на следующие id & description***/
-    protected long id;
+
+    @PrimaryKey
+    protected String id = UUID.randomUUID().toString();
     protected Time signalTime; /****заменить на новый тип****/  //Время запуска
     protected Time repeatSignalInterval; /****заменить на новый тип****/  //интервал повтора
     protected boolean vibrating; //вибрация(Вибрирующий)
@@ -28,7 +29,7 @@ public abstract class Signal implements IEdite {
     protected boolean onState; //Вкл/Выкл звукового сигнала
 
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

@@ -5,12 +5,13 @@ import java.sql.Time;
 
 import Library.Enums.GeneralPereodicity;
 import Library.Enums.Priority;
+import io.realm.RealmModel;
 
 /**
  * Created by ytgv8b on 16.10.2017.
  */
 
-public class Notification extends Signal {
+public class Notification extends Signal implements RealmModel {
     /****Методы интерфейсов****/
 
     private GeneralPereodicity generalPeriodicity;

@@ -1,8 +1,24 @@
 package Library.Settings;
 
+import android.content.Context;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 import Library.Enums.FontSize;
 import Library.Enums.Language;
 import Library.IEdite;
+import Library.ISerialize;
+import Library.Settings.UIBuilders.DefaultUIBuilder;
+import Library.Settings.UIBuilders.UIBuilder;
+import Library.Settings.UIBuilders.UIDirector;
+import Library.User;
 import io.realm.RealmObject;
 import io.realm.annotations.Required;
 
@@ -10,7 +26,7 @@ import io.realm.annotations.Required;
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class UserInterface implements IEdite, ISetting {
+public class UserInterface implements IEdite, ISetting, Serializable, ISerialize {
     /****Пока хз, что тут еще будет****/
     /****Реализовать методы интерфейсов****/
 
@@ -19,33 +35,27 @@ public class UserInterface implements IEdite, ISetting {
     private FontSize fontSize;
     private Language language;
 
+    private final static String fileName = "UserInterface"; //Имя сериализованного файла
+
     private static UserInterface userInterface;
 
-    private UserInterface() {}
-
-    private UserInterface(ColorScheme colorScheme, FontSize fontSize, Language language)
-    {
-        this.colorScheme = colorScheme;
-        this.fontSize = fontSize;
-        this.language = language;
+    private UserInterface() {
     }
 
-    public UserInterface getInstance() //Возврат ссылки на синглтон, либо создание объекта
-    {
-        if (userInterface == null) {
-            userInterface = new UserInterface();
-        }
-        return userInterface;
-    }
-
-    public UserInterface getInstance(ColorScheme colorScheme, FontSize fontSize,
-                                     Language language) {
+    public static UserInterface getInstance(Context context) {
         //Возврат ссылки на синглтон, либо создание объекта
         if (userInterface == null) {
-            userInterface = new UserInterface(colorScheme, fontSize, language);
+            if (new File(fileName).exists()) {  //Существование файла
+                userInterface = deserialize(context);
+            }
+            else {
+                UIDirector director = new UIDirector(new DefaultUIBuilder());
+                userInterface = director.construct();
+            }
         }
         return userInterface;
     }
+
 
     public IUIAttribute getColorScheme() {
         return colorScheme;
@@ -55,13 +65,70 @@ public class UserInterface implements IEdite, ISetting {
         this.colorScheme = colorScheme;
     }
 
+    public FontSize getFontSize() {
+        return fontSize;
+    }
+
+    public void setFontSize(FontSize fontSize) {
+        this.fontSize = fontSize;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
     @Override
     public void OpenEditeDialog() {  //Редактирование
         /****Открытие диалога редактирования****/
     }
 
     @Override
-    public void reset() {
+    public void setDefault() {
+        UIDirector director = new UIDirector(new DefaultUIBuilder());
+        userInterface = director.construct();
+    }
 
+    @Override
+    public void serialize(Context context) {
+        try {
+            FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+            ObjectOutputStream outputStream = new ObjectOutputStream(fos);
+            outputStream.writeObject(this);
+            outputStream.close();
+            fos.close();
+        }
+        catch (FileNotFoundException ex)
+        {
+
+        }
+        catch (IOException ex)
+        {
+
+        }
+    }
+
+    private static UserInterface deserialize(Context context) {
+        try {
+            FileInputStream fis = context.openFileInput(fileName);
+            ObjectInputStream inputStream = new ObjectInputStream(fis);
+            UserInterface temp = (UserInterface) inputStream.readObject();
+            return temp;
+        }
+        catch (FileNotFoundException ex)
+        {
+            return null;
+        }
+        catch (IOException ex)
+        {
+            return  null;
+        }
+        catch (ClassNotFoundException ex)
+        {
+            return null;
+        }
     }
 }

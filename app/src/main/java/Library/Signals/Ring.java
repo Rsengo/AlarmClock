@@ -7,13 +7,16 @@ import Library.Enums.TurnOffMethod;
 import Library.Messages.IMessage;
 import Library.Puzzles.Puzzle;
 import Library.Messages.SMS;
+import io.realm.RealmModel;
+import io.realm.annotations.RealmClass;
 import io.realm.annotations.Required;
 
 /**
  * Created by ytgv8b on 16.10.2017.
  */
 
-public class Ring extends Signal {
+@RealmClass
+public class Ring extends Signal implements RealmModel{
     /****добавить абстракции для головоломки****/
     /****Написать метод отложить будьник****/
     /****Методы интефкйсов****/
@@ -21,6 +24,8 @@ public class Ring extends Signal {
     private TurnOffMethod turnOffMethod; //метод выключения
     private Puzzle puzzle; //головоломка
     private IMessage sms; //СМС
+
+    /***Можно ли использовать массив?***/
     private boolean[] repeatDays; //Дни повтора
 
     public TurnOffMethod getTurnOffMethod() {

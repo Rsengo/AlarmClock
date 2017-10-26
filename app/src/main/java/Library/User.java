@@ -1,5 +1,8 @@
 package Library;
 
+import android.content.Context;
+import android.provider.ContactsContract;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.io.*;
@@ -13,7 +16,7 @@ import io.realm.RealmObject;
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class User implements Serializable, IEdite {
+public class User implements Serializable, IEdite, ISerialize {
     /****Добавление/удаление сигналов с заходом в БД****/
     /****Выйти из профиля****/
     /****Кэширование****/
@@ -21,18 +24,24 @@ public class User implements Serializable, IEdite {
     private ArrayList<Signal> alarms = new ArrayList<>(); //Будильники
     private ArrayList<Signal> notifications = new ArrayList<>(); //События
     private int moneyQuantity; //Число монет
-    private ISetting userInterface; /****мб сделать абстракцию****/
-    //Пользовательский интерфейс
+    private ISetting userInterface;
+    //Пользовательский интерфейc
+    private String email; //Email пользователя
+    private final static String fileName = "User"; //Имя сериализованного файла
 
     private static User user; //Ссылка на себя
+
     private User() { //Новый пользователь
         /****Ссылка на какой-то хэлпер(регистрация)****/
         /**Только имя, остальное в настройках**/
     }
-    private static User getInstance(String path) { //Создание пользователя
+
+    /***МБ второй конструктор***/
+
+    public static User getInstance(Context context) { //Создание пользователя
         if (user == null) { //Если вход не выполнен
-            if (new File(path).exists()) {  //Существование файла
-                user = Deserialize(new File(path)); //Отправка файла на десериализацию
+            if (new File(fileName).exists()) {  //Существование файла
+                user = deserialize(context); //Отправка файла на десериализацию
             } else { //Если файла нет
                 user = new User(); //Создание нового пользователя
             }
@@ -69,15 +78,6 @@ public class User implements Serializable, IEdite {
         /****Открытие диалога редактирования****/
     }
 
-    private static User Deserialize(File file) { //Загрузка данных из объекта
-        /****Десериализация(Кэш)****/
-        return null;
-    }
-
-    public void Serialize() {
-        /****Сериализация(Кэш)****/
-
-    }
 
     public void addSignal(Signal signal)
     {
@@ -87,6 +87,46 @@ public class User implements Serializable, IEdite {
     public void removeSignal(Signal signal)
     {
 
+    }
+
+    @Override
+    public void serialize(Context context) {
+        try {
+            FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+            ObjectOutputStream outputStream = new ObjectOutputStream(fos);
+            outputStream.writeObject(this);
+            outputStream.close();
+            fos.close();
+        }
+        catch (FileNotFoundException ex)
+        {
+
+        }
+        catch (IOException ex)
+        {
+
+        }
+    }
+
+    private static User deserialize(Context context) {
+        try {
+            FileInputStream fis = context.openFileInput(fileName);
+            ObjectInputStream inputStream = new ObjectInputStream(fis);
+            User temp = (User) inputStream.readObject();
+            return temp;
+        }
+        catch (FileNotFoundException ex)
+        {
+            return null;
+        }
+        catch (IOException ex)
+        {
+            return  null;
+        }
+        catch (ClassNotFoundException ex)
+        {
+            return null;
+        }
     }
 }
 

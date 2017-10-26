@@ -5,5 +5,5 @@ package Library.Settings;
  */
 
 public interface ISetting {
-    void reset();
+    void setDefault();
 }

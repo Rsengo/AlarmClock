@@ -1,9 +1,11 @@
 package Library.ProgramInfo;
 
 import java.io.File;
+import java.util.UUID;
 
 import io.realm.RealmModel;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 import io.realm.annotations.Required;
 
@@ -14,7 +16,11 @@ import io.realm.annotations.Required;
 @RealmClass
 public class Slide implements RealmModel {
 
+    @PrimaryKey
+    private String id = UUID.randomUUID().toString();
+
     @Required
+
     private String text;
 
     private int picture;
@@ -25,5 +31,9 @@ public class Slide implements RealmModel {
 
     public String getText() {
         return text;
+    }
+
+    public String getId() {
+        return id;
     }
 }
