@@ -17,7 +17,6 @@ public class Slide implements RealmModel {
     @Required
     private String text;
 
-    @Required
     private int picture;
 
     public int getPicture() {

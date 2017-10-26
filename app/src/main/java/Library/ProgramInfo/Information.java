@@ -18,8 +18,6 @@ public class Information implements RealmModel {
 
     private RealmList<Developer> developers;
 
-    private static Information information;
-
     public Information() {
 
     }
