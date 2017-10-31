@@ -8,5 +8,5 @@ import android.content.Context;
  */
 
 public interface ISerialize {
-    void serialize(Context context);
+    void serialize();
 }

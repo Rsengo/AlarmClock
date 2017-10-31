@@ -1,6 +1,6 @@
 package Library.Signals.SignalBuilders;
 
-import Library.Signals.Signal;
+import Library.Signals.ISignal;
 
 /**
  * Created by ytgv8b on 21.10.2017.
@@ -14,7 +14,7 @@ public class SignalDirector {
         this.builder = builder;
     }
 
-    public Signal construct() {
+    public ISignal construct() {
         builder.createSignal();
         builder.setId();
         builder.setRepeatSignalInterval();

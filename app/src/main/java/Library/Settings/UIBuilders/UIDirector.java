@@ -1,5 +1,7 @@
 package Library.Settings.UIBuilders;
 
+import android.content.Context;
+
 import Library.Settings.UserInterface;
 
 /**

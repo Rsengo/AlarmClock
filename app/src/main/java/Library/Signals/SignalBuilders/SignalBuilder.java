@@ -1,13 +1,19 @@
 package Library.Signals.SignalBuilders;
 
-import Library.Signals.Signal;
+import android.content.Context;
+
+import Library.Signals.ISignal;
+import Library.User;
 
 /**
  * Created by ytgv8b on 21.10.2017.
  */
 
 public abstract class SignalBuilder {
-    protected Signal signal;
+    protected ISignal signal;
+
+    public SignalBuilder() { }
+
     /****public static long id;****/ /**Пока хз как реализуется**/
     public abstract void createSignal();
     public abstract void setId(); /****мб и не понадобится****/
@@ -18,8 +24,9 @@ public abstract class SignalBuilder {
     public abstract void setTurnOffTime();
     public abstract void setDescription();
     public abstract void setOnState();
+    public abstract void setUserEmail();
 
-    public Signal getSignal() {
+    public ISignal getSignal() {
         return signal;
     }
 }

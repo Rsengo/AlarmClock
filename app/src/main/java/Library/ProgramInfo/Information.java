@@ -1,5 +1,7 @@
 package Library.ProgramInfo;
 
+import java.util.ArrayList;
+
 import io.realm.RealmList;
 import io.realm.RealmModel;
 import io.realm.RealmObject;
@@ -14,7 +16,7 @@ public class Information {
 
     private float version;
 
-    private RealmList<Developer> developers;
+    private ArrayList<Developer> developers;
 
     public Information() {
 
@@ -24,7 +26,7 @@ public class Information {
         return version;
     }
 
-    public RealmList<Developer> getDevelopers() {
+    public ArrayList<Developer> getDevelopers() {
         return developers;
     }
 }

@@ -1,14 +1,23 @@
 package Library.Signals.SignalBuilders;
 
+import android.content.Context;
+
 import Library.Enums.TurnOffMethod;
 import Library.Messages.IMessage;
 import Library.Puzzles.Puzzle;
+import Library.Signals.Ring;
+import Library.User;
 
 /**
  * Created by ytgv8b on 21.10.2017.
  */
 
 public class RingBuilder extends SignalBuilder {
+
+    public RingBuilder() {
+        super();
+    }
+
     @Override
     public void createSignal() {
 
@@ -52,6 +61,12 @@ public class RingBuilder extends SignalBuilder {
     @Override
     public void setOnState() {
 
+    }
+
+    @Override
+    public void setUserEmail() {
+        String userEmail = User.getInstance().getEmail();
+        ((Ring)signal).setUserEmail(userEmail);
     }
 
     public  void setTurnOffMethod() {

@@ -1,10 +1,20 @@
 package Library.Signals.SignalBuilders;
 
+import android.content.Context;
+
+import Library.Signals.Ring;
+import Library.User;
+
 /**
  * Created by ytgv8b on 21.10.2017.
  */
 
 public class NotificationBuilder extends SignalBuilder {
+
+    public NotificationBuilder() {
+        super();
+    }
+
     @Override
     public void createSignal() {
 
@@ -48,6 +58,12 @@ public class NotificationBuilder extends SignalBuilder {
     @Override
     public void setOnState() {
 
+    }
+
+    @Override
+    public void setUserEmail() {
+        String userEmail = User.getInstance().getEmail();
+        ((Ring)signal).setUserEmail(userEmail);
     }
 
     public void setDate() {

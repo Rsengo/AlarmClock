@@ -1,6 +1,7 @@
 package Library.Settings;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,21 +33,21 @@ public class UserInterface implements IEdite, ISetting, Serializable, ISerialize
 
     private IUIAttribute colorScheme;
 
-    private FontSize fontSize;
-    private Language language;
+    private byte fontSize;
+    private byte language;
 
-    private final static String fileName = "UserInterface"; //Имя сериализованного файла
+    private final static String FILE_NAME = "UserInterface"; //Имя файла на диске
 
     private static UserInterface userInterface;
 
     private UserInterface() {
     }
 
-    public static UserInterface getInstance(Context context) {
+    public static UserInterface getInstance() {
         //Возврат ссылки на синглтон, либо создание объекта
         if (userInterface == null) {
-            if (new File(fileName).exists()) {  //Существование файла
-                userInterface = deserialize(context);
+            if (new File(FILE_NAME).exists()) {  //Существование файла
+                userInterface = deserialize();
             }
             else {
                 UIDirector director = new UIDirector(new DefaultUIBuilder());
@@ -65,19 +66,19 @@ public class UserInterface implements IEdite, ISetting, Serializable, ISerialize
         this.colorScheme = colorScheme;
     }
 
-    public FontSize getFontSize() {
+    public byte getFontSize() {
         return fontSize;
     }
 
-    public void setFontSize(FontSize fontSize) {
+    public void setFontSize(byte fontSize) {
         this.fontSize = fontSize;
     }
 
-    public Language getLanguage() {
+    public byte getLanguage() {
         return language;
     }
 
-    public void setLanguage(Language language) {
+    public void setLanguage(byte language) {
         this.language = language;
     }
 
@@ -93,9 +94,9 @@ public class UserInterface implements IEdite, ISetting, Serializable, ISerialize
     }
 
     @Override
-    public void serialize(Context context) {
+    public void serialize() {
         try {
-            FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+            FileOutputStream fos = new FileOutputStream(FILE_NAME);
             ObjectOutputStream outputStream = new ObjectOutputStream(fos);
             outputStream.writeObject(this);
             outputStream.close();
@@ -103,31 +104,34 @@ public class UserInterface implements IEdite, ISetting, Serializable, ISerialize
         }
         catch (FileNotFoundException ex)
         {
-
+            Log.e("Exception", "FileNotFoundException");
         }
         catch (IOException ex)
         {
-
+            Log.e("Exception", "IOException");
         }
     }
 
-    private static UserInterface deserialize(Context context) {
+    private static UserInterface deserialize() {
         try {
-            FileInputStream fis = context.openFileInput(fileName);
+            FileInputStream fis = new FileInputStream(FILE_NAME);
             ObjectInputStream inputStream = new ObjectInputStream(fis);
             UserInterface temp = (UserInterface) inputStream.readObject();
             return temp;
         }
         catch (FileNotFoundException ex)
         {
+            Log.e("Exception", "FileNotFoundException");
             return null;
         }
         catch (IOException ex)
         {
+            Log.e("Exception", "IOException");
             return  null;
         }
         catch (ClassNotFoundException ex)
         {
+            Log.e("Exception", "ClassNotFoundException");
             return null;
         }
     }

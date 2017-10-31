@@ -15,8 +15,7 @@ import io.realm.annotations.Required;
  * Created by ytgv8b on 08.10.2017.
  */
 
-@RealmClass
-public class SMS implements IEdite, IMessage, RealmModel {
+public class SMS extends RealmObject implements IEdite, IMessage {
     /****Добавление/удаление получателей с заходом в БД****/
     /****Переопределить методы интерфейсов****/
 
