@@ -1,15 +1,12 @@
 package Library.Signals.SignalBuilders;
 
-import android.content.Context;
-
 import Library.Signals.ISignal;
-import Library.User;
 
 /**
  * Created by ytgv8b on 21.10.2017.
  */
 
-public abstract class SignalBuilder {
+abstract class SignalBuilder {
     protected ISignal signal;
 
     public SignalBuilder() { }

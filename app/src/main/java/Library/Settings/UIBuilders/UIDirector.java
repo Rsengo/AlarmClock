@@ -19,10 +19,9 @@ public class UIDirector {
 
     public UserInterface construct()
     {
-        builder.createUI();
         builder.setColorScheme();
         builder.setLanguage();
         builder.setFontSize();
-        return builder.getUserInterface();
+        return (UserInterface) builder.getUserInterface();
     }
 }

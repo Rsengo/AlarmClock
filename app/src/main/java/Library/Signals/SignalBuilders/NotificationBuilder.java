@@ -1,9 +1,7 @@
 package Library.Signals.SignalBuilders;
 
-import android.content.Context;
-
 import Library.Signals.Ring;
-import Library.User;
+import Library.User.User;
 
 /**
  * Created by ytgv8b on 21.10.2017.

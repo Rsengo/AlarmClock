@@ -3,6 +3,7 @@ package Library.Settings.UIBuilders;
 import android.content.Context;
 import android.os.Environment;
 
+import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
 
 /**
@@ -10,17 +11,19 @@ import Library.Settings.UserInterface;
  */
 
 public abstract class UIBuilder {
-    protected UserInterface userInterface;
 
-    public void createUI() {
-        userInterface = UserInterface.getInstance();
+    protected ISetting userInterface;
+
+    public UIBuilder(ISetting userInterface) {
+        this.userInterface = userInterface;
     }
 
     public abstract void setColorScheme();
     public abstract void setLanguage();
     public abstract void setFontSize();
 
-    public UserInterface getUserInterface() {
+    public ISetting getUserInterface() {
         return userInterface;
     }
+
 }

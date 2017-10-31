@@ -1,33 +1,18 @@
 package Library.Settings;
 
-import android.content.Context;
-import android.util.Log;
+import android.content.SharedPreferences;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
-import Library.Enums.FontSize;
-import Library.Enums.Language;
+import Library.DataHelpers.DataSaver;
 import Library.IEdite;
-import Library.ISerialize;
 import Library.Settings.UIBuilders.DefaultUIBuilder;
-import Library.Settings.UIBuilders.UIBuilder;
+import Library.Settings.UIBuilders.PreferenceUIBuilder;
 import Library.Settings.UIBuilders.UIDirector;
-import Library.User;
-import io.realm.RealmObject;
-import io.realm.annotations.Required;
 
 /**
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class UserInterface implements IEdite, ISetting, Serializable, ISerialize {
+public class UserInterface implements IEdite, ISetting {
     /****Пока хз, что тут еще будет****/
     /****Реализовать методы интерфейсов****/
 
@@ -36,23 +21,28 @@ public class UserInterface implements IEdite, ISetting, Serializable, ISerialize
     private byte fontSize;
     private byte language;
 
-    private final static String FILE_NAME = "UserInterface"; //Имя файла на диске
-
+    private static SharedPreferences preferences;
     private static UserInterface userInterface;
+    private static UIDirector director;
 
     private UserInterface() {
+        preferences = DataSaver.getPreferences();
     }
 
     public static UserInterface getInstance() {
         //Возврат ссылки на синглтон, либо создание объекта
         if (userInterface == null) {
-            if (new File(FILE_NAME).exists()) {  //Существование файла
-                userInterface = deserialize();
+            userInterface = new UserInterface();
+
+            //Если имеются сохраненные настройки
+            if (preferences.contains(DataSaver.getFileName())) {
+                director = new UIDirector(new PreferenceUIBuilder(userInterface));
             }
             else {
-                UIDirector director = new UIDirector(new DefaultUIBuilder());
-                userInterface = director.construct();
+                /***Либо настройки тоже хранить на сервере***/
+                director = new UIDirector(new DefaultUIBuilder(userInterface));
             }
+            userInterface = director.construct();
         }
         return userInterface;
     }
@@ -89,50 +79,8 @@ public class UserInterface implements IEdite, ISetting, Serializable, ISerialize
 
     @Override
     public void setDefault() {
-        UIDirector director = new UIDirector(new DefaultUIBuilder());
+        UIDirector director = new UIDirector(new DefaultUIBuilder(userInterface));
         userInterface = director.construct();
     }
 
-    @Override
-    public void serialize() {
-        try {
-            FileOutputStream fos = new FileOutputStream(FILE_NAME);
-            ObjectOutputStream outputStream = new ObjectOutputStream(fos);
-            outputStream.writeObject(this);
-            outputStream.close();
-            fos.close();
-        }
-        catch (FileNotFoundException ex)
-        {
-            Log.e("Exception", "FileNotFoundException");
-        }
-        catch (IOException ex)
-        {
-            Log.e("Exception", "IOException");
-        }
-    }
-
-    private static UserInterface deserialize() {
-        try {
-            FileInputStream fis = new FileInputStream(FILE_NAME);
-            ObjectInputStream inputStream = new ObjectInputStream(fis);
-            UserInterface temp = (UserInterface) inputStream.readObject();
-            return temp;
-        }
-        catch (FileNotFoundException ex)
-        {
-            Log.e("Exception", "FileNotFoundException");
-            return null;
-        }
-        catch (IOException ex)
-        {
-            Log.e("Exception", "IOException");
-            return  null;
-        }
-        catch (ClassNotFoundException ex)
-        {
-            Log.e("Exception", "ClassNotFoundException");
-            return null;
-        }
-    }
 }

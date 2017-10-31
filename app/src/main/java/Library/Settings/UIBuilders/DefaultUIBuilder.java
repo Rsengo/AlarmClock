@@ -4,6 +4,8 @@ import android.content.Context;
 
 import Library.Enums.FontSize;
 import Library.Enums.Language;
+import Library.Settings.ISetting;
+import Library.Settings.UserInterface;
 
 /**
  * Created by ytgv8b on 27.10.2017.
@@ -11,23 +13,23 @@ import Library.Enums.Language;
 
 public class DefaultUIBuilder extends UIBuilder {
 
-    @Override
-    public void createUI() {
-        super.createUI();
+    public DefaultUIBuilder(ISetting userInterface) {
+        super(userInterface);
     }
 
     @Override
     public void setColorScheme() {
-        /***Найти дефолтную***/
+        /***Найти дефолтную, либо из базы***/
     }
 
     @Override
     public void setLanguage() {
-        userInterface.setLanguage(Language.RUSSIAN); /**Можно в завис. от страны***/
+        ((UserInterface)userInterface).setLanguage(Language.RUSSIAN);
+        /**Можно в завис. от страны***/
     }
 
     @Override
     public void setFontSize() {
-        userInterface.setFontSize(FontSize.NORMAL);
+        ((UserInterface)userInterface).setFontSize(FontSize.NORMAL);
     }
 }
