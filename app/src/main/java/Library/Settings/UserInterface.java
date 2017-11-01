@@ -1,12 +1,11 @@
 package Library.Settings;
 
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import Library.DataHelpers.DataSaver;
 import Library.IEdite;
 import Library.Settings.UIBuilders.DefaultUIBuilder;
-import Library.Settings.UIBuilders.PreferenceUIBuilder;
+import Library.Settings.UIBuilders.SavedUIBuilder;
 import Library.Settings.UIBuilders.UIDirector;
 
 /**
@@ -22,12 +21,10 @@ public class UserInterface implements IEdite, ISetting {
     private byte fontSize;
     private byte language;
 
-    private static SharedPreferences preferences;
     private static UserInterface userInterface;
     private static UIDirector director;
 
     private UserInterface() {
-        preferences = DataSaver.getPreferences();
     }
 
     public static UserInterface getInstance() {
@@ -36,8 +33,8 @@ public class UserInterface implements IEdite, ISetting {
             userInterface = new UserInterface();
 
             //Если имеются сохраненные настройки
-            if (preferences.contains(DataSaver.getFileName())) { //если файл существует
-                director = new UIDirector(new PreferenceUIBuilder(userInterface));
+            if (!DataSaver.isEmpty()) { //если файл существует
+                director = new UIDirector(new SavedUIBuilder(userInterface));
             }
             else {
                 /***Либо настройки тоже хранить на сервере***/

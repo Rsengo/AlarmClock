@@ -10,10 +10,10 @@ import Library.User.User;
 
 public class SavedUserBuilder extends UserBuilder {
 
-    private DataSaver dataSaver;
 
     public SavedUserBuilder(IUser user) {
         super(user);
+        DataSaver.loadPreference();
     }
 
     @Override

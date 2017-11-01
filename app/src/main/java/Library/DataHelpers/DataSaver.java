@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import java.io.File;
+import java.util.Map;
 
 import Library.Settings.UserInterface;
 import Library.User.User;
@@ -34,6 +35,12 @@ public final class DataSaver {
         editor = preferences.edit();
     }
 
+    public static boolean isEmpty() {
+        Map<String, ?> values = preferences.getAll();
+        if (!values.isEmpty())
+            return false;
+        return true;
+    }
 
     public static void writePreference() {
         user = User.getInstance();

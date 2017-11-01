@@ -28,12 +28,10 @@ public class User implements IEdite, IUser {
     private ISetting userInterface;
     private String email; //Email пользователя
 
-    private static SharedPreferences preferences;
     private static UserDirector director;
     private static User user; //Ссылка на себя
 
     private User() { //Новый пользователь
-        preferences = DataSaver.getPreferences();
         userInterface = UserInterface.getInstance();
     }
 
@@ -43,7 +41,7 @@ public class User implements IEdite, IUser {
             /***потом убрать***/
 
             //Если имеются сохраненные настройки
-            if (preferences.contains(DataSaver.getFileName())) { //если файл существует
+            if (!DataSaver.isEmpty()) { //если файл существует
                 director = new UserDirector(new SavedUserBuilder(user));
             } else {
                 /**регистрация/вход**/

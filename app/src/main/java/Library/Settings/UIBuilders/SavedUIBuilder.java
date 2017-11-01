@@ -8,10 +8,11 @@ import Library.Settings.UserInterface;
  * Created by ytgv8b on 01.11.2017.
  */
 
-public class PreferenceUIBuilder extends UIBuilder {
+public class SavedUIBuilder extends UIBuilder {
 
-    public PreferenceUIBuilder(ISetting userInterface) {
+    public SavedUIBuilder(ISetting userInterface) {
         super(userInterface);
+        DataSaver.loadPreference();
     }
 
     @Override
