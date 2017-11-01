@@ -1,6 +1,7 @@
 package Library.User;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -32,23 +33,29 @@ public class User implements IEdite, IUser {
     private static User user; //Ссылка на себя
 
     private User() { //Новый пользователь
-        /***загрузка данных из БД***/
         preferences = DataSaver.getPreferences();
     }
 
     public static User getInstance() { //Создание пользователя
         if (user == null) { //Если вход не выполнен
-                user = new User(); //Создание нового пользователя
+            user = new User(); //Создание нового пользователя
+            /***потом убрать***/
 
             //Если имеются сохраненные настройки
             if (preferences.contains(DataSaver.getFileName())) { //если файл существует
                 director = new UserDirector(new SavedUserBuilder(user));
-            }
-            else {
+            } else {
                 /**регистрация/вход**/
             }
-            user = director.construct();
+
+            try {
+                director.construct();
             }
+            catch (NullPointerException ex)
+            {
+                Log.e("Exception", "Null pointer, creation");
+            }
+        }
 
         return user; //Возврат ссылки
     }

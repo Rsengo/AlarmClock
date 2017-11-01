@@ -29,7 +29,7 @@ public final class DataSaver {
     private static byte language;
     private static byte fontSize;
 
-    public void init(Context context) {
+    public static void init(Context context) {
         preferences = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
         editor = preferences.edit();
     }

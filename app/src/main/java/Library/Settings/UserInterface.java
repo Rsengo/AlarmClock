@@ -1,6 +1,7 @@
 package Library.Settings;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import Library.DataHelpers.DataSaver;
 import Library.IEdite;
@@ -42,7 +43,15 @@ public class UserInterface implements IEdite, ISetting {
                 /***Либо настройки тоже хранить на сервере***/
                 director = new UIDirector(new DefaultUIBuilder(userInterface));
             }
-            userInterface = director.construct();
+
+            try {
+                director.construct();
+            }
+            catch (NullPointerException ex)
+            {
+                Log.e("Exception", "Null pointer, creation");
+            }
+
         }
         return userInterface;
     }
