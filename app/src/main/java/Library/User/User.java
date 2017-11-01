@@ -1,11 +1,10 @@
 package Library.User;
 
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
 
-import Library.DataHelpers.DataSaver;
+import Library.DataHelpers.PreferenceHelper;
 import Library.IEdite;
 import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
@@ -41,7 +40,7 @@ public class User implements IEdite, IUser {
             /***потом убрать***/
 
             //Если имеются сохраненные настройки
-            if (!DataSaver.isEmpty()) { //если файл существует
+            if (!PreferenceHelper.isEmpty()) { //если файл существует
                 director = new UserDirector(new SavedUserBuilder(user));
             } else {
                 /**регистрация/вход**/
@@ -99,6 +98,6 @@ public class User implements IEdite, IUser {
     @Override
     public void logOut() {
         /***Сохранение данных на сервер***/
-        DataSaver.removePreference();
+        PreferenceHelper.removePreference();
     }
 }

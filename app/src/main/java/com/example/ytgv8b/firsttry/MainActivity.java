@@ -1,23 +1,16 @@
 package com.example.ytgv8b.firsttry;
 
-import android.graphics.Picture;
-import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import Library.DataHelpers.DataSaver;
+import Library.DataHelpers.PreferenceHelper;
 import Library.Enums.FontSize;
 import Library.Enums.Language;
-import Library.Messages.IMessage;
-import Library.Messages.SMS;
 import Library.Settings.UserInterface;
 import Library.User.User;
-import io.realm.Realm;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DataSaver.init(this);
+        PreferenceHelper.init(this);
 
         final Button save = (Button)findViewById(R.id.saveButton);
         final Button load = (Button)findViewById(R.id.loadButton);
@@ -41,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 UserInterface userInterface = (UserInterface) user.getUserInterface();
                 userInterface.setFontSize(FontSize.NORMAL);
                 userInterface.setLanguage(Language.RUSSIAN);
-                DataSaver.writePreference();
+                PreferenceHelper.writePreference();
                 textView.setText("Done");
             }
         });

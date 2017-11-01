@@ -2,7 +2,7 @@ package Library.Settings;
 
 import android.util.Log;
 
-import Library.DataHelpers.DataSaver;
+import Library.DataHelpers.PreferenceHelper;
 import Library.IEdite;
 import Library.Settings.UIBuilders.DefaultUIBuilder;
 import Library.Settings.UIBuilders.SavedUIBuilder;
@@ -33,7 +33,7 @@ public class UserInterface implements IEdite, ISetting {
             userInterface = new UserInterface();
 
             //Если имеются сохраненные настройки
-            if (!DataSaver.isEmpty()) { //если файл существует
+            if (!PreferenceHelper.isEmpty()) { //если файл существует
                 director = new UIDirector(new SavedUIBuilder(userInterface));
             }
             else {

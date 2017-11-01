@@ -1,6 +1,6 @@
 package Library.Settings.UIBuilders;
 
-import Library.DataHelpers.DataSaver;
+import Library.DataHelpers.PreferenceHelper;
 import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
 
@@ -12,7 +12,7 @@ public class SavedUIBuilder extends UIBuilder {
 
     public SavedUIBuilder(ISetting userInterface) {
         super(userInterface);
-        DataSaver.loadPreference();
+        PreferenceHelper.loadPreference();
     }
 
     @Override
@@ -22,11 +22,11 @@ public class SavedUIBuilder extends UIBuilder {
 
     @Override
     public void setLanguage() {
-        ((UserInterface)userInterface).setLanguage(DataSaver.getLanguage());
+        ((UserInterface)userInterface).setLanguage(PreferenceHelper.getLanguage());
     }
 
     @Override
     public void setFontSize() {
-        ((UserInterface)userInterface).setLanguage(DataSaver.getFontSize());
+        ((UserInterface)userInterface).setLanguage(PreferenceHelper.getFontSize());
     }
 }

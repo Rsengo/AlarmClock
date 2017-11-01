@@ -14,7 +14,7 @@ import Library.User.User;
  * Created by ytgv8b on 01.11.2017.
  */
 
-public final class DataSaver {
+public final class PreferenceHelper {
 
     /***Добавить метку того, первый ли запуск***/
 

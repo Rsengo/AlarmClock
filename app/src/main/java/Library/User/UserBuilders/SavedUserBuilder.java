@@ -1,6 +1,6 @@
 package Library.User.UserBuilders;
 
-import Library.DataHelpers.DataSaver;
+import Library.DataHelpers.PreferenceHelper;
 import Library.User.IUser;
 import Library.User.User;
 
@@ -13,12 +13,12 @@ public class SavedUserBuilder extends UserBuilder {
 
     public SavedUserBuilder(IUser user) {
         super(user);
-        DataSaver.loadPreference();
+        PreferenceHelper.loadPreference();
     }
 
     @Override
     public void setName() {
-        ((User) user).setName(DataSaver.getUserName());
+        ((User) user).setName(PreferenceHelper.getUserName());
 
     }
 
@@ -34,12 +34,12 @@ public class SavedUserBuilder extends UserBuilder {
 
     @Override
     public void setMoneyQuantity() {
-        ((User) user).setMoneyQuantity(DataSaver.getUserMoney());
+        ((User) user).setMoneyQuantity(PreferenceHelper.getUserMoney());
     }
 
     @Override
     public void setEmail() {
-        ((User) user).setEmail(DataSaver.getUserEmail());
+        ((User) user).setEmail(PreferenceHelper.getUserEmail());
     }
 
 }
