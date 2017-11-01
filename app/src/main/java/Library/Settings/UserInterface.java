@@ -35,7 +35,7 @@ public class UserInterface implements IEdite, ISetting {
             userInterface = new UserInterface();
 
             //Если имеются сохраненные настройки
-            if (preferences.contains(DataSaver.getFileName())) {
+            if (preferences.contains(DataSaver.getFileName())) { //если файл существует
                 director = new UIDirector(new PreferenceUIBuilder(userInterface));
             }
             else {

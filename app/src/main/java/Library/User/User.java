@@ -41,7 +41,7 @@ public class User implements IEdite, IUser {
                 user = new User(); //Создание нового пользователя
 
             //Если имеются сохраненные настройки
-            if (preferences.contains(DataSaver.getFileName())) {
+            if (preferences.contains(DataSaver.getFileName())) { //если файл существует
                 director = new UserDirector(new SavedUserBuilder(user));
             }
             else {

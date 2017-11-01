@@ -29,7 +29,13 @@ public final class DataSaver {
     private static byte language;
     private static byte fontSize;
 
-    public DataSaver(Context context) {
+    public void init(Context context) {
+        preferences = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
+        editor = preferences.edit();
+    }
+
+
+    public static void writePreference() {
         user = User.getInstance();
         userInterface = (UserInterface) user.getUserInterface();
         userName = user.getName();
@@ -37,29 +43,33 @@ public final class DataSaver {
         userMoney = user.getMoneyQuantity();
         language = userInterface.getLanguage();
         fontSize = userInterface.getFontSize();
-        preferences = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
-        editor = preferences.edit();
-    }
 
-
-    public static void writePreference() {
         editor.putString("USER_NAME", userName);
         editor.putString("USER_EMAIL", userEmail);
         editor.putInt("USER_MONEY", userMoney);
         editor.putInt("LANGUAGE", language);
         editor.putInt("FONT_SIZE", fontSize);
+
         editor.apply();
     }
 
 
     public static void loadPreference() {
-
+        userName = preferences.getString("USER_NAME", "");
+        userEmail = preferences.getString("USER_EMAIL", "");
+        userMoney = preferences.getInt("USER_MONEY", 0);
+        language = (byte) preferences.getInt("LANGUAGE", 0);
+        fontSize = (byte) preferences.getInt("FONT_SIZE", 0);
     }
 
     public static void removePreference() {
         String path = "/data/data/alarmclock/shared_prefs/" + fileName + ".xml";
         File file= new File(path);
         file.delete();
+    }
+
+    public static void clearPreference() {
+        editor.clear();
     }
 
     public static SharedPreferences getPreferences() {
