@@ -44,6 +44,8 @@ public final class DataSaver {
         language = userInterface.getLanguage();
         fontSize = userInterface.getFontSize();
 
+        clearPreference(); //Очищаем старые записи
+
         editor.putString("USER_NAME", userName);
         editor.putString("USER_EMAIL", userEmail);
         editor.putInt("USER_MONEY", userMoney);
