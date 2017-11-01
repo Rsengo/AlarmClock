@@ -24,27 +24,23 @@ public class MainActivity extends AppCompatActivity {
         final Button load = (Button)findViewById(R.id.loadButton);
         final TextView textView = (TextView)findViewById(R.id.Text);
 
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                User user = User.getInstance();
-                user.setEmail("User@gmail.com");
-                user.setName("User");
-                user.setMoneyQuantity(1);
-                UserInterface userInterface = (UserInterface) user.getUserInterface();
-                userInterface.setFontSize(FontSize.NORMAL);
-                userInterface.setLanguage(Language.RUSSIAN);
-                PreferenceHelper.writePreference();
-                textView.setText("Done");
-            }
+        save.setOnClickListener(v ->
+        {
+            User user = User.getInstance();
+            user.setEmail("User@gmail.com");
+            user.setName("User");
+            user.setMoneyQuantity(1);
+            UserInterface userInterface = (UserInterface) user.getUserInterface();
+            userInterface.setFontSize(FontSize.NORMAL);
+            userInterface.setLanguage(Language.RUSSIAN);
+            PreferenceHelper.writePreference();
+            textView.setText("Done");
         });
 
-        load.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                User user = User.getInstance();
-                textView.setText(user.getEmail());
-            }
+        load.setOnClickListener(v ->
+        {
+            User user = User.getInstance();
+            textView.setText(user.getEmail());
         });
 
     }
