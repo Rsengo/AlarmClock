@@ -34,6 +34,7 @@ public class User implements IEdite, IUser {
 
     private User() { //Новый пользователь
         preferences = DataSaver.getPreferences();
+        userInterface = UserInterface.getInstance();
     }
 
     public static User getInstance() { //Создание пользователя

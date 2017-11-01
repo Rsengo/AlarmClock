@@ -17,11 +17,20 @@
         android:text="Hello World!" />
 
     <Button
-        android:id="@+id/Yebash"
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="125dp"
+        android:text="Button"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="43dp"
-        android:text="Button"/>
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/loadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/Yebash"
+        android:layout_marginBottom="35dp"/>
 </RelativeLayout>
