@@ -21,7 +21,7 @@ abstract class UserBuilder {
     public abstract void setMoneyQuantity();
     public abstract void setEmail();
     public void setUserInterface() {
-        ((User) user).setUserInterface(UserInterface.getInstance());
+        ((User) user).setUserInterface((UserInterface) UserInterface.getInstance());
     }
 
 

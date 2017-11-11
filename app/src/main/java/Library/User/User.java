@@ -9,8 +9,11 @@ import Library.IEdite;
 import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
 import Library.Signals.ISignal;
+import Library.Signals.Notification;
+import Library.Signals.Ring;
 import Library.User.UserBuilders.SavedUserBuilder;
 import Library.User.UserBuilders.UserDirector;
+import io.realm.RealmResults;
 
 /**
  * Created by ytgv8b on 08.10.2017.
@@ -19,10 +22,11 @@ import Library.User.UserBuilders.UserDirector;
 public class User implements IEdite, IUser {
     /****Добавление/удаление сигналов с заходом в БД****/
     /****Выйти из профиля****/
-    /****Кэширование****/
+    /****Пересмотреть абстракции***/
+
     private String name; //Имя
-    private ArrayList<ISignal> rings; //Будильники
-    private ArrayList<ISignal> notifications; //События
+    private RealmResults<Ring> rings; //Будильники
+    private RealmResults<Notification> notifications; //События
     private int moneyQuantity; //Число монет
     private ISetting userInterface;
     private String email; //Email пользователя
@@ -34,7 +38,7 @@ public class User implements IEdite, IUser {
         userInterface = UserInterface.getInstance();
     }
 
-    public static User getInstance() { //Создание пользователя
+    public static IUser getInstance() { //Создание пользователя
         if (user == null) { //Если вход не выполнен
             user = new User(); //Создание нового пользователя
             /***потом убрать***/
@@ -88,6 +92,22 @@ public class User implements IEdite, IUser {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public RealmResults<Ring> getRings() {
+        return rings;
+    }
+
+    public void setRings(RealmResults<Ring> rings) {
+        this.rings = rings;
+    }
+
+    public RealmResults<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(RealmResults<Notification> notifications) {
+        this.notifications = notifications;
     }
 
     @Override

@@ -43,7 +43,7 @@ public final class PreferenceHelper {
     }
 
     public static void writePreference() {
-        user = User.getInstance();
+        user = (User) User.getInstance();
         userInterface = (UserInterface) user.getUserInterface();
         userName = user.getName();
         userEmail = user.getEmail();

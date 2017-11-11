@@ -7,6 +7,7 @@ import Library.IEdite;
 import Library.Settings.UIBuilders.DefaultUIBuilder;
 import Library.Settings.UIBuilders.SavedUIBuilder;
 import Library.Settings.UIBuilders.UIDirector;
+import io.realm.annotations.Required;
 
 /**
  * Created by ytgv8b on 08.10.2017.
@@ -24,10 +25,11 @@ public class UserInterface implements IEdite, ISetting {
     private static UserInterface userInterface;
     private static UIDirector director;
 
+
     private UserInterface() {
     }
 
-    public static UserInterface getInstance() {
+    public static ISetting getInstance() {
         //Возврат ссылки на синглтон, либо создание объекта
         if (userInterface == null) {
             userInterface = new UserInterface();

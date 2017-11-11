@@ -6,7 +6,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.example.ytgv8b.alarmclock"
+        applicationId "com.example.ytgv8b.firsttry"
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1

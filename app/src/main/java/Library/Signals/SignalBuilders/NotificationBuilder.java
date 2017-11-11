@@ -60,7 +60,7 @@ public class NotificationBuilder extends SignalBuilder {
 
     @Override
     public void setUserEmail() {
-        String userEmail = User.getInstance().getEmail();
+        String userEmail = ((User) User.getInstance()).getEmail();
         ((Ring)signal).setUserEmail(userEmail);
     }
 

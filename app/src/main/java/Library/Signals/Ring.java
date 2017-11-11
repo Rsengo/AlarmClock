@@ -12,6 +12,7 @@ import io.realm.RealmModel;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
+import io.realm.annotations.Required;
 
 /**
  * Created by ytgv8b on 16.10.2017.
@@ -37,6 +38,7 @@ public class Ring extends RealmObject implements IEdite, ISignal{
     private Date turnOffTime; //Время автовыключения звукового сигнала
     private String description; //Описание
     private boolean onState; //Вкл/Выкл звукового сигнала
+    @Required
     private String userEmail; //Почта пользователя-владельца
 
     /***Можно ли использовать массив?***/
