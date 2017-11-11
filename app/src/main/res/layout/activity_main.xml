@@ -34,22 +34,4 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
 
-    <Button
-        android:id="@+id/dbButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/saveButton"
-        android:layout_alignStart="@+id/saveButton"
-        android:layout_marginBottom="16dp"
-        android:text="DBLoad"/>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/dbButton"
-        android:layout_alignStart="@+id/dbButton"
-        android:layout_marginBottom="44dp"
-        android:text="Button"/>
-
 </RelativeLayout>
