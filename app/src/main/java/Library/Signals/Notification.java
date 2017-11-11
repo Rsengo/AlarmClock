@@ -22,6 +22,8 @@ public class Notification implements RealmModel, IEdite, ISignal{
     /***Обратная связь с юзером***/
 
     @PrimaryKey
+    private String id = UUID.randomUUID().toString();
+    @Required
     private String name; //Имя
     private byte generalPeriodicity; //Общая переодичность
     private byte specificPeriodicity; //Подробная

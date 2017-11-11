@@ -9,7 +9,7 @@ import Library.User.User;
  * Created by ytgv8b on 21.10.2017.
  */
 
-public class NotificationBuilder extends SignalFactory {
+public class NotificationFactory extends SignalFactory {
 
     @Override
     public void createSignal() {
