@@ -25,8 +25,8 @@ public class User implements IEdite, IUser {
     /****Пересмотреть абстракции***/
 
     private String name; //Имя
-    private RealmResults<Ring> rings; //Будильники
-    private RealmResults<Notification> notifications; //События
+    private ArrayList<ISignal> rings; //Будильники
+    private ArrayList<ISignal> notifications; //События
     private int moneyQuantity; //Число монет
     private ISetting userInterface;
     private String email; //Email пользователя
@@ -94,19 +94,19 @@ public class User implements IEdite, IUser {
         this.email = email;
     }
 
-    public RealmResults<Ring> getRings() {
+    public ArrayList<ISignal> getRings() {
         return rings;
     }
 
-    public void setRings(RealmResults<Ring> rings) {
+    public void setRings(ArrayList<ISignal> rings) {
         this.rings = rings;
     }
 
-    public RealmResults<Notification> getNotifications() {
+    public ArrayList<ISignal> getNotifications() {
         return notifications;
     }
 
-    public void setNotifications(RealmResults<Notification> notifications) {
+    public void setNotifications(ArrayList<ISignal> notifications) {
         this.notifications = notifications;
     }
 
