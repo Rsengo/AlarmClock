@@ -25,20 +25,15 @@ public class SMS extends RealmObject implements IEdite, IMessage {
     @Required
     private String text; //Текст
 
-    private RealmList<String> recepients = new RealmList<>(); //Получатели
+    private String recepientName; //Получатель
+
+    private String recepientNumber; //Номер получателя
 
     public SMS(String text) {
         this.text = text;
     }
 
     public SMS() { }
-
-    public SMS (String text, RealmList<String> recepients)
-    {
-        this.text = text;
-        this.recepients = recepients;
-    }
-
 
     public String getText() {
         return text;
@@ -48,9 +43,8 @@ public class SMS extends RealmObject implements IEdite, IMessage {
         this.text = text;
     }
 
-    @Override
-    public void OpenEditeDialog() { //Редактирование
-        //Открытие диалога редактирования
+    public String getId() {
+        return id;
     }
 
     @Override
@@ -58,15 +52,18 @@ public class SMS extends RealmObject implements IEdite, IMessage {
 
     }
 
-    public RealmList<String> getRecepients() {
-        return recepients;
+    @Override
+    public void addRecepient() {
+
     }
 
-    public void setRecepients(RealmList<String> recepients) {
-        this.recepients = recepients;
+    @Override
+    public void removeRecepient() {
+
     }
 
-    public String getId() {
-        return id;
+    @Override
+    public void OpenEditeDialog() { //Редактирование
+        //Открытие диалога редактирования
     }
 }

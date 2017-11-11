@@ -9,10 +9,6 @@ import Library.User.User;
 
 public class NotificationBuilder extends SignalBuilder {
 
-    public NotificationBuilder() {
-        super();
-    }
-
     @Override
     public void createSignal() {
 

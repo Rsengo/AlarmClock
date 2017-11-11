@@ -9,8 +9,6 @@ import Library.Signals.ISignal;
 abstract class SignalBuilder {
     protected ISignal signal;
 
-    public SignalBuilder() { }
-
     /****public static long id;****/ /**Пока хз как реализуется**/
     public abstract void createSignal();
     public abstract void setId(); /****мб и не понадобится****/

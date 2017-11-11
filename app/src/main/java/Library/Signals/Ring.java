@@ -10,6 +10,7 @@ import Library.Puzzles.Puzzle;
 import Library.Messages.SMS;
 import io.realm.RealmModel;
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 import io.realm.annotations.Required;
@@ -29,7 +30,8 @@ public class Ring extends RealmObject implements IEdite, ISignal{
     private String id = UUID.randomUUID().toString();
     private byte turnOffMethod; //метод выключения
     private Puzzle puzzle; //головоломка
-    private SMS sms; //СМС
+    @Ignore
+    private IMessage message; //СМС
     private Date signalTime; //Время запуска
     private Date repeatSignalInterval; //интервал повтора
     private boolean vibrating; //вибрация(Вибрирующий)
@@ -65,11 +67,11 @@ public class Ring extends RealmObject implements IEdite, ISignal{
     }
 
     public IMessage getSms() {
-        return sms;
+        return message;
     }
 
-    public void setSms(SMS sms) {
-        this.sms = sms;
+    public void setSms(IMessage message) {
+        this.message = message;
     }
 
 //    public boolean[] getRepeatDays() {

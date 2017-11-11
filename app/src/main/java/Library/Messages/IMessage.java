@@ -8,4 +8,6 @@ import io.realm.RealmModel;
 
 public interface IMessage{
     void send();
+    void addRecepient();
+    void removeRecepient();
 }

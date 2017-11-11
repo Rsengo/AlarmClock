@@ -9,10 +9,6 @@ import Library.User.User;
 
 public class RingBuilder extends SignalBuilder {
 
-    public RingBuilder() {
-        super();
-    }
-
     @Override
     public void createSignal() {
 
