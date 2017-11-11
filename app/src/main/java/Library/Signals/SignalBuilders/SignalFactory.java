@@ -6,7 +6,7 @@ import Library.Signals.ISignal;
  * Created by ytgv8b on 21.10.2017.
  */
 
-abstract class SignalBuilder {
+abstract class SignalFactory {
     protected ISignal signal;
 
     /****public static long id;****/ /**Пока хз как реализуется**/
@@ -20,8 +20,5 @@ abstract class SignalBuilder {
     public abstract void setDescription();
     public abstract void setOnState();
     public abstract void setUserEmail();
-
-    public ISignal getSignal() {
-        return signal;
-    }
+    public abstract ISignal create();
 }

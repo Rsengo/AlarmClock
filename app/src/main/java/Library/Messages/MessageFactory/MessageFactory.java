@@ -1,4 +1,4 @@
-package Library.Messages.MessageBuilders;
+package Library.Messages.MessageFactory;
 
 import Library.Messages.IMessage;
 
@@ -6,14 +6,11 @@ import Library.Messages.IMessage;
  * Created by ytgv8b on 12.11.2017.
  */
 
-public abstract class MessageBuilder {
+public abstract class MessageFactory {
     protected IMessage message;
 
     public abstract void createMessage();
     public abstract void setText();
     public abstract void setRecepientName();
-
-    public IMessage getMessage() {
-        return message;
-    }
+    public abstract IMessage create();
 }

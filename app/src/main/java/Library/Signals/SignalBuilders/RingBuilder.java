@@ -1,5 +1,6 @@
 package Library.Signals.SignalBuilders;
 
+import Library.Signals.ISignal;
 import Library.Signals.Ring;
 import Library.User.User;
 
@@ -7,7 +8,7 @@ import Library.User.User;
  * Created by ytgv8b on 21.10.2017.
  */
 
-public class RingBuilder extends SignalBuilder {
+public class RingBuilder extends SignalFactory {
 
     @Override
     public void createSignal() {
@@ -74,5 +75,12 @@ public class RingBuilder extends SignalBuilder {
 
     public  void setRepeatDays() {
 
+    }
+
+    @Override
+    public ISignal create() {
+        createSignal();
+        setId();
+        return signal;
     }
 }
