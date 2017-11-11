@@ -1,6 +1,7 @@
 package Library.Messages.MessageFactory;
 
 import Library.Messages.IMessage;
+import Library.Messages.SMS;
 
 /**
  * Created by ytgv8b on 12.11.2017.
@@ -9,7 +10,7 @@ import Library.Messages.IMessage;
 public class SMSFactory extends MessageFactory {
     @Override
     public void createMessage() {
-
+        message = new SMS();
     }
 
     @Override

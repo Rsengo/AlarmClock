@@ -66,11 +66,11 @@ public class Ring extends RealmObject implements IEdite, ISignal{
         this.puzzle = puzzle;
     }
 
-    public IMessage getSms() {
+    public IMessage getMessage() {
         return message;
     }
 
-    public void setSms(IMessage message) {
+    public void setMessage (IMessage message) {
         this.message = message;
     }
 

@@ -42,16 +42,16 @@ public final class DataBaseHelper {
     }
 
     public void loadData() {
-        realm = Realm.getDefaultInstance();
-        ((User) user).setRings(ringRealmQuery.findAll());
-        ((User) user).setNotifications(notificationRealmQuery.findAll());
-        ((UserInterface) userInterface).setColorScheme(colorSchemeRealmQuery.findFirst());
-        realm.close();
+//        realm = Realm.getDefaultInstance();
+//        ((User) user).setRings(ringRealmQuery.findAll());
+//        ((User) user).setNotifications(notificationRealmQuery.findAll());
+//        ((UserInterface) userInterface).setColorScheme(colorSchemeRealmQuery.findFirst());
+//        realm.close();
     }
 
     public <T> void saveData(T data) {
-        realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
+//        realm = Realm.getDefaultInstance();
+//        realm.beginTransaction();
 
     }
 

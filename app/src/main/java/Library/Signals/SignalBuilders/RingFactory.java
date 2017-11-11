@@ -8,7 +8,7 @@ import Library.User.User;
  * Created by ytgv8b on 21.10.2017.
  */
 
-public class RingBuilder extends SignalFactory {
+public class RingFactory extends SignalFactory {
 
     @Override
     public void createSignal() {

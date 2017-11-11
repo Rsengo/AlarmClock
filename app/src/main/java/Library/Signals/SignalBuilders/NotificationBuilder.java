@@ -1,5 +1,7 @@
 package Library.Signals.SignalBuilders;
 
+import Library.Signals.ISignal;
+import Library.Signals.Notification;
 import Library.Signals.Ring;
 import Library.User.User;
 
@@ -7,11 +9,11 @@ import Library.User.User;
  * Created by ytgv8b on 21.10.2017.
  */
 
-public class NotificationBuilder extends SignalBuilder {
+public class NotificationBuilder extends SignalFactory {
 
     @Override
     public void createSignal() {
-
+        signal = new Notification();
     }
 
     @Override
@@ -74,5 +76,20 @@ public class NotificationBuilder extends SignalBuilder {
 
     public void setSpecificPeriodicity() {
 
+    }
+
+    @Override
+    public ISignal create() {
+        createSignal();
+        setId();
+        setRepeatSignalInterval();
+        setVibrating();
+        setMelody();
+        setMelodyVolume();
+        setTurnOffTime();
+        setTurnOffTime();
+        setDescription();
+        setOnState();
+        return signal;
     }
 }
