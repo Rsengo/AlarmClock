@@ -15,7 +15,7 @@ public class UserDirector {
         this.builder = builder;
     }
 
-    public User construct()
+    public void construct()
     {
         builder.setName();
         builder.setEmail();
@@ -23,6 +23,5 @@ public class UserDirector {
         builder.setRings();
         builder.setNotifications();
         builder.setUserInterface();
-        return (User) builder.getUser();
     }
 }

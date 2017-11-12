@@ -8,10 +8,10 @@ import Library.User.User;
  * Created by ytgv8b on 01.11.2017.
  */
 
-abstract class UserBuilder {
-    protected IUser user;
+public abstract class UserBuilder {
+    protected User user;
 
-    public UserBuilder(IUser user) {
+    public UserBuilder(User user) {
         this.user = user;
     }
 
@@ -21,11 +21,11 @@ abstract class UserBuilder {
     public abstract void setMoneyQuantity();
     public abstract void setEmail();
     public void setUserInterface() {
-        ((User) user).setUserInterface((UserInterface) UserInterface.getInstance());
+        user.setUserInterface(UserInterface.getInstance());
     }
 
 
-    public IUser getUser() {
+    public User getResult() {
         return user;
     }
 }

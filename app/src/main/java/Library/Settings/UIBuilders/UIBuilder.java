@@ -12,9 +12,9 @@ import Library.Settings.UserInterface;
 
 public abstract class UIBuilder {
 
-    protected ISetting userInterface;
+    protected UserInterface userInterface;
 
-    public UIBuilder(ISetting userInterface) {
+    public UIBuilder(UserInterface userInterface) {
         this.userInterface = userInterface;
     }
 
@@ -22,7 +22,7 @@ public abstract class UIBuilder {
     public abstract void setLanguage();
     public abstract void setFontSize();
 
-    public ISetting getUserInterface() {
+    public UserInterface getResult() {
         return userInterface;
     }
 

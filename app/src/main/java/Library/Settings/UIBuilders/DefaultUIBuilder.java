@@ -6,6 +6,7 @@ import Library.Enums.FontSize;
 import Library.Enums.Language;
 import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
+import Library.User.User;
 
 /**
  * Created by ytgv8b on 27.10.2017.
@@ -13,7 +14,7 @@ import Library.Settings.UserInterface;
 
 public class DefaultUIBuilder extends UIBuilder {
 
-    public DefaultUIBuilder(ISetting userInterface) {
+    public DefaultUIBuilder(UserInterface userInterface) {
         super(userInterface);
     }
 
@@ -24,7 +25,7 @@ public class DefaultUIBuilder extends UIBuilder {
 
     @Override
     public void setLanguage() {
-        ((UserInterface)userInterface).setLanguage(Language.RUSSIAN);
+        userInterface.setLanguage(Language.RUSSIAN);
         /**Можно в завис. от страны***/
     }
 

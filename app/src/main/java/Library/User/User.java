@@ -12,6 +12,7 @@ import Library.Signals.ISignal;
 import Library.Signals.Notification;
 import Library.Signals.Ring;
 import Library.User.UserBuilders.SavedUserBuilder;
+import Library.User.UserBuilders.UserBuilder;
 import Library.User.UserBuilders.UserDirector;
 import io.realm.RealmResults;
 
@@ -32,26 +33,27 @@ public class User implements IEdite, IUser {
     private String email; //Email пользователя
 
     private static UserDirector director;
+    private static UserBuilder builder;
     private static User user; //Ссылка на себя
 
     private User() { //Новый пользователь
         userInterface = UserInterface.getInstance();
     }
 
-    public static IUser getInstance() { //Создание пользователя
+    public static User getInstance() { //Создание пользователя
         if (user == null) { //Если вход не выполнен
-            user = new User(); //Создание нового пользователя
-            /***потом убрать***/
 
             //Если имеются сохраненные настройки
             if (!PreferenceHelper.isEmpty()) { //если файл существует
-                director = new UserDirector(new SavedUserBuilder(user));
+                builder = new SavedUserBuilder(user);
+                director = new UserDirector(builder);
             } else {
                 /**регистрация/вход**/
             }
 
             try {
                 director.construct();
+                user = builder.getResult();
             }
             catch (NullPointerException ex)
             {

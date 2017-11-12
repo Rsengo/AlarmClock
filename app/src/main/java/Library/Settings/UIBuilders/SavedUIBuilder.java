@@ -10,7 +10,7 @@ import Library.Settings.UserInterface;
 
 public class SavedUIBuilder extends UIBuilder {
 
-    public SavedUIBuilder(ISetting userInterface) {
+    public SavedUIBuilder(UserInterface userInterface) {
         super(userInterface);
         PreferenceHelper.loadPreference();
     }
@@ -22,11 +22,11 @@ public class SavedUIBuilder extends UIBuilder {
 
     @Override
     public void setLanguage() {
-        ((UserInterface)userInterface).setLanguage(PreferenceHelper.getLanguage());
+        userInterface.setLanguage(PreferenceHelper.getLanguage());
     }
 
     @Override
     public void setFontSize() {
-        ((UserInterface)userInterface).setLanguage(PreferenceHelper.getFontSize());
+        userInterface.setLanguage(PreferenceHelper.getFontSize());
     }
 }
