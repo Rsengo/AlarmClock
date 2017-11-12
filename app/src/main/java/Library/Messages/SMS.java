@@ -3,7 +3,6 @@ package Library.Messages;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import Library.IEdite;
 import io.realm.RealmList;
 import io.realm.RealmModel;
 import io.realm.RealmObject;
@@ -15,7 +14,7 @@ import io.realm.annotations.Required;
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class SMS extends RealmObject implements IEdite, IMessage {
+public class SMS extends RealmObject implements IMessage {
     /****Добавление/удаление получателей с заходом в БД****/
     /****Переопределить методы интерфейсов****/
 
@@ -60,10 +59,5 @@ public class SMS extends RealmObject implements IEdite, IMessage {
     @Override
     public void removeRecepient() {
 
-    }
-
-    @Override
-    public void OpenEditeDialog() { //Редактирование
-        //Открытие диалога редактирования
     }
 }

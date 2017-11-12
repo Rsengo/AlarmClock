@@ -3,18 +3,16 @@ package Library.Settings;
 import android.util.Log;
 
 import Library.DataHelpers.PreferenceHelper;
-import Library.IEdite;
 import Library.Settings.UIBuilders.DefaultUIBuilder;
 import Library.Settings.UIBuilders.SavedUIBuilder;
 import Library.Settings.UIBuilders.UIBuilder;
 import Library.Settings.UIBuilders.UIDirector;
-import io.realm.annotations.Required;
 
 /**
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class UserInterface implements IEdite, ISetting {
+public class UserInterface implements ISetting {
     /****Пока хз, что тут еще будет****/
     /****Реализовать методы интерфейсов****/
 
@@ -81,11 +79,6 @@ public class UserInterface implements IEdite, ISetting {
 
     public void setLanguage(byte language) {
         this.language = language;
-    }
-
-    @Override
-    public void OpenEditeDialog() {  //Редактирование
-        /****Открытие диалога редактирования****/
     }
 
     @Override

@@ -3,16 +3,11 @@ package Library.Signals;
 import java.util.Date;
 import java.util.UUID;
 
-import Library.Enums.TurnOffMethod;
-import Library.IEdite;
 import Library.Messages.IMessage;
 import Library.Puzzles.Puzzle;
-import Library.Messages.SMS;
-import io.realm.RealmModel;
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.RealmClass;
 import io.realm.annotations.Required;
 
 /**
@@ -20,7 +15,7 @@ import io.realm.annotations.Required;
  */
 
 
-public class Ring extends RealmObject implements IEdite, ISignal{
+public class Ring extends RealmObject implements ISignal{
     /****добавить абстракции для головоломки****/
     /****Написать метод отложить будьник****/
     /****Методы интефкйсов****/
@@ -152,11 +147,6 @@ public class Ring extends RealmObject implements IEdite, ISignal{
 
     public void postpound() {  //отложить
         /****отложить будильник****/
-    }
-
-    @Override
-    public void OpenEditeDialog() {  //Редактирование
-        /****Открытие диалога редактирования****/
     }
 
     @Override

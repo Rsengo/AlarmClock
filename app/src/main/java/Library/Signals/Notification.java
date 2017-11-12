@@ -1,12 +1,8 @@
 package Library.Signals;
 
-import java.io.File;
 import java.util.Date;
 import java.util.UUID;
 
-import Library.Enums.GeneralPereodicity;
-import Library.Enums.Priority;
-import Library.IEdite;
 import io.realm.RealmModel;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
@@ -17,7 +13,7 @@ import io.realm.annotations.Required;
  */
 
 @RealmClass
-public class Notification implements RealmModel, IEdite, ISignal{
+public class Notification implements RealmModel, ISignal{
     /****Методы интерфейсов****/
     /***Обратная связь с юзером***/
 
@@ -142,11 +138,6 @@ public class Notification implements RealmModel, IEdite, ISignal{
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
-    }
-
-    @Override
-    public void OpenEditeDialog() {  //Редактирование
-        /****Открытие диалога редактирования****/
     }
 
     @Override

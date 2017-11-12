@@ -5,22 +5,18 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import Library.DataHelpers.PreferenceHelper;
-import Library.IEdite;
 import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
 import Library.Signals.ISignal;
-import Library.Signals.Notification;
-import Library.Signals.Ring;
 import Library.User.UserBuilders.SavedUserBuilder;
 import Library.User.UserBuilders.UserBuilder;
 import Library.User.UserBuilders.UserDirector;
-import io.realm.RealmResults;
 
 /**
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class User implements IEdite, IUser {
+public class User implements  IUser {
     /****Добавление/удаление сигналов с заходом в БД****/
     /****Выйти из профиля****/
     /****Пересмотреть абстракции***/
@@ -110,11 +106,6 @@ public class User implements IEdite, IUser {
 
     public void setNotifications(ArrayList<ISignal> notifications) {
         this.notifications = notifications;
-    }
-
-    @Override
-    public void OpenEditeDialog() { //Редактирование
-        /****Открытие диалога редактирования****/
     }
 
     @Override
