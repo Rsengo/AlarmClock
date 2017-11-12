@@ -42,6 +42,7 @@ public final class PreferenceHelper {
         return true;
     }
 
+
     public static void writePreference() {
         user = (User) User.getInstance();
         userInterface = (UserInterface) user.getUserInterface();
@@ -64,8 +65,8 @@ public final class PreferenceHelper {
 
 
     public static void loadPreference() {
-        userName = preferences.getString("USER_NAME", "");
-        userEmail = preferences.getString("USER_EMAIL", "");
+        userName = preferences.getString("USER_NAME", "ss");
+        userEmail = preferences.getString("USER_EMAIL", "hh");
         userMoney = preferences.getInt("USER_MONEY", 0);
         language = (byte) preferences.getInt("LANGUAGE", 0);
         fontSize = (byte) preferences.getInt("FONT_SIZE", 0);

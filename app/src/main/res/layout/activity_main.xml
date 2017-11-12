@@ -34,4 +34,41 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/saveButton"
+        android:layout_alignRight="@+id/loadButton"
+        android:layout_marginBottom="78dp"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button"
+        android:layout_marginBottom="54dp"
+        android:layout_toEndOf="@+id/Text"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignStart="@+id/button"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="30dp"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button3"
+        android:layout_alignStart="@+id/loadButton"
+        android:layout_marginBottom="20dp"
+        android:text="Button" />
+
 </RelativeLayout>
