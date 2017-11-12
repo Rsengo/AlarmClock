@@ -1,5 +1,8 @@
 package Library.Signals.SignalBuilders;
 
+import Library.Messages.IMessage;
+import Library.Messages.MessageFactory.MessageFactories;
+import Library.Messages.MessageFactory.MessageFactory;
 import Library.Signals.ISignal;
 import Library.Signals.Ring;
 import Library.User.User;
@@ -9,6 +12,12 @@ import Library.User.User;
  */
 
 public class RingFactory extends SignalFactory {
+
+    private String messageFactory;
+
+    public RingFactory(String messageFactory) {
+        this.messageFactory = messageFactory;
+    }
 
     @Override
     public void createSignal() {
@@ -57,7 +66,7 @@ public class RingFactory extends SignalFactory {
 
     @Override
     public void setUserEmail() {
-        String userEmail = ((User) User.getInstance()).getEmail();
+        String userEmail = User.getInstance().getEmail();
         ((Ring)signal).setUserEmail(userEmail);
     }
 
@@ -69,8 +78,15 @@ public class RingFactory extends SignalFactory {
 
     }
 
-    public  void setSms() {
-
+    public  void setMessage() {
+        if (messageFactory != null) {
+            MessageFactories factories = new MessageFactories();
+            MessageFactory signalFactory = factories.getFactory(messageFactory);
+            IMessage message = signalFactory.create();
+            ((Ring) signal).setMessage(message);
+        } else {
+            ((Ring) signal).setMessage(null);
+        }
     }
 
     public  void setRepeatDays() {
@@ -81,6 +97,17 @@ public class RingFactory extends SignalFactory {
     public ISignal create() {
         createSignal();
         setId();
+        setRepeatSignalInterval();
+        setVibrating();
+        setMelody();
+        setMelodyVolume();
+        setTurnOffTime();
+        setTurnOffTime();
+        setDescription();
+        setOnState();
+        setTurnOffTime();
+        setPuzzle();
+        setRepeatDays();
         return signal;
     }
 }
