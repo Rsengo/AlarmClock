@@ -32,7 +32,6 @@ public final class DataBaseHelper {
     }
 
     public DataBaseHelper(Context context) {
-        //init(context);
         user = User.getInstance();
         userInterface = UserInterface.getInstance();
         userEmail = ((User) user).getEmail();

@@ -24,6 +24,7 @@ public class UserInterface implements ISetting {
     private static UserInterface userInterface;
     private static UIDirector director;
     private static UIBuilder builder;
+    private static PreferenceHelper preferenceHelper;
 
 
     private UserInterface() {
@@ -32,9 +33,9 @@ public class UserInterface implements ISetting {
     public static UserInterface getInstance() {
         //Возврат ссылки на синглтон, либо создание объекта
         if (userInterface == null) {
-
+            preferenceHelper = PreferenceHelper.getInstance();
             //Если имеются сохраненные настройки
-            if (!PreferenceHelper.isEmpty()) { //если файл существует
+            if (!preferenceHelper.isEmpty()) { //если файл существует
                 builder = new SavedUIBuilder(userInterface);
                 director = new UIDirector(builder);
             }

@@ -18,24 +18,39 @@ public final class PreferenceHelper {
 
     /***Добавить метку того, первый ли запуск***/
 
-    private static User user;
-    private static UserInterface userInterface;
+    private User user;
+    private UserInterface userInterface;
     private static Editor editor;
     private static SharedPreferences preferences;
     private final static String fileName = "USER_PREFERENCES"; //Имя файла на диске
 
-    private static String userEmail;
-    private static String userName;
-    private static int userMoney;
-    private static byte language;
-    private static byte fontSize;
+    private String userEmail;
+    private String userName;
+    private int userMoney;
+    private byte language;
+    private byte fontSize;
+
+    private PreferenceHelper() {
+        loadPreference();
+    }
+
+    private static PreferenceHelper preferenceHelper;
+
+    public static PreferenceHelper getInstance()
+    {
+        if (preferenceHelper == null)
+        {
+            preferenceHelper = new PreferenceHelper();
+        }
+        return preferenceHelper;
+    }
 
     public static void init(Context context) {
         preferences = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
         editor = preferences.edit();
     }
 
-    public static boolean isEmpty() {
+    public boolean isEmpty() {
         Map<String, ?> values = preferences.getAll();
         if (!values.isEmpty())
             return false;
@@ -43,8 +58,8 @@ public final class PreferenceHelper {
     }
 
 
-    public static void writePreference() {
-        user = (User) User.getInstance();
+    public void writePreference() {
+        user = User.getInstance();
         userInterface = (UserInterface) user.getUserInterface();
         userName = user.getName();
         userEmail = user.getEmail();
@@ -64,7 +79,7 @@ public final class PreferenceHelper {
     }
 
 
-    public static void loadPreference() {
+    public void loadPreference() {
         userName = preferences.getString("USER_NAME", "ss");
         userEmail = preferences.getString("USER_EMAIL", "hh");
         userMoney = preferences.getInt("USER_MONEY", 0);
@@ -72,7 +87,7 @@ public final class PreferenceHelper {
         fontSize = (byte) preferences.getInt("FONT_SIZE", 0);
     }
 
-    public static void removePreference() {
+    public void removePreference() {
         String path = "/data/data/alarmclock/shared_prefs/" + fileName + ".xml";
         File file= new File(path);
         file.delete();
@@ -82,31 +97,33 @@ public final class PreferenceHelper {
         editor.clear();
     }
 
+    //getters and setters
+
     public static SharedPreferences getPreferences() {
         return preferences;
     }
 
-    public static String getUserEmail() {
+    public static String getFileName() {
+        return fileName;
+    }
+
+    public String getUserEmail() {
         return userEmail;
     }
 
-    public static String getUserName() {
+    public String getUserName() {
         return userName;
     }
 
-    public static int getUserMoney() {
+    public int getUserMoney() {
         return userMoney;
     }
 
-    public static byte getLanguage() {
+    public byte getLanguage() {
         return language;
     }
 
-    public static byte getFontSize() {
+    public byte getFontSize() {
         return fontSize;
-    }
-
-    public static String getFileName() {
-        return fileName;
     }
 }

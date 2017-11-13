@@ -30,6 +30,7 @@ public class User implements  IUser {
 
     private static UserDirector director;
     private static UserBuilder builder;
+    private static PreferenceHelper preferenceHelper;
     private static User user; //Ссылка на себя
 
     private User() { //Новый пользователь
@@ -38,9 +39,9 @@ public class User implements  IUser {
 
     public static User getInstance() { //Создание пользователя
         if (user == null) { //Если вход не выполнен
-
+            preferenceHelper = PreferenceHelper.getInstance();
             //Если имеются сохраненные настройки
-            if (!PreferenceHelper.isEmpty()) { //если файл существует
+            if (!preferenceHelper.isEmpty()) { //если файл существует
                 builder = new SavedUserBuilder(user);
                 director = new UserDirector(builder);
             } else {
@@ -111,6 +112,7 @@ public class User implements  IUser {
     @Override
     public void logOut() {
         /***Сохранение данных на сервер***/
-        PreferenceHelper.removePreference();
+        preferenceHelper = PreferenceHelper.getInstance();
+        preferenceHelper.removePreference();
     }
 }

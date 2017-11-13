@@ -24,7 +24,6 @@ public abstract class UserBuilder {
         user.setUserInterface(UserInterface.getInstance());
     }
 
-
     public User getResult() {
         return user;
     }

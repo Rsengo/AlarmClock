@@ -10,15 +10,17 @@ import Library.User.User;
 
 public class SavedUserBuilder extends UserBuilder {
 
+    private PreferenceHelper preferenceHelper;
 
     public SavedUserBuilder(User user) {
         super(user);
-        PreferenceHelper.loadPreference();
+        preferenceHelper = PreferenceHelper.getInstance();
+        preferenceHelper.loadPreference();
     }
 
     @Override
     public void setName() {
-        user.setName(PreferenceHelper.getUserName());
+        user.setName(preferenceHelper.getUserName());
 
     }
 
@@ -34,12 +36,12 @@ public class SavedUserBuilder extends UserBuilder {
 
     @Override
     public void setMoneyQuantity() {
-        user.setMoneyQuantity(PreferenceHelper.getUserMoney());
+        user.setMoneyQuantity(preferenceHelper.getUserMoney());
     }
 
     @Override
     public void setEmail() {
-        user.setEmail(PreferenceHelper.getUserEmail());
+        user.setEmail(preferenceHelper.getUserEmail());
     }
 
 }
