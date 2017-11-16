@@ -15,7 +15,7 @@ import io.realm.annotations.Required;
  */
 
 
-public class Ring extends RealmObject implements ISignal{
+public class Ring extends RealmObject implements ISignal, IRing{
     /****добавить абстракции для головоломки****/
     /****Написать метод отложить будьник****/
     /****Методы интефкйсов****/
@@ -23,10 +23,10 @@ public class Ring extends RealmObject implements ISignal{
 
     @PrimaryKey
     private String id = UUID.randomUUID().toString();
+
     private byte turnOffMethod; //метод выключения
     private Puzzle puzzle; //головоломка
-    @Ignore
-    private IMessage message; //СМС
+    private long messageID; //ID сообщения
     private Date signalTime; //Время запуска
     private Date repeatSignalInterval; //интервал повтора
     private boolean vibrating; //вибрация(Вибрирующий)
@@ -35,8 +35,13 @@ public class Ring extends RealmObject implements ISignal{
     private Date turnOffTime; //Время автовыключения звукового сигнала
     private String description; //Описание
     private boolean onState; //Вкл/Выкл звукового сигнала
+
     @Required
     private String userEmail; //Почта пользователя-владельца
+
+    @Ignore
+    private IMessage message; //СМС
+
 
     /***Можно ли использовать массив?***/
 //    private boolean[] repeatDays; //Дни повтора
@@ -145,8 +150,24 @@ public class Ring extends RealmObject implements ISignal{
         this.userEmail = userEmail;
     }
 
+    public long getMessageID() {
+        return messageID;
+    }
+
+    public void setMessageID(long messageID) {
+        this.messageID = messageID;
+    }
+
+    @Override
     public void postpound() {  //отложить
         /****отложить будильник****/
+    }
+
+    @Override
+    public void sendMessage()
+    {
+        if (message != null)
+            message.send();
     }
 
     @Override

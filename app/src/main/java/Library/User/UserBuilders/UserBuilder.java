@@ -14,7 +14,6 @@ public abstract class UserBuilder {
     public UserBuilder(User user) {
         this.user = user;
     }
-
     public abstract void setName();
     public abstract void setRings();
     public abstract void setNotifications();

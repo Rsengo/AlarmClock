@@ -19,18 +19,17 @@ public class DefaultUIBuilder extends UIBuilder {
     }
 
     @Override
-    public void setColorScheme() {
-        /***Найти дефолтную, либо из базы***/
+    public void setColorSchemeId() {
+        userInterface.setColorSchemeId(0);
     }
 
     @Override
     public void setLanguage() {
         userInterface.setLanguage(Language.RUSSIAN);
-        /**Можно в завис. от страны***/
     }
 
     @Override
     public void setFontSize() {
-        ((UserInterface)userInterface).setFontSize(FontSize.NORMAL);
+        userInterface.setFontSize(FontSize.NORMAL);
     }
 }

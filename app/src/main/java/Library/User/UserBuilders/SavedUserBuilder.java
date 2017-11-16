@@ -15,7 +15,6 @@ public class SavedUserBuilder extends UserBuilder {
     public SavedUserBuilder(User user) {
         super(user);
         preferenceHelper = PreferenceHelper.getInstance();
-        preferenceHelper.loadPreference();
     }
 
     @Override

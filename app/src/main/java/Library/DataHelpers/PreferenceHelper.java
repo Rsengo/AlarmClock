@@ -29,6 +29,7 @@ public final class PreferenceHelper {
     private int userMoney;
     private byte language;
     private byte fontSize;
+    private long colorSchemeID;
 
     private PreferenceHelper() {
         loadPreference();
@@ -66,6 +67,7 @@ public final class PreferenceHelper {
         userMoney = user.getMoneyQuantity();
         language = userInterface.getLanguage();
         fontSize = userInterface.getFontSize();
+        colorSchemeID = userInterface.getColorSchemeId();
 
         clearPreference(); //Очищаем старые записи
 
@@ -74,6 +76,7 @@ public final class PreferenceHelper {
         editor.putInt("USER_MONEY", userMoney);
         editor.putInt("LANGUAGE", language);
         editor.putInt("FONT_SIZE", fontSize);
+        editor.putLong("COLOR_SCHEME_ID", colorSchemeID);
 
         editor.apply();
     }
@@ -85,6 +88,7 @@ public final class PreferenceHelper {
         userMoney = preferences.getInt("USER_MONEY", 0);
         language = (byte) preferences.getInt("LANGUAGE", 0);
         fontSize = (byte) preferences.getInt("FONT_SIZE", 0);
+        colorSchemeID = preferences.getLong("COLOR_SCHEME_ID", 0);
     }
 
     public void removePreference() {
@@ -125,5 +129,13 @@ public final class PreferenceHelper {
 
     public byte getFontSize() {
         return fontSize;
+    }
+
+    public long getColorSchemeID() {
+        return colorSchemeID;
+    }
+
+    public void setColorSchemeID(long colorSchemeID) {
+        this.colorSchemeID = colorSchemeID;
     }
 }

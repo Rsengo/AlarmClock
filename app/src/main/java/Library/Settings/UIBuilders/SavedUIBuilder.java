@@ -14,12 +14,12 @@ public class SavedUIBuilder extends UIBuilder {
 
     public SavedUIBuilder(UserInterface userInterface) {
         super(userInterface);
-        preferenceHelper.loadPreference();
+        preferenceHelper = PreferenceHelper.getInstance();
     }
 
     @Override
-    public void setColorScheme() {
-        /***Найти дефолтную, либо из базы***/
+    public void setColorSchemeId() {
+        userInterface.setColorSchemeId(preferenceHelper.getColorSchemeID());
     }
 
     @Override

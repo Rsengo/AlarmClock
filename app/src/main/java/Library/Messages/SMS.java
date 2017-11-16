@@ -1,5 +1,7 @@
 package Library.Messages;
 
+import android.telephony.SmsManager;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -19,14 +21,15 @@ public class SMS extends RealmObject implements IMessage {
     /****Переопределить методы интерфейсов****/
 
     @PrimaryKey
-    private String id = UUID.randomUUID().toString();
+    //private String id = UUID.randomUUID().toString();
+    private long id;
 
     @Required
     private String text; //Текст
 
     private String recepientName; //Получатель
 
-    private String recepientNumber; //Номер получателя
+    private String recepientAddress; //Номер получателя
 
     public SMS(String text) {
         this.text = text;
@@ -34,30 +37,52 @@ public class SMS extends RealmObject implements IMessage {
 
     public SMS() { }
 
+    private void setRecepientName(String recepientName) {
+        this.recepientName = recepientName;
+    }
+
+    private void setRecepientAddress(String recepientAddress) {
+        this.recepientAddress = recepientAddress;
+    }
+
+    @Override
     public String getText() {
         return text;
     }
 
+    @Override
     public void setText(String text) {
         this.text = text;
     }
 
-    public String getId() {
+    @Override
+    public long getId() {
         return id;
     }
 
     @Override
+    public String getRecepientName() {
+        return recepientName;
+    }
+
+    @Override
+    public String getRecepientAddress() {
+        return recepientAddress;
+    }
+
+    @Override
     public void send() {
-
+        SmsManager.getDefault().sendTextMessage(recepientAddress, null, text,
+                null, null);
     }
 
     @Override
-    public void addRecepient() {
-
+    public void setRecepient(String name, String address) {
+        setRecepientName(name);
+        setRecepientAddress(address);
     }
 
-    @Override
-    public void removeRecepient() {
-
+    public void setId(long id) {
+        this.id = id;
     }
 }

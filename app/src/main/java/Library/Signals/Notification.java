@@ -13,7 +13,7 @@ import io.realm.annotations.Required;
  */
 
 @RealmClass
-public class Notification implements RealmModel, ISignal{
+public class Notification implements RealmModel, ISignal, INotification{
     /****Методы интерфейсов****/
     /***Обратная связь с юзером***/
 
@@ -147,6 +147,11 @@ public class Notification implements RealmModel, ISignal{
 
     @Override
     public void stop() {
+
+    }
+
+    @Override
+    public void recountCloseDate() {
 
     }
 }

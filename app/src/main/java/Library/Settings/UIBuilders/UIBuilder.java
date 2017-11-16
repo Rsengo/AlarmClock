@@ -18,7 +18,7 @@ public abstract class UIBuilder {
         this.userInterface = userInterface;
     }
 
-    public abstract void setColorScheme();
+    public abstract void setColorSchemeId();
     public abstract void setLanguage();
     public abstract void setFontSize();
 

@@ -17,7 +17,7 @@ public class UIDirector {
 
     public void construct()
     {
-        builder.setColorScheme();
+        builder.setColorSchemeId();
         builder.setLanguage();
         builder.setFontSize();
     }

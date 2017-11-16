@@ -9,7 +9,7 @@ import io.realm.annotations.RealmClass;
  */
 
 public class FontSize{
-    public static final byte SMALL = 0;
-    public static final byte NORMAL = 1;
+    public static final byte SMALL = 1;
+    public static final byte NORMAL = 0;
     public static final byte BIG = 2;
 }

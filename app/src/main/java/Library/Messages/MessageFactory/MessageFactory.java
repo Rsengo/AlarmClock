@@ -11,6 +11,6 @@ public abstract class MessageFactory {
 
     public abstract void createMessage();
     public abstract void setText();
-    public abstract void setRecepientName();
+    public abstract void setRecepient();
     public abstract IMessage create();
 }

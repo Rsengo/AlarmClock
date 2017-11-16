@@ -16,10 +16,11 @@ public class UserInterface implements ISetting {
     /****Пока хз, что тут еще будет****/
     /****Реализовать методы интерфейсов****/
 
-    private ColorScheme colorScheme;
+    private IColorScheme colorScheme;
 
     private byte fontSize;
     private byte language;
+    private long colorSchemeId;
 
     private static UserInterface userInterface;
     private static UIDirector director;
@@ -34,13 +35,13 @@ public class UserInterface implements ISetting {
         //Возврат ссылки на синглтон, либо создание объекта
         if (userInterface == null) {
             preferenceHelper = PreferenceHelper.getInstance();
+            userInterface = new UserInterface();
             //Если имеются сохраненные настройки
             if (!preferenceHelper.isEmpty()) { //если файл существует
                 builder = new SavedUIBuilder(userInterface);
                 director = new UIDirector(builder);
             }
             else {
-                /***Либо настройки тоже хранить на сервере***/
                 builder = new DefaultUIBuilder(userInterface);
                 director = new UIDirector(builder);
             }
@@ -58,11 +59,11 @@ public class UserInterface implements ISetting {
         return userInterface;
     }
 
-    public ColorScheme getColorScheme() {
+    public IColorScheme getColorScheme() {
         return colorScheme;
     }
 
-    public void setColorScheme(ColorScheme colorScheme) {
+    public void setColorScheme(IColorScheme colorScheme) {
         this.colorScheme = colorScheme;
     }
 
@@ -82,6 +83,14 @@ public class UserInterface implements ISetting {
         this.language = language;
     }
 
+    public long getColorSchemeId() {
+        return colorSchemeId;
+    }
+
+    public void setColorSchemeId(long colorSchemeId) {
+        this.colorSchemeId = colorSchemeId;
+    }
+
     @Override
     public void setDefault() {
         builder = new DefaultUIBuilder(userInterface);
@@ -89,5 +98,4 @@ public class UserInterface implements ISetting {
         director.construct();
         userInterface = builder.getResult();
     }
-
 }

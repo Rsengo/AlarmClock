@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import Library.DataHelpers.PreferenceHelper;
 import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
+import Library.Signals.INotification;
+import Library.Signals.IRing;
 import Library.Signals.ISignal;
 import Library.User.UserBuilders.SavedUserBuilder;
 import Library.User.UserBuilders.UserBuilder;
@@ -22,8 +24,8 @@ public class User implements  IUser {
     /****Пересмотреть абстракции***/
 
     private String name; //Имя
-    private ArrayList<ISignal> rings; //Будильники
-    private ArrayList<ISignal> notifications; //События
+    private ArrayList<IRing> rings; //Будильники
+    private ArrayList<INotification> notifications; //События
     private int moneyQuantity; //Число монет
     private ISetting userInterface;
     private String email; //Email пользователя
@@ -40,6 +42,7 @@ public class User implements  IUser {
     public static User getInstance() { //Создание пользователя
         if (user == null) { //Если вход не выполнен
             preferenceHelper = PreferenceHelper.getInstance();
+            user = new User();
             //Если имеются сохраненные настройки
             if (!preferenceHelper.isEmpty()) { //если файл существует
                 builder = new SavedUserBuilder(user);
@@ -93,19 +96,19 @@ public class User implements  IUser {
         this.email = email;
     }
 
-    public ArrayList<ISignal> getRings() {
+    public ArrayList<IRing> getRings() {
         return rings;
     }
 
-    public void setRings(ArrayList<ISignal> rings) {
+    public void setRings(ArrayList<IRing> rings) {
         this.rings = rings;
     }
 
-    public ArrayList<ISignal> getNotifications() {
+    public ArrayList<INotification> getNotifications() {
         return notifications;
     }
 
-    public void setNotifications(ArrayList<ISignal> notifications) {
+    public void setNotifications(ArrayList<INotification> notifications) {
         this.notifications = notifications;
     }
 

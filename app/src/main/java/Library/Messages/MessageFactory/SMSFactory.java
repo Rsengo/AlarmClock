@@ -19,11 +19,7 @@ class SMSFactory extends MessageFactory {
     }
 
     @Override
-    public void setRecepientName() {
-
-    }
-
-    public void setRecepientNumber() {
+    public void setRecepient() {
 
     }
 
@@ -31,8 +27,7 @@ class SMSFactory extends MessageFactory {
     public IMessage create () {
         createMessage();
         setText();
-        setRecepientName();
-        setRecepientNumber();
+        setRecepient();
         return message;
     }
 

@@ -10,5 +10,5 @@ import io.realm.annotations.RealmClass;
 
 public class Language{
     public static final byte RUSSIAN = 0;
-    public static final byte ENGLISH = 0;
+    public static final byte ENGLISH = 1;
 }
