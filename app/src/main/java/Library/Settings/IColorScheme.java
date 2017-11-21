@@ -7,7 +7,5 @@ import io.realm.RealmModel;
  */
 
 public interface IColorScheme extends RealmModel {
-    long getId();
-    String getUserEmail();
-    void setUserEmail(String userEmail);
+
 }

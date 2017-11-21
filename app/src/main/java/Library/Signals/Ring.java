@@ -15,7 +15,7 @@ import io.realm.annotations.Required;
  */
 
 
-public class Ring extends RealmObject implements ISignal, IRing{
+public class Ring extends RealmObject implements IRing{
     /****добавить абстракции для головоломки****/
     /****Написать метод отложить будьник****/
     /****Методы интефкйсов****/

@@ -3,7 +3,9 @@ package Library.Signals;
 import java.util.Date;
 import java.util.UUID;
 
+import io.realm.Realm;
 import io.realm.RealmModel;
+import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 import io.realm.annotations.Required;
@@ -12,8 +14,7 @@ import io.realm.annotations.Required;
  * Created by ytgv8b on 16.10.2017.
  */
 
-@RealmClass
-public class Notification implements RealmModel, ISignal, INotification{
+public class Notification extends RealmObject implements INotification{
     /****Методы интерфейсов****/
     /***Обратная связь с юзером***/
 

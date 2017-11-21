@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             userInterface.setLanguage(Language.RUSSIAN);
             preferenceHelper.writePreference();
             sms.setText("my new message");
-            sms.setId(1);
 //            dataBaseHelper.saveData(sms);
 //            textView.setText("Done");
             Ring ring = new Ring();

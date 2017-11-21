@@ -9,9 +9,5 @@ import io.realm.RealmModel;
 public interface IMessage extends RealmModel{
     void send();
     void setRecepient(String name, String number);
-    String getRecepientName();
-    String getRecepientAddress();
-    long getId();
-    String getText();
     void setText(String text);
 }

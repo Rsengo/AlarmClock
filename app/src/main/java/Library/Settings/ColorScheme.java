@@ -18,17 +18,14 @@ public class ColorScheme extends RealmObject implements IColorScheme {
     @PrimaryKey
     private long id;
 
-    @Override
     public long getId() {
         return id;
     }
 
-    @Override
     public String getUserEmail() {
         return null;
     }
 
-    @Override
     public void setUserEmail(String userEmail) {
 
     }
