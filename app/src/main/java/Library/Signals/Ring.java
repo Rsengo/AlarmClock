@@ -1,10 +1,17 @@
 package Library.Signals;
 
+import android.app.AlarmManager;
+import android.content.Context;
+import android.content.Intent;
+
+import com.example.ytgv8b.firsttry.Services.AlarmBroadcast;
+
 import java.util.Date;
 import java.util.UUID;
 
 import Library.Messages.IMessage;
 import Library.Puzzles.Puzzle;
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
@@ -18,8 +25,6 @@ import io.realm.annotations.Required;
 public class Ring extends RealmObject implements IRing{
     /****добавить абстракции для головоломки****/
     /****Написать метод отложить будьник****/
-    /****Методы интефкйсов****/
-    /***Обратная связь с юзером***/
 
     @PrimaryKey
     private String id = UUID.randomUUID().toString();
@@ -44,7 +49,7 @@ public class Ring extends RealmObject implements IRing{
 
 
     /***Можно ли использовать массив?***/
-//    private boolean[] repeatDays; //Дни повтора
+    private RealmList<Boolean> repeatDays; //Дни повтора
 
     public String getId() {
         return id;
@@ -74,9 +79,13 @@ public class Ring extends RealmObject implements IRing{
         this.message = message;
     }
 
-//    public boolean[] getRepeatDays() {
-//        return repeatDays;
-//    }
+    public RealmList<Boolean> getRepeatDays() {
+        return repeatDays;
+    }
+
+    public void setRepeatDays(RealmList<Boolean> repeatDays) {
+        this.repeatDays = repeatDays;
+    }
 
     public Date getSignalTime() {
         return signalTime;
@@ -171,8 +180,10 @@ public class Ring extends RealmObject implements IRing{
     }
 
     @Override
-    public void start() {
-
+    public void start(Context context) {
+        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmBroadcast.class);
+        
     }
 
     @Override

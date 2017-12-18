@@ -1,5 +1,8 @@
 package Library.Signals.SignalBuilders;
 
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+
 import Library.Signals.ISignal;
 import Library.Signals.Notification;
 import Library.Signals.Ring;
@@ -10,6 +13,12 @@ import Library.User.User;
  */
 
 public class NotificationFactory extends SignalFactory {
+
+    private Notification signal;
+
+    public NotificationFactory(AppCompatActivity context) {
+        super(context);
+    }
 
     @Override
     public void createSignal() {
@@ -58,8 +67,8 @@ public class NotificationFactory extends SignalFactory {
 
     @Override
     public void setUserEmail() {
-        String userEmail = ((User) User.getInstance()).getEmail();
-        ((Ring)signal).setUserEmail(userEmail);
+        String userEmail = User.getInstance().getEmail();
+        signal.setUserEmail(userEmail);
     }
 
     public void setDate() {

@@ -1,5 +1,12 @@
 package Library.Signals.SignalBuilders;
 
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.os.Bundle;
+
+import com.example.ytgv8b.firsttry.R;
+
 import Library.Messages.IMessage;
 import Library.Messages.MessageFactory.MessageFactories;
 import Library.Messages.MessageFactory.MessageFactory;
@@ -13,15 +20,17 @@ import Library.User.User;
 
 public class RingFactory extends SignalFactory {
 
+    private Ring signal;
     private String messageFactory;
 
-    public RingFactory(String messageFactory) {
+    public RingFactory(String messageFactory, AppCompatActivity context) {
+        super(context);
         this.messageFactory = messageFactory;
     }
 
     @Override
     public void createSignal() {
-
+        signal = new Ring();
     }
 
     @Override
@@ -36,7 +45,6 @@ public class RingFactory extends SignalFactory {
 
     @Override
     public void setVibrating() {
-
     }
 
     @Override

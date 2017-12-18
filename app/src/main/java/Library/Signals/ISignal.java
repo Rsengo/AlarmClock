@@ -1,5 +1,7 @@
 package Library.Signals;
 
+import android.content.Context;
+
 import io.realm.RealmModel;
 
 /**
@@ -7,6 +9,6 @@ import io.realm.RealmModel;
  */
 
 public interface ISignal extends RealmModel {
-    void start();
+    void start(Context context);
     void stop();
 }

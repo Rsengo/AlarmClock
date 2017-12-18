@@ -1,5 +1,8 @@
 package Library.Signals.SignalBuilders;
 
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+
 import Library.Signals.ISignal;
 
 /**
@@ -7,7 +10,12 @@ import Library.Signals.ISignal;
  */
 
 abstract class SignalFactory {
-    protected ISignal signal;
+    protected AppCompatActivity context;
+
+    public SignalFactory(AppCompatActivity context)
+    {
+        this.context = context;
+    }
 
     /****public static long id;****/ /**Пока хз как реализуется**/
     public abstract void createSignal();
