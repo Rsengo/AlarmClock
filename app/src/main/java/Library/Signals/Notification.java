@@ -1,5 +1,7 @@
 package Library.Signals;
 
+import android.content.Context;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -34,6 +36,7 @@ public class Notification extends RealmObject implements INotification{
     private Date turnOffTime; //Время автовыключения звукового сигнала
     private String description; //Описание
     private boolean onState; //Вкл/Выкл звукового сигнала
+    private boolean deleteAfterUsing; //Удалить после использования
     @Required
     private String userEmail; //Почта пользователя-владельца
 
@@ -141,8 +144,12 @@ public class Notification extends RealmObject implements INotification{
         this.userEmail = userEmail;
     }
 
+    public boolean isDeleteAfterUsing() {
+        return deleteAfterUsing;
+    }
+
     @Override
-    public void start() {
+    public void start(Context context) {
 
     }
 

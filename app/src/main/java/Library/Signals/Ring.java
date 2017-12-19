@@ -4,13 +4,11 @@ import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.ytgv8b.firsttry.Services.AlarmBroadcast;
 
 import java.util.Date;
 import java.util.UUID;
 
 import Library.Messages.IMessage;
-import Library.Puzzles.Puzzle;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
@@ -30,7 +28,7 @@ public class Ring extends RealmObject implements IRing{
     private String id = UUID.randomUUID().toString();
 
     private byte turnOffMethod; //метод выключения
-    private Puzzle puzzle; //головоломка
+    private byte puzzle; //головоломка
     private long messageID; //ID сообщения
     private Date signalTime; //Время запуска
     private Date repeatSignalInterval; //интервал повтора
@@ -40,6 +38,7 @@ public class Ring extends RealmObject implements IRing{
     private Date turnOffTime; //Время автовыключения звукового сигнала
     private String description; //Описание
     private boolean onState; //Вкл/Выкл звукового сигнала
+    private boolean deleteAfterUsing; //удалить поле срабатывания
 
     @Required
     private String userEmail; //Почта пользователя-владельца
@@ -63,11 +62,11 @@ public class Ring extends RealmObject implements IRing{
         this.turnOffMethod = turnOffMethod;
     }
 
-    public Puzzle getPuzzle() {
+    public byte getPuzzle() {
         return puzzle;
     }
 
-    public void setPuzzle(Puzzle puzzle) {
+    public void setPuzzle(byte puzzle) {
         this.puzzle = puzzle;
     }
 
@@ -167,6 +166,14 @@ public class Ring extends RealmObject implements IRing{
         this.messageID = messageID;
     }
 
+    public boolean isDeleteAfterUsing() {
+        return deleteAfterUsing;
+    }
+
+    public void setDeleteAfterUsing(boolean deleteAfterUsing) {
+        this.deleteAfterUsing = deleteAfterUsing;
+    }
+
     @Override
     public void postpound() {  //отложить
         /****отложить будильник****/
@@ -181,9 +188,6 @@ public class Ring extends RealmObject implements IRing{
 
     @Override
     public void start(Context context) {
-        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlarmBroadcast.class);
-        
     }
 
     @Override
