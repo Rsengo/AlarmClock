@@ -162,4 +162,14 @@ public class Notification extends RealmObject implements INotification{
     public void recountCloseDate() {
 
     }
+
+    @Override
+    public void turnOn() {
+
+    }
+
+    @Override
+    public void turnOff() {
+
+    }
 }

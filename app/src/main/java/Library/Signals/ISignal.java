@@ -11,4 +11,6 @@ import io.realm.RealmModel;
 public interface ISignal extends RealmModel {
     void start(Context context);
     void stop();
+    void turnOn();
+    void turnOff();
 }

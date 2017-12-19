@@ -138,7 +138,7 @@ public class Ring extends RealmObject implements IRing{
         return onState;
     }
 
-    public void setOnState(boolean onState) {
+    private void setOnState(boolean onState) {
         this.onState = onState;
     }
 
@@ -192,6 +192,16 @@ public class Ring extends RealmObject implements IRing{
 
     @Override
     public void stop() {
+
+    }
+
+    @Override
+    public void turnOn() {
+
+    }
+
+    @Override
+    public void turnOff() {
 
     }
 }
