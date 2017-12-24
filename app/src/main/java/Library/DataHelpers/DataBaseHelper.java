@@ -138,6 +138,18 @@ public final class DataBaseHelper {
         return rings;
     }
 
+    public Ring getRing(String id)
+    {
+        Ring ring;
+
+        try (Realm realm = Realm.getDefaultInstance()) {
+            ring = realm.where(Ring.class)
+                    .equalTo("id", id).findFirst();
+        }
+
+        return ring;
+    }
+
     public <T extends RealmObject> void saveData(T data) {
         try (Realm realm = Realm.getDefaultInstance())
         {
@@ -165,5 +177,26 @@ public final class DataBaseHelper {
         } catch (IllegalAccessException ex) {
             Log.e("Exception", "IllegalAccessException, recursive saving");
         }
+    }
+
+    public <T extends RealmObject> void deleteRecursive(T data)
+    {
+        Class dataClass = data.getClass();
+
+        Field[] fields = dataClass.getDeclaredFields();
+
+        try {
+            for (Field field : fields) {
+                field.setAccessible(true);
+                Object newData = field.get(data);
+                if ((newData instanceof RealmObject) || (newData instanceof RealmModel)) {
+                    deleteRecursive((RealmObject) newData);
+                }
+            }
+        } catch (IllegalAccessException ex) {
+            Log.e("Exception", "IllegalAccessException, recursive saving");
+        }
+
+        data.deleteFromRealm();
     }
 }

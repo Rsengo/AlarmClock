@@ -149,13 +149,8 @@ public class Notification extends RealmObject implements INotification{
     }
 
     @Override
-    public void start(Context context) {
-
-    }
-
-    @Override
-    public void stop() {
-
+    public String getId() {
+        return id;
     }
 
     @Override
@@ -164,12 +159,12 @@ public class Notification extends RealmObject implements INotification{
     }
 
     @Override
-    public void turnOn() {
+    public void turnOn(Context context) {
 
     }
 
     @Override
-    public void turnOff() {
+    public void turnOff(Context context) {
 
     }
 }

@@ -31,14 +31,14 @@ public class Ring extends RealmObject implements IRing{
     private byte puzzle; //головоломка
     private long messageID; //ID сообщения
     private Date signalTime; //Время запуска
-    private Date repeatSignalInterval; //интервал повтора
+    private long repeatSignalInterval; //интервал повтора
     private boolean vibrating; //вибрация(Вибрирующий)
     private int melody; //мелодия
     private byte melodyVolume; //громкость
     private Date turnOffTime; //Время автовыключения звукового сигнала
     private String description; //Описание
     private boolean onState; //Вкл/Выкл звукового сигнала
-    private boolean deleteAfterUsing; //удалить поле срабатывания
+    private boolean deleteAfterUsing; //удалить после срабатывания
 
     @Required
     private String userEmail; //Почта пользователя-владельца
@@ -50,6 +50,7 @@ public class Ring extends RealmObject implements IRing{
     /***Можно ли использовать массив?***/
     private RealmList<Boolean> repeatDays; //Дни повтора
 
+    @Override
     public String getId() {
         return id;
     }
@@ -94,11 +95,11 @@ public class Ring extends RealmObject implements IRing{
         this.signalTime = signalTime;
     }
 
-    public Date getRepeatSignalInterval() {
+    public long getRepeatSignalInterval() {
         return repeatSignalInterval;
     }
 
-    public void setRepeatSignalInterval(Date repeatSignalInterval) {
+    public void setRepeatSignalInterval(long repeatSignalInterval) {
         this.repeatSignalInterval = repeatSignalInterval;
     }
 
@@ -176,7 +177,7 @@ public class Ring extends RealmObject implements IRing{
 
     @Override
     public void postpound() {  //отложить
-        /****отложить будильник****/
+        // TODO: отложить будильник
     }
 
     @Override
@@ -187,21 +188,12 @@ public class Ring extends RealmObject implements IRing{
     }
 
     @Override
-    public void start(Context context) {
+    public void turnOn(Context context) {
+        onState = true;
     }
 
     @Override
-    public void stop() {
-
-    }
-
-    @Override
-    public void turnOn() {
-
-    }
-
-    @Override
-    public void turnOff() {
-
+    public void turnOff(Context context) {
+        onState = false;
     }
 }
