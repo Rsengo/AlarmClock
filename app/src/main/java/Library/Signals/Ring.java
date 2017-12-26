@@ -1,10 +1,14 @@
 package Library.Signals;
 
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
 
+import com.example.ytgv8b.firsttry.MainActivity;
+
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -176,8 +180,17 @@ public class Ring extends RealmObject implements IRing{
     }
 
     @Override
-    public void postpound() {  //отложить
-        // TODO: отложить будильник
+    public void postpound(Context context) {  //отложить
+        /*AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        // TODO: 26.12.2017 switch-case для выбора способа выключения
+        Intent intent = new Intent(context, MainActivity.class);
+        // TODO: 26.12.2017 request code для различия
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(context, 0, intent, 0);
+        long signalTime = Calendar.getInstance().
+        // TODO: 26.12.2017 время автовыкл.
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, signalTime,
+                this.repeatSignalInterval, pendingIntent);*/
     }
 
     @Override
@@ -190,10 +203,31 @@ public class Ring extends RealmObject implements IRing{
     @Override
     public void turnOn(Context context) {
         onState = true;
+
+        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        // TODO: 26.12.2017 switch-case для выбора способа выключения 
+        Intent intent = new Intent(context, MainActivity.class);
+        // TODO: 26.12.2017 request code для различия
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(context, 0, intent, 0);
+
+        long signalTime = this.signalTime.getTime();
+        // TODO: 26.12.2017 время автовыкл.
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, signalTime, 
+                this.repeatSignalInterval, pendingIntent);
     }
 
     @Override
     public void turnOff(Context context) {
         onState = false;
+
+        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        // TODO: 26.12.2017 switch-case для выбора способа выключения
+        Intent intent = new Intent(context, MainActivity.class);
+        // TODO: 26.12.2017 request code для различия
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(context, 0, intent, 0);
+
+        alarmManager.cancel(pendingIntent);
     }
 }
