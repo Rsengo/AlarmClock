@@ -1,6 +1,11 @@
 package Library.Signals;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+
+import com.example.ytgv8b.firsttry.MainActivity;
 
 import java.util.Date;
 import java.util.UUID;
@@ -29,7 +34,7 @@ public class Notification extends RealmObject implements INotification{
     private Date closeDate; //Ближайшая дата
     private byte priority; //Приоритет
     private Date signalTime; //Время запуска
-    private Date repeatSignalInterval; //интервал повтора
+    private long repeatSignalInterval; //интервал повтора
     private boolean vibrating; //вибрация(Вибрирующий)
     private int melody; //мелодия
     private byte melodyVolume; //громкость
@@ -42,6 +47,10 @@ public class Notification extends RealmObject implements INotification{
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getCloseDate() {
@@ -78,13 +87,14 @@ public class Notification extends RealmObject implements INotification{
 
     public void setSignalTime(Date signalTime) {
         this.signalTime = signalTime;
+        closeDate = signalTime;
     }
 
-    public Date getRepeatSignalInterval() {
+    public long getRepeatSignalInterval() {
         return repeatSignalInterval;
     }
 
-    public void setRepeatSignalInterval(Date repeatSignalInterval) {
+    public void setRepeatSignalInterval(long repeatSignalInterval) {
         this.repeatSignalInterval = repeatSignalInterval;
     }
 
@@ -148,6 +158,10 @@ public class Notification extends RealmObject implements INotification{
         return deleteAfterUsing;
     }
 
+    public void setDeleteAfterUsing(boolean deleteAfterUsing) {
+        this.deleteAfterUsing = deleteAfterUsing;
+    }
+
     @Override
     public String getId() {
         return id;
@@ -155,16 +169,39 @@ public class Notification extends RealmObject implements INotification{
 
     @Override
     public void recountCloseDate() {
-
     }
 
     @Override
     public void turnOn(Context context) {
+        onState = true;
+
+        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        // TODO: 26.12.2017 switch-case для выбора способа выключения
+        Intent intent = new Intent(context, MainActivity.class);
+        // TODO: 26.12.2017 request code для различия
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(context, 0, intent, 0);
+
+        long signalTime = this.closeDate.getTime();
+        // TODO: 26.12.2017 время автовыкл.
+
+        if (repeatSignalInterval != 0)
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, signalTime,
+                this.repeatSignalInterval, pendingIntent);
+        else
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, signalTime, pendingIntent);
 
     }
 
     @Override
     public void turnOff(Context context) {
+        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        // TODO: 26.12.2017 switch-case для выбора способа выключения
+        Intent intent = new Intent(context, MainActivity.class);
+        // TODO: 26.12.2017 request code для различия
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(context, 0, intent, 0);
 
+        alarmManager.cancel(pendingIntent);
     }
 }

@@ -102,6 +102,11 @@ public class RingFactory extends SignalFactory {
     }
 
     @Override
+    public void setDeleteAfterUsing() {
+
+    }
+
+    @Override
     public ISignal create() {
         createSignal();
         setId();

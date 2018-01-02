@@ -35,7 +35,8 @@ public class Ring extends RealmObject implements IRing{
     private byte puzzle; //головоломка
     private long messageID; //ID сообщения
     private Date signalTime; //Время запуска
-    private long repeatSignalInterval; //интервал повтора
+    private Date closeDate; //Ближайшее время запуска
+    private Date repeatSignalInterval; //интервал повторного запуска после откладывания
     private boolean vibrating; //вибрация(Вибрирующий)
     private int melody; //мелодия
     private byte melodyVolume; //громкость
@@ -97,13 +98,14 @@ public class Ring extends RealmObject implements IRing{
 
     public void setSignalTime(Date signalTime) {
         this.signalTime = signalTime;
+        closeDate = signalTime;
     }
 
-    public long getRepeatSignalInterval() {
+    public Date getRepeatSignalInterval() {
         return repeatSignalInterval;
     }
 
-    public void setRepeatSignalInterval(long repeatSignalInterval) {
+    public void setRepeatSignalInterval(Date repeatSignalInterval) {
         this.repeatSignalInterval = repeatSignalInterval;
     }
 
@@ -181,16 +183,20 @@ public class Ring extends RealmObject implements IRing{
 
     @Override
     public void postpound(Context context) {  //отложить
-        /*AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        // TODO: 26.12.2017 switch-case для выбора способа выключения
+        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+//         TODO: 26.12.2017 switch-case для выбора способа выключения
         Intent intent = new Intent(context, MainActivity.class);
+        recountCloseDate();
         // TODO: 26.12.2017 request code для различия
         PendingIntent pendingIntent =
                 PendingIntent.getActivity(context, 0, intent, 0);
-        long signalTime = Calendar.getInstance().
         // TODO: 26.12.2017 время автовыкл.
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, signalTime,
-                this.repeatSignalInterval, pendingIntent);*/
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, closeDate.getTime(), pendingIntent);
+    }
+
+    @Override
+    public void recountCloseDate() {
+//        closeDate = closeDate + repeatSignalInterval;
     }
 
     @Override
@@ -213,8 +219,7 @@ public class Ring extends RealmObject implements IRing{
 
         long signalTime = this.signalTime.getTime();
         // TODO: 26.12.2017 время автовыкл.
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, signalTime, 
-                this.repeatSignalInterval, pendingIntent);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, signalTime, pendingIntent);
     }
 
     @Override

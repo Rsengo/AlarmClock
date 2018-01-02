@@ -27,6 +27,7 @@ abstract class SignalFactory {
     public abstract void setTurnOffTime();
     public abstract void setDescription();
     public abstract void setOnState();
+    public abstract void setDeleteAfterUsing();
     public abstract void setUserEmail();
     public abstract ISignal create();
 }
