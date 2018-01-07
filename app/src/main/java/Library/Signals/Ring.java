@@ -196,7 +196,6 @@ public class Ring extends RealmObject implements IRing{
 
     @Override
     public void recountCloseDate() {
-//        closeDate = closeDate + repeatSignalInterval;
     }
 
     @Override
@@ -219,7 +218,8 @@ public class Ring extends RealmObject implements IRing{
 
         long signalTime = this.signalTime.getTime();
         // TODO: 26.12.2017 время автовыкл.
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, signalTime, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, signalTime,
+                repeatSignalInterval.getTime(), pendingIntent);
     }
 
     @Override

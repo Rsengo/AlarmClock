@@ -16,7 +16,7 @@ public class UserInterface implements ISetting {
     /****Пока хз, что тут еще будет****/
     /****Реализовать методы интерфейсов****/
 
-    private IColorScheme colorScheme;
+    private ColorScheme colorScheme;
 
     private byte fontSize;
     private byte language;
@@ -59,11 +59,11 @@ public class UserInterface implements ISetting {
         return userInterface;
     }
 
-    public IColorScheme getColorScheme() {
+    public ColorScheme getColorScheme() {
         return colorScheme;
     }
 
-    public void setColorScheme(IColorScheme colorScheme) {
+    public void setColorScheme(ColorScheme colorScheme) {
         this.colorScheme = colorScheme;
     }
 

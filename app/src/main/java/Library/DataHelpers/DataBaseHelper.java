@@ -1,31 +1,23 @@
 package Library.DataHelpers;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import Library.Messages.IMessage;
-import Library.Messages.SMS;
-import Library.Settings.ColorScheme;
-import Library.Settings.IColorScheme;
-import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
 import Library.Signals.INotification;
 import Library.Signals.IRing;
-import Library.Signals.ISignal;
 import Library.Signals.Notification;
 import Library.Signals.Ring;
-import Library.User.IUser;
 import Library.User.User;
 import io.realm.Realm;
 import io.realm.RealmModel;
 import io.realm.RealmObject;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
-import io.realm.annotations.RealmClass;
 
 /**
  * Created by ytgv8b on 29.10.2017.
