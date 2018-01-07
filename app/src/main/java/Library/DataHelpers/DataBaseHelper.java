@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import Library.Messages.IMessage;
+import Library.Settings.ColorScheme;
 import Library.Settings.UserInterface;
 import Library.Signals.INotification;
 import Library.Signals.IRing;
@@ -30,7 +31,7 @@ public final class DataBaseHelper {
     private UserInterface userInterface;
     private RealmQuery<Ring> ringRealmQuery;
     private RealmQuery<Notification> notificationRealmQuery;
-    private RealmQuery<IColorScheme> colorSchemeRealmQuery;
+    private RealmQuery<ColorScheme> colorSchemeRealmQuery;
     private RealmQuery<IMessage> messageRealmQuery;
 
     public static void init(Context context) {
@@ -77,12 +78,12 @@ public final class DataBaseHelper {
         return notifications;
     }
 
-    public IColorScheme loadColorScheme() {
-        IColorScheme scheme;
+    public ColorScheme loadColorScheme() {
+        ColorScheme scheme;
 
         try (Realm realm = Realm.getDefaultInstance()) {
             colorSchemeRealmQuery =
-                    realm.where(IColorScheme.class).equalTo("id",
+                    realm.where(ColorScheme.class).equalTo("id",
                             userInterface.getColorSchemeId());
             scheme = colorSchemeRealmQuery.findFirst();
         }
