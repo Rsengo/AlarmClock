@@ -1,8 +1,10 @@
 package com.example.ytgv8b.firsttry;
 
+import android.content.Intent;
 import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ import io.realm.Realm;
 import io.realm.RealmQuery;
 
 public class MainActivity extends AppCompatActivity {
+
 
     private long id;
     @Override
@@ -80,5 +83,27 @@ public class MainActivity extends AppCompatActivity {
         button3.setOnClickListener(view -> {
             textView.setText(user.getEmail());
         });
+
+
+    }
+
+    public void calculate(View view) {
+        Intent intent = new Intent(this, DisplayCalculateActivity.class);
+        /*
+        *alarmName - потом брать из конкретного будильника
+        */
+        String alarmName = "Будильник 1";
+        DisplayCalculateActivity.set_alarmName(alarmName);
+        startActivity(intent);
+    }
+
+    public void connect(View view) {
+        Intent intent = new Intent(this, DisplayConnectActivity.class);
+         /*
+        *alarmName - потом брать из конкретного будильника
+        */
+        String alarmName = "Будильник 2";
+        DisplayConnectActivity.set_alarmName(alarmName);
+        startActivity(intent);
     }
 }

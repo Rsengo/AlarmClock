@@ -42,4 +42,24 @@
         android:layout_alignEnd="@+id/button"
         android:layout_centerVertical="true"
         android:text="Button"/>
+
+    <Button
+        android:id="@+id/buttonCalculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="13dp"
+        android:text="Calculate"
+        android:onClick="calculate"/>
+
+    <Button
+        android:id="@+id/buttonConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/buttonCalculate"
+        android:layout_marginTop="13dp"
+        android:text="Connect"
+        android:onClick="connect"/>
 </RelativeLayout>
