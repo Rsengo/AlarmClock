@@ -10,4 +10,6 @@ public interface IMessage extends RealmModel{
     void send();
     void setRecepient(String name, String number);
     void setText(String text);
+    void setId(int id);
+    int getId();
 }

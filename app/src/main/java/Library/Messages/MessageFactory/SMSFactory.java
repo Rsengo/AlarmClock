@@ -26,6 +26,7 @@ class SMSFactory extends MessageFactory {
     @Override
     public IMessage create () {
         createMessage();
+        setId();
         setText();
         setRecepient();
         return message;

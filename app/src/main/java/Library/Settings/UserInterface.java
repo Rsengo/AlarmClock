@@ -13,8 +13,6 @@ import Library.Settings.UIBuilders.UIDirector;
  */
 
 public class UserInterface implements ISetting {
-    /****Пока хз, что тут еще будет****/
-    /****Реализовать методы интерфейсов****/
 
     private ColorScheme colorScheme;
 

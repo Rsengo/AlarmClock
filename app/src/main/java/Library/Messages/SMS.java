@@ -23,20 +23,16 @@ public class SMS extends RealmObject implements IMessage {
 
     private String recepientAddress; //Номер получателя
 
-    public SMS(String text) {
-        this.text = text;
-    }
-
-    public SMS() { }
-
     public String getText() {
         return text;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
@@ -47,6 +43,14 @@ public class SMS extends RealmObject implements IMessage {
 
     public String getRecepientAddress() {
         return recepientAddress;
+    }
+
+    public void setRecepientName(String recepientName) {
+        this.recepientName = recepientName;
+    }
+
+    public void setRecepientAddress(String recepientAddress) {
+        this.recepientAddress = recepientAddress;
     }
 
     @Override

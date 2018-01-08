@@ -89,7 +89,7 @@ public class RingFactory extends SignalFactory {
     public  void setMessage() {
         if (messageFactory != null) {
             MessageFactories factories = new MessageFactories();
-            MessageFactory signalFactory = factories.getFactory(messageFactory);
+            MessageFactory signalFactory = factories.getFactory(messageFactory, signal);
             IMessage message = signalFactory.create();
             signal.setMessage(message);
         } else {
