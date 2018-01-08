@@ -4,6 +4,7 @@ import android.content.Context;
 
 import Library.Enums.FontSize;
 import Library.Enums.Language;
+import Library.Settings.ColorScheme;
 import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
 import Library.User.User;
@@ -19,8 +20,10 @@ public class DefaultUIBuilder extends UIBuilder {
     }
 
     @Override
-    public void setColorSchemeId() {
+    public void setColorScheme() {
         userInterface.setColorSchemeId(0);
+        ColorScheme colorScheme = dataBaseHelper.loadColorScheme(0);
+        userInterface.setColorScheme(colorScheme);
     }
 
     @Override

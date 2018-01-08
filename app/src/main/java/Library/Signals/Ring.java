@@ -10,8 +10,10 @@ import com.example.ytgv8b.firsttry.MainActivity;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
+import Library.DataHelpers.DataBaseHelper;
 import Library.Messages.IMessage;
 import io.realm.RealmList;
 import io.realm.RealmObject;
@@ -29,14 +31,13 @@ public class Ring extends RealmObject implements IRing{
     /****Написать метод отложить будьник****/
 
     @PrimaryKey
-    private String id = UUID.randomUUID().toString();
+    private int id;
 
     private byte turnOffMethod; //метод выключения
     private byte puzzle; //головоломка
     private long messageID; //ID сообщения
     private Date signalTime; //Время запуска
-    private Date closeDate; //Ближайшее время запуска
-    private Date repeatSignalInterval; //интервал повторного запуска после откладывания
+    private byte repeatSignalInterval; //интервал повторного запуска после откладывания в мин
     private boolean vibrating; //вибрация(Вибрирующий)
     private int melody; //мелодия
     private byte melodyVolume; //громкость
@@ -56,8 +57,12 @@ public class Ring extends RealmObject implements IRing{
     private RealmList<Boolean> repeatDays; //Дни повтора
 
     @Override
-    public String getId() {
+    public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public byte getTurnOffMethod() {
@@ -76,7 +81,12 @@ public class Ring extends RealmObject implements IRing{
         this.puzzle = puzzle;
     }
 
-    public IMessage getMessage() {
+    public IMessage getMessage() { //Null obj pattern
+        if (message == null)
+        {
+            DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
+            message = dataBaseHelper.loadMesssage(messageID);
+        }
         return message;
     }
 
@@ -98,14 +108,13 @@ public class Ring extends RealmObject implements IRing{
 
     public void setSignalTime(Date signalTime) {
         this.signalTime = signalTime;
-        closeDate = signalTime;
     }
 
-    public Date getRepeatSignalInterval() {
+    public byte getRepeatSignalInterval() {
         return repeatSignalInterval;
     }
 
-    public void setRepeatSignalInterval(Date repeatSignalInterval) {
+    public void setRepeatSignalInterval(byte repeatSignalInterval) {
         this.repeatSignalInterval = repeatSignalInterval;
     }
 
@@ -186,16 +195,16 @@ public class Ring extends RealmObject implements IRing{
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 //         TODO: 26.12.2017 switch-case для выбора способа выключения
         Intent intent = new Intent(context, MainActivity.class);
-        recountCloseDate();
         // TODO: 26.12.2017 request code для различия
         PendingIntent pendingIntent =
                 PendingIntent.getActivity(context, 0, intent, 0);
         // TODO: 26.12.2017 время автовыкл.
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, closeDate.getTime(), pendingIntent);
-    }
 
-    @Override
-    public void recountCloseDate() {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.add(Calendar.MINUTE, repeatSignalInterval);
+        Date closeDate = calendar.getTime();
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, closeDate.getTime(), pendingIntent);
     }
 
     @Override
@@ -218,8 +227,7 @@ public class Ring extends RealmObject implements IRing{
 
         long signalTime = this.signalTime.getTime();
         // TODO: 26.12.2017 время автовыкл.
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, signalTime,
-                repeatSignalInterval.getTime(), pendingIntent);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, signalTime, pendingIntent);
     }
 
     @Override

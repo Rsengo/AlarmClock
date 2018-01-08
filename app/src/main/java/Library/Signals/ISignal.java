@@ -11,6 +11,5 @@ import io.realm.RealmModel;
 public interface ISignal extends RealmModel {
     void turnOn(Context context);
     void turnOff(Context context);
-    String getId();
-    void recountCloseDate();
+    int getId();
 }

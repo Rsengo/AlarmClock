@@ -11,7 +11,8 @@ import io.realm.annotations.RealmClass;
 public class GeneralPereodicity{
     public static final byte NOREPEAT = 0;
     public static final byte EVERYHOUR = 1;
-    public static final byte EVERYWEEK = 2;
-    public static final byte EVERYMOUNTH = 3;
-    public static final byte EVERYYEAR = 4;
+    public static final byte EEVEYDAY = 2;
+    public static final byte EVERYWEEK = 3;
+    public static final byte EVERYMOUNTH = 4;
+    public static final byte EVERYYEAR = 5;
 }

@@ -1,6 +1,7 @@
 package Library.Settings.UIBuilders;
 
 import Library.DataHelpers.PreferenceHelper;
+import Library.Settings.ColorScheme;
 import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
 
@@ -10,16 +11,18 @@ import Library.Settings.UserInterface;
 
 public class SavedUIBuilder extends UIBuilder {
 
-    private PreferenceHelper preferenceHelper;
+    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     public SavedUIBuilder(UserInterface userInterface) {
         super(userInterface);
-        preferenceHelper = PreferenceHelper.getInstance();
     }
 
     @Override
-    public void setColorSchemeId() {
-        userInterface.setColorSchemeId(preferenceHelper.getColorSchemeID());
+    public void setColorScheme() {
+        long id = preferenceHelper.getColorSchemeID();
+        userInterface.setColorSchemeId(id);
+        ColorScheme colorScheme = dataBaseHelper.loadColorScheme(id);
+        userInterface.setColorScheme(colorScheme);
     }
 
     @Override

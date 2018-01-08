@@ -8,7 +8,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by ytgv8b on 16.10.2017.
  */
 
-public class ColorScheme extends RealmObject implements RealmModel {
+public class ColorScheme extends RealmObject{
     /****Хз пока про содержимое, после создания интерфейса решим****/
 
     @PrimaryKey

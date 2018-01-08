@@ -52,13 +52,6 @@ public final class DataBaseHelper {
         return dataBaseHelper;
     }
 
-    public void loadAllData() {
-        user.setNotifications(loadNotifications());
-        user.setRings(loadRings());
-        userInterface.setColorScheme(loadColorScheme());
-        /***добавить ProgramInfo***/
-    }
-
     public ArrayList<INotification> loadNotifications() {
         ArrayList<INotification> notifications = new ArrayList<>();
 
@@ -78,13 +71,12 @@ public final class DataBaseHelper {
         return notifications;
     }
 
-    public ColorScheme loadColorScheme() {
+    public ColorScheme loadColorScheme(long id) {
         ColorScheme scheme;
 
         try (Realm realm = Realm.getDefaultInstance()) {
             colorSchemeRealmQuery =
-                    realm.where(ColorScheme.class).equalTo("id",
-                            userInterface.getColorSchemeId());
+                    realm.where(ColorScheme.class).equalTo("id", id);
             scheme = colorSchemeRealmQuery.findFirst();
         }
 

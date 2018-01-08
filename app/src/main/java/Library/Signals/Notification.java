@@ -7,9 +7,12 @@ import android.content.Intent;
 
 import com.example.ytgv8b.firsttry.MainActivity;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
+import Library.Enums.GeneralPereodicity;
 import io.realm.Realm;
 import io.realm.RealmModel;
 import io.realm.RealmObject;
@@ -26,7 +29,7 @@ public class Notification extends RealmObject implements INotification{
     /***Обратная связь с юзером***/
 
     @PrimaryKey
-    private String id = UUID.randomUUID().toString();
+    private int id;
     @Required
     private String name; //Имя
     private byte generalPeriodicity; //Общая переодичность
@@ -162,13 +165,38 @@ public class Notification extends RealmObject implements INotification{
         this.deleteAfterUsing = deleteAfterUsing;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
-    public String getId() {
+    public int getId() {
         return id;
     }
 
     @Override
     public void recountCloseDate() {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(closeDate);
+
+        switch (generalPeriodicity) {
+            case (GeneralPereodicity.NOREPEAT):
+                break;
+            case (GeneralPereodicity.EVERYHOUR):
+                calendar.add(Calendar.HOUR, specificPeriodicity);
+                break;
+            case (GeneralPereodicity.EEVEYDAY):
+                calendar.add(Calendar.DAY_OF_YEAR, specificPeriodicity);
+                break;
+            case (GeneralPereodicity.EVERYMOUNTH):
+                calendar.add(Calendar.MONTH, specificPeriodicity);
+                break;
+            case (GeneralPereodicity.EVERYYEAR):
+                calendar.add(Calendar.YEAR, specificPeriodicity);
+                break;
+        }
+
+        closeDate = calendar.getTime();
     }
 
     @Override
