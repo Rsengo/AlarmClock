@@ -35,7 +35,6 @@ public class Ring extends RealmObject implements IRing{
 
     private byte turnOffMethod; //метод выключения
     private byte puzzle; //головоломка
-    private long messageID; //ID сообщения
     private Date signalTime; //Время запуска
     private byte repeatSignalInterval; //интервал повторного запуска после откладывания в мин
     private boolean vibrating; //вибрация(Вибрирующий)
@@ -55,6 +54,11 @@ public class Ring extends RealmObject implements IRing{
 
     /***Можно ли использовать массив?***/
     private RealmList<Boolean> repeatDays; //Дни повтора
+
+    public static int getNextId() {
+        DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
+        return dataBaseHelper.getNextId(Ring.class);
+    }
 
     @Override
     public int getId() {
@@ -85,7 +89,7 @@ public class Ring extends RealmObject implements IRing{
         if (message == null)
         {
             DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
-            message = dataBaseHelper.loadMesssage(messageID);
+            message = dataBaseHelper.loadMesssage(id);
         }
         return message;
     }
@@ -172,14 +176,6 @@ public class Ring extends RealmObject implements IRing{
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
-    }
-
-    public long getMessageID() {
-        return messageID;
-    }
-
-    public void setMessageID(long messageID) {
-        this.messageID = messageID;
     }
 
     public boolean isDeleteAfterUsing() {

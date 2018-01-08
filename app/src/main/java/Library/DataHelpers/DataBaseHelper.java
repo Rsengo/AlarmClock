@@ -77,7 +77,7 @@ public final class DataBaseHelper {
         try (Realm realm = Realm.getDefaultInstance()) {
             colorSchemeRealmQuery =
                     realm.where(ColorScheme.class).equalTo("id", id);
-            scheme = colorSchemeRealmQuery.findFirst();
+            scheme = realm.copyFromRealm(colorSchemeRealmQuery.findFirst());
         }
 
         return scheme;
@@ -108,12 +108,11 @@ public final class DataBaseHelper {
             for (Ring ring: realmResults)
             {
                 Ring copyRing = realm.copyFromRealm(ring);
-                long messageID = copyRing.getMessageID();
                 IMessage message = null;
 
-                if (messageID != 0) {
-                    message = loadMesssage(messageID);
-                }
+                IMessage message1 = realm.where(IMessage.class)
+                        .equalTo("id", copyRing.getId())
+                        .findFirst(); /***********************************************/
 
                 copyRing.setMessage(message);
                 rings.add(copyRing);
@@ -183,5 +182,19 @@ public final class DataBaseHelper {
         }
 
         data.deleteFromRealm();
+    }
+
+    public int getNextId(final Class clazz) {
+        int newId = 0;
+        if (clazz.getSuperclass().equals(RealmObject.class) ||
+                clazz.getSuperclass().equals(RealmModel.class)) {
+            try (Realm realm = Realm.getDefaultInstance()) {
+                Number maxId = realm.where(clazz)
+                        .max("id");
+                newId = (maxId == null) ? 0 : maxId.intValue() + 1;
+            }
+        }
+
+        return newId;
     }
 }

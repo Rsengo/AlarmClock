@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 
+import Library.DataHelpers.DataBaseHelper;
 import Library.Enums.GeneralPereodicity;
 import io.realm.Realm;
 import io.realm.RealmModel;
@@ -47,6 +48,11 @@ public class Notification extends RealmObject implements INotification{
     private boolean deleteAfterUsing; //Удалить после использования
     @Required
     private String userEmail; //Почта пользователя-владельца
+
+    public static int getNextId() {
+        DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
+        return dataBaseHelper.getNextId(Notification.class);
+    }
 
     public String getName() {
         return name;

@@ -27,7 +27,7 @@ public class NotificationFactory extends SignalFactory {
 
     @Override
     public void setId() {
-
+        signal.setId(Notification.getNextId());
     }
 
     @Override

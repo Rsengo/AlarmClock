@@ -14,7 +14,7 @@ public class SMS extends RealmObject implements IMessage {
     /****Переопределить методы интерфейсов****/
 
     @PrimaryKey
-    private long id = 1;
+    private int id;
 
     @Required
     private String text; //Текст
@@ -33,8 +33,12 @@ public class SMS extends RealmObject implements IMessage {
         return text;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getRecepientName() {

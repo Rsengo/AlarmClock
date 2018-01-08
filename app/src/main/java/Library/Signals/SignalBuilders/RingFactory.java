@@ -35,7 +35,7 @@ public class RingFactory extends SignalFactory {
 
     @Override
     public void setId() {
-
+        signal.setId(Ring.getNextId());
     }
 
     @Override
@@ -91,9 +91,9 @@ public class RingFactory extends SignalFactory {
             MessageFactories factories = new MessageFactories();
             MessageFactory signalFactory = factories.getFactory(messageFactory);
             IMessage message = signalFactory.create();
-            ((Ring) signal).setMessage(message);
+            signal.setMessage(message);
         } else {
-            ((Ring) signal).setMessage(null);
+            signal.setMessage(null);
         }
     }
 

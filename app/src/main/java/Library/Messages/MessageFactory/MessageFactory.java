@@ -9,6 +9,10 @@ import Library.Messages.IMessage;
 public abstract class MessageFactory {
     protected IMessage message;
 
+    public void setId() {
+
+    }
+
     public abstract void createMessage();
     public abstract void setText();
     public abstract void setRecepient();
