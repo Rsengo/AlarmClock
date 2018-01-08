@@ -49,6 +49,7 @@ public class RingService extends Service {
 
         isVibrating = intent.getBooleanExtra("isVibrating", false);
         melody = intent.getIntExtra("melody", 0);
+        // TODO: 08.01.2018 volume 
 
         musicThread = new Thread(() ->
                 MediaPlayer.create(this, R.raw.music).start(),
