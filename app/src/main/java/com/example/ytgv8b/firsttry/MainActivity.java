@@ -56,20 +56,20 @@ public class MainActivity extends AppCompatActivity {
 //            dataBaseHelper.saveData(sms);
 //            textView.setText("Done");
             Ring ring = new Ring();
-            ring.setMessageID(sms.getId());
+            //ring.setMessageID(sms.getId());
             ring.setUserEmail("email");
             ring.setDescription("desk");
             ring.setMessage(sms);
 //            dataBaseHelper.saveData(ring);
 //            dataBaseHelper.saveData(sms);
             dataBaseHelper.saveRecursive(ring);
-            id = ring.getMessageID();
+          //  id = ring.getMessageID();
             textView.setText("Done");
         });
 
         button2.setOnClickListener(view -> {
             try {
-                dataBaseHelper.loadAllData();
+               // dataBaseHelper.loadAllData();
                 Ring ring = (Ring) user.getRings().get(0);
                 SMS sms1 = (SMS) ring.getMessage();
                 textView.setText(sms1.getText());

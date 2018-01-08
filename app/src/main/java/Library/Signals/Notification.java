@@ -212,9 +212,8 @@ public class Notification extends RealmObject implements INotification{
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         // TODO: 26.12.2017 switch-case для выбора способа выключения
         Intent intent = new Intent(context, MainActivity.class);
-        // TODO: 26.12.2017 request code для различия
         PendingIntent pendingIntent =
-                PendingIntent.getActivity(context, 0, intent, 0);
+                PendingIntent.getActivity(context, id, intent, 0);
 
         long signalTime = this.closeDate.getTime();
         // TODO: 26.12.2017 время автовыкл.
@@ -232,9 +231,8 @@ public class Notification extends RealmObject implements INotification{
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         // TODO: 26.12.2017 switch-case для выбора способа выключения
         Intent intent = new Intent(context, MainActivity.class);
-        // TODO: 26.12.2017 request code для различия
         PendingIntent pendingIntent =
-                PendingIntent.getActivity(context, 0, intent, 0);
+                PendingIntent.getActivity(context, id, intent, 0);
 
         alarmManager.cancel(pendingIntent);
     }

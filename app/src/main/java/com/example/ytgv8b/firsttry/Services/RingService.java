@@ -4,6 +4,8 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.IBinder;
 import android.os.Vibrator;
 
@@ -47,9 +49,11 @@ public class RingService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        
+
         isVibrating = intent.getBooleanExtra("isVibrating", false);
         melody = intent.getIntExtra("melody", 0);
-        // TODO: 08.01.2018 volume 
+        // TODO: 08.01.2018 volume
 
         musicThread = new Thread(() ->
                 MediaPlayer.create(this, R.raw.music).start(),
