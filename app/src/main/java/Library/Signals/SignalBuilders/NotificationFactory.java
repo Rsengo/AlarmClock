@@ -104,6 +104,12 @@ public class NotificationFactory extends SignalFactory {
         setTurnOffTime();
         setDescription();
         setOnState();
+        setDeleteAfterUsing();
+        setUserEmail();
+        setDate();
+        setPriority();
+        setGeneralPeriodicity();
+        setSpecificPeriodicity();
         return signal;
     }
 }

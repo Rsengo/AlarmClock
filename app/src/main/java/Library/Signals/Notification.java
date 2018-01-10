@@ -35,7 +35,7 @@ public class Notification extends RealmObject implements INotification {
     private Date closeDate; //Ближайшая дата
     private byte priority; //Приоритет
     private Date signalTime; //Время запуска
-    private long repeatSignalInterval; //интервал повтора
+    private int repeatSignalInterval; //интервал повтора (Константа AlarmManager)
     private boolean vibrating; //вибрация(Вибрирующий)
     private int melody; //мелодия
     private byte melodyVolume; //громкость
@@ -96,11 +96,11 @@ public class Notification extends RealmObject implements INotification {
         closeDate = signalTime;
     }
 
-    public long getRepeatSignalInterval() {
+    public int getRepeatSignalInterval() {
         return repeatSignalInterval;
     }
 
-    public void setRepeatSignalInterval(long repeatSignalInterval) {
+    public void setRepeatSignalInterval(int repeatSignalInterval) {
         this.repeatSignalInterval = repeatSignalInterval;
     }
 
@@ -144,6 +144,7 @@ public class Notification extends RealmObject implements INotification {
         this.onState = onState;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }

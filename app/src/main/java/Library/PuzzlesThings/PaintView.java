@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.ytgv8b.firsttry.DisplayConnectActivity;
+import com.example.ytgv8b.firsttry.Puzzles.DisplayConnectActivity;
 import com.example.ytgv8b.firsttry.R;
 
 /**

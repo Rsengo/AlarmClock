@@ -133,13 +133,18 @@ public final class DataBaseHelper {
         return rings;
     }
 
-    public Ring getRing(int id)
+    public IRing getRing(int id)
     {
-        Ring ring;
+        IRing ring = null;
 
         try (Realm realm = Realm.getDefaultInstance()) {
-            ring = realm.where(Ring.class)
-                    .equalTo("id", id).findFirst();
+            try {
+                ring = realm.copyFromRealm(realm.where(Ring.class)
+                        .equalTo("id", id).findFirst());
+            } catch (Exception ex) {
+                Log.d("Find ring by id", "rind not found");
+            }
+
         }
 
         return ring;

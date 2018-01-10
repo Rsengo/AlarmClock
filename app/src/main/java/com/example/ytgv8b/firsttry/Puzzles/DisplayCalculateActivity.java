@@ -1,14 +1,22 @@
-package com.example.ytgv8b.firsttry;
+package com.example.ytgv8b.firsttry.Puzzles;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.example.ytgv8b.firsttry.R;
+import com.example.ytgv8b.firsttry.Services.RingService;
+
 import java.text.SimpleDateFormat;
 import java.util.Random;
+
+import Library.DataHelpers.DataBaseHelper;
+import Library.DataHelpers.PreferenceHelper;
+import Library.Signals.IRing;
 
 /**
  * при выполнении головоломкивозвращается на предыдущее активити (можно это убрать)
@@ -18,7 +26,6 @@ import java.util.Random;
 public class DisplayCalculateActivity extends AppCompatActivity {
 
     private int _ans;
-    private String _sTime;
 
     private final int[] _dans = {15, 1, -1, 2, -5, 10, -10, 111};
     private final char[] _operation = {'+', '-', '*', '/'};
@@ -27,11 +34,39 @@ public class DisplayCalculateActivity extends AppCompatActivity {
 
     private static String _alarmName = "";
 
+    private IRing ring;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        DataBaseHelper.init(this);
+        PreferenceHelper.init(this);
+
+        DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
+
+        Intent starterIntent = getIntent();
+        int ringId = starterIntent.getIntExtra("id", 0);
+        ring = dataBaseHelper.getRing(ringId);
+
+        _alarmName = ring.getDescription();
+
+        Intent intent = new Intent(getApplicationContext(), RingService.class);
+        // TODO: 11.01.2018 put extras
+        startService(intent);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Intent intent = new Intent(getApplicationContext(), RingService.class);
+        stopService(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_calculate);
-        Intent intent = getIntent();
         TextView textView = (TextView) findViewById(R.id.textViewTime);
         textView.setText(get_sTime());
         TextView textViewName = (TextView) findViewById(R.id.textViewName);
@@ -51,10 +86,6 @@ public class DisplayCalculateActivity extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         alarmTime = format.format(t);
         return alarmTime;
-    }
-
-    public static void set_alarmName(String alarmName) {
-        _alarmName = alarmName;
     }
 
     private void createTask()
@@ -231,14 +262,10 @@ public class DisplayCalculateActivity extends AppCompatActivity {
             }
         }
         catch (Exception e)
-        {  }
+        {
+            Log.e("Exception", "CalcActivity");
+        }
 
 
-    }
-
-
-    public boolean getIsFinished()
-    {
-        return _isFinished;
     }
 }

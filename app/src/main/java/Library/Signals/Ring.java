@@ -15,6 +15,7 @@ import java.util.GregorianCalendar;
 import Library.DataHelpers.DataBaseHelper;
 import Library.IRealmModelWithID;
 import Library.Messages.IMessage;
+import Library.PuzzlesThings.PuzzleFactory;
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
@@ -32,7 +33,6 @@ public class Ring extends RealmObject implements IRing{
     @PrimaryKey
     private int id;
 
-    private byte turnOffMethod; //метод выключения
     private byte puzzle; //головоломка
     private Date signalTime; //Время запуска
     private byte repeatSignalInterval; //интервал повторного запуска после откладывания в мин
@@ -68,14 +68,6 @@ public class Ring extends RealmObject implements IRing{
 
     public void setRepeatDays(byte[] repeatDays) {
         this.repeatDays = repeatDays;
-    }
-
-    public byte getTurnOffMethod() {
-        return turnOffMethod;
-    }
-
-    public void setTurnOffMethod(byte turnOffMethod) {
-        this.turnOffMethod = turnOffMethod;
     }
 
     public byte getPuzzle() {
@@ -159,6 +151,7 @@ public class Ring extends RealmObject implements IRing{
         this.onState = onState;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
@@ -186,10 +179,9 @@ public class Ring extends RealmObject implements IRing{
     @Override
     public void postpound(Context context) {  //отложить
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-//         TODO: 26.12.2017 switch-case для выбора способа выключения
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent =
-                PendingIntent.getActivity(context, id, intent, 0);
+
+        PendingIntent pendingIntent = createIntent(context);
+
         // TODO: 26.12.2017 время автовыкл.
 
         GregorianCalendar calendar = new GregorianCalendar();
@@ -211,10 +203,8 @@ public class Ring extends RealmObject implements IRing{
         onState = true;
 
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        // TODO: 26.12.2017 switch-case для выбора способа выключения 
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent =
-                PendingIntent.getActivity(context, id, intent, 0);
+
+        PendingIntent pendingIntent = createIntent(context);
 
         long signalTime = this.signalTime.getTime();
         // TODO: 26.12.2017 время автовыкл.
@@ -226,10 +216,8 @@ public class Ring extends RealmObject implements IRing{
         onState = false;
 
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        // TODO: 26.12.2017 switch-case для выбора способа выключения
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent =
-                PendingIntent.getActivity(context, id, intent, 0);
+
+        PendingIntent pendingIntent = createIntent(context);
 
         alarmManager.cancel(pendingIntent);
     }
@@ -237,5 +225,17 @@ public class Ring extends RealmObject implements IRing{
     @Override
     public void recountCloseDate() {
 
+    }
+
+    private PendingIntent createIntent(Context context) {
+        Class puzzleClass = PuzzleFactory.getFactory(puzzle);
+
+        Intent intent = new Intent(context, puzzleClass);
+        intent.putExtra("id", id);
+
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(context, id, intent, 0);
+
+        return pendingIntent;
     }
 }

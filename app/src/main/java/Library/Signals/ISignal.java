@@ -13,4 +13,5 @@ public interface ISignal extends IRealmModelWithID {
     void turnOn(Context context);
     void turnOff(Context context);
     void recountCloseDate();
+    String getDescription();
 }

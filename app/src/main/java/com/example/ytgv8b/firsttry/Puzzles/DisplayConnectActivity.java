@@ -1,4 +1,4 @@
-package com.example.ytgv8b.firsttry;
+package com.example.ytgv8b.firsttry.Puzzles;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -12,11 +12,17 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.ytgv8b.firsttry.R;
+import com.example.ytgv8b.firsttry.Services.RingService;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Library.DataHelpers.DataBaseHelper;
+import Library.DataHelpers.PreferenceHelper;
 import Library.PuzzlesThings.PaintView;
+import Library.Signals.IRing;
 
 
 /**
@@ -36,12 +42,41 @@ public class DisplayConnectActivity extends AppCompatActivity {
 
     private ArrayList<ArrayList<Point>> _arrayPoint = new ArrayList<>();
 
+    private IRing ring;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        DataBaseHelper.init(this);
+        PreferenceHelper.init(this);
+
+        DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
+
+        Intent starterIntent = getIntent();
+        int ringId = starterIntent.getIntExtra("id", 0);
+        ring = dataBaseHelper.getRing(ringId);
+
+        _alarmName = ring.getDescription();
+
+        Intent intent = new Intent(getApplicationContext(), RingService.class);
+        // TODO: 11.01.2018 put extras
+        startService(intent);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Intent intent = new Intent(getApplicationContext(), RingService.class);
+        stopService(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_display_connect);
-        Intent intent = getIntent();
+//        Intent intent = getIntent();
         //ActionBar actionBar = getSupportActionBar();
         //actionBar.hide();
         for(int i = 0; i<4; i++)
@@ -103,9 +138,6 @@ public class DisplayConnectActivity extends AppCompatActivity {
 
 
     }
-    public static void set_alarmName(String alarmName) {
-        _alarmName = alarmName;
-    }
 
     private String get_sTime()
     {
@@ -162,11 +194,6 @@ public class DisplayConnectActivity extends AppCompatActivity {
             _imageViewRight[i].setY(coordY[r]);
         }
 
-    }
-
-    public boolean getIsFinished()
-    {
-        return _isFinished;
     }
 
     public void setFinished()

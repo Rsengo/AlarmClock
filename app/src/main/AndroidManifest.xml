@@ -21,8 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".DisplayCalculateActivity" />
-        <activity android:name=".DisplayConnectActivity"></activity>
+        <activity android:name=".Puzzles.DisplayCalculateActivity" />
+        <activity android:name=".Puzzles.DisplayConnectActivity"></activity>
         <service
             android:name=".Services.RingService"
             android:enabled="true"

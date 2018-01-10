@@ -75,12 +75,9 @@ public class RingFactory extends SignalFactory {
     @Override
     public void setUserEmail() {
         String userEmail = User.getInstance().getEmail();
-        ((Ring)signal).setUserEmail(userEmail);
+        signal.setUserEmail(userEmail);
     }
 
-    public  void setTurnOffMethod() {
-
-    }
 
     public  void setPuzzle() {
 
@@ -120,6 +117,8 @@ public class RingFactory extends SignalFactory {
         setTurnOffTime();
         setPuzzle();
         setRepeatDays();
+        setDeleteAfterUsing();
+        setUserEmail();
         return signal;
     }
 }

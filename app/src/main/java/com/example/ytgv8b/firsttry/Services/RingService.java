@@ -40,17 +40,12 @@ public class RingService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        //user = User.getInstance();
-        DataBaseHelper.init(this);
-        //dataBaseHelper = DataBaseHelper.getInstance();
+
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-        
-
         isVibrating = intent.getBooleanExtra("isVibrating", false);
         melody = intent.getIntExtra("melody", 0);
         // TODO: 08.01.2018 volume
