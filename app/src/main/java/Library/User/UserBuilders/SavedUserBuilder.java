@@ -1,7 +1,10 @@
 package Library.User.UserBuilders;
 
+import java.util.ArrayList;
+
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.PreferenceHelper;
+import Library.Signals.IRing;
 import Library.User.IUser;
 import Library.User.User;
 
@@ -29,11 +32,17 @@ public class SavedUserBuilder extends UserBuilder {
     @Override
     public void setRings() {
         user.setRings(dataBaseHelper.loadRings());
+
+        if (user.getRings() == null)
+            user.setRings(new ArrayList<>());
     }
 
     @Override
     public void setNotifications() {
         user.setNotifications(dataBaseHelper.loadNotifications());
+
+        if (user.getNotifications() == null)
+            user.setNotifications(new ArrayList<>());
     }
 
     @Override

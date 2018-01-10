@@ -68,23 +68,31 @@ public class MainActivity extends AppCompatActivity {
             Ring ring = new Ring();
             ring.setId(Ring.getNextId());
             ring.setUserEmail(user.getEmail());
-            ring.setDescription("dgdfgdgdgfd");
+            ring.setDescription("dgdfgdgdgfd "+ring.getId());
             textView.setText(ring.getUserEmail());
             SMS message = new SMS();
             message.setId(ring.getId());
             message.setText("my message");
             ring.setMessage(message);
-            dataBaseHelper.saveRecursive(ring);
+            user.addRing(ring);
         });
 
         Button button7 = (Button)findViewById(R.id.button7);
 
         button7.setOnClickListener(view -> {
             User user = User.getInstance();
-            user.setRings(dataBaseHelper.loadRings());
-            IRing ring = user.getRings()
-                    .get(0);
-            textView.setText(String.valueOf(((Ring) ring).getMessage().getId()));
+            //user.setRings(dataBaseHelper.loadRings());
+            //IRing ring = user.getRings()
+                //    .get(0);
+//            textView.setText(((Ring)ring).getDescription());
+            textView.setText(String.valueOf(user.getRings().size()));
+        });
+
+        Button button6 = (Button)findViewById(R.id.button6);
+
+        button6.setOnClickListener(view -> {
+            User user = User.getInstance();
+            user.removeRing(0);
         });
     }
 }

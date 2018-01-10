@@ -33,7 +33,7 @@
         android:layout_alignEnd="@+id/button"
         android:layout_below="@+id/button"
         android:layout_marginTop="24dp"
-        android:text="CreateRings"/>
+        android:text="Create Rings"/>
 
     <Button
         android:id="@+id/button5"
@@ -51,7 +51,7 @@
         android:layout_alignEnd="@+id/button5"
         android:layout_below="@+id/button5"
         android:layout_marginTop="24dp"
-        android:text="Load Rings"/>
+        android:text="remove Rings"/>
 
     <Button
         android:id="@+id/button7"

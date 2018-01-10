@@ -204,7 +204,7 @@ public final class DataBaseHelper {
                 RealmObject realmData = (RealmObject) realm.where(clazz)
                         .equalTo("id", id)
                         .findFirst();
-                realmData.deleteFromRealm();
+                realm.executeTransaction(realm1 -> realmData.deleteFromRealm());
             } catch (NullPointerException ex1) {
                 Log.e("Null pointer", "null in deleting");
             } catch (Exception ex2) {
