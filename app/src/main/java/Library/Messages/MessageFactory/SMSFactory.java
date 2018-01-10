@@ -8,6 +8,11 @@ import Library.Messages.SMS;
  */
 
 class SMSFactory extends MessageFactory {
+
+    public SMSFactory() {
+        messageClass = SMS.class;
+    }
+
     @Override
     public void createMessage() {
         message = new SMS();

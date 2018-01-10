@@ -10,22 +10,19 @@ import com.example.ytgv8b.firsttry.MainActivity;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.UUID;
 
 import Library.DataHelpers.DataBaseHelper;
 import Library.Enums.GeneralPereodicity;
-import io.realm.Realm;
-import io.realm.RealmModel;
+import Library.IRealmModelWithID;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.RealmClass;
 import io.realm.annotations.Required;
 
 /**
  * Created by ytgv8b on 16.10.2017.
  */
 
-public class Notification extends RealmObject implements INotification{
+public class Notification extends RealmObject implements INotification {
     /****Методы интерфейсов****/
     /***Обратная связь с юзером***/
 
@@ -171,6 +168,7 @@ public class Notification extends RealmObject implements INotification{
         this.deleteAfterUsing = deleteAfterUsing;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }

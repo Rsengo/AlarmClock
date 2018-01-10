@@ -6,7 +6,10 @@ import android.util.Log;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import Library.IRealmModelWithID;
 import Library.Messages.IMessage;
+import Library.Messages.MessageFactory.MessageFactories;
+import Library.Messages.MessageFactory.MessageFactory;
 import Library.Settings.ColorScheme;
 import Library.Settings.UserInterface;
 import Library.Signals.INotification;
@@ -32,7 +35,6 @@ public final class DataBaseHelper {
     private RealmQuery<Ring> ringRealmQuery;
     private RealmQuery<Notification> notificationRealmQuery;
     private RealmQuery<ColorScheme> colorSchemeRealmQuery;
-    private RealmQuery<IMessage> messageRealmQuery;
 
     public static void init(Context context) {
         Realm.init(context);
@@ -83,13 +85,24 @@ public final class DataBaseHelper {
         return scheme;
     }
 
-    public IMessage loadMesssage(long id)
-    {
-        IMessage message;
+    public IMessage loadMesssage(int id) {
 
+        IMessage message = null;
         try (Realm realm = Realm.getDefaultInstance()) {
-            messageRealmQuery = realm.where(IMessage.class).equalTo("id", id);
-            message = realm.copyFromRealm(messageRealmQuery.findFirst());
+            for (MessageFactory factory : MessageFactories.factories()) {
+                try {
+                    IMessage realmMessage = (IMessage) realm
+                            .where(factory.getMessageClass())
+                            .equalTo("id", id)
+                            .findFirst();
+                    if (realmMessage != null) {
+                        message = realm.copyFromRealm(realmMessage);
+                        break;
+                    }
+                } catch (Exception ex) {
+                    Log.d("Null pointer", "null");
+                }
+            }
         }
         return message;
     }
@@ -110,9 +123,7 @@ public final class DataBaseHelper {
                 Ring copyRing = realm.copyFromRealm(ring);
                 IMessage message = null;
 
-                IMessage message1 = realm.where(IMessage.class)
-                        .equalTo("id", copyRing.getId())
-                        .findFirst(); /***********************************************/
+                message = loadMesssage(ring.getId());
 
                 copyRing.setMessage(message);
                 rings.add(copyRing);
@@ -134,7 +145,7 @@ public final class DataBaseHelper {
         return ring;
     }
 
-    public <T extends RealmObject> void saveData(T data) {
+    public <T extends RealmModel> void saveData(T data) {
         try (Realm realm = Realm.getDefaultInstance())
         {
             realm.executeTransaction(realm1 -> {
@@ -143,7 +154,7 @@ public final class DataBaseHelper {
         }
     }
 
-    public <T extends RealmObject> void saveRecursive(T data) {
+    public <T extends RealmModel> void saveRecursive(T data) {
         saveData(data);
 
         Class dataClass = data.getClass();
@@ -154,7 +165,7 @@ public final class DataBaseHelper {
             for (Field field : fields) {
                 field.setAccessible(true);
                 Object newData = field.get(data);
-                if ((newData instanceof RealmObject) || (newData instanceof RealmModel)) {
+                if (newData instanceof RealmModel) {
                     saveRecursive((RealmObject) newData);
                 }
             }
@@ -163,7 +174,7 @@ public final class DataBaseHelper {
         }
     }
 
-    public <T extends RealmObject> void deleteRecursive(T data)
+    public <T extends IRealmModelWithID> void deleteRecursive(T data)
     {
         Class dataClass = data.getClass();
 
@@ -173,15 +184,33 @@ public final class DataBaseHelper {
             for (Field field : fields) {
                 field.setAccessible(true);
                 Object newData = field.get(data);
-                if ((newData instanceof RealmObject) || (newData instanceof RealmModel)) {
-                    deleteRecursive((RealmObject) newData);
+                if (newData instanceof RealmModel && newData instanceof IRealmModelWithID) {
+                    deleteRecursive((IRealmModelWithID) newData);
                 }
             }
         } catch (IllegalAccessException ex) {
             Log.e("Exception", "IllegalAccessException, recursive saving");
         }
 
-        data.deleteFromRealm();
+        deleteData(data);
+    }
+
+    public <T extends IRealmModelWithID> void deleteData(T data) {
+        Class clazz = data.getClass();
+        int id = data.getId();
+
+        try (Realm realm = Realm.getDefaultInstance()) {
+            try {
+                RealmObject realmData = (RealmObject) realm.where(clazz)
+                        .equalTo("id", id)
+                        .findFirst();
+                realmData.deleteFromRealm();
+            } catch (NullPointerException ex1) {
+                Log.e("Null pointer", "null in deleting");
+            } catch (Exception ex2) {
+                Log.e("Exception", "Deleteting data");
+            }
+        }
     }
 
     public int getNextId(final Class clazz) {

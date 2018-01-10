@@ -1,5 +1,7 @@
 package Library.Messages.MessageFactory;
 
+import android.support.annotation.NonNull;
+
 import Library.Messages.IMessage;
 import Library.Signals.IRing;
 import Library.Signals.Ring;
@@ -12,16 +14,23 @@ public abstract class MessageFactory {
     protected IMessage message;
     protected IRing ring;
 
+    @NonNull
+    protected Class messageClass;
+
     public void initRing (IRing ring) {
         this.ring = ring;
+    }
+
+    public Class getMessageClass() {
+        return messageClass;
     }
 
     public  void setId() {
         message.setId(ring.getId());
     }
 
-    public abstract void createMessage();
-    public abstract void setText();
-    public abstract void setRecepient();
+    protected abstract void createMessage();
+    protected abstract void setText();
+    protected abstract void setRecepient();
     public abstract IMessage create();
 }

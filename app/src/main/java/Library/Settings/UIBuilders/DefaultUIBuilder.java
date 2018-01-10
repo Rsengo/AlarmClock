@@ -21,9 +21,9 @@ public class DefaultUIBuilder extends UIBuilder {
 
     @Override
     public void setColorScheme() {
-        userInterface.setColorSchemeId(0);
-        ColorScheme colorScheme = dataBaseHelper.loadColorScheme(0);
-        userInterface.setColorScheme(colorScheme);
+//        userInterface.setColorSchemeId(0);
+//        ColorScheme colorScheme = dataBaseHelper.loadColorScheme(0);
+//        userInterface.setColorScheme(colorScheme);
     }
 
     @Override

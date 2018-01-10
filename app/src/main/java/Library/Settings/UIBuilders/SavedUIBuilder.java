@@ -19,10 +19,10 @@ public class SavedUIBuilder extends UIBuilder {
 
     @Override
     public void setColorScheme() {
-        long id = preferenceHelper.getColorSchemeID();
-        userInterface.setColorSchemeId(id);
-        ColorScheme colorScheme = dataBaseHelper.loadColorScheme(id);
-        userInterface.setColorScheme(colorScheme);
+//        long id = preferenceHelper.getColorSchemeID();
+//        userInterface.setColorSchemeId(id);
+//        ColorScheme colorScheme = dataBaseHelper.loadColorScheme(id);
+//        userInterface.setColorScheme(colorScheme);
     }
 
     @Override

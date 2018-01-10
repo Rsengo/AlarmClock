@@ -4,7 +4,9 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.PreferenceHelper;
+import Library.IRealmModelWithID;
 import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
 import Library.Signals.INotification;
@@ -32,7 +34,9 @@ public class User implements  IUser {
 
     private static UserDirector director;
     private static UserBuilder builder;
-    private static PreferenceHelper preferenceHelper;
+    private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+    private static DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
+
     private static User user; //Ссылка на себя
 
     private User() { //Новый пользователь
@@ -41,7 +45,6 @@ public class User implements  IUser {
 
     public static User getInstance() { //Создание пользователя
         if (user == null) { //Если вход не выполнен
-            preferenceHelper = PreferenceHelper.getInstance();
             user = new User();
             //Если имеются сохраненные настройки
             if (!preferenceHelper.isEmpty()) { //если файл существует
@@ -117,5 +120,41 @@ public class User implements  IUser {
         /***Сохранение данных на сервер***/
         preferenceHelper = PreferenceHelper.getInstance();
         preferenceHelper.removePreference();
+    }
+
+    @Override
+    public void addRing(IRing ring) {
+        dataBaseHelper.saveRecursive(ring);
+        rings.add(ring);
+    }
+
+    @Override
+    public void addNotification(INotification notification) {
+        dataBaseHelper.saveRecursive(notification);
+        notifications.add(notification);
+    }
+
+    @Override
+    public void removeRing(IRing ring) {
+        dataBaseHelper.deleteRecursive(ring);
+        rings.remove(ring);
+    }
+
+    @Override
+    public void removeNotification(INotification notification) {
+        dataBaseHelper.deleteRecursive(notification);
+        notifications.remove(notification);
+    }
+
+    @Override
+    public void removeRing(int position) {
+        IRing ring = rings.get(position);
+        removeRing(ring);
+    }
+
+    @Override
+    public void removeNotification(int position) {
+        INotification notification = notifications.get(position);
+        removeNotification(notification);
     }
 }

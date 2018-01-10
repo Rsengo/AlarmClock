@@ -5,5 +5,4 @@ package Library.Signals;
  */
 
 public interface INotification extends ISignal {
-    void recountCloseDate();
 }

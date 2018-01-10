@@ -1,5 +1,7 @@
 package Library.Messages.MessageFactory;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import Library.Signals.IRing;
@@ -9,16 +11,28 @@ import Library.Signals.IRing;
  */
 
 public class MessageFactories {
-    private HashMap<String, MessageFactory> factories = new HashMap<>();
+    private static HashMap<String, MessageFactory> factories = new HashMap<>();
 
-    public MessageFactories() {
-        factories.put("SMS", new SMSFactory());
-    }
-
-    public MessageFactory getFactory(String messageFactory, IRing ring) {
+    public static MessageFactory getFactory(String messageFactory, IRing ring) {
+        complete();
         MessageFactory factory = factories.get(messageFactory);
         factory.initRing(ring);
         return factory;
     }
 
+    public static int size() {
+        complete();
+        return factories.size();
+    }
+
+    public static Collection<MessageFactory> factories() {
+        complete();
+        return factories.values();
+    }
+
+    private static void complete() {
+        if (factories.isEmpty()) {
+            factories.put("SMS", new SMSFactory());
+        }
+    }
 }

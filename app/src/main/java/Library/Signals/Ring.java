@@ -11,11 +11,10 @@ import com.example.ytgv8b.firsttry.MainActivity;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.UUID;
 
 import Library.DataHelpers.DataBaseHelper;
+import Library.IRealmModelWithID;
 import Library.Messages.IMessage;
-import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
@@ -62,6 +61,7 @@ public class Ring extends RealmObject implements IRing{
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
@@ -232,5 +232,10 @@ public class Ring extends RealmObject implements IRing{
                 PendingIntent.getActivity(context, id, intent, 0);
 
         alarmManager.cancel(pendingIntent);
+    }
+
+    @Override
+    public void recountCloseDate() {
+
     }
 }

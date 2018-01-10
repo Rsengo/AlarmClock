@@ -1,6 +1,8 @@
 package Library.Messages;
 
 import android.telephony.SmsManager;
+
+import Library.IRealmModelWithID;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -9,7 +11,8 @@ import io.realm.annotations.Required;
  * Created by ytgv8b on 08.10.2017.
  */
 
-public class SMS extends RealmObject implements IMessage {
+
+public class SMS extends RealmObject implements IMessage{
     /****Добавление/удаление получателей с заходом в БД****/
     /****Переопределить методы интерфейсов****/
 

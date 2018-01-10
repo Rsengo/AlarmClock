@@ -2,14 +2,15 @@ package Library.Signals;
 
 import android.content.Context;
 
+import Library.IRealmModelWithID;
 import io.realm.RealmModel;
 
 /**
  * Created by ytgv8b on 28.10.2017.
  */
 
-public interface ISignal extends RealmModel {
+public interface ISignal extends IRealmModelWithID {
     void turnOn(Context context);
     void turnOff(Context context);
-    int getId();
+    void recountCloseDate();
 }
