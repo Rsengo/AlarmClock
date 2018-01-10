@@ -13,6 +13,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Hashtable;
 
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.PreferenceHelper;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             message.setText("my message");
             ring.setMessage(message);
             user.addRing(ring);
+
         });
 
         Button button7 = (Button)findViewById(R.id.button7);
