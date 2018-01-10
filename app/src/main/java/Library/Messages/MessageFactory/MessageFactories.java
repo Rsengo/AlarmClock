@@ -1,5 +1,7 @@
 package Library.Messages.MessageFactory;
 
+import android.support.annotation.NonNull;
+
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,6 +29,7 @@ public class MessageFactories {
         return factories.size();
     }
 
+    @NonNull
     public static Collection<MessageFactory> factories() {
         complete();
         return factories.values();

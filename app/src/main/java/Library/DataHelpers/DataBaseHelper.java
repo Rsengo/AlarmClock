@@ -133,7 +133,7 @@ public final class DataBaseHelper {
         return rings;
     }
 
-    public Ring getRing(String id)
+    public Ring getRing(int id)
     {
         Ring ring;
 
