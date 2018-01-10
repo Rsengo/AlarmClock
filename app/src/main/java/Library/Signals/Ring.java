@@ -27,8 +27,6 @@ import io.realm.annotations.Required;
 
 
 public class Ring extends RealmObject implements IRing{
-    /****добавить абстракции для головоломки****/
-    /****Написать метод отложить будьник****/
 
     @PrimaryKey
     private int id;

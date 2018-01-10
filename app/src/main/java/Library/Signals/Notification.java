@@ -35,7 +35,7 @@ public class Notification extends RealmObject implements INotification {
     private Date closeDate; //Ближайшая дата
     private byte priority; //Приоритет
     private Date signalTime; //Время запуска
-    private int repeatSignalInterval; //интервал повтора (Константа AlarmManager)
+    private long repeatSignalInterval; //интервал повтора (Константа AlarmManager)
     private boolean vibrating; //вибрация(Вибрирующий)
     private int melody; //мелодия
     private byte melodyVolume; //громкость
@@ -96,11 +96,11 @@ public class Notification extends RealmObject implements INotification {
         closeDate = signalTime;
     }
 
-    public int getRepeatSignalInterval() {
+    public long getRepeatSignalInterval() {
         return repeatSignalInterval;
     }
 
-    public void setRepeatSignalInterval(int repeatSignalInterval) {
+    public void setRepeatSignalInterval(long repeatSignalInterval) {
         this.repeatSignalInterval = repeatSignalInterval;
     }
 
@@ -209,13 +209,12 @@ public class Notification extends RealmObject implements INotification {
         onState = true;
 
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        // TODO: 26.12.2017 switch-case для выбора способа выключения
+        // TODO: 26.12.2017 ресивер на прием
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent =
                 PendingIntent.getActivity(context, id, intent, 0);
 
         long signalTime = this.closeDate.getTime();
-        // TODO: 26.12.2017 время автовыкл.
 
         if (repeatSignalInterval != 0)
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, signalTime,
@@ -228,7 +227,7 @@ public class Notification extends RealmObject implements INotification {
     @Override
     public void turnOff(Context context) {
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        // TODO: 26.12.2017 switch-case для выбора способа выключения
+        // TODO: 26.12.2017 ресивер на прием
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent =
                 PendingIntent.getActivity(context, id, intent, 0);
