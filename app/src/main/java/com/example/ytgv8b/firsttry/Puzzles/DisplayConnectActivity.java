@@ -21,6 +21,7 @@ import java.util.Random;
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.PreferenceHelper;
 import Library.PuzzlesThings.PaintView;
+import Library.PuzzlesThings.PuzzleFactory;
 import Library.Signals.IRing;
 
 
@@ -32,41 +33,17 @@ import Library.Signals.IRing;
  */
 
 
-public class DisplayConnectActivity extends AppCompatActivity {
+public class DisplayConnectActivity extends PuzzleActivity {
 
     private  ImageView[] _imageViewLeft;
     private  ImageView[] _imageViewRight;
     private boolean _isFinished = false;
-    private static String _alarmName = "";
 
     private ArrayList<ArrayList<Point>> _arrayPoint = new ArrayList<>();
 
-    private IRing ring;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        DataBaseHelper.init(this);
-        PreferenceHelper.init(this);
 
-        DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
-
-        Intent starterIntent = getIntent();
-        int ringId = starterIntent.getIntExtra("id", 0);
-        ring = dataBaseHelper.getRing(ringId);
-
-        _alarmName = ring.getDescription();
-
-        // TODO: 12.01.2018 запуск потоков
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        // TODO: 12.01.2018 закрыть потоки
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
