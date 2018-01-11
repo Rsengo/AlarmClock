@@ -15,10 +15,11 @@ public class UIDirector {
         this.builder = builder;
     }
 
-    public void construct()
+    public UserInterface construct()
     {
         builder.setColorScheme();
         builder.setLanguage();
         builder.setFontSize();
+        return builder.getResult();
     }
 }

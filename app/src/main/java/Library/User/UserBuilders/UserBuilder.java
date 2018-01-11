@@ -19,9 +19,7 @@ public abstract class UserBuilder {
     public abstract void setNotifications();
     public abstract void setMoneyQuantity();
     public abstract void setEmail();
-    public void setUserInterface() {
-        user.setUserInterface(UserInterface.getInstance());
-    }
+    public abstract void setUserInterface();
 
     public User getResult() {
         return user;

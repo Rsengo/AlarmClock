@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.PreferenceHelper;
+import Library.Settings.ISetting;
+import Library.Settings.UIBuilders.SavedUIBuilder;
+import Library.Settings.UIBuilders.UIBuilder;
+import Library.Settings.UIBuilders.UIDirector;
 import Library.Signals.IRing;
 import Library.User.IUser;
 import Library.User.User;
@@ -55,4 +59,11 @@ public class SavedUserBuilder extends UserBuilder {
         user.setEmail(preferenceHelper.getUserEmail());
     }
 
+    @Override
+    public void setUserInterface() {
+        UIBuilder builder = new SavedUIBuilder();
+        UIDirector director = new UIDirector(builder);
+        ISetting setting = director.construct();
+        user.setUserInterface(setting);
+    }
 }

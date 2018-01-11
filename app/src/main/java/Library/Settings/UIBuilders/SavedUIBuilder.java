@@ -13,10 +13,6 @@ public class SavedUIBuilder extends UIBuilder {
 
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
-    public SavedUIBuilder(UserInterface userInterface) {
-        super(userInterface);
-    }
-
     @Override
     public void setColorScheme() {
 //        long id = preferenceHelper.getColorSchemeID();

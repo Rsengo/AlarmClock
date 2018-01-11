@@ -15,10 +15,6 @@ import Library.User.User;
 
 public class DefaultUIBuilder extends UIBuilder {
 
-    public DefaultUIBuilder(UserInterface userInterface) {
-        super(userInterface);
-    }
-
     @Override
     public void setColorScheme() {
 //        userInterface.setColorSchemeId(0);

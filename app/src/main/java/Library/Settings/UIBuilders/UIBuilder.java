@@ -17,8 +17,8 @@ public abstract class UIBuilder {
     protected UserInterface userInterface;
     protected DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
 
-    public UIBuilder(UserInterface userInterface) {
-        this.userInterface = userInterface;
+    public UIBuilder() {
+        userInterface = new UserInterface();
     }
 
     public abstract void setColorScheme();
@@ -28,5 +28,4 @@ public abstract class UIBuilder {
     public UserInterface getResult() {
         return userInterface;
     }
-
 }

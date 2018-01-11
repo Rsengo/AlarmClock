@@ -12,6 +12,7 @@ import Library.Settings.UserInterface;
 import Library.Signals.INotification;
 import Library.Signals.IRing;
 import Library.Signals.ISignal;
+import Library.User.UserBuilders.DefaultUserBuilder;
 import Library.User.UserBuilders.SavedUserBuilder;
 import Library.User.UserBuilders.UserBuilder;
 import Library.User.UserBuilders.UserDirector;
@@ -21,9 +22,6 @@ import Library.User.UserBuilders.UserDirector;
  */
 
 public class User implements  IUser {
-    /****Добавление/удаление сигналов с заходом в БД****/
-    /****Выйти из профиля****/
-    /****Пересмотреть абстракции***/
 
     private String name; //Имя
     private ArrayList<IRing> rings; //Будильники
@@ -32,29 +30,29 @@ public class User implements  IUser {
     private ISetting userInterface;
     private String email; //Email пользователя
 
-    private static UserDirector director;
-    private static UserBuilder builder;
+
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     private static DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
 
     private static User user; //Ссылка на себя
 
     private User() { //Новый пользователь
-        userInterface = UserInterface.getInstance();
     }
 
     public static User getInstance() { //Создание пользователя
         if (user == null) { //Если вход не выполнен
             user = new User();
+            UserBuilder builder;
             //Если имеются сохраненные настройки
             if (!preferenceHelper.isEmpty()) { //если файл существует
                 builder = new SavedUserBuilder(user);
-                director = new UserDirector(builder);
             } else {
-                /**регистрация/вход**/
+                // TODO: 11.01.2018 регистрация
+                builder = new DefaultUserBuilder(user);
             }
 
             try {
+                UserDirector director = new UserDirector(builder);
                 director.construct();
                 user = builder.getResult();
             }
@@ -87,7 +85,7 @@ public class User implements  IUser {
         return userInterface;
     }
 
-    public void setUserInterface(UserInterface userInterface) {
+    public void setUserInterface(ISetting userInterface) {
         this.userInterface = userInterface;
     }
 
