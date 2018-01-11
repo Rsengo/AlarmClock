@@ -16,7 +16,7 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        Button button = (Button)findViewById(R.id.button);
+        Button button = (Button)findViewById(R.id.button2);
         EditText editText1 = (EditText)findViewById(R.id.editText);
         EditText editText2 = (EditText)findViewById(R.id.editText2);
         button.setOnClickListener(new View.OnClickListener() {
