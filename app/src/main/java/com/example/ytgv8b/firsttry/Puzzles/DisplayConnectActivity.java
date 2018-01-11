@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ytgv8b.firsttry.R;
-import com.example.ytgv8b.firsttry.Services.RingService;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

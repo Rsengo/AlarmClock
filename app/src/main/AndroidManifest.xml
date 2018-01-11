@@ -22,12 +22,6 @@
         <activity android:name=".Puzzles.DisplayCalculateActivity"/>
         <activity android:name=".Puzzles.DisplayConnectActivity"/>
 
-        <service
-            android:name=".Services.RingService"
-            android:enabled="true"
-            android:exported="true">
-        </service>
-
         <receiver
             android:name=".Services.NotificationReceiver"
             android:enabled="true"
