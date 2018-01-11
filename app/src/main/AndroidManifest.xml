@@ -3,9 +3,7 @@
           package="com.example.ytgv8b.firsttry">
 
     <uses-permission android:name="android.permission.SEND_SMS"/>
-
     <uses-permission android:name="android.permission.VIBRATE"/>
-
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
@@ -21,13 +19,20 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Puzzles.DisplayCalculateActivity" />
-        <activity android:name=".Puzzles.DisplayConnectActivity"></activity>
+        <activity android:name=".Puzzles.DisplayCalculateActivity"/>
+        <activity android:name=".Puzzles.DisplayConnectActivity"/>
+
         <service
             android:name=".Services.RingService"
             android:enabled="true"
             android:exported="true">
         </service>
+
+        <receiver
+            android:name=".Services.NotificationReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
     </application>
 
 </manifest>

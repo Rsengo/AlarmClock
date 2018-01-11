@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.ytgv8b.firsttry.MainActivity;
+import com.example.ytgv8b.firsttry.Services.NotificationReceiver;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -211,8 +212,7 @@ public class Notification extends RealmObject implements INotification {
         onState = true;
 
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        // TODO: 26.12.2017 ресивер на прием
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, NotificationReceiver.class);
         PendingIntent pendingIntent =
                 PendingIntent.getActivity(context, id, intent, 0);
 
@@ -229,8 +229,7 @@ public class Notification extends RealmObject implements INotification {
     @Override
     public void turnOff(Context context) {
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        // TODO: 26.12.2017 ресивер на прием
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, NotificationReceiver.class);
         PendingIntent pendingIntent =
                 PendingIntent.getActivity(context, id, intent, 0);
 
