@@ -20,9 +20,13 @@ public final class PreferenceHelper {
 
     private User user;
     private UserInterface userInterface;
-    private static Editor editor;
-    private static SharedPreferences preferences;
-    private final static String fileName = "USER_PREFERENCES"; //Имя файла на диске
+    private static Editor userEditor;
+    private static SharedPreferences userPreferences;
+    private static Editor startTimeEditor;
+    private static SharedPreferences startTimePreferences;
+    private final static String userFile = "USER_PREFERENCES"; //Имя файла на диске
+    // с польз настройками
+    private final static String startFile = "START_TIME";
 
     private String userEmail;
     private String userName;
@@ -47,17 +51,33 @@ public final class PreferenceHelper {
     }
 
     public static void init(Context context) {
-        preferences = context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
-        editor = preferences.edit();
+        userPreferences = context.getSharedPreferences(userFile, Context.MODE_PRIVATE);
+        userEditor = userPreferences.edit();
+        startTimePreferences = context.getSharedPreferences(startFile, Context.MODE_PRIVATE);
+        startTimeEditor = startTimePreferences.edit();
     }
 
     public boolean isEmpty() {
-        Map<String, ?> values = preferences.getAll();
+        Map<String, ?> values = userPreferences.getAll();
         if (!values.isEmpty())
             return false;
         return true;
     }
 
+    public boolean isFirstStart() {
+        return startTimePreferences.getBoolean("isFirst", true);
+    }
+
+    public void changeStartTime() {
+        if (isFirstStart()) {
+            startTimeEditor.clear();
+            startTimeEditor.putBoolean("isFirst", false);
+        } else {
+            startTimeEditor.clear();
+            startTimeEditor.putBoolean("isFirst", true);
+        }
+        startTimeEditor.apply();
+    }
 
     public void writePreference() {
         user = User.getInstance();
@@ -71,44 +91,44 @@ public final class PreferenceHelper {
 
         clearPreference(); //Очищаем старые записи
 
-        editor.putString("USER_NAME", userName);
-        editor.putString("USER_EMAIL", userEmail);
-        editor.putInt("USER_MONEY", userMoney);
-        editor.putInt("LANGUAGE", language);
-        editor.putInt("FONT_SIZE", fontSize);
-        editor.putLong("COLOR_SCHEME_ID", colorSchemeID);
+        userEditor.putString("USER_NAME", userName);
+        userEditor.putString("USER_EMAIL", userEmail);
+        userEditor.putInt("USER_MONEY", userMoney);
+        userEditor.putInt("LANGUAGE", language);
+        userEditor.putInt("FONT_SIZE", fontSize);
+        userEditor.putLong("COLOR_SCHEME_ID", colorSchemeID);
 
-        editor.apply();
+        userEditor.apply();
     }
 
 
     public void loadPreference() {
-        userName = preferences.getString("USER_NAME", "ss");
-        userEmail = preferences.getString("USER_EMAIL", "hh");
-        userMoney = preferences.getInt("USER_MONEY", 0);
-        language = (byte) preferences.getInt("LANGUAGE", 0);
-        fontSize = (byte) preferences.getInt("FONT_SIZE", 0);
-        colorSchemeID = preferences.getLong("COLOR_SCHEME_ID", 0);
+        userName = userPreferences.getString("USER_NAME", "ss");
+        userEmail = userPreferences.getString("USER_EMAIL", "hh");
+        userMoney = userPreferences.getInt("USER_MONEY", 0);
+        language = (byte) userPreferences.getInt("LANGUAGE", 0);
+        fontSize = (byte) userPreferences.getInt("FONT_SIZE", 0);
+        colorSchemeID = userPreferences.getLong("COLOR_SCHEME_ID", 0);
     }
 
     public void removePreference() {
-        String path = "/data/data/alarmclock/shared_prefs/" + fileName + ".xml";
+        String path = "/data/data/alarmclock/shared_prefs/" + userFile + ".xml";
         File file= new File(path);
         file.delete();
     }
 
     public static void clearPreference() {
-        editor.clear();
+        userEditor.clear();
     }
 
-    //getters and setters
+//getters and setters
 
     public static SharedPreferences getPreferences() {
-        return preferences;
+        return userPreferences;
     }
 
     public static String getFileName() {
-        return fileName;
+        return userFile;
     }
 
     public String getUserEmail() {
@@ -139,3 +159,4 @@ public final class PreferenceHelper {
         this.colorSchemeID = colorSchemeID;
     }
 }
+

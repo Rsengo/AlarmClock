@@ -1,5 +1,7 @@
 package Library.Signals;
 
+import android.content.Context;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -142,7 +144,7 @@ public class Notification extends RealmObject implements INotification{
     }
 
     @Override
-    public void start() {
+    public void start(Context context) {
 
     }
 

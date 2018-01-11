@@ -10,6 +10,7 @@ import Library.Settings.UserInterface;
 import Library.Signals.INotification;
 import Library.Signals.IRing;
 import Library.Signals.ISignal;
+import Library.Signals.Ring;
 import Library.User.UserBuilders.SavedUserBuilder;
 import Library.User.UserBuilders.UserBuilder;
 import Library.User.UserBuilders.UserDirector;
@@ -36,6 +37,7 @@ public class User implements  IUser {
     private static User user; //Ссылка на себя
 
     private User() { //Новый пользователь
+
         userInterface = UserInterface.getInstance();
     }
 

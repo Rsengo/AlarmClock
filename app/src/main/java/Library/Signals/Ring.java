@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.ytgv8b.firsttry.Services.AlarmBroadcast;
 
 import java.util.Date;
 import java.util.UUID;
@@ -181,8 +180,6 @@ public class Ring extends RealmObject implements IRing{
 
     @Override
     public void start(Context context) {
-        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlarmBroadcast.class);
         
     }
 
