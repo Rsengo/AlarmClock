@@ -180,7 +180,7 @@ public class Notification extends RealmObject implements INotification {
     }
 
     @Override
-    public void recountCloseDate() {
+    public void recountSignalTime(Context context) {
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(closeDate);
 
@@ -202,6 +202,8 @@ public class Notification extends RealmObject implements INotification {
         }
 
         closeDate = calendar.getTime();
+
+        turnOn(context);
     }
 
     @Override
@@ -233,5 +235,11 @@ public class Notification extends RealmObject implements INotification {
                 PendingIntent.getActivity(context, id, intent, 0);
 
         alarmManager.cancel(pendingIntent);
+    }
+
+    @Override
+    public long remainingTimeInMillis() {
+        Date tempDate = new Date();
+        return closeDate.getTime() - tempDate.getTime();
     }
 }

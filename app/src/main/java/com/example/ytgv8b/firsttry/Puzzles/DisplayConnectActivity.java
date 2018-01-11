@@ -67,6 +67,7 @@ public class DisplayConnectActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        ring.recountSignalTime(getApplicationContext());
         Intent intent = new Intent(getApplicationContext(), RingService.class);
         stopService(intent);
     }

@@ -1,28 +1,16 @@
 package com.example.ytgv8b.firsttry;
 
-import android.content.Intent;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.ytgv8b.firsttry.Services.RingService;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Hashtable;
-
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.PreferenceHelper;
 import Library.Enums.FontSize;
 import Library.Enums.Language;
-import Library.Messages.IMessage;
 import Library.Messages.SMS;
 import Library.Settings.UserInterface;
-import Library.Signals.IRing;
 import Library.Signals.Ring;
 import Library.User.User;
 

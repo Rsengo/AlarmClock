@@ -174,6 +174,10 @@ public class Ring extends RealmObject implements IRing{
         this.deleteAfterUsing = deleteAfterUsing;
     }
 
+    public void setVibrating(boolean vibrating) {
+        this.vibrating = vibrating;
+    }
+
     @Override
     public void postpound(Context context) {  //отложить
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
@@ -196,9 +200,29 @@ public class Ring extends RealmObject implements IRing{
             message.send();
     }
 
+    private void recountUnrepeatable () {
+        GregorianCalendar tempTime = new GregorianCalendar();
+        GregorianCalendar newSignalTime = new  GregorianCalendar();
+
+        newSignalTime.setTime(signalTime);
+        newSignalTime.set(Calendar.YEAR, tempTime.get(Calendar.YEAR));
+        newSignalTime.set(Calendar.MONTH, tempTime.get(Calendar.MONTH));
+        newSignalTime.set(Calendar.DAY_OF_YEAR, tempTime.get(Calendar.DAY_OF_YEAR));
+
+        if (newSignalTime.before(tempTime)) {
+            newSignalTime.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        signalTime = newSignalTime.getTime();
+    }
+
     @Override
     public void turnOn(Context context) {
         onState = true;
+
+        if (repeatDays == null) {
+            recountUnrepeatable();
+        }
 
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 
@@ -221,8 +245,31 @@ public class Ring extends RealmObject implements IRing{
     }
 
     @Override
-    public void recountCloseDate() {
+    public void recountSignalTime(Context context) {
+        if (repeatDays == null) {
+            setOnState(false);
+            return;
+        }
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(signalTime);
+
+        int tempDay = calendar.get(Calendar.DAY_OF_WEEK);
+        int additionalDays = 0;
+
+        while (repeatDays[tempDay] == 0) {
+            tempDay++;
+            additionalDays++;
+
+            if (tempDay > 6)
+                tempDay = 0;
+        }
+
+        calendar.add(Calendar.DAY_OF_YEAR, additionalDays);
+
+        signalTime = calendar.getTime();
+
+        turnOn(context);
     }
 
     private PendingIntent createIntent(Context context) {
@@ -235,5 +282,11 @@ public class Ring extends RealmObject implements IRing{
                 PendingIntent.getActivity(context, id, intent, 0);
 
         return pendingIntent;
+    }
+
+    @Override
+    public long remainingTimeInMillis() {
+        Date tempTime = new Date();
+        return signalTime.getTime() - tempTime.getTime();
     }
 }
