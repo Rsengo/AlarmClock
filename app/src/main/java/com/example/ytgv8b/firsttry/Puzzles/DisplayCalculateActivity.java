@@ -51,9 +51,8 @@ public class DisplayCalculateActivity extends AppCompatActivity {
 
         _alarmName = ring.getDescription();
 
-        Intent intent = new Intent(getApplicationContext(), RingService.class);
-        // TODO: 11.01.2018 put extras
-        startService(intent);
+        // TODO: 12.01.2018 запуск потоков
+
     }
 
     @Override
