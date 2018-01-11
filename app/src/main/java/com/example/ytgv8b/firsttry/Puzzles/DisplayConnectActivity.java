@@ -41,10 +41,6 @@ public class DisplayConnectActivity extends PuzzleActivity {
 
     private ArrayList<ArrayList<Point>> _arrayPoint = new ArrayList<>();
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
