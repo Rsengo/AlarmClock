@@ -39,7 +39,7 @@ public class User implements  IUser {
     private User() { //Новый пользователь
     }
 
-    public static User getInstance() { //Создание пользователя
+    public static synchronized User getInstance() { //Создание пользователя
         if (user == null) { //Если вход не выполнен
             user = new User();
             UserBuilder builder;

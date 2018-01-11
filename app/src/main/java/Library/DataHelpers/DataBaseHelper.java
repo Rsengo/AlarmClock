@@ -42,12 +42,12 @@ public final class DataBaseHelper {
 
     private DataBaseHelper() {
         user = User.getInstance();
-        userInterface = UserInterface.getInstance();
+        userInterface = (UserInterface) user.getUserInterface();
     }
 
     private static DataBaseHelper dataBaseHelper;
 
-    public static DataBaseHelper getInstance()
+    public static synchronized DataBaseHelper getInstance()
     {
         if (dataBaseHelper == null)
             dataBaseHelper = new DataBaseHelper();
