@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 
 import com.example.ytgv8b.firsttry.MainActivity;
@@ -224,13 +225,17 @@ public class Ring extends RealmObject implements IRing{
             recountUnrepeatable();
         }
 
-        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         PendingIntent pendingIntent = createIntent(context);
 
         long signalTime = this.signalTime.getTime();
         // TODO: 26.12.2017 время автовыкл.
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, signalTime, pendingIntent);
+        try {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, signalTime, pendingIntent);
+        } catch (NullPointerException ex) {
+            Log.e("Ring turn on", ex.getMessage());
+        }
     }
 
     @Override

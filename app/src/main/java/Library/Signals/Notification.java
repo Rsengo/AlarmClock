@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.example.ytgv8b.firsttry.MainActivity;
 import com.example.ytgv8b.firsttry.Services.NotificationReceiver;
@@ -218,11 +219,15 @@ public class Notification extends RealmObject implements INotification {
 
         long signalTime = this.closeDate.getTime();
 
-        if (repeatSignalInterval != 0)
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, signalTime,
-                this.repeatSignalInterval, pendingIntent);
-        else
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, signalTime, pendingIntent);
+        try {
+            if (repeatSignalInterval != 0)
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, signalTime,
+                        this.repeatSignalInterval, pendingIntent);
+            else
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, signalTime, pendingIntent);
+        } catch (NullPointerException ex) {
+            Log.e("Notification turn on", ex.getMessage());
+        }
 
     }
 
