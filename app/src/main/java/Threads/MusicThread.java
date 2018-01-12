@@ -15,7 +15,6 @@ import Library.Signals.Ring;
  */
 
 public class MusicThread extends Thread {
-    // TODO: 13.01.2018 music
     IRing signal;
     Context context;
 
@@ -31,14 +30,14 @@ public class MusicThread extends Thread {
 
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
-        int melody = signal.getMelody();
+        int melodyID = signal.getMelody();
         float volume = audioManager.getStreamVolume(AudioManager.STREAM_RING);
 
         AudioAttributes.Builder audioAttributesBuilder = new AudioAttributes.Builder();
         audioAttributesBuilder.setUsage(AudioAttributes.USAGE_ALARM)
                 .setLegacyStreamType(AudioManager.STREAM_RING)
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                .setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED);
+                .setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED); //воспроизв. гарант. системой
         AudioAttributes audioAttributes = audioAttributesBuilder.build();
 
         SoundPool.Builder soundPullBuilder = new SoundPool.Builder();
@@ -46,7 +45,15 @@ public class MusicThread extends Thread {
                 .setAudioAttributes(audioAttributes);
         SoundPool soundPool = soundPullBuilder.build();
 
-        
+        // TODO: 13.01.2018 загрузка мелодии
+        // TODO: 13.01.2018 audio focus
+
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                soundPool.play(0, volume, volume, 1, -1, 1);
+            }
+        });
     }
 
     @Override

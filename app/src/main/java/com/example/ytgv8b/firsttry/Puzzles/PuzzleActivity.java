@@ -28,6 +28,7 @@ public abstract class PuzzleActivity extends AppCompatActivity {
     protected VibrationThread vibrationThread;
     protected TimerTask timerTask;
     protected Timer timer;
+    private  DataBaseHelper dataBaseHelper;
 
     @Override
     protected void onStart() {
@@ -36,7 +37,7 @@ public abstract class PuzzleActivity extends AppCompatActivity {
         DataBaseHelper.init(this);
         PreferenceHelper.init(this);
 
-        DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
+        dataBaseHelper = DataBaseHelper.getInstance();
 
         Intent starterIntent = getIntent();
         int ringId = starterIntent.getIntExtra("id", -1);
@@ -62,5 +63,9 @@ public abstract class PuzzleActivity extends AppCompatActivity {
 
         musicThread.interrupt();
         vibrationThread.interrupt();
+
+        if (ring.isDeleteAfterUsing()) {
+            dataBaseHelper.deleteData(ring);
+        }
     }
 }

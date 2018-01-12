@@ -47,7 +47,6 @@ public class Notification extends RealmObject implements INotification {
     private long repeatSignalInterval = AlarmManager.INTERVAL_DAY; //интервал повтора
     // (Константа AlarmManager)
     private String description = null; //Описание
-    private boolean deleteAfterUsing = false; //Удалить после использования
     @Required
     private String userEmail; //Почта пользователя-владельца
 
@@ -125,14 +124,6 @@ public class Notification extends RealmObject implements INotification {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
-    }
-
-    public boolean isDeleteAfterUsing() {
-        return deleteAfterUsing;
-    }
-
-    public void setDeleteAfterUsing(boolean deleteAfterUsing) {
-        this.deleteAfterUsing = deleteAfterUsing;
     }
 
     @Override

@@ -71,11 +71,6 @@ public class NotificationBuilder extends SignalFactory {
         return this;
     }
 
-    @Override
-    public NotificationBuilder setDeleteAfterUsing(boolean deleteAfterUsing) {
-        signal.setDeleteAfterUsing(deleteAfterUsing);
-        return this;
-    }
 
     @Override
     public ISignal build() {

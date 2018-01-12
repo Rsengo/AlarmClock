@@ -50,18 +50,16 @@ public class RingBuilder extends SignalFactory {
     }
 
     @Override
-    public RingBuilder setDeleteAfterUsing(boolean deleteAfterUsing) {
-        signal.setDeleteAfterUsing(deleteAfterUsing);
-        return this;
-    }
-
-    @Override
     protected RingBuilder setUserEmail() {
         String userEmail = User.getInstance().getEmail();
         signal.setUserEmail(userEmail);
         return this;
     }
 
+    public RingBuilder setDeleteAfterUsing(boolean deleteAfterUsing) {
+        signal.setDeleteAfterUsing(deleteAfterUsing);
+        return this;
+    }
 
     public  RingBuilder setMessage(String messageFactory) {
         if (messageFactory != null) {
