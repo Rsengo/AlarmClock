@@ -16,65 +16,69 @@ import Library.User.User;
 
 public class NotificationBuilder extends SignalFactory {
 
-    private Notification signal;
+    private Notification signal = new Notification();
 
     @Override
-    public void createSignal() {
-        signal = new Notification();
-    }
-
-    @Override
-    public void setId() {
+    public NotificationBuilder setId() {
         signal.setId(Notification.getNextId());
+        return this;
     }
 
 
     @Override
-    public void setUserEmail() {
+    public NotificationBuilder setUserEmail() {
         String userEmail = User.getInstance().getEmail();
         signal.setUserEmail(userEmail);
+        return this;
     }
 
-    public void setPriority(byte priority) {
+    public NotificationBuilder setPriority(byte priority) {
         signal.setPriority(priority);
+        return this;
     }
 
-    public void setGeneralPeriodicity(byte generalPeriodicity) {
+    public NotificationBuilder setGeneralPeriodicity(byte generalPeriodicity) {
         signal.setGeneralPeriodicity(generalPeriodicity);
+        return this;
     }
 
-    public void setSpecificPeriodicity(byte specificPeriodicity) {
+    public NotificationBuilder setSpecificPeriodicity(byte specificPeriodicity) {
         signal.setSpecificPeriodicity(specificPeriodicity);
+        return this;
     }
 
 
-    public void setName(String name) {
+    public NotificationBuilder setName(String name) {
         signal.setName(name);
+        return this;
     }
 
     @Override
-    public void setSignalTime(Date signalTime) {
+    public NotificationBuilder setSignalTime(Date signalTime) {
         signal.setSignalTime(signalTime);
+        return this;
     }
 
     @Override
-    public void setRepeatSignalInterval(long repeatSignalInterval) {
+    public NotificationBuilder setRepeatSignalInterval(long repeatSignalInterval) {
         signal.setRepeatSignalInterval(repeatSignalInterval);
+        return this;
     }
 
     @Override
-    public void setDescription(String description) {
+    public NotificationBuilder setDescription(String description) {
         signal.setDescription(description);
+        return this;
     }
 
     @Override
-    public void setDeleteAfterUsing(boolean deleteAfterUsing) {
+    public NotificationBuilder setDeleteAfterUsing(boolean deleteAfterUsing) {
         signal.setDeleteAfterUsing(deleteAfterUsing);
+        return this;
     }
 
     @Override
     public ISignal build() {
-        createSignal();
         setId();
         setUserEmail();
         return signal;

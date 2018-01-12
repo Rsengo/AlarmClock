@@ -15,12 +15,11 @@ import io.realm.annotations.Required;
 
 public abstract class SignalFactory {
 
-    public abstract void createSignal();
-    protected abstract void setId();
-    public abstract void setSignalTime(Date signalTime);
-    public abstract void setRepeatSignalInterval(long repeatSignalInterval);
-    public abstract void setDescription(String description);
-    public abstract void setDeleteAfterUsing(boolean deleteAfterUsing);
-    protected abstract void setUserEmail();
+    protected abstract SignalFactory setId();
+    public abstract SignalFactory setSignalTime(Date signalTime);
+    public abstract SignalFactory setRepeatSignalInterval(long repeatSignalInterval);
+    public abstract SignalFactory setDescription(String description);
+    public abstract SignalFactory setDeleteAfterUsing(boolean deleteAfterUsing);
+    protected abstract SignalFactory setUserEmail();
     public abstract ISignal build();
 }

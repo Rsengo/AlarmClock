@@ -300,8 +300,8 @@ public class Ring extends RealmObject implements IRing{
         return signalTime.getTime() - tempTime.getTime();
     }
 
-    @Override
-    public SignalFactory builder() {
+    @NonNull
+    public static SignalFactory builder() {
         return new RingBuilder();
     }
 }

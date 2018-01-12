@@ -23,46 +23,47 @@ import Library.User.User;
 
 public class RingBuilder extends SignalFactory {
 
-    private Ring signal;
+    private Ring signal = new Ring();
 
     @Override
-    public void createSignal() {
-        signal = new Ring();
-    }
-
-    @Override
-    protected void setId() {
+    protected RingBuilder setId() {
         signal.setId(Ring.getNextId());
+        return this;
     }
 
     @Override
-    public void setSignalTime(Date signalTime) {
+    public RingBuilder setSignalTime(Date signalTime) {
         signal.setSignalTime(signalTime);
+        return this;
     }
 
     @Override
-    public void setRepeatSignalInterval(long repeatSignalInterval) {
+    public RingBuilder setRepeatSignalInterval(long repeatSignalInterval) {
         signal.setRepeatSignalInterval(repeatSignalInterval);
+        return this;
     }
 
     @Override
-    public void setDescription(String description) {
+    public RingBuilder setDescription(String description) {
         signal.setDescription(description);
+        return this;
     }
 
     @Override
-    public void setDeleteAfterUsing(boolean deleteAfterUsing) {
+    public RingBuilder setDeleteAfterUsing(boolean deleteAfterUsing) {
         signal.setDeleteAfterUsing(deleteAfterUsing);
+        return this;
     }
 
     @Override
-    protected void setUserEmail() {
+    protected RingBuilder setUserEmail() {
         String userEmail = User.getInstance().getEmail();
         signal.setUserEmail(userEmail);
+        return this;
     }
 
 
-    public  void setMessage(String messageFactory) {
+    public  RingBuilder setMessage(String messageFactory) {
         if (messageFactory != null) {
             MessageFactory signalFactory = MessageFactories.getFactory(messageFactory, signal);
             IMessage message = signalFactory.create();
@@ -70,42 +71,50 @@ public class RingBuilder extends SignalFactory {
         } else {
             signal.setMessage(null);
         }
+
+        return this;
     }
 
-    public void setPuzzle(byte puzzle) {
+    public RingBuilder setPuzzle(byte puzzle) {
         signal.setPuzzle(puzzle);
+        return this;
     }
 
-    public void setVibrating(boolean vibration) {
+    public RingBuilder setVibrating(boolean vibration) {
         signal.setVibration(vibration);
+        return this;
     }
 
-    public void setMelody(int melody) {
+    public RingBuilder setMelody(int melody) {
         signal.setMelody(melody);
+        return this;
     }
 
-    public void setMelodyVolume(float melodyVolume) {
+    public RingBuilder setMelodyVolume(float melodyVolume) {
         signal.setMelodyVolume(melodyVolume);
+        return this;
     }
 
-    public void setTurnOffTime(long turnOffTime) {
+    public RingBuilder setTurnOffTime(long turnOffTime) {
         signal.setTurnOffTime(turnOffTime);
+        return this;
     }
 
 
-    public void setRepeatDays(byte[] repeatDays) {
+    public RingBuilder setRepeatDays(byte[] repeatDays) {
         signal.setRepeatDays(repeatDays);
+        return this;
     }
 
-    public void setOnState(boolean onState, Context context) {
+    public RingBuilder setOnState(boolean onState, Context context) {
         if (onState)
             signal.turnOn(context);
         else signal.setOnState(false);
+        return this;
     }
 
     @Override
     public ISignal build() {
-        createSignal();
         setId();
         setUserEmail();
         return signal;

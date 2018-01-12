@@ -4,6 +4,8 @@ import android.content.Context;
 import android.media.RingtoneManager;
 
 import Library.Signals.IRing;
+import Library.Signals.Notification;
+import Library.Signals.Ring;
 
 /**
  * Created by ytgv8b on 12.01.2018.

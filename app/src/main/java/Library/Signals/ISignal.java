@@ -16,5 +16,4 @@ public interface ISignal extends IRealmModelWithID {
     void recountSignalTime(Context context);
     String getDescription();
     long remainingTimeInMillis();
-    SignalFactory builder();
 }

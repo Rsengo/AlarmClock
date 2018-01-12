@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.ytgv8b.firsttry.MainActivity;
@@ -214,8 +215,8 @@ public class Notification extends RealmObject implements INotification {
         return pendingIntent;
     }
 
-    @Override
-    public SignalFactory builder() {
+    @NonNull
+    public static SignalFactory builder() {
         return new NotificationBuilder();
     }
 }
