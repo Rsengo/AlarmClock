@@ -29,8 +29,10 @@ public class MusicThread extends Thread {
     public void run() {
         super.run();
 
+        AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+
         int melody = signal.getMelody();
-        float volume = signal.getMelodyVolume();
+        float volume = audioManager.getStreamVolume(AudioManager.STREAM_RING);
 
         AudioAttributes.Builder audioAttributesBuilder = new AudioAttributes.Builder();
         audioAttributesBuilder.setUsage(AudioAttributes.USAGE_ALARM)
@@ -44,7 +46,7 @@ public class MusicThread extends Thread {
                 .setAudioAttributes(audioAttributes);
         SoundPool soundPool = soundPullBuilder.build();
 
-
+        
     }
 
     @Override

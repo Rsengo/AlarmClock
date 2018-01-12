@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.os.Bundle;
 
-import com.example.ytgv8b.firsttry.R;
+
 
 import java.util.Date;
 
@@ -87,11 +87,6 @@ public class RingBuilder extends SignalFactory {
 
     public RingBuilder setMelody(int melody) {
         signal.setMelody(melody);
-        return this;
-    }
-
-    public RingBuilder setMelodyVolume(float melodyVolume) {
-        signal.setMelodyVolume(melodyVolume);
         return this;
     }
 

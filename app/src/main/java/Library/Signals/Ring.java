@@ -43,7 +43,6 @@ public class Ring extends RealmObject implements IRing{
     @Required
     private int melody; //мелодия
     // TODO: 13.01.2018 phone volume
-    private float melodyVolume = 0.5f; //громкость
     private long turnOffTime = 300000L; //Время автовыключения в мс (default = 5 мин)
     private String description = "Будильник"; //Описание
     private boolean onState = true; //Вкл/Выкл звукового сигнала
@@ -55,6 +54,7 @@ public class Ring extends RealmObject implements IRing{
 
     @Ignore
     private IMessage message = null; //СМС
+
 
     public static int getNextId() {
         DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
@@ -131,15 +131,6 @@ public class Ring extends RealmObject implements IRing{
 
     public void setMelody(int melody) {
         this.melody = melody;
-    }
-
-    @Override
-    public float getMelodyVolume() {
-        return melodyVolume;
-    }
-
-    public void setMelodyVolume(float melodyVolume) {
-        this.melodyVolume = melodyVolume;
     }
 
     @Override

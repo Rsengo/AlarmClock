@@ -10,6 +10,5 @@ public interface IRing extends ISignal {
     void postpound(Context context);
     void sendMessage();
     int getMelody();
-    float getMelodyVolume();
     long getTurnOffTime();
 }
