@@ -10,6 +10,6 @@ import io.realm.annotations.RealmClass;
 
 public class Priority{
     public static final byte LOW = 0;
-    public static final byte MID = 1;
+    public static final byte DEFAULT = 1;
     public static final byte HIGH = 2;
 }

@@ -13,20 +13,14 @@ import io.realm.annotations.Required;
  * Created by ytgv8b on 21.10.2017.
  */
 
-abstract class SignalFactory {
-    protected AppCompatActivity context;
-
-    public SignalFactory(AppCompatActivity context)
-    {
-        this.context = context;
-    }
+public abstract class SignalFactory {
 
     public abstract void createSignal();
-    public abstract void setId();
-    public abstract void setSignalTime();
-    public abstract void setRepeatSignalInterval();
-    public abstract void setDescription();
-    public abstract void setDeleteAfterUsing();
-    public abstract void setUserEmail();
-    public abstract ISignal create();
+    protected abstract void setId();
+    public abstract void setSignalTime(Date signalTime);
+    public abstract void setRepeatSignalInterval(long repeatSignalInterval);
+    public abstract void setDescription(String description);
+    public abstract void setDeleteAfterUsing(boolean deleteAfterUsing);
+    protected abstract void setUserEmail();
+    public abstract ISignal build();
 }

@@ -9,6 +9,7 @@ import Library.Signals.IRing;
  */
 
 public class MusicThread extends Thread {
+    // TODO: 13.01.2018 music
     IRing signal;
     Context context;
 

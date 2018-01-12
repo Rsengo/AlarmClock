@@ -4,7 +4,9 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.util.Log;
+import Library.Signals.SignalBuilders.*;
 
 
 import com.example.ytgv8b.firsttry.MainActivity;
@@ -32,23 +34,27 @@ public class Ring extends RealmObject implements IRing{
     @PrimaryKey
     private int id;
 
-    private byte puzzle; //головоломка
-    private Date signalTime; //Время запуска
-    private byte repeatSignalInterval; //интервал повторного запуска после откладывания в мин
-    private boolean vibrating; //вибрация(Вибрирующий)
+    private byte puzzle = PuzzleFactory.DEFAULT; //головоломка
+    @Required
+    private Date signalTime = null; //Время запуска
+    private long repeatSignalInterval = 600000L; //интервал повторного запуска после откладывания
+    private boolean vibrating = true; //вибрация(Вибрирующий)
+    // TODO: 13.01.2018 default melody
+    @Required
     private int melody; //мелодия
-    private float melodyVolume; //громкость
-    private long turnOffTime; //Время автовыключения звукового сигнала в мс
-    private String description; //Описание
-    private boolean onState; //Вкл/Выкл звукового сигнала
-    private boolean deleteAfterUsing; //удалить после срабатывания
-    private byte[] repeatDays; //Дни повтора
+    // TODO: 13.01.2018 phone volume
+    private float melodyVolume = 0.5f; //громкость
+    private long turnOffTime = 18000000L; //Время автовыключения в мс (default = 30 мин)
+    private String description = "Будильник"; //Описание
+    private boolean onState = true; //Вкл/Выкл звукового сигнала
+    private boolean deleteAfterUsing = false; //удалить после срабатывания
+    private byte[] repeatDays = null; //Дни повтора
 
     @Required
     private String userEmail; //Почта пользователя-владельца
 
     @Ignore
-    private IMessage message; //СМС
+    private IMessage message = null; //СМС
 
     public static int getNextId() {
         DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
@@ -102,11 +108,11 @@ public class Ring extends RealmObject implements IRing{
         this.signalTime = signalTime;
     }
 
-    public byte getRepeatSignalInterval() {
+    public long getRepeatSignalInterval() {
         return repeatSignalInterval;
     }
 
-    public void setRepeatSignalInterval(byte repeatSignalInterval) {
+    public void setRepeatSignalInterval(long repeatSignalInterval) {
         this.repeatSignalInterval = repeatSignalInterval;
     }
 
@@ -148,7 +154,7 @@ public class Ring extends RealmObject implements IRing{
         return onState;
     }
 
-    private void setOnState(boolean onState) {
+    public void setOnState(boolean onState) {
         this.onState = onState;
     }
 
@@ -177,10 +183,6 @@ public class Ring extends RealmObject implements IRing{
         this.deleteAfterUsing = deleteAfterUsing;
     }
 
-    public void setVibrating(boolean vibrating) {
-        this.vibrating = vibrating;
-    }
-
     @Override
     public void postpound(Context context) {  //отложить
 
@@ -191,7 +193,7 @@ public class Ring extends RealmObject implements IRing{
         PendingIntent pendingIntent = createIntent(context);
 
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.add(Calendar.MINUTE, repeatSignalInterval);
+        calendar.add(Calendar.MILLISECOND, (int)repeatSignalInterval);
         Date closeDate = calendar.getTime();
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, closeDate.getTime(), pendingIntent);
@@ -296,5 +298,10 @@ public class Ring extends RealmObject implements IRing{
     public long remainingTimeInMillis() {
         Date tempTime = new Date();
         return signalTime.getTime() - tempTime.getTime();
+    }
+
+    @Override
+    public SignalFactory builder() {
+        return new RingBuilder();
     }
 }

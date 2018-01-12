@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import com.example.ytgv8b.firsttry.R;
 
+import java.util.Date;
+
 import Library.Messages.IMessage;
 import Library.Messages.MessageFactory.MessageFactories;
 import Library.Messages.MessageFactory.MessageFactory;
@@ -19,15 +21,9 @@ import Library.User.User;
  * Created by ytgv8b on 21.10.2017.
  */
 
-public class RingFactory extends SignalFactory {
+public class RingBuilder extends SignalFactory {
 
     private Ring signal;
-    private String messageFactory;
-
-    public RingFactory(String messageFactory, AppCompatActivity context) {
-        super(context);
-        this.messageFactory = messageFactory;
-    }
 
     @Override
     public void createSignal() {
@@ -35,38 +31,38 @@ public class RingFactory extends SignalFactory {
     }
 
     @Override
-    public void setId() {
+    protected void setId() {
         signal.setId(Ring.getNextId());
     }
 
     @Override
-    public void setSignalTime() {
-
+    public void setSignalTime(Date signalTime) {
+        signal.setSignalTime(signalTime);
     }
 
     @Override
-    public void setRepeatSignalInterval() {
-
+    public void setRepeatSignalInterval(long repeatSignalInterval) {
+        signal.setRepeatSignalInterval(repeatSignalInterval);
     }
 
     @Override
-    public void setDescription() {
-
+    public void setDescription(String description) {
+        signal.setDescription(description);
     }
 
     @Override
-    public void setDeleteAfterUsing() {
-
+    public void setDeleteAfterUsing(boolean deleteAfterUsing) {
+        signal.setDeleteAfterUsing(deleteAfterUsing);
     }
 
     @Override
-    public void setUserEmail() {
+    protected void setUserEmail() {
         String userEmail = User.getInstance().getEmail();
         signal.setUserEmail(userEmail);
     }
 
 
-    public  void setMessage() {
+    public  void setMessage(String messageFactory) {
         if (messageFactory != null) {
             MessageFactory signalFactory = MessageFactories.getFactory(messageFactory, signal);
             IMessage message = signalFactory.create();
@@ -76,50 +72,42 @@ public class RingFactory extends SignalFactory {
         }
     }
 
-    public void setPuzzle() {
-
+    public void setPuzzle(byte puzzle) {
+        signal.setPuzzle(puzzle);
     }
 
-    public void setVibrating() {
-
+    public void setVibrating(boolean vibration) {
+        signal.setVibration(vibration);
     }
 
-    public void setMelody() {
-
+    public void setMelody(int melody) {
+        signal.setMelody(melody);
     }
 
-    public void setMelodyVolume() {
-
+    public void setMelodyVolume(float melodyVolume) {
+        signal.setMelodyVolume(melodyVolume);
     }
 
-    public void setTurnOffTime() {
-
+    public void setTurnOffTime(long turnOffTime) {
+        signal.setTurnOffTime(turnOffTime);
     }
 
-    public void setOnState() {
 
+    public void setRepeatDays(byte[] repeatDays) {
+        signal.setRepeatDays(repeatDays);
     }
 
-    public void setRepeatDays() {
-
+    public void setOnState(boolean onState, Context context) {
+        if (onState)
+            signal.turnOn(context);
+        else signal.setOnState(false);
     }
 
     @Override
-    public ISignal create() {
+    public ISignal build() {
         createSignal();
         setId();
-        setRepeatSignalInterval();
-        setVibrating();
-        setMelody();
-        setMelodyVolume();
-        setTurnOffTime();
-        setDescription();
-        setOnState();
-        setPuzzle();
-        setRepeatDays();
-        setDeleteAfterUsing();
         setUserEmail();
-        setMessage();
         return signal;
     }
 }

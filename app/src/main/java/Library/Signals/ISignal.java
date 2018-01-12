@@ -3,6 +3,7 @@ package Library.Signals;
 import android.content.Context;
 
 import Library.IRealmModelWithID;
+import Library.Signals.SignalBuilders.SignalFactory;
 import io.realm.RealmModel;
 
 /**
@@ -15,4 +16,5 @@ public interface ISignal extends IRealmModelWithID {
     void recountSignalTime(Context context);
     String getDescription();
     long remainingTimeInMillis();
+    SignalFactory builder();
 }

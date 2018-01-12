@@ -15,8 +15,12 @@ import java.util.GregorianCalendar;
 
 import Library.DataHelpers.DataBaseHelper;
 import Library.Enums.GeneralPereodicity;
+import Library.Enums.Priority;
 import Library.IRealmModelWithID;
 import Library.PuzzlesThings.PuzzleFactory;
+import Library.Signals.SignalBuilders.NotificationBuilder;
+import Library.Signals.SignalBuilders.RingBuilder;
+import Library.Signals.SignalBuilders.SignalFactory;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -32,15 +36,17 @@ public class Notification extends RealmObject implements INotification {
     @PrimaryKey
     private int id;
     @Required
-    private String name; //Имя
-    private byte generalPeriodicity; //Общая переодичность
-    private byte specificPeriodicity; //Подробная
-    private Date closeDate; //Ближайшая дата
-    private byte priority; //Приоритет
-    private Date signalTime; //Время запуска
-    private long repeatSignalInterval; //интервал повтора (Константа AlarmManager)
-    private String description; //Описание
-    private boolean deleteAfterUsing; //Удалить после использования
+    private String name = ""; //Имя
+    private byte generalPeriodicity = GeneralPereodicity.NOREPEAT; //Общая переодичность
+    private byte specificPeriodicity = 0; //Подробная
+    private Date closeDate = null; //Ближайшая дата
+    private byte priority = Priority.DEFAULT; //Приоритет
+    @Required
+    private Date signalTime = new Date(); //Время запуска
+    private long repeatSignalInterval = AlarmManager.INTERVAL_DAY; //интервал повтора
+    // (Константа AlarmManager)
+    private String description = null; //Описание
+    private boolean deleteAfterUsing = false; //Удалить после использования
     @Required
     private String userEmail; //Почта пользователя-владельца
 
@@ -206,5 +212,10 @@ public class Notification extends RealmObject implements INotification {
                 PendingIntent.getActivity(context, id, intent, 0);
 
         return pendingIntent;
+    }
+
+    @Override
+    public SignalFactory builder() {
+        return new NotificationBuilder();
     }
 }
