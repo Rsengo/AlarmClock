@@ -56,9 +56,6 @@ public class Ring extends RealmObject implements IRing{
     @Ignore
     private IMessage message = null; //СМС
 
-    @Ignore
-    public static SignalFactory Builder = new RingBuilder();
-
     public static int getNextId() {
         DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
         return dataBaseHelper.getNextId(Ring.class);
@@ -302,5 +299,10 @@ public class Ring extends RealmObject implements IRing{
     public long remainingTimeInMillis() {
         Date tempTime = new Date();
         return signalTime.getTime() - tempTime.getTime();
+    }
+
+    @NonNull
+    public static SignalFactory builder() {
+        return new RingBuilder();
     }
 }

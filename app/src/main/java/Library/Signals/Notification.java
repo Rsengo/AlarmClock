@@ -23,7 +23,6 @@ import Library.Signals.SignalBuilders.NotificationBuilder;
 import Library.Signals.SignalBuilders.RingBuilder;
 import Library.Signals.SignalBuilders.SignalFactory;
 import io.realm.RealmObject;
-import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
@@ -51,9 +50,6 @@ public class Notification extends RealmObject implements INotification {
     private boolean deleteAfterUsing = false; //Удалить после использования
     @Required
     private String userEmail; //Почта пользователя-владельца
-
-    @Ignore
-    public static SignalFactory Builder = new NotificationBuilder();
 
     public static int getNextId() {
         DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
