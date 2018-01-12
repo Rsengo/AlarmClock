@@ -15,6 +15,7 @@ import Threads.VibrationThread;
 
 public abstract class PuzzleActivity extends AppCompatActivity {
     // TODO: 26.12.2017 время автовыкл.
+    // TODO: 12.01.2018 message send after postpound
     public PuzzleActivity() {
         super();
     }

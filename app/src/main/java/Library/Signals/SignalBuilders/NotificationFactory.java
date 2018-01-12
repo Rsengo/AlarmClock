@@ -36,32 +36,7 @@ public class NotificationFactory extends SignalFactory {
     }
 
     @Override
-    public void setVibrating() {
-
-    }
-
-    @Override
-    public void setMelody() {
-
-    }
-
-    @Override
-    public void setMelodyVolume() {
-
-    }
-
-    @Override
-    public void setTurnOffTime() {
-
-    }
-
-    @Override
     public void setDescription() {
-
-    }
-
-    @Override
-    public void setOnState() {
 
     }
 
@@ -71,9 +46,11 @@ public class NotificationFactory extends SignalFactory {
         signal.setUserEmail(userEmail);
     }
 
-    public void setDate() {
+    @Override
+    public void setSignalTime() {
 
     }
+
 
     public void setPriority() {
 
@@ -92,24 +69,23 @@ public class NotificationFactory extends SignalFactory {
 
     }
 
+    public void setName() {
+
+    }
+
     @Override
     public ISignal create() {
         createSignal();
         setId();
-        setRepeatSignalInterval();
-        setVibrating();
-        setMelody();
-        setMelodyVolume();
-        setTurnOffTime();
-        setTurnOffTime();
-        setDescription();
-        setOnState();
-        setDeleteAfterUsing();
-        setUserEmail();
-        setDate();
-        setPriority();
+        setName();
         setGeneralPeriodicity();
         setSpecificPeriodicity();
+        setPriority();
+        setSignalTime();
+        setRepeatSignalInterval();
+        setDescription();
+        setDeleteAfterUsing();
+        setUserEmail();
         return signal;
     }
 }

@@ -31,7 +31,7 @@ public class RingFactory extends SignalFactory {
 
     @Override
     public void createSignal() {
-
+        signal = new Ring();
     }
 
     @Override
@@ -66,7 +66,7 @@ public class RingFactory extends SignalFactory {
     }
 
 
-    /*public  void setMessage() {
+    public  void setMessage() {
         if (messageFactory != null) {
             MessageFactory signalFactory = MessageFactories.getFactory(messageFactory, signal);
             IMessage message = signalFactory.create();
@@ -74,8 +74,35 @@ public class RingFactory extends SignalFactory {
         } else {
             signal.setMessage(null);
         }
-    }*/
+    }
 
+    public void setPuzzle() {
+
+    }
+
+    public void setVibrating() {
+
+    }
+
+    public void setMelody() {
+
+    }
+
+    public void setMelodyVolume() {
+
+    }
+
+    public void setTurnOffTime() {
+
+    }
+
+    public void setOnState() {
+
+    }
+
+    public void setRepeatDays() {
+
+    }
 
     @Override
     public ISignal create() {
@@ -92,6 +119,7 @@ public class RingFactory extends SignalFactory {
         setRepeatDays();
         setDeleteAfterUsing();
         setUserEmail();
+        setMessage();
         return signal;
     }
 }
