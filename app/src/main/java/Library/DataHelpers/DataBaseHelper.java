@@ -135,12 +135,13 @@ public final class DataBaseHelper {
 
     public IRing getRing(int id)
     {
-        IRing ring = null;
+        Ring ring = null;
 
         try (Realm realm = Realm.getDefaultInstance()) {
             try {
                 ring = realm.copyFromRealm(realm.where(Ring.class)
                         .equalTo("id", id).findFirst());
+                ring.setMessage(loadMesssage(ring.getId()));
             } catch (Exception ex) {
                 Log.d("Find ring by id", "rind not found");
             }
@@ -148,6 +149,23 @@ public final class DataBaseHelper {
         }
 
         return ring;
+    }
+
+    public INotification getNotification(int id)
+    {
+        INotification notification = null;
+
+        try (Realm realm = Realm.getDefaultInstance()) {
+            try {
+                notification = realm.copyFromRealm(realm.where(Notification.class)
+                        .equalTo("id", id).findFirst());
+            } catch (Exception ex) {
+                Log.d("Find ring by id", "rind not found");
+            }
+
+        }
+
+        return notification;
     }
 
     public <T extends RealmModel> void saveData(T data) {

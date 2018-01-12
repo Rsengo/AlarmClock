@@ -20,4 +20,10 @@ public class VibrationThread extends Thread {
     public void run() {
         vibrator.vibrate(vibrationDuration, 0);
     }
+
+    @Override
+    public void interrupt() {
+        super.interrupt();
+        vibrator.cancel();
+    }
 }

@@ -111,10 +111,8 @@ public class RingFactory extends SignalFactory {
         setMelody();
         setMelodyVolume();
         setTurnOffTime();
-        setTurnOffTime();
         setDescription();
         setOnState();
-        setTurnOffTime();
         setPuzzle();
         setRepeatDays();
         setDeleteAfterUsing();

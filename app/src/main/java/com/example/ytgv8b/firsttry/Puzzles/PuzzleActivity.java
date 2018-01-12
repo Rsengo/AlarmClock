@@ -6,18 +6,23 @@ import android.support.v7.app.AppCompatActivity;
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.PreferenceHelper;
 import Library.Signals.IRing;
+import Threads.MusicThread;
+import Threads.VibrationThread;
 
 /**
  * Created by ytgv8b on 12.01.2018.
  */
 
 public abstract class PuzzleActivity extends AppCompatActivity {
+    // TODO: 26.12.2017 время автовыкл.
     public PuzzleActivity() {
         super();
     }
 
     protected String _alarmName = "";
     protected IRing ring;
+    MusicThread musicThread;
+    VibrationThread vibrationThread;
 
     @Override
     protected void onStart() {
@@ -29,18 +34,20 @@ public abstract class PuzzleActivity extends AppCompatActivity {
         DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
 
         Intent starterIntent = getIntent();
-        int ringId = starterIntent.getIntExtra("id", 0);
+        int ringId = starterIntent.getIntExtra("id", -1);
         ring = dataBaseHelper.getRing(ringId);
 
         _alarmName = ring.getDescription();
 
-        // TODO: 12.01.2018 запуск потоков
+        musicThread = new MusicThread(this, ring);
+        vibrationThread = new VibrationThread(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        // TODO: 12.01.2018 закрыть потоки
+        musicThread.interrupt();
+        vibrationThread.interrupt();
     }
 }

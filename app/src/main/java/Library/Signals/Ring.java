@@ -37,7 +37,7 @@ public class Ring extends RealmObject implements IRing{
     private byte repeatSignalInterval; //интервал повторного запуска после откладывания в мин
     private boolean vibrating; //вибрация(Вибрирующий)
     private int melody; //мелодия
-    private byte melodyVolume; //громкость
+    private float melodyVolume; //громкость
     private Date turnOffTime; //Время автовыключения звукового сигнала
     private String description; //Описание
     private boolean onState; //Вкл/Выкл звукового сигнала
@@ -118,6 +118,7 @@ public class Ring extends RealmObject implements IRing{
         this.vibrating = vibrating;
     }
 
+    @Override
     public int getMelody() {
         return melody;
     }
@@ -126,11 +127,12 @@ public class Ring extends RealmObject implements IRing{
         this.melody = melody;
     }
 
-    public byte getMelodyVolume() {
+    @Override
+    public float getMelodyVolume() {
         return melodyVolume;
     }
 
-    public void setMelodyVolume(byte melodyVolume) {
+    public void setMelodyVolume(float melodyVolume) {
         this.melodyVolume = melodyVolume;
     }
 
@@ -185,8 +187,6 @@ public class Ring extends RealmObject implements IRing{
 
         PendingIntent pendingIntent = createIntent(context);
 
-        // TODO: 26.12.2017 время автовыкл.
-
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.add(Calendar.MINUTE, repeatSignalInterval);
         Date closeDate = calendar.getTime();
@@ -230,7 +230,7 @@ public class Ring extends RealmObject implements IRing{
         PendingIntent pendingIntent = createIntent(context);
 
         long signalTime = this.signalTime.getTime();
-        // TODO: 26.12.2017 время автовыкл.
+
         try {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, signalTime, pendingIntent);
         } catch (NullPointerException ex) {

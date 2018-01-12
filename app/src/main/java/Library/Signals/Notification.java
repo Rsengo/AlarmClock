@@ -16,6 +16,7 @@ import java.util.GregorianCalendar;
 import Library.DataHelpers.DataBaseHelper;
 import Library.Enums.GeneralPereodicity;
 import Library.IRealmModelWithID;
+import Library.PuzzlesThings.PuzzleFactory;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -38,12 +39,9 @@ public class Notification extends RealmObject implements INotification {
     private byte priority; //Приоритет
     private Date signalTime; //Время запуска
     private long repeatSignalInterval; //интервал повтора (Константа AlarmManager)
-    private boolean vibrating; //вибрация(Вибрирующий)
-    private int melody; //мелодия
-    private byte melodyVolume; //громкость
     private Date turnOffTime; //Время автовыключения звукового сигнала
     private String description; //Описание
-    private boolean onState; //Вкл/Выкл звукового сигнала
+    private boolean musical; //Вкл/Выкл звукового сигнала
     private boolean deleteAfterUsing; //Удалить после использования
     @Required
     private String userEmail; //Почта пользователя-владельца
@@ -53,6 +51,7 @@ public class Notification extends RealmObject implements INotification {
         return dataBaseHelper.getNextId(Notification.class);
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -106,30 +105,6 @@ public class Notification extends RealmObject implements INotification {
         this.repeatSignalInterval = repeatSignalInterval;
     }
 
-    public boolean isVibrating() {
-        return vibrating;
-    }
-
-    public void setVibration(boolean vibrating) {
-        this.vibrating = vibrating;
-    }
-
-    public int getMelody() {
-        return melody;
-    }
-
-    public void setMelody(int melody) {
-        this.melody = melody;
-    }
-
-    public byte getMelodyVolume() {
-        return melodyVolume;
-    }
-
-    public void setMelodyVolume(byte melodyVolume) {
-        this.melodyVolume = melodyVolume;
-    }
-
     public Date getTurnOffTime() {
         return turnOffTime;
     }
@@ -138,12 +113,12 @@ public class Notification extends RealmObject implements INotification {
         this.turnOffTime = turnOffTime;
     }
 
-    public boolean isOnState() {
-        return onState;
+    public boolean isMusical() {
+        return musical;
     }
 
-    public void setOnState(boolean onState) {
-        this.onState = onState;
+    public void setMusical(boolean musical) {
+        this.musical = musical;
     }
 
     @Override
@@ -210,12 +185,9 @@ public class Notification extends RealmObject implements INotification {
 
     @Override
     public void turnOn(Context context) {
-        onState = true;
-
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, NotificationReceiver.class);
-        PendingIntent pendingIntent =
-                PendingIntent.getActivity(context, id, intent, 0);
+
+        PendingIntent pendingIntent = createIntent(context);
 
         long signalTime = this.closeDate.getTime();
 
@@ -234,9 +206,7 @@ public class Notification extends RealmObject implements INotification {
     @Override
     public void turnOff(Context context) {
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, NotificationReceiver.class);
-        PendingIntent pendingIntent =
-                PendingIntent.getActivity(context, id, intent, 0);
+        PendingIntent pendingIntent = createIntent(context);
 
         alarmManager.cancel(pendingIntent);
     }
@@ -245,5 +215,14 @@ public class Notification extends RealmObject implements INotification {
     public long remainingTimeInMillis() {
         Date tempDate = new Date();
         return closeDate.getTime() - tempDate.getTime();
+    }
+
+    private PendingIntent createIntent(Context context) {
+        Intent intent = new Intent(context, NotificationReceiver.class);
+        intent.putExtra("id", id);
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(context, id, intent, 0);
+
+        return pendingIntent;
     }
 }
