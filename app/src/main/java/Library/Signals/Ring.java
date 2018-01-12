@@ -183,6 +183,9 @@ public class Ring extends RealmObject implements IRing{
 
     @Override
     public void postpound(Context context) {  //отложить
+
+        sendMessage();
+
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 
         PendingIntent pendingIntent = createIntent(context);
