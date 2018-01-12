@@ -19,17 +19,21 @@ import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.RadioGroup;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import Library.DataHelpers.PreferenceHelper;
 
 public class AddRing extends AppCompatActivity {
 
     final Context context = this;
+    private byte[] days = new byte[7];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +59,99 @@ public class AddRing extends AppCompatActivity {
                 else
                     time+=tp.getCurrentMinute();
                 textView.setText(time);
+            }
+        });
+        //Повторение
+        ListView repeatDase = (ListView)findViewById(R.id.repeatDase);
+        ArrayList<HashMap<String, String>> list1 = new ArrayList<>();
+        HashMap<String, String> map;
+        map = new HashMap<>();
+        map.put("Name", "Повторять");
+        map.put("Tel", "Никогда");
+        list1.add(map);
+        String [] strings = {"Name", "Tel"};
+        int [] date = {android.R.id.text1, android.R.id.text2};
+        SimpleAdapter adapter1 = new SimpleAdapter(this, list1, android.R.layout.simple_list_item_2,
+               strings,
+                date);
+        repeatDase.setAdapter(adapter1);
+        repeatDase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Получаем вид с файла prompt.xml, который применим для диалогового окна:
+                LayoutInflater li = LayoutInflater.from(context);
+                View repeatView = li.inflate(R.layout.repeat_style, null);
+
+                //Создаем AlertDialog
+                AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(context);
+
+                //Настраиваем prompt.xml для нашего AlertDialog:
+                mDialogBuilder.setView(repeatView);
+
+                //Настраиваем отображение поля для ввода текста в открытом диалоге:
+                RadioGroup radioGroup= (RadioGroup)repeatView.findViewById(R.id.group);
+                radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        switch (checkedId)
+                        {
+                            case R.id.radioNever:
+                                for(int i = 0 ;i<days.length; i++)
+                                {
+                                    days[i] =0;
+                                }
+                                map.clear();
+                                map.put("Name", "Повторять");
+                                map.put("Tel", "Никогда");
+                                break;
+                            case R.id.radioButton5:
+                                for(int i = 0 ;i<days.length; i++)
+                                {
+                                    if(i<5)
+                                    days[i] =1;
+                                    else
+                                        days[i]=0;
+                                }
+                                map.clear();
+                                map.put("Name", "Повторять");
+                                map.put("Tel", "По будням");
+                                break;
+                            case R.id.radioButton7:
+                                for(int i = 0 ;i<days.length; i++)
+                                {
+                                        days[i] =1;
+                                }
+                                map.clear();
+                                map.put("Name", "Повторять");
+                                map.put("Tel", "Каждый день");
+                                break;
+                            case R.id.radioButtonChoose:
+                                map.clear();
+                                map.put("Name", "Повторять");
+                                map.put("Tel", "...");
+                                break;
+                        }
+                    }
+                });
+
+                //Настраиваем сообщение в диалоговом окне:
+                mDialogBuilder
+                        .setCancelable(true)
+                        .setNegativeButton("Отмена",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+
+                //Создаем AlertDialog:
+                AlertDialog alertDialog = mDialogBuilder.create();
+
+                //и отображаем его:
+                alertDialog.show();
+
             }
         });
         ListView listView = (ListView)findViewById(R.id.listView)  ;
