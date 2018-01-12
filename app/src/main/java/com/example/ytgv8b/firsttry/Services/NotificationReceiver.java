@@ -39,7 +39,6 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.ikonka_notif);
 
-        // TODO: 13.01.2018 priority
         builder.setContentIntent(pendingIntent)
                 .setSmallIcon(R.mipmap.ikonka)
                 .setContentTitle(notification.getName())
@@ -47,7 +46,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setLargeIcon(bitmap)
                 .setTicker(notification.getName())
                 .setWhen(System.currentTimeMillis())
-                .setAutoCancel(true);
+                .setAutoCancel(true)
+                .setPriority(notification.getPriority());
 
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

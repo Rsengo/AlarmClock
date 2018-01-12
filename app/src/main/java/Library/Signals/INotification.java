@@ -6,4 +6,5 @@ package Library.Signals;
 
 public interface INotification extends ISignal {
     String getName();
+    byte getPriority();
 }
