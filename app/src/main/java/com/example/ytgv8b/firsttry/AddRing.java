@@ -34,6 +34,7 @@ public class AddRing extends AppCompatActivity {
 
     final Context context = this;
     private byte[] days = new byte[7];
+    private  AlertDialog alertDialog1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,10 +76,9 @@ public class AddRing extends AppCompatActivity {
                strings,
                 date);
         repeatDase.setAdapter(adapter1);
-        repeatDase.setOnClickListener(new View.OnClickListener() {
+        repeatDase.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Получаем вид с файла prompt.xml, который применим для диалогового окна:
                 LayoutInflater li = LayoutInflater.from(context);
                 View repeatView = li.inflate(R.layout.repeat_style, null);
@@ -104,32 +104,36 @@ public class AddRing extends AppCompatActivity {
                                 map.clear();
                                 map.put("Name", "Повторять");
                                 map.put("Tel", "Никогда");
+                                alertDialog1.cancel();
                                 break;
                             case R.id.radioButton5:
                                 for(int i = 0 ;i<days.length; i++)
                                 {
                                     if(i<5)
-                                    days[i] =1;
+                                        days[i] =1;
                                     else
                                         days[i]=0;
                                 }
                                 map.clear();
                                 map.put("Name", "Повторять");
                                 map.put("Tel", "По будням");
+                                alertDialog1.cancel();
                                 break;
                             case R.id.radioButton7:
                                 for(int i = 0 ;i<days.length; i++)
                                 {
-                                        days[i] =1;
+                                    days[i] =1;
                                 }
                                 map.clear();
                                 map.put("Name", "Повторять");
                                 map.put("Tel", "Каждый день");
+                                alertDialog1.cancel();
                                 break;
                             case R.id.radioButtonChoose:
                                 map.clear();
                                 map.put("Name", "Повторять");
                                 map.put("Tel", "...");
+                                alertDialog1.cancel();
                                 break;
                         }
                     }
@@ -147,11 +151,10 @@ public class AddRing extends AppCompatActivity {
 
 
                 //Создаем AlertDialog:
-                AlertDialog alertDialog = mDialogBuilder.create();
+                alertDialog1 = mDialogBuilder.create();
 
                 //и отображаем его:
-                alertDialog.show();
-
+                alertDialog1.show();
             }
         });
         ListView listView = (ListView)findViewById(R.id.listView)  ;
