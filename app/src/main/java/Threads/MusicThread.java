@@ -1,7 +1,10 @@
 package Threads;
 
 import android.content.Context;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.RingtoneManager;
+import android.media.SoundPool;
 
 import Library.Signals.IRing;
 import Library.Signals.Notification;
@@ -28,6 +31,20 @@ public class MusicThread extends Thread {
 
         int melody = signal.getMelody();
         float volume = signal.getMelodyVolume();
+
+        AudioAttributes.Builder audioAttributesBuilder = new AudioAttributes.Builder();
+        audioAttributesBuilder.setUsage(AudioAttributes.USAGE_ALARM)
+                .setLegacyStreamType(AudioManager.STREAM_RING)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED);
+        AudioAttributes audioAttributes = audioAttributesBuilder.build();
+
+        SoundPool.Builder soundPullBuilder = new SoundPool.Builder();
+        soundPullBuilder.setMaxStreams(1)
+                .setAudioAttributes(audioAttributes);
+        SoundPool soundPool = soundPullBuilder.build();
+
+
     }
 
     @Override
