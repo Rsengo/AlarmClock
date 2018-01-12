@@ -1,5 +1,7 @@
 package Library.Enums;
 
+import android.support.v4.app.NotificationCompat;
+
 import io.realm.RealmModel;
 import io.realm.RealmObject;
 import io.realm.annotations.RealmClass;
@@ -9,7 +11,7 @@ import io.realm.annotations.RealmClass;
  */
 
 public class Priority{
-    public static final byte LOW = 0;
-    public static final byte MID = 1;
-    public static final byte HIGH = 2;
+    public static final byte LOW = NotificationCompat.PRIORITY_LOW;
+    public static final byte DEFAULT = NotificationCompat.PRIORITY_DEFAULT;
+    public static final byte HIGH = NotificationCompat.PRIORITY_MAX;
 }

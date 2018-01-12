@@ -11,6 +11,14 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="MyRadioButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@android:color/holo_green_light</item>
+        <item name="colorControlActivated">@android:color/holo_orange_dark</item>
+    </style>
+    <style name="MyButton" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="android:colorButtonNormal">@android:color/holo_green_light</item>
+        <item name="colorControlHighlight">@android:color/holo_orange_dark</item>
+    </style>
 
 
 </resources>
