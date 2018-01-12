@@ -11,6 +11,7 @@ import java.util.HashMap;
  */
 
 public class PuzzleFactory {
+    // TODO: 13.01.2018 add default puzzle
     public static byte DEFAULT = 0;
     public static byte CALCULATE = 1;
     public static byte CONNECT = 2;
