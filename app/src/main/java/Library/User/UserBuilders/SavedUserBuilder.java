@@ -35,7 +35,7 @@ public class SavedUserBuilder extends UserBuilder {
 
     @Override
     public void setRings() {
-        user.setRings(dataBaseHelper.loadRings());
+        user.setRings(dataBaseHelper.loadRings(preferenceHelper.getUserEmail()));
 
         if (user.getRings() == null)
             user.setRings(new ArrayList<>());
@@ -43,7 +43,7 @@ public class SavedUserBuilder extends UserBuilder {
 
     @Override
     public void setNotifications() {
-        user.setNotifications(dataBaseHelper.loadNotifications());
+        user.setNotifications(dataBaseHelper.loadNotifications(preferenceHelper.getUserEmail()));
 
         if (user.getNotifications() == null)
             user.setNotifications(new ArrayList<>());

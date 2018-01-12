@@ -42,23 +42,19 @@ public class User implements  IUser {
     public static synchronized User getInstance() { //Создание пользователя
         if (user == null) { //Если вход не выполнен
             user = new User();
-            UserBuilder builder;
+
             //Если имеются сохраненные настройки
             if (!preferenceHelper.isEmpty()) { //если файл существует
-                builder = new SavedUserBuilder(user);
-            } else {
-                // TODO: 11.01.2018 регистрация
-                builder = new DefaultUserBuilder(user);
-            }
-
-            try {
-                UserDirector director = new UserDirector(builder);
-                director.construct();
-                user = builder.getResult();
-            }
-            catch (NullPointerException ex)
-            {
-                Log.e("Exception", "Null pointer, creation");
+                UserBuilder builder = new SavedUserBuilder(user);
+                try {
+                    UserDirector director = new UserDirector(builder);
+                    director.construct();
+                    user = builder.getResult();
+                }
+                catch (NullPointerException ex)
+                {
+                    Log.e("Exception", "Null pointer, creation");
+                }
             }
         }
 
@@ -117,7 +113,7 @@ public class User implements  IUser {
     public void logOut() {
         /***Сохранение данных на сервер***/
         preferenceHelper = PreferenceHelper.getInstance();
-        preferenceHelper.removePreference();
+        preferenceHelper.clearPreference();
     }
 
     @Override

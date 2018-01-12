@@ -117,7 +117,7 @@ public final class PreferenceHelper {
         file.delete();
     }
 
-    public static void clearPreference() {
+    public void clearPreference() {
         userEditor.clear();
     }
 

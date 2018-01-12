@@ -55,13 +55,13 @@ public final class DataBaseHelper {
         return dataBaseHelper;
     }
 
-    public ArrayList<INotification> loadNotifications() {
+    public ArrayList<INotification> loadNotifications(String userEmail) {
         ArrayList<INotification> notifications = new ArrayList<>();
 
         try (Realm realm = Realm.getDefaultInstance()) {
             notificationRealmQuery =
                     realm.where(Notification.class).equalTo("userEmail",
-                            user.getEmail());
+                            userEmail);
             RealmResults<Notification> realmResults = notificationRealmQuery.findAll();
 
             for (Notification notification: realmResults)
@@ -108,7 +108,7 @@ public final class DataBaseHelper {
         return message;
     }
 
-    public ArrayList<IRing> loadRings()
+    public ArrayList<IRing> loadRings(String userEmail)
     {
         ArrayList<IRing> rings = new ArrayList<>();
 
@@ -116,7 +116,7 @@ public final class DataBaseHelper {
         {
             ringRealmQuery =
                     realm.where(Ring.class).equalTo("userEmail",
-                            user.getEmail());
+                            userEmail);
             RealmResults<Ring> realmResults = ringRealmQuery.findAll();
 
             for (Ring ring: realmResults)
