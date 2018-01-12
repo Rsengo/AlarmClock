@@ -8,6 +8,9 @@ import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.PreferenceHelper;
 import Library.IRealmModelWithID;
 import Library.Settings.ISetting;
+import Library.Settings.UIBuilders.DefaultUIBuilder;
+import Library.Settings.UIBuilders.UIBuilder;
+import Library.Settings.UIBuilders.UIDirector;
 import Library.Settings.UserInterface;
 import Library.Signals.INotification;
 import Library.Signals.IRing;
@@ -57,7 +60,10 @@ public class User implements  IUser {
                 }
             }
             else {
-
+                UIBuilder uiBuilder = new DefaultUIBuilder();
+                UIDirector director = new UIDirector(uiBuilder);
+                ISetting setting = director.construct();
+                user.setUserInterface(setting);
             }
         }
 
