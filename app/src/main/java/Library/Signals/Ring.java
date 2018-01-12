@@ -42,7 +42,7 @@ public class Ring extends RealmObject implements IRing{
     // TODO: 13.01.2018 default melody
     @Required
     private int melody; //мелодия
-    private long turnOffTime = 300000L; //Время автовыключения в мс (default = 5 мин)
+    private final long turnOffTime = 300000L; //Время автовыключения в мс (default = 5 мин)
     private String description = "Будильник"; //Описание
     private boolean onState = true; //Вкл/Выкл звукового сигнала
     private boolean deleteAfterUsing = false; //удалить после срабатывания
@@ -137,9 +137,6 @@ public class Ring extends RealmObject implements IRing{
         return turnOffTime;
     }
 
-    public void setTurnOffTime(long turnOffTime) {
-        this.turnOffTime = turnOffTime;
-    }
 
     public boolean isOnState() {
         return onState;

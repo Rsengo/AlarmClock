@@ -88,12 +88,6 @@ public class RingBuilder extends SignalFactory {
         return this;
     }
 
-    public RingBuilder setTurnOffTime(long turnOffTime) {
-        signal.setTurnOffTime(turnOffTime);
-        return this;
-    }
-
-
     public RingBuilder setRepeatDays(byte[] repeatDays) {
         signal.setRepeatDays(repeatDays);
         return this;
