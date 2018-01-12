@@ -38,7 +38,7 @@ public class Ring extends RealmObject implements IRing{
     private boolean vibrating; //вибрация(Вибрирующий)
     private int melody; //мелодия
     private float melodyVolume; //громкость
-    private Date turnOffTime; //Время автовыключения звукового сигнала
+    private long turnOffTime; //Время автовыключения звукового сигнала в мс
     private String description; //Описание
     private boolean onState; //Вкл/Выкл звукового сигнала
     private boolean deleteAfterUsing; //удалить после срабатывания
@@ -136,11 +136,11 @@ public class Ring extends RealmObject implements IRing{
         this.melodyVolume = melodyVolume;
     }
 
-    public Date getTurnOffTime() {
+    public long getTurnOffTime() {
         return turnOffTime;
     }
 
-    public void setTurnOffTime(Date turnOffTime) {
+    public void setTurnOffTime(long turnOffTime) {
         this.turnOffTime = turnOffTime;
     }
 

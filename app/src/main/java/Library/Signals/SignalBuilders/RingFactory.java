@@ -11,6 +11,7 @@ import Library.Messages.IMessage;
 import Library.Messages.MessageFactory.MessageFactories;
 import Library.Messages.MessageFactory.MessageFactory;
 import Library.Signals.ISignal;
+import Library.Signals.Notification;
 import Library.Signals.Ring;
 import Library.User.User;
 
@@ -30,7 +31,7 @@ public class RingFactory extends SignalFactory {
 
     @Override
     public void createSignal() {
-        signal = new Ring();
+
     }
 
     @Override
@@ -39,26 +40,12 @@ public class RingFactory extends SignalFactory {
     }
 
     @Override
+    public void setSignalTime() {
+
+    }
+
+    @Override
     public void setRepeatSignalInterval() {
-
-    }
-
-    @Override
-    public void setVibrating() {
-    }
-
-    @Override
-    public void setMelody() {
-
-    }
-
-    @Override
-    public void setMelodyVolume() {
-
-    }
-
-    @Override
-    public void setTurnOffTime() {
 
     }
 
@@ -68,7 +55,7 @@ public class RingFactory extends SignalFactory {
     }
 
     @Override
-    public void setOnState() {
+    public void setDeleteAfterUsing() {
 
     }
 
@@ -79,11 +66,7 @@ public class RingFactory extends SignalFactory {
     }
 
 
-    public  void setPuzzle() {
-
-    }
-
-    public  void setMessage() {
+    /*public  void setMessage() {
         if (messageFactory != null) {
             MessageFactory signalFactory = MessageFactories.getFactory(messageFactory, signal);
             IMessage message = signalFactory.create();
@@ -91,16 +74,8 @@ public class RingFactory extends SignalFactory {
         } else {
             signal.setMessage(null);
         }
-    }
+    }*/
 
-    public  void setRepeatDays() {
-
-    }
-
-    @Override
-    public void setDeleteAfterUsing() {
-
-    }
 
     @Override
     public ISignal create() {

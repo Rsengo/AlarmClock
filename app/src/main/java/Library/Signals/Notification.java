@@ -39,9 +39,7 @@ public class Notification extends RealmObject implements INotification {
     private byte priority; //Приоритет
     private Date signalTime; //Время запуска
     private long repeatSignalInterval; //интервал повтора (Константа AlarmManager)
-    private Date turnOffTime; //Время автовыключения звукового сигнала
     private String description; //Описание
-    private boolean musical; //Вкл/Выкл звукового сигнала
     private boolean deleteAfterUsing; //Удалить после использования
     @Required
     private String userEmail; //Почта пользователя-владельца
@@ -103,22 +101,6 @@ public class Notification extends RealmObject implements INotification {
 
     public void setRepeatSignalInterval(long repeatSignalInterval) {
         this.repeatSignalInterval = repeatSignalInterval;
-    }
-
-    public Date getTurnOffTime() {
-        return turnOffTime;
-    }
-
-    public void setTurnOffTime(Date turnOffTime) {
-        this.turnOffTime = turnOffTime;
-    }
-
-    public boolean isMusical() {
-        return musical;
-    }
-
-    public void setMusical(boolean musical) {
-        this.musical = musical;
     }
 
     @Override

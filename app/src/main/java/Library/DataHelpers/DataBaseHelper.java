@@ -30,6 +30,7 @@ import io.realm.RealmResults;
 public final class DataBaseHelper {
 /****считывание ProgramInfo****/
 
+// TODO: 12.01.2018 search by email
     private User user;
     private UserInterface userInterface;
     private RealmQuery<Ring> ringRealmQuery;
