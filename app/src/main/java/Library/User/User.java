@@ -56,6 +56,9 @@ public class User implements  IUser {
                     Log.e("Exception", "Null pointer, creation");
                 }
             }
+            else {
+
+            }
         }
 
         return user; //Возврат ссылки
