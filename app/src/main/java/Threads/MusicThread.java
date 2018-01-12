@@ -28,8 +28,6 @@ public class MusicThread extends Thread {
 
         int melody = signal.getMelody();
         float volume = signal.getMelodyVolume();
-
-
     }
 
     @Override

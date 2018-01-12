@@ -3,26 +3,31 @@ package com.example.ytgv8b.firsttry.Puzzles;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.PreferenceHelper;
 import Library.Signals.IRing;
 import Threads.MusicThread;
 import Threads.VibrationThread;
+import Timer.*;
 
 /**
  * Created by ytgv8b on 12.01.2018.
  */
 
 public abstract class PuzzleActivity extends AppCompatActivity {
-    // TODO: 26.12.2017 время автовыкл.
     public PuzzleActivity() {
         super();
     }
 
     protected String _alarmName = "";
     protected IRing ring;
-    MusicThread musicThread;
-    VibrationThread vibrationThread;
+    protected MusicThread musicThread;
+    protected VibrationThread vibrationThread;
+    protected TimerTask timerTask;
+    protected Timer timer;
 
     @Override
     protected void onStart() {
@@ -41,6 +46,14 @@ public abstract class PuzzleActivity extends AppCompatActivity {
 
         musicThread = new MusicThread(this, ring);
         vibrationThread = new VibrationThread(this);
+
+        musicThread.start();
+        vibrationThread.start();
+
+        timer = new Timer();
+        timerTask = new AutoTurnOffTask(this);
+
+        timer.schedule(timerTask, ring.getTurnOffTime());
     }
 
     @Override
