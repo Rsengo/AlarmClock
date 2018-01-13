@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PreferenceHelper.init(this);
+        /*PreferenceHelper.init(this);
         DataBaseHelper.init(this);
 
         PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
@@ -81,6 +81,6 @@ public class MainActivity extends AppCompatActivity {
                     + "; "
                     + String.valueOf(notification.getCloseDate().getSeconds());
             textView.setText(s);*/
-        });
+        //});*/
     }
 }
