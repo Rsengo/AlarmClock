@@ -22,6 +22,8 @@ import android.widget.TimePicker;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.sql.StatementEvent;
+
 public class AddRing extends AppCompatActivity {
 
     final Context context = this;
@@ -30,6 +32,10 @@ public class AddRing extends AppCompatActivity {
     private RadioButton rb;
     private RadioGroup rg;
     private boolean b = false;
+    private boolean b1 = false;
+    private String discriptionstring= "Будильник";
+    private byte method = 0;
+
 
     @Override
     protected void onStart() {
@@ -42,6 +48,7 @@ public class AddRing extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ring);
 
+        // TODO: 14.01.2018 Установка времени! 
         TextView textView = (TextView)findViewById(R.id.textView2);
         TimePicker tp = (TimePicker)findViewById(R.id.timePicker2);
         tp.setIs24HourView(true);
@@ -76,8 +83,85 @@ public class AddRing extends AppCompatActivity {
                 textView.setText(time);
             }
         });
-        //Повторение
+        // TODO: 13.01.2018 Описание!
+        ListView discription = (ListView)findViewById(R.id.discription);
+        ArrayList<HashMap<String, String>> listdiscription =new ArrayList<>();
+        HashMap<String, String> mapdiscription;
+        mapdiscription = new HashMap<>();
+        mapdiscription.put("Name", "Описание:");
+        mapdiscription.put("Tel", "Будильник");
+        listdiscription.add(mapdiscription);
+        String [] strings1 = {"Name", "Tel"};
+        int [] date1 = {android.R.id.text1, android.R.id.text2};
+        SimpleAdapter adapter2 = new SimpleAdapter(this, listdiscription, android.R.layout.simple_list_item_2,
+                strings1,
+                date1);
+        discription.setAdapter(adapter2);
+        discription.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Получаем вид с файла prompt.xml, который применим для диалогового окна:
+                LayoutInflater li = LayoutInflater.from(context);
+                View promptsView = li.inflate(R.layout.prompt, null);
+
+                //Создаем AlertDialog
+                AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(context);
+
+                //Настраиваем prompt.xml для нашего AlertDialog:
+                mDialogBuilder.setView(promptsView);
+
+                //Настраиваем отображение поля для ввода текста в открытом диалоге:
+                EditText userInput = (EditText) promptsView.findViewById(R.id.descriptiontext);
+                Button cancel = (Button) promptsView.findViewById(R.id.cancel);
+                Button ok = (Button) promptsView.findViewById(R.id.ok);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog1.cancel();
+                    }
+                });
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        discriptionstring=userInput.getText().toString();
+                        mapdiscription.clear();
+                        mapdiscription.put("Name", "Описание:");
+                        mapdiscription.put("Tel", discriptionstring);
+                        discription.setAdapter(adapter2);
+                        alertDialog1.cancel();
+                    }
+                });
+
+                userInput.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(userInput.getText().equals("Будильник"))
+                        {
+                            userInput.setText("");
+                        }
+                    }
+                });
+                    userInput.setText(discriptionstring);
+
+
+
+                //Настраиваем сообщение в диалоговом окне:
+                mDialogBuilder
+                        .setCancelable(true)
+                        .setTitle("Введите описание");
+
+                //Создаем AlertDialog:
+                alertDialog1 = mDialogBuilder.create();
+
+                //и отображаем его:
+                alertDialog1.show();
+            }
+        });
+
+
+        // TODO: 14.01.2018 Дни повтора! 
         ListView repeatDase = (ListView)findViewById(R.id.repeatDase);
+        repeatDase.setScrollContainer(false);
         ArrayList<HashMap<String, String>> list1 = new ArrayList<>();
         HashMap<String, String> map;
         map = new HashMap<>();
@@ -194,6 +278,21 @@ public class AddRing extends AppCompatActivity {
                 alertDialog1.show();
             }
         });
+        // TODO: 14.01.2018 Способо выключения!
+        RadioGroup methodGroup = (RadioGroup)findViewById(R.id.radioGroupMethod);
+        methodGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId)
+                {
+                    case R.id.radio_simple:
+                        method=0;
+                        break;
+                    case R.id.primer:
+                        
+                }
+            }
+        });
         ListView listView = (ListView)findViewById(R.id.listView)  ;
         String [] list = new String[] {"Вибрация", "Удалить после срабатывания"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, list);
@@ -211,54 +310,4 @@ public class AddRing extends AppCompatActivity {
 
             }
         });
-        Button button = (Button)findViewById(R.id.button);
-        TextView final_text = (TextView)findViewById(R.id.final_text);
-        button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-
-
-                //Получаем вид с файла prompt.xml, который применим для диалогового окна:
-                LayoutInflater li = LayoutInflater.from(context);
-                View promptsView = li.inflate(R.layout.prompt, null);
-
-                //Создаем AlertDialog
-                AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(context);
-
-                //Настраиваем prompt.xml для нашего AlertDialog:
-                mDialogBuilder.setView(promptsView);
-
-                //Настраиваем отображение поля для ввода текста в открытом диалоге:
-                final EditText userInput = (EditText) promptsView.findViewById(R.id.input_text);
-                userInput.setText(final_text.getText());
-
-                //Настраиваем сообщение в диалоговом окне:
-                mDialogBuilder
-                        .setCancelable(true)
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        //Вводим текст и отображаем в строке ввода на основном экране:
-                                        final_text.setText(userInput.getText());
-                                        dialog.cancel();
-                                    }
-                                })
-                        .setNegativeButton("Отмена",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                //Создаем AlertDialog:
-                AlertDialog alertDialog = mDialogBuilder.create();
-
-                //и отображаем его:
-                alertDialog.show();
-
-            }
-
-
-    });
 }}

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <RadioGroup
         android:id="@+id/group"
@@ -19,28 +18,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Никогда"
-            android:theme="@style/MyRadioButton"/>
+            android:theme="@style/MyRadioButton" />
 
         <RadioButton
             android:id="@+id/radioButton7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Каждый день"
-            android:theme="@style/MyRadioButton"/>
+            android:theme="@style/MyRadioButton" />
 
         <RadioButton
             android:id="@+id/radioButton5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="По будням"
-            android:theme="@style/MyRadioButton"/>
+            android:theme="@style/MyRadioButton" />
 
         <RadioButton
             android:id="@+id/radioButtonChoose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Выбрать дни"
-            android:theme="@style/MyRadioButton"/>
+            android:theme="@style/MyRadioButton" />
 
     </RadioGroup>
 
@@ -53,7 +52,7 @@
         android:text="Отмена"
         android:theme="@style/MyButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/group"/>
+        app:layout_constraintTop_toBottomOf="@+id/group" />
 
     <Button
         android:id="@+id/ok"
@@ -64,5 +63,5 @@
         android:text="ОК"
         android:theme="@style/MyButton"
         app:layout_constraintStart_toEndOf="@+id/cancel"
-        app:layout_constraintTop_toBottomOf="@+id/group"/>
+        app:layout_constraintTop_toBottomOf="@+id/group" />
 </android.support.constraint.ConstraintLayout>
