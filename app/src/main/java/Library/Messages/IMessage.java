@@ -11,4 +11,7 @@ public interface IMessage extends IRealmModelWithID{
     void send();
     void setRecepient(String name, String number);
     void setText(String text);
+    String getText();
+    String getRecepientName();
+    String getRecepientAddress();
 }

@@ -9,15 +9,12 @@ import java.util.Calendar;
 
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.PreferenceHelper;
-import Library.Messages.SMS;
+import Library.Messages.MessageFactory.MessageBuilder;
+import Library.Messages.MessageFactory.SMSBuilder;
 import Library.PuzzlesThings.PuzzleFactory;
 import Library.Settings.UserInterface;
-import Library.Signals.IRing;
-import Library.Signals.Notification;
 import Library.Signals.Ring;
-import Library.Signals.SignalBuilders.NotificationBuilder;
 import Library.Signals.SignalBuilders.RingBuilder;
-import Library.Signals.SignalBuilders.SignalFactory;
 import Library.User.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,14 +54,16 @@ public class MainActivity extends AppCompatActivity {
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.MILLISECOND, 10000);
 
+            MessageBuilder messageBuilder = new SMSBuilder();
+            messageBuilder.setText("Text")
+                    .setRecepient("badf", "dsfsdfs");
+
             RingBuilder builder = Ring.builder();
             builder.setSignalTime(calendar.getTime())
-                    .setPuzzle(PuzzleFactory.CONNECT)
-                    .setOnState(true, getApplicationContext())
-                    .setMessage("SMS", "Hi",
-                            "Gl", "+79502790929");
+                    .setPuzzle(PuzzleFactory.CONNECT);
 
             Ring ring = (Ring)builder.build();
+            ring.turnOn(this);
             user.addRing(ring);
 
             /*NotificationBuilder builder = new NotificationBuilder();

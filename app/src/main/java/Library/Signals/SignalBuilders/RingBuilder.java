@@ -1,20 +1,13 @@
 package Library.Signals.SignalBuilders;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.os.Bundle;
-
 
 
 import java.util.Date;
 
 import Library.DataHelpers.PreferenceHelper;
 import Library.Messages.IMessage;
-import Library.Messages.MessageFactory.MessageFactories;
-import Library.Messages.MessageFactory.MessageFactory;
-import Library.Signals.ISignal;
-import Library.Signals.Notification;
+import Library.Signals.IRing;
 import Library.Signals.Ring;
 import Library.User.User;
 
@@ -63,15 +56,8 @@ public class RingBuilder extends SignalFactory {
         return this;
     }
 
-    public  RingBuilder setMessage(String messageFactory) {
-        if (messageFactory != null) {
-            MessageFactory signalFactory = MessageFactories.getFactory(messageFactory, signal);
-            IMessage message = signalFactory.create();
-            signal.setMessage(message);
-        } else {
-            signal.setMessage(null);
-        }
-
+    public  RingBuilder setMessage(IMessage message) {
+        signal.setMessage(message);
         return this;
     }
 
@@ -95,16 +81,13 @@ public class RingBuilder extends SignalFactory {
         return this;
     }
 
-    public RingBuilder setOnState(boolean onState, Context context) {
-        if (onState)
-            signal.turnOn(context);
-        else signal.setOnState(false);
-        return this;
-    }
-
     @Override
-    public ISignal build() {
+    public IRing build() {
         setId();
+
+        if (signal.getMessage() != null)
+            signal.getMessage().setId(signal.getId());
+
         setUserEmail();
 
         if (signal.getMelody() == null)

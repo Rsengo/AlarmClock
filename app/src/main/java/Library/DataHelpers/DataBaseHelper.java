@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import Library.IRealmModelWithID;
 import Library.Messages.IMessage;
-import Library.Messages.MessageFactory.MessageFactory;
+import Library.Messages.SMS;
 import Library.Settings.ColorScheme;
 import Library.Settings.UserInterface;
 import Library.Signals.INotification;
@@ -88,20 +88,19 @@ public final class DataBaseHelper {
 
         IMessage message = null;
         try (Realm realm = Realm.getDefaultInstance()) {
-            for (MessageFactory factory : MessageFactories.factories()) {
-                try {
-                    IMessage realmMessage = (IMessage) realm
-                            .where(factory.getMessageClass())
-                            .equalTo("id", id)
-                            .findFirst();
-                    if (realmMessage != null) {
-                        message = realm.copyFromRealm(realmMessage);
-                        break;
-                    }
-                } catch (Exception ex) {
-                    Log.d("Null pointer", "null");
+            try {
+                IMessage realmMessage = realm.where(SMS.class)
+                        .equalTo("id", id)
+                        .findFirst();
+                if (realmMessage != null) {
+                    message = realm.copyFromRealm(realmMessage);
+                } else {
+                    // TODO: 14.01.2018 просматривать остальные классы
                 }
+            } catch (Exception ex) {
+                Log.d("Null pointer", "null");
             }
+
         }
         return message;
     }

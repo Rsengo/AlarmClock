@@ -40,10 +40,12 @@ public class SMS extends RealmObject implements IMessage{
         this.id = id;
     }
 
+    @Override
     public String getRecepientName() {
         return recepientName;
     }
 
+    @Override
     public String getRecepientAddress() {
         return recepientAddress;
     }

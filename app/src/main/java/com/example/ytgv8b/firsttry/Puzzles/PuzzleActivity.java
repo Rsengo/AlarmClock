@@ -2,6 +2,7 @@ package com.example.ytgv8b.firsttry.Puzzles;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -34,6 +35,11 @@ public abstract class PuzzleActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+
+        // TODO: 13.01.2018 locking
         DataBaseHelper.init(this);
         PreferenceHelper.init(this);
 
@@ -63,6 +69,7 @@ public abstract class PuzzleActivity extends AppCompatActivity {
 
         musicThread.interrupt();
         vibrationThread.interrupt();
+        //ring.postpound(this);
 
         if (ring.isDeleteAfterUsing()) {
             dataBaseHelper.deleteData(ring);
