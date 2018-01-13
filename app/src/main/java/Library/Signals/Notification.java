@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.ytgv8b.firsttry.MainActivity;
 import com.example.ytgv8b.firsttry.Services.NotificationReceiver;
 
 import java.util.Calendar;
@@ -15,12 +14,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import Library.DataHelpers.DataBaseHelper;
-import Library.Enums.GeneralPereodicity;
-import Library.Enums.Priority;
-import Library.IRealmModelWithID;
-import Library.PuzzlesThings.PuzzleFactory;
 import Library.Signals.SignalBuilders.NotificationBuilder;
-import Library.Signals.SignalBuilders.RingBuilder;
 import Library.Signals.SignalBuilders.SignalFactory;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -38,10 +32,10 @@ public class Notification extends RealmObject implements INotification {
     private int id;
     @Required
     private String name = ""; //Имя
-    private byte generalPeriodicity = GeneralPereodicity.NOREPEAT; //Общая переодичность
+    private byte generalPeriodicity = Notification.NOREPEAT; //Общая переодичность
     private byte specificPeriodicity = 0; //Подробная
     private Date closeDate = null; //Ближайшая дата
-    private byte priority = Priority.DEFAULT; //Приоритет
+    private byte priority = PRIORITY_DEFAULT; //Приоритет
     @Required
     private Date signalTime = new Date(); //Время запуска
     private long repeatSignalInterval = AlarmManager.INTERVAL_DAY; //интервал повтора
@@ -49,6 +43,17 @@ public class Notification extends RealmObject implements INotification {
     private String description = null; //Описание
     @Required
     private String userEmail; //Почта пользователя-владельца
+
+    public static final byte NOREPEAT = 0;
+    public static final byte REPEAT_EVERYHOUR = 1;
+    public static final byte REPEAT_EEVEYDAY = 2;
+    public static final byte REPEAT_EVERYWEEK = 3;
+    public static final byte REPEAT_EVERYMOUNTH = 4;
+    public static final byte REPEAT_EVERYYEAR = 5;
+
+    public static final byte PRIORITY_LOW = 0;
+    public static final byte PRIORITY_DEFAULT = 1;
+    public static final byte PRIORITY_HIGH = 2;
 
     public static int getNextId() {
         DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
@@ -142,18 +147,18 @@ public class Notification extends RealmObject implements INotification {
         calendar.setTime(closeDate);
 
         switch (generalPeriodicity) {
-            case (GeneralPereodicity.NOREPEAT):
+            case (NOREPEAT):
                 break;
-            case (GeneralPereodicity.EVERYHOUR):
+            case (REPEAT_EVERYHOUR):
                 calendar.add(Calendar.HOUR, specificPeriodicity);
                 break;
-            case (GeneralPereodicity.EEVEYDAY):
+            case (REPEAT_EEVEYDAY):
                 calendar.add(Calendar.DAY_OF_YEAR, specificPeriodicity);
                 break;
-            case (GeneralPereodicity.EVERYMOUNTH):
+            case (REPEAT_EVERYMOUNTH):
                 calendar.add(Calendar.MONTH, specificPeriodicity);
                 break;
-            case (GeneralPereodicity.EVERYYEAR):
+            case (REPEAT_EVERYYEAR):
                 calendar.add(Calendar.YEAR, specificPeriodicity);
                 break;
         }

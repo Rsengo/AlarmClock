@@ -1,13 +1,6 @@
 package Library.Settings.UIBuilders;
 
-import android.content.Context;
-
-import Library.Enums.FontSize;
-import Library.Enums.Language;
-import Library.Settings.ColorScheme;
-import Library.Settings.ISetting;
 import Library.Settings.UserInterface;
-import Library.User.User;
 
 /**
  * Created by ytgv8b on 27.10.2017.
@@ -24,11 +17,11 @@ public class DefaultUIBuilder extends UIBuilder {
 
     @Override
     public void setLanguage() {
-        userInterface.setLanguage(Language.RUSSIAN);
+        userInterface.setLanguage(UserInterface.LANGUAGE_RUSSIAN);
     }
 
     @Override
     public void setFontSize() {
-        userInterface.setFontSize(FontSize.NORMAL);
+        userInterface.setFontSize(UserInterface.FONT_SIZE_DEFAULT);
     }
 }

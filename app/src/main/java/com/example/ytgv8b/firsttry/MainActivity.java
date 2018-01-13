@@ -7,8 +7,6 @@ import android.widget.TextView;
 
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.PreferenceHelper;
-import Library.Enums.FontSize;
-import Library.Enums.Language;
 import Library.Messages.SMS;
 import Library.Settings.UserInterface;
 import Library.Signals.Ring;
@@ -37,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
             user.setEmail("email");
             user.setMoneyQuantity(100);
             UserInterface settings = (UserInterface)user.getUserInterface();
-            settings.setLanguage(Language.RUSSIAN);
+            settings.setLanguage(UserInterface.LANGUAGE_RUSSIAN);
             settings.setColorSchemeId(0);
-            settings.setFontSize(FontSize.NORMAL);
+            settings.setFontSize(UserInterface.FONT_SIZE_DEFAULT);
             preferenceHelper.writePreference();
         });
 

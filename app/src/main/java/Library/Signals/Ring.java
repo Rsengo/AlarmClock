@@ -36,7 +36,8 @@ public class Ring extends RealmObject implements IRing{
     private long repeatSignalInterval = 600000L; //интервал повторного запуска после откладывания
     private boolean vibrating = true; //вибрация(Вибрирующий)
     private String melody; //мелодия
-    private final long turnOffTime = 300000L; //Время автовыключения в мс (default = 5 мин)
+    @Ignore
+    private static final long turnOffTime = 300000L; //Время автовыключения в мс (default = 5 мин)
     private String description = "Будильник"; //Описание
     private boolean onState = true; //Вкл/Выкл звукового сигнала
     private boolean deleteAfterUsing = false; //удалить после срабатывания

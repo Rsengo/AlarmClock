@@ -19,6 +19,13 @@ public class UserInterface implements ISetting {
     private static UIDirector director;
     private static UIBuilder builder;
 
+    public static final byte FONT_SIZE_SMALL = 1;
+    public static final byte FONT_SIZE_DEFAULT = 0;
+    public static final byte FONT_SIZE_BIG = 2;
+
+    public static final byte LANGUAGE_RUSSIAN = 0;
+    public static final byte LANGUAGE_ENGLISH = 1;
+
     public ColorScheme getColorScheme() {
         return colorScheme;
     }
