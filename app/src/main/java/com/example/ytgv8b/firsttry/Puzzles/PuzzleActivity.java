@@ -66,6 +66,9 @@ public abstract class PuzzleActivity extends AppCompatActivity {
 
         if (ring.isDeleteAfterUsing()) {
             dataBaseHelper.deleteData(ring);
+        } else {
+            ring.recountSignalTime(this);
+            dataBaseHelper.saveRecursive(ring);
         }
     }
 }

@@ -99,6 +99,11 @@ public class Ring extends RealmObject implements IRing{
 
     public void setSignalTime(Date signalTime) {
         this.signalTime = signalTime;
+
+        if (repeatDays == null)
+            recountUnrepeatable();
+        else
+            recountRepeatable();
     }
 
     public long getRepeatSignalInterval() {
@@ -205,12 +210,39 @@ public class Ring extends RealmObject implements IRing{
         signalTime = newSignalTime.getTime();
     }
 
+    private void recountRepeatable() {
+        GregorianCalendar signalCalendar = new GregorianCalendar();
+        GregorianCalendar tempCalendar = new GregorianCalendar();
+        signalCalendar.setTime(signalTime);
+
+        if (tempCalendar.before(signalCalendar))
+            return;
+
+        signalCalendar.add(Calendar.DAY_OF_WEEK, 1);
+        int tempDay = signalCalendar.get(Calendar.DAY_OF_WEEK);
+        int additionalDays = 1;
+
+        while (repeatDays[tempDay] == 0) {
+            tempDay++;
+            additionalDays++;
+
+            if (tempDay > 6)
+                tempDay = 0;
+        }
+
+        signalCalendar.add(Calendar.DAY_OF_YEAR, additionalDays);
+
+        signalTime = signalCalendar.getTime();
+    }
+
     @Override
     public void turnOn(Context context) {
         onState = true;
 
         if (repeatDays == null) {
             recountUnrepeatable();
+        } else {
+            recountRepeatable();
         }
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -244,23 +276,7 @@ public class Ring extends RealmObject implements IRing{
             return;
         }
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(signalTime);
-
-        int tempDay = calendar.get(Calendar.DAY_OF_WEEK);
-        int additionalDays = 0;
-
-        while (repeatDays[tempDay] == 0) {
-            tempDay++;
-            additionalDays++;
-
-            if (tempDay > 6)
-                tempDay = 0;
-        }
-
-        calendar.add(Calendar.DAY_OF_YEAR, additionalDays);
-
-        signalTime = calendar.getTime();
+        recountRepeatable();
 
         turnOn(context);
     }

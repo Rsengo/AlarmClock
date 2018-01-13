@@ -52,5 +52,8 @@ public class NotificationReceiver extends BroadcastReceiver {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(notification.getId(), builder.build());
+
+        notification.recountSignalTime(context);
+        dataBaseHelper.saveRecursive(notification);
     }
 }
