@@ -156,9 +156,13 @@ public final class PreferenceHelper {
         // TODO: 14.01.2018 название мелодии
         Observable<String> fileObservable = Observable.fromArray(path.listFiles())
                 .map(file -> file.getName())
+                .filter(s -> {
+                    String[] s1 = s.split("\\.");
+                    return s1[1].equals("ogg");
+                })
                 .map(s -> {
                     String[] s1 = s.split("\\.");
-                    return s1[0];
+                    return  s1[0];
                 });
 
         Disposable disposable = fileObservable.subscribe(s -> melodies.add(s));

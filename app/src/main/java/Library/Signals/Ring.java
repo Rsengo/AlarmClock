@@ -30,7 +30,7 @@ public class Ring extends RealmObject implements IRing{
     @PrimaryKey
     private int id;
 
-    private byte puzzle = PuzzleFactory.DEFAULT; //головоломка
+    private byte puzzle = PUZZLE_DEFAULT; //головоломка
     @Required
     private Date signalTime = null; //Время запуска
     private long repeatSignalInterval = 600000L; //интервал повторного запуска после откладывания
@@ -49,6 +49,9 @@ public class Ring extends RealmObject implements IRing{
     @Ignore
     private IMessage message = null; //СМС
 
+    public static byte PUZZLE_DEFAULT = 0;
+    public static byte PUZZLE_CALCULATE = 1;
+    public static byte PUZZLE_CONNECT = 2;
 
     public static int getNextId() {
         DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();

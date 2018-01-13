@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             User user = User.getInstance();
 
             Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.MILLISECOND, 10000);
+            calendar.add(Calendar.MILLISECOND, 3000);
 
             MessageBuilder messageBuilder = new SMSBuilder();
             messageBuilder.setText("Text")
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
             RingBuilder builder = Ring.builder();
             builder.setSignalTime(calendar.getTime())
-                    .setPuzzle(PuzzleFactory.CONNECT);
+                    .setPuzzle(Ring.PUZZLE_CONNECT);
 
             Ring ring = (Ring)builder.build();
             ring.turnOn(this);
