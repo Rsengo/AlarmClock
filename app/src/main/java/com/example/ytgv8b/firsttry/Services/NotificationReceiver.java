@@ -36,11 +36,6 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         Log.e("Search", "stop");
 
-        // TODO: 12.01.2018 MainMenu
-        Intent notificationActivity = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, notification.getId(),
-                notificationActivity, 0);
-
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 
         Log.e("Bitmap", "start");
@@ -53,8 +48,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         Log.e("Builder", "start");
 
-        builder.setContentIntent(pendingIntent)
-                .setSmallIcon(R.mipmap.ikonka)
+        builder.setSmallIcon(R.mipmap.ikonka)
                 .setContentTitle(notification.getName())
                 .setContentText(notification.getDescription())
                 .setLargeIcon(bitmap)

@@ -13,7 +13,9 @@ import Library.Messages.MessageFactory.MessageBuilder;
 import Library.Messages.MessageFactory.SMSBuilder;
 import Library.PuzzlesThings.PuzzleFactory;
 import Library.Settings.UserInterface;
+import Library.Signals.Notification;
 import Library.Signals.Ring;
+import Library.Signals.SignalBuilders.NotificationBuilder;
 import Library.Signals.SignalBuilders.RingBuilder;
 import Library.User.User;
 
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.MILLISECOND, 3000);
 
-            MessageBuilder messageBuilder = new SMSBuilder();
+            /*MessageBuilder messageBuilder = new SMSBuilder();
             messageBuilder.setText("Text")
                     .setRecepient("badf", "dsfsdfs");
 
@@ -64,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
             Ring ring = (Ring)builder.build();
             ring.turnOn(this);
-            user.addRing(ring);
+            user.addRing(ring);*/
 
             textView.setText(preferenceHelper.loadMelodies().get(0));
 
-            /*NotificationBuilder builder = new NotificationBuilder();
+            NotificationBuilder builder = new NotificationBuilder();
             builder.setSignalTime(calendar.getTime())
                     .setDescription("xhdfjgkuhlij;ok")
                     .setName("Notif")
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     + String.valueOf(notification.getCloseDate().getMinutes())
                     + "; "
                     + String.valueOf(notification.getCloseDate().getSeconds());
-            textView.setText(s);*/
+            textView.setText(s);
         });
     }
 }
