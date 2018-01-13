@@ -92,7 +92,7 @@ public class RingBuilder extends SignalFactory {
 
         if (signal.getMelody() == null)
         {
-            signal.setMelody(preferenceHelper.loadMelodies().get(4));
+            signal.setMelody(preferenceHelper.loadMelodies().get(0));
         }
 
         return signal;
