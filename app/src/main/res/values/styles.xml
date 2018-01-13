@@ -19,6 +19,11 @@
         <item name="android:colorButtonNormal">@android:color/holo_green_light</item>
         <item name="colorControlHighlight">@android:color/holo_orange_dark</item>
     </style>
-
+    <style name="MyTextStyle" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:windowBackground">@android:color/holo_green_light</item>
+        <item name="android:colorControlNormal">@android:color/holo_green_light</item>
+    </style>
 
 </resources>
