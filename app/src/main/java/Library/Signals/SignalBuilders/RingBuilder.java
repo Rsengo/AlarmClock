@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import java.util.Date;
 
+import Library.DataHelpers.PreferenceHelper;
 import Library.Messages.IMessage;
 import Library.Messages.MessageFactory.MessageFactories;
 import Library.Messages.MessageFactory.MessageFactory;
@@ -24,6 +25,7 @@ import Library.User.User;
 public class RingBuilder extends SignalFactory {
 
     private Ring signal = new Ring();
+    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     @Override
     protected RingBuilder setId() {
@@ -104,6 +106,12 @@ public class RingBuilder extends SignalFactory {
     public ISignal build() {
         setId();
         setUserEmail();
+
+        if (signal.getMelody() == null)
+        {
+            signal.setMelody(preferenceHelper.loadMelodies().get(0));
+        }
+
         return signal;
     }
 }

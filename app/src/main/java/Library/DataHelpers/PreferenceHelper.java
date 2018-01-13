@@ -4,11 +4,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.example.ytgv8b.firsttry.R;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import Library.Settings.UserInterface;
 import Library.User.User;
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by ytgv8b on 01.11.2017.
@@ -20,13 +27,18 @@ public final class PreferenceHelper {
 
     private User user;
     private UserInterface userInterface;
+    private static Context context;
     private static Editor userEditor;
     private static SharedPreferences userPreferences;
     private static Editor startTimeEditor;
+    private static SharedPreferences melodyPreferences;
+    private static Editor melodyTimeEditor;
     private static SharedPreferences startTimePreferences;
     private final static String userFile = "USER_PREFERENCES"; //Имя файла на диске
     // с польз настройками
-    private final static String startFile = "START_TIME";
+    private final static String startFile = "START_TIME"; //первый запуск?
+    private final static String melodiesFile = "MELODIES";
+
 
     private String userEmail;
     private String userName;
@@ -34,6 +46,7 @@ public final class PreferenceHelper {
     private byte language;
     private byte fontSize;
     private long colorSchemeID;
+    private String[] melodies;
 
     private PreferenceHelper() {
         loadPreference();
@@ -51,10 +64,12 @@ public final class PreferenceHelper {
     }
 
     public static void init(Context context) {
+
         userPreferences = context.getSharedPreferences(userFile, Context.MODE_PRIVATE);
         userEditor = userPreferences.edit();
         startTimePreferences = context.getSharedPreferences(startFile, Context.MODE_PRIVATE);
         startTimeEditor = startTimePreferences.edit();
+        setContext(context);
     }
 
     public boolean isEmpty() {
@@ -102,7 +117,7 @@ public final class PreferenceHelper {
     }
 
 
-    public void loadPreference() {
+    private void loadPreference() {
         userName = userPreferences.getString("USER_NAME", "ss");
         userEmail = userPreferences.getString("USER_EMAIL", "hh");
         userMoney = userPreferences.getInt("USER_MONEY", 0);
@@ -111,14 +126,40 @@ public final class PreferenceHelper {
         colorSchemeID = userPreferences.getLong("COLOR_SCHEME_ID", 0);
     }
 
-    public void removePreference() {
-        String path = "/data/data/alarmclock/shared_prefs/" + userFile + ".xml";
-        File file= new File(path);
-        file.delete();
+    public ArrayList<String> loadMelodies() {
+        Map<String, ?> values = melodyPreferences.getAll();
+        ArrayList<String> melodies;
+        if (!values.isEmpty()) {
+            melodies = new ArrayList<>();
+
+            Observable<String> melodyObservable = Observable
+                    .fromIterable(values.values())
+                    .map(value -> (String)value);
+
+            Disposable disposable = melodyObservable.subscribe(s -> melodies.add(s));
+        } else {
+            melodies = loadMelodiesFromFolder();
+        }
+
+        return melodies;
+    }
+
+    private ArrayList<String> loadMelodiesFromFolder() {
+        File path = new File(context.getString(R.string.ringtone_folder));
+        ArrayList<String> melodies = new ArrayList<>();
+
+        Observable<String> fileObservable = Observable.fromArray(path.listFiles())
+                .map(file -> file.getName())
+                .map(s -> s.substring(0, s.length()-5));
+
+        Disposable disposable = fileObservable.subscribe(s -> melodies.add(s));
+
+        return melodies;
     }
 
     public void clearPreference() {
         userEditor.clear();
+        startTimeEditor.clear();
     }
 
     //getters and setters
@@ -157,5 +198,13 @@ public final class PreferenceHelper {
 
     public void setColorSchemeID(long colorSchemeID) {
         this.colorSchemeID = colorSchemeID;
+    }
+
+    public static Context getContext() {
+        return context;
+    }
+
+    private static void setContext(Context context) {
+        PreferenceHelper.context = context;
     }
 }
