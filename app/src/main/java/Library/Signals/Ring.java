@@ -44,7 +44,7 @@ public class Ring extends RealmObject implements IRing{
     private byte[] repeatDays = null; //Дни повтора
 
     @Required
-    private String userEmail; //Почта пользователя-владельца
+    private String userEmail; //Почта пользователя владельца
 
     @Ignore
     private IMessage message = null; //СМС
