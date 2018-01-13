@@ -40,8 +40,7 @@ public class Ring extends RealmObject implements IRing{
     private long repeatSignalInterval = 600000L; //интервал повторного запуска после откладывания
     private boolean vibrating = true; //вибрация(Вибрирующий)
     // TODO: 13.01.2018 default melody
-    @Required
-    private int melody; //мелодия
+    private String melody; //мелодия
     private final long turnOffTime = 300000L; //Время автовыключения в мс (default = 5 мин)
     private String description = "Будильник"; //Описание
     private boolean onState = true; //Вкл/Выкл звукового сигнала
@@ -124,11 +123,11 @@ public class Ring extends RealmObject implements IRing{
     }
 
     @Override
-    public int getMelody() {
+    public String getMelody() {
         return melody;
     }
 
-    public void setMelody(int melody) {
+    public void setMelody(String melody) {
         this.melody = melody;
     }
 

@@ -83,7 +83,7 @@ public class RingBuilder extends SignalFactory {
         return this;
     }
 
-    public RingBuilder setMelody(int melody) {
+    public RingBuilder setMelody(String melody) {
         signal.setMelody(melody);
         return this;
     }

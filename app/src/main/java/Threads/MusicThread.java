@@ -6,6 +6,8 @@ import android.media.AudioManager;
 import android.media.RingtoneManager;
 import android.media.SoundPool;
 
+import com.example.ytgv8b.firsttry.R;
+
 import Library.Signals.IRing;
 import Library.Signals.Notification;
 import Library.Signals.Ring;
@@ -15,15 +17,25 @@ import Library.Signals.Ring;
  */
 
 public class MusicThread extends Thread {
-    private IRing signal;
+    private String melody;
     private Context context;
     private AudioManager.OnAudioFocusChangeListener audioFocusChangeListener;
     private SoundPool soundPool;
+    private int loop;
+    private float volume;
 
     public MusicThread(Context context, IRing signal) {
         super("Music thread");
-        this.signal = signal;
+        melody = signal.getMelody();
         this.context = context;
+        loop = -1;
+    }
+
+    public MusicThread(String melody, Context context) {
+        super("Music thread");
+        this.melody = melody;
+        this.context = context;
+        loop = 0;
     }
 
     @Override
@@ -32,16 +44,11 @@ public class MusicThread extends Thread {
 
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
-        int melodyID = signal.getMelody();
-        float tryVolume;
-
         try {
-            tryVolume = audioManager.getStreamVolume(AudioManager.STREAM_RING);
+            volume = audioManager.getStreamVolume(AudioManager.STREAM_RING);
         }  catch (NullPointerException ex) {
-            tryVolume = 1;
+            volume = 1;
         }
-
-        final float volume = tryVolume;
 
         AudioAttributes.Builder audioAttributesBuilder = new AudioAttributes.Builder();
         audioAttributesBuilder.setUsage(AudioAttributes.USAGE_ALARM)
@@ -55,7 +62,8 @@ public class MusicThread extends Thread {
                 .setAudioAttributes(audioAttributes);
         soundPool = soundPullBuilder.build();
 
-        soundPool.load(context, melodyID, 1);
+        String path = context.getString(R.string.ringtone_folder) + melody + ".ogg";
+        int melodyID = soundPool.load(path, 1);
 
         soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
@@ -64,7 +72,7 @@ public class MusicThread extends Thread {
                         AudioManager.STREAM_RING, AudioManager.AUDIOFOCUS_GAIN);
 
                 if (focus == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-                    soundPool.play(melodyID, volume, volume, 1, -1, 1);
+                    soundPool.play(melodyID, volume, volume, 1, loop, 1);
                 }
             }
         });
@@ -80,7 +88,7 @@ public class MusicThread extends Thread {
                                     soundPool.resume(0);
                                 } catch (Exception ex) {
                                     soundPool.play(melodyID, volume, volume,
-                                            1, -1, 1);
+                                            1, loop, 1);
                                 }
                                 break;
                             case AudioManager.AUDIOFOCUS_LOSS:
