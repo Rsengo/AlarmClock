@@ -153,7 +153,6 @@ public final class PreferenceHelper {
         File path = new File(context.getString(R.string.ringtone_folder));
         ArrayList<String> melodies = new ArrayList<>();
 
-        // TODO: 14.01.2018 название мелодии
         Observable<String> fileObservable = Observable.fromArray(path.listFiles())
                 .map(file -> file.getName())
                 .filter(s -> {

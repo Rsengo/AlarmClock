@@ -39,7 +39,6 @@ public abstract class PuzzleActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
-        // TODO: 13.01.2018 locking
         DataBaseHelper.init(this);
         PreferenceHelper.init(this);
 
