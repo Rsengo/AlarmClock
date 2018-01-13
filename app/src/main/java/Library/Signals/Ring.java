@@ -301,7 +301,7 @@ public class Ring extends RealmObject implements IRing{
     }
 
     @NonNull
-    public static SignalFactory builder() {
+    public static RingBuilder builder() {
         return new RingBuilder();
     }
 }

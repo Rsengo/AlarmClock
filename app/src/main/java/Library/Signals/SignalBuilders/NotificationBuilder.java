@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.util.Date;
 
+import Library.Signals.INotification;
 import Library.Signals.ISignal;
 import Library.Signals.Notification;
 import Library.Signals.Ring;
@@ -73,7 +74,7 @@ public class NotificationBuilder extends SignalFactory {
 
 
     @Override
-    public ISignal build() {
+    public INotification build() {
         setId();
         setUserEmail();
         return signal;

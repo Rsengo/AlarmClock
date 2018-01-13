@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.ytgv8b.firsttry.Services.NotificationReceiver;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -32,24 +33,30 @@ public class Notification extends RealmObject implements INotification {
     private int id;
     @Required
     private String name = ""; //Имя
-    private byte generalPeriodicity = Notification.NOREPEAT; //Общая переодичность
+    private byte generalPeriodicity = Notification.PEREODICITY_NOREPEAT; //Общая переодичность
     private byte specificPeriodicity = 0; //Подробная
     private Date closeDate = null; //Ближайшая дата
     private byte priority = PRIORITY_DEFAULT; //Приоритет
     @Required
     private Date signalTime = new Date(); //Время запуска
-    private long repeatSignalInterval = AlarmManager.INTERVAL_DAY; //интервал повтора
+    private long repeatSignalInterval = INTERVAL_DAY; //интервал повтора
     // (Константа AlarmManager)
     private String description = null; //Описание
     @Required
     private String userEmail; //Почта пользователя-владельца
 
-    public static final byte NOREPEAT = 0;
-    public static final byte REPEAT_EVERYHOUR = 1;
-    public static final byte REPEAT_EEVEYDAY = 2;
-    public static final byte REPEAT_EVERYWEEK = 3;
-    public static final byte REPEAT_EVERYMOUNTH = 4;
-    public static final byte REPEAT_EVERYYEAR = 5;
+    public static final byte PEREODICITY_NOREPEAT = 0;
+    public static final byte PEREODICITY_EVERYHOUR = 1;
+    public static final byte PEREODICITY_EVERYDAY = 2;
+    public static final byte PEREODICITY_EVERYWEEK = 3;
+    public static final byte PEREODICITY_EVERYMOUNTH = 4;
+    public static final byte PEREODICITY_EVERYYEAR = 5;
+
+    public static final long INTERVAL_DAY = AlarmManager.INTERVAL_DAY;
+    public static final long INTERVAL_HALF_DAY = AlarmManager.INTERVAL_HALF_DAY;
+    public static final long FIFITEEN_MINUTES = AlarmManager.INTERVAL_FIFTEEN_MINUTES;
+    public static final long INTEVAL_HALF_HOUR = AlarmManager.INTERVAL_HALF_HOUR;
+    public static final long INTEVAL_HOUR = AlarmManager.INTERVAL_HOUR;
 
     public static final byte PRIORITY_LOW = 0;
     public static final byte PRIORITY_DEFAULT = 1;
@@ -103,6 +110,10 @@ public class Notification extends RealmObject implements INotification {
 
     public void setSignalTime(Date signalTime) {
         this.signalTime = signalTime;
+
+        if (System.currentTimeMillis() > signalTime.getTime())
+            recountSignalTime();
+
         closeDate = signalTime;
     }
 
@@ -141,30 +152,33 @@ public class Notification extends RealmObject implements INotification {
         return id;
     }
 
-    @Override
-    public void recountSignalTime(Context context) {
+    private void recountSignalTime() {
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(closeDate);
 
         switch (generalPeriodicity) {
-            case (NOREPEAT):
+            case (PEREODICITY_NOREPEAT):
                 break;
-            case (REPEAT_EVERYHOUR):
+            case (PEREODICITY_EVERYHOUR):
                 calendar.add(Calendar.HOUR, specificPeriodicity);
                 break;
-            case (REPEAT_EEVEYDAY):
+            case (PEREODICITY_EVERYDAY):
                 calendar.add(Calendar.DAY_OF_YEAR, specificPeriodicity);
                 break;
-            case (REPEAT_EVERYMOUNTH):
+            case (PEREODICITY_EVERYMOUNTH):
                 calendar.add(Calendar.MONTH, specificPeriodicity);
                 break;
-            case (REPEAT_EVERYYEAR):
+            case (PEREODICITY_EVERYYEAR
+            ):
                 calendar.add(Calendar.YEAR, specificPeriodicity);
                 break;
         }
 
         closeDate = calendar.getTime();
+    }
 
+    @Override
+    public void recountSignalTime(Context context) {
         turnOn(context);
     }
 
@@ -206,13 +220,13 @@ public class Notification extends RealmObject implements INotification {
         Intent intent = new Intent(context, NotificationReceiver.class);
         intent.putExtra("id", id);
         PendingIntent pendingIntent =
-                PendingIntent.getActivity(context, id, intent, 0);
+                PendingIntent.getBroadcast(context, id, intent, 0);
 
         return pendingIntent;
     }
 
     @NonNull
-    public static SignalFactory builder() {
+    public static NotificationBuilder builder() {
         return new NotificationBuilder();
     }
 }

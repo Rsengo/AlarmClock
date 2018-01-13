@@ -63,6 +63,8 @@ public class User implements  IUser {
                 UIBuilder uiBuilder = new DefaultUIBuilder();
                 UIDirector director = new UIDirector(uiBuilder);
                 ISetting setting = director.construct();
+                user.setRings(new ArrayList<>());
+                user.setNotifications(new ArrayList<>());
                 user.setUserInterface(setting);
             }
         }

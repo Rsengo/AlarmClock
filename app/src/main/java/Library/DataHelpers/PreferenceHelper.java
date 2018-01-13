@@ -116,7 +116,6 @@ public final class PreferenceHelper {
         userEditor.apply();
     }
 
-
     private void loadPreference() {
         userName = userPreferences.getString("USER_NAME", "ss");
         userEmail = userPreferences.getString("USER_EMAIL", "hh");
@@ -127,19 +126,25 @@ public final class PreferenceHelper {
     }
 
     public ArrayList<String> loadMelodies() {
-        Map<String, ?> values = melodyPreferences.getAll();
-        ArrayList<String> melodies;
-        if (!values.isEmpty()) {
-            melodies = new ArrayList<>();
-
-            Observable<String> melodyObservable = Observable
-                    .fromIterable(values.values())
-                    .map(value -> (String)value);
-
-            Disposable disposable = melodyObservable.subscribe(s -> melodies.add(s));
-        } else {
-            melodies = loadMelodiesFromFolder();
+        Map<String, ?> values;
+        try {
+            values = melodyPreferences.getAll();
+        } catch (NullPointerException ex) {
+            return loadMelodiesFromFolder();
         }
+
+            ArrayList<String> melodies;
+            if (!values.isEmpty()) {
+                melodies = new ArrayList<>();
+
+                Observable<String> melodyObservable = Observable
+                        .fromIterable(values.values())
+                        .map(value -> (String) value);
+
+                Disposable disposable = melodyObservable.subscribe(s -> melodies.add(s));
+            } else {
+                melodies = loadMelodiesFromFolder();
+            }
 
         return melodies;
     }
@@ -150,7 +155,7 @@ public final class PreferenceHelper {
 
         Observable<String> fileObservable = Observable.fromArray(path.listFiles())
                 .map(file -> file.getName())
-                .map(s -> s.substring(0, s.length()-5));
+                .map(s -> s.substring(0, s.length()-4));
 
         Disposable disposable = fileObservable.subscribe(s -> melodies.add(s));
 

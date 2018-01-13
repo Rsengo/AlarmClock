@@ -5,11 +5,19 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.PreferenceHelper;
 import Library.Messages.SMS;
+import Library.PuzzlesThings.PuzzleFactory;
 import Library.Settings.UserInterface;
+import Library.Signals.IRing;
+import Library.Signals.Notification;
 import Library.Signals.Ring;
+import Library.Signals.SignalBuilders.NotificationBuilder;
+import Library.Signals.SignalBuilders.RingBuilder;
+import Library.Signals.SignalBuilders.SignalFactory;
 import Library.User.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,46 +49,39 @@ public class MainActivity extends AppCompatActivity {
             preferenceHelper.writePreference();
         });
 
-        Button button3 = (Button)findViewById(R.id.button5);
-
-        button3.setOnClickListener(view -> {
-            User user = User.getInstance();
-            textView.setText(user.getEmail());
-        });
-
         Button button2 = (Button)findViewById(R.id.button2);
 
         button2.setOnClickListener(view -> {
             User user = User.getInstance();
-            Ring ring = new Ring();
-            ring.setId(Ring.getNextId());
-            ring.setUserEmail(user.getEmail());
-            ring.setDescription("dgdfgdgdgfd "+ring.getId());
-            textView.setText(ring.getUserEmail());
-            SMS message = new SMS();
-            message.setId(ring.getId());
-            message.setText("my message");
-            ring.setMessage(message);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MILLISECOND, 10000);
+
+            RingBuilder builder = Ring.builder();
+            builder.setSignalTime(calendar.getTime())
+                    .setPuzzle(PuzzleFactory.CONNECT)
+                    .setOnState(true, getApplicationContext())
+                    .setMessage("SMS", "Hi",
+                            "Gl", "+79502790929");
+
+            Ring ring = (Ring)builder.build();
             user.addRing(ring);
 
-        });
+            /*NotificationBuilder builder = new NotificationBuilder();
+            builder.setSignalTime(calendar.getTime())
+                    .setDescription("xhdfjgkuhlij;ok")
+                    .setName("Notif")
+                    .setPriority(Notification.PRIORITY_DEFAULT);
 
-        Button button7 = (Button)findViewById(R.id.button7);
-
-        button7.setOnClickListener(view -> {
-            User user = User.getInstance();
-            //user.setRings(dataBaseHelper.loadRings());
-            //IRing ring = user.getRings()
-                //    .get(0);
-//            textView.setText(((Ring)ring).getDescription());
-            textView.setText(String.valueOf(user.getRings().size()));
-        });
-
-        Button button6 = (Button)findViewById(R.id.button6);
-
-        button6.setOnClickListener(view -> {
-            User user = User.getInstance();
-            user.removeRing(0);
+            Notification notification = (Notification) builder.build();
+            user.addNotification(notification);
+            notification.turnOn(getApplicationContext());
+            String s = String.valueOf(notification.getCloseDate().getHours())
+                    + "; "
+                    + String.valueOf(notification.getCloseDate().getMinutes())
+                    + "; "
+                    + String.valueOf(notification.getCloseDate().getSeconds());
+            textView.setText(s);*/
         });
     }
 }

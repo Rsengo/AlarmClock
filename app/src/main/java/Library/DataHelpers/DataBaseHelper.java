@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import Library.IRealmModelWithID;
 import Library.Messages.IMessage;
-import Library.Messages.MessageFactory.MessageFactories;
 import Library.Messages.MessageFactory.MessageFactory;
 import Library.Settings.ColorScheme;
 import Library.Settings.UserInterface;
