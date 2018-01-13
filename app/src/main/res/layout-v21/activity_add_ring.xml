@@ -47,7 +47,7 @@
         android:choiceMode="multipleChoiceModal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timePicker2"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupMethod"
         tools:listitem="@android:layout/simple_list_item_multiple_choice">
 
     </ListView>
@@ -78,21 +78,23 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="1dp"
         android:adjustViewBounds="true"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="@+id/radioGroupMethod"
-        app:layout_constraintTop_toBottomOf="@+id/discription"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker2"
         app:srcCompat="@mipmap/golovolomka" />
 
     <ImageView
         android:id="@+id/simple"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="72dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="1dp"
         android:adjustViewBounds="true"
         android:scaleType="centerInside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/discription"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker2"
         app:srcCompat="@mipmap/obychnoe" />
 
     <ImageView
@@ -104,20 +106,20 @@
         android:adjustViewBounds="true"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toStartOf="@+id/head"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toEndOf="@+id/simple"
-        app:layout_constraintTop_toBottomOf="@+id/discription"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker2"
         app:srcCompat="@mipmap/primer" />
 
     <RadioGroup
         android:id="@+id/radioGroupMethod"
-        android:layout_width="match_parent"
+        android:layout_width="381dp"
         android:layout_height="41dp"
         android:layout_marginTop="8dp"
         android:checkedButton="@+id/radio_simple"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/discription">
+        app:layout_constraintTop_toBottomOf="@+id/timePicker2">
 
         <RadioButton
             android:id="@+id/radio_simple"
