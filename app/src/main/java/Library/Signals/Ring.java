@@ -8,15 +8,11 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import Library.Signals.SignalBuilders.*;
 
-
-import com.example.ytgv8b.firsttry.MainActivity;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 import Library.DataHelpers.DataBaseHelper;
-import Library.IRealmModelWithID;
 import Library.Messages.IMessage;
 import Library.PuzzlesThings.PuzzleFactory;
 import io.realm.RealmObject;
