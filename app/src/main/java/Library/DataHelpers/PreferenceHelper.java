@@ -162,7 +162,10 @@ public final class PreferenceHelper {
                 })
                 .map(s -> {
                     String[] s1 = s.split("\\.");
-                    return  s1[0];
+                    String result = "";
+                    for (int i = 0; i < s1.length - 1; i++)
+                        result += s1[i];
+                    return  result;
                 });
 
         Disposable disposable = fileObservable.subscribe(s -> melodies.add(s));

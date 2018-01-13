@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
             ring.turnOn(this);
             user.addRing(ring);
 
+            textView.setText(preferenceHelper.loadMelodies().get(0));
+
             /*NotificationBuilder builder = new NotificationBuilder();
             builder.setSignalTime(calendar.getTime())
                     .setDescription("xhdfjgkuhlij;ok")
