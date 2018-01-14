@@ -7,12 +7,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.FileSystemHelper;
 import Library.DataHelpers.PreferenceHelper;
+import Library.User.User;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -33,7 +35,7 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         PreferenceHelper helper = PreferenceHelper.getInstance();
-        if (helper.isFirstStart())
+       if (helper.isFirstStart())
         {
             Intent intent = new Intent(getApplicationContext(), StartActivity.class);
             startActivity(intent);

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,6 +30,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+import Library.DataHelpers.FileSystemHelper;
+import Library.Messages.IMessage;
+import Library.Messages.MessageFactory.SMSBuilder;
 import Library.Messages.SMS;
 import Library.Signals.Ring;
 import Library.Signals.SignalBuilders.RingBuilder;
@@ -399,6 +403,11 @@ public class AddRing extends AppCompatActivity {
                         public void onClick(View v) {
                             switchSms.setText(" SMS "+userInput.getText().toString());
                             phonenumber=userInput.getText().toString();//добавить SMS
+                            SMSBuilder smsb = new SMSBuilder();
+                            smsb.setText("Разбуди меня, пожалуйста");
+                            smsb.setRecepient("Получатель", phonenumber);
+                            IMessage message1 = smsb.build();
+                            ringBuilder.setMessage(message1);
                             alertDialog1.cancel();
                         }
                     });
@@ -418,6 +427,49 @@ public class AddRing extends AppCompatActivity {
                     switchSms.setText(" SMS ");
                     ringBuilder.setMessage(null);
                 }
+            }
+        });
+        // TODO: 14.01.2018 Добавление музыки!
+        Button music = (Button)findViewById(R.id.music);
+        TextView melody = (TextView)findViewById(R.id.namemelody) ;
+        music.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater li = LayoutInflater.from(context);
+                View promptsView = li.inflate(R.layout.music, null);
+
+                //Создаем AlertDialog
+                AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(context);
+
+                //Настраиваем prompt.xml для нашего AlertDialog:
+                mDialogBuilder.setView(promptsView);
+
+                //Настраиваем отображение поля для ввода текста в открытом диалоге:
+                ListView musiclist = (ListView)promptsView.findViewById(R.id.musiclist);
+                ArrayList<String> namesmusic=FileSystemHelper.getInstance().loadMelodies();
+                ArrayAdapter<String> musicadapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_single_choice, namesmusic);
+                musiclist.setAdapter(musicadapter);
+                musiclist.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+                musiclist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String musicname = namesmusic.get(position);
+                        ringBuilder.setMelody(musicname);
+                        melody.setText(musicname);
+                        alertDialog1.cancel();
+                    }
+                });
+
+                //Настраиваем сообщение в диалоговом окне:
+                mDialogBuilder
+                        .setCancelable(true)
+                        .setTitle("Выберите мелодию:");
+
+                //Создаем AlertDialog:
+                alertDialog1 = mDialogBuilder.create();
+
+                //и отображаем его:
+                alertDialog1.show();
             }
         });
 }}
