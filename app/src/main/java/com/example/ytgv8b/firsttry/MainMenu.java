@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import Library.DataHelpers.DataBaseHelper;
+import Library.DataHelpers.FileSystemHelper;
 import Library.DataHelpers.PreferenceHelper;
 
 public class MainMenu extends AppCompatActivity {
@@ -19,10 +21,17 @@ public class MainMenu extends AppCompatActivity {
     private ViewPager viewPager;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        PreferenceHelper.init(this);
+        DataBaseHelper.init(this);
+        FileSystemHelper.init(this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        PreferenceHelper.init(this);
         PreferenceHelper helper = PreferenceHelper.getInstance();
         if (helper.isFirstStart())
         {
