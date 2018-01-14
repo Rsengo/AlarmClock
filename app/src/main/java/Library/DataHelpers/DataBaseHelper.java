@@ -89,14 +89,12 @@ public final class DataBaseHelper {
         IMessage message = null;
         try (Realm realm = Realm.getDefaultInstance()) {
             try {
+                // TODO: 14.01.2018 просматривать остальные классы
                 IMessage realmMessage = realm.where(SMS.class)
                         .equalTo("id", id)
                         .findFirst();
-                if (realmMessage != null) {
+                if (realmMessage != null)
                     message = realm.copyFromRealm(realmMessage);
-                } else {
-                    // TODO: 14.01.2018 просматривать остальные классы
-                }
             } catch (Exception ex) {
                 Log.d("Null pointer", "null");
             }
@@ -119,7 +117,7 @@ public final class DataBaseHelper {
             for (Ring ring: realmResults)
             {
                 Ring copyRing = realm.copyFromRealm(ring);
-                IMessage message = null;
+                IMessage message;
 
                 message = loadMesssage(ring.getId());
 

@@ -80,6 +80,7 @@ public class Ring extends RealmObject implements IRing{
         this.puzzle = puzzle;
     }
 
+    @Override
     public IMessage getMessage() { //Null obj pattern
         if (message == null)
         {

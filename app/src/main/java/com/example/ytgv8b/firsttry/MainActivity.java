@@ -13,6 +13,7 @@ import Library.Messages.MessageFactory.MessageBuilder;
 import Library.Messages.MessageFactory.SMSBuilder;
 import Library.PuzzlesThings.PuzzleFactory;
 import Library.Settings.UserInterface;
+import Library.Signals.IRing;
 import Library.Signals.Notification;
 import Library.Signals.Ring;
 import Library.Signals.SignalBuilders.NotificationBuilder;
@@ -38,6 +39,16 @@ public class MainActivity extends AppCompatActivity {
 
         button1.setOnClickListener(view -> {
             User user = User.getInstance();
+            IRing ring = user.getRings().get(0);
+            textView.setText(ring.getMessage().getText());
+            ring.sendMessage();
+        });
+
+        Button button2 = (Button)findViewById(R.id.button2);
+
+        button2.setOnClickListener(view -> {
+            User user = User.getInstance();
+
             user.setName("user");
             user.setEmail("email");
             user.setMoneyQuantity(100);
@@ -46,31 +57,26 @@ public class MainActivity extends AppCompatActivity {
             settings.setColorSchemeId(0);
             settings.setFontSize(UserInterface.FONT_SIZE_DEFAULT);
             preferenceHelper.writePreference();
-        });
-
-        Button button2 = (Button)findViewById(R.id.button2);
-
-        button2.setOnClickListener(view -> {
-            User user = User.getInstance();
 
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.MILLISECOND, 3000);
 
-            /*MessageBuilder messageBuilder = new SMSBuilder();
+            MessageBuilder messageBuilder = new SMSBuilder();
             messageBuilder.setText("Text")
-                    .setRecepient("badf", "dsfsdfs");
+                    .setRecepient("badf", "89138110659");
 
             RingBuilder builder = Ring.builder();
             builder.setSignalTime(calendar.getTime())
-                    .setPuzzle(Ring.PUZZLE_CONNECT);
+                    .setPuzzle(Ring.PUZZLE_CONNECT)
+                    .setMessage(messageBuilder.build());
 
             Ring ring = (Ring)builder.build();
-            ring.turnOn(this);
-            user.addRing(ring);*/
+            //ring.turnOn(this);
+            user.addRing(ring);
 
             textView.setText(preferenceHelper.loadMelodies().get(0));
 
-            NotificationBuilder builder = new NotificationBuilder();
+            /*NotificationBuilder builder = new NotificationBuilder();
             builder.setSignalTime(calendar.getTime())
                     .setDescription("xhdfjgkuhlij;ok")
                     .setName("Notif")
@@ -84,7 +90,14 @@ public class MainActivity extends AppCompatActivity {
                     + String.valueOf(notification.getCloseDate().getMinutes())
                     + "; "
                     + String.valueOf(notification.getCloseDate().getSeconds());
-            textView.setText(s);
+            textView.setText(s);*/
+        });
+
+        Button button3 = (Button)findViewById(R.id.button3);
+
+        button3.setOnClickListener(view -> {
+            User user = User.getInstance();
+            textView.setText(String.valueOf(user.getRings().size()));
         });
     }
 }
