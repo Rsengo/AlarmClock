@@ -30,7 +30,7 @@ public class Ring extends RealmObject implements IRing{
     @PrimaryKey
     private int id;
 
-    private byte puzzle = PUZZLE_CONNECT; //головоломка
+    private byte puzzle = PUZZLE_DEFAULT; //головоломка
     @Required
     private Date signalTime = null; //Время запуска
     private long repeatSignalInterval = 600000L; //интервал повторного запуска после откладывания

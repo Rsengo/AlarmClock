@@ -57,7 +57,7 @@ public class NotificationFragment extends Fragment {
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i  =new Intent(v.getContext(),NotificationFragment.class);
+                Intent i  =new Intent(v.getContext(),AddNotification.class);
                 startActivity(i);
             }
         });

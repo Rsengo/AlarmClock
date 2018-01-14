@@ -1,5 +1,6 @@
 package Library.PuzzlesThings;
 
+import com.example.ytgv8b.firsttry.Puzzles.DefaultPuzzleActivity;
 import com.example.ytgv8b.firsttry.Puzzles.DisplayCalculateActivity;
 import com.example.ytgv8b.firsttry.Puzzles.DisplayConnectActivity;
 import com.example.ytgv8b.firsttry.MainActivity;
@@ -19,7 +20,7 @@ public class PuzzleFactory {
 
     private static void complete() {
         if (puzzles.isEmpty()) {
-            puzzles.put(Ring.PUZZLE_DEFAULT, MainActivity.class);
+            puzzles.put(Ring.PUZZLE_DEFAULT, DefaultPuzzleActivity.class);
             puzzles.put(Ring.PUZZLE_CALCULATE, DisplayCalculateActivity.class);
             puzzles.put(Ring.PUZZLE_CONNECT, DisplayConnectActivity.class);
         }
