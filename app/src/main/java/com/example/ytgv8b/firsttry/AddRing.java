@@ -315,10 +315,13 @@ public class AddRing extends AppCompatActivity {
                 {
                     case R.id.radio_simple:
                         ringBuilder.setPuzzle(Ring.PUZZLE_DEFAULT);//Билдер способа выключения
+                        break;
                     case R.id.primer:
-                        ringBuilder.setPuzzle((byte)1);
+                        ringBuilder.setPuzzle(Ring.PUZZLE_CALCULATE);
+                        break;
                     case R.id.head:
-                        ringBuilder.setPuzzle((byte)2);
+                        ringBuilder.setPuzzle(Ring.PUZZLE_CONNECT);
+                        break;
                 }
             }
         });
