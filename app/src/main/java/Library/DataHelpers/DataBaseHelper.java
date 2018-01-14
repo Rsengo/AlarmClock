@@ -27,7 +27,6 @@ import io.realm.RealmResults;
  */
 
 public final class DataBaseHelper {
-/****считывание ProgramInfo****/
 
     private User user;
     private UserInterface userInterface;
