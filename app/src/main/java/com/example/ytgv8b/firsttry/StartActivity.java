@@ -21,9 +21,7 @@ public class StartActivity extends AppCompatActivity {
         EditText editText1 = (EditText)findViewById(R.id.editText);
         EditText editText2 = (EditText)findViewById(R.id.editText2);
         PreferenceHelper helper = PreferenceHelper.getInstance();
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        button.setOnClickListener(view -> {
                 if(editText2.getText().equals("Введите имя")&&editText2.getText().equals(""))
                 {
 
@@ -40,7 +38,6 @@ public class StartActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-            }
         });
     }
 }
