@@ -9,8 +9,9 @@ import android.widget.Toast;
 
 public class Kostyl {
     public static void makeToast(Context context) {
-        Toast toast = Toast.makeText(context, "Функция пока не достпна. Проект находится " +
-                "в активной разработке ;)", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(context, "Функция пока не доступна. Проект находится " +
+                "в активной доработке ;)", Toast.LENGTH_LONG);
+        toast.show();
     }
 
 }
