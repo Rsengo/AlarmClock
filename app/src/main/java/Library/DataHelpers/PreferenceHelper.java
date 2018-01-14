@@ -27,17 +27,13 @@ public final class PreferenceHelper {
 
     private User user;
     private UserInterface userInterface;
-    private static Context context;
     private static Editor userEditor;
     private static SharedPreferences userPreferences;
     private static Editor startTimeEditor;
-    private static SharedPreferences melodyPreferences;
-    private static Editor melodyTimeEditor;
     private static SharedPreferences startTimePreferences;
     private final static String userFile = "USER_PREFERENCES"; //Имя файла на диске
     // с польз настройками
     private final static String startFile = "START_TIME"; //первый запуск?
-    private final static String melodiesFile = "MELODIES";
 
 
     private String userEmail;
@@ -69,7 +65,6 @@ public final class PreferenceHelper {
         userEditor = userPreferences.edit();
         startTimePreferences = context.getSharedPreferences(startFile, Context.MODE_PRIVATE);
         startTimeEditor = startTimePreferences.edit();
-        setContext(context);
     }
 
     public boolean isEmpty() {
@@ -125,53 +120,6 @@ public final class PreferenceHelper {
         colorSchemeID = userPreferences.getLong("COLOR_SCHEME_ID", 0);
     }
 
-    public ArrayList<String> loadMelodies() {
-        Map<String, ?> values;
-        try {
-            values = melodyPreferences.getAll();
-        } catch (NullPointerException ex) {
-            return loadMelodiesFromFolder();
-        }
-
-            ArrayList<String> melodies;
-            if (!values.isEmpty()) {
-                melodies = new ArrayList<>();
-
-                Observable<String> melodyObservable = Observable
-                        .fromIterable(values.values())
-                        .map(value -> (String) value);
-
-                Disposable disposable = melodyObservable.subscribe(s -> melodies.add(s));
-            } else {
-                melodies = loadMelodiesFromFolder();
-            }
-
-        return melodies;
-    }
-
-    private ArrayList<String> loadMelodiesFromFolder() {
-        File path = new File(context.getString(R.string.ringtone_folder));
-        ArrayList<String> melodies = new ArrayList<>();
-
-        Observable<String> fileObservable = Observable.fromArray(path.listFiles())
-                .map(file -> file.getName())
-                .filter(s -> {
-                    String[] s1 = s.split("\\.");
-                    return s1[1].equals("ogg");
-                })
-                .map(s -> {
-                    String[] s1 = s.split("\\.");
-                    String result = "";
-                    for (int i = 0; i < s1.length - 1; i++)
-                        result += s1[i];
-                    return  result;
-                });
-
-        Disposable disposable = fileObservable.subscribe(s -> melodies.add(s));
-
-        return melodies;
-    }
-
     public void clearPreference() {
         userEditor.clear();
         startTimeEditor.clear();
@@ -213,13 +161,5 @@ public final class PreferenceHelper {
 
     public void setColorSchemeID(long colorSchemeID) {
         this.colorSchemeID = colorSchemeID;
-    }
-
-    public static Context getContext() {
-        return context;
-    }
-
-    private static void setContext(Context context) {
-        PreferenceHelper.context = context;
     }
 }
