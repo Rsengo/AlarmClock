@@ -2,6 +2,7 @@ package com.example.ytgv8b.firsttry;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -93,8 +94,8 @@ public class MainMenu extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new RingFragment(), "Ring");
-        adapter.addFragment(new RingFragment(), "Уведомления");
+        adapter.addFragment(new RingFragment(), "Будильники");
+        adapter.addFragment(new NotificationFragment(), "Уведомления");
         viewPager.setAdapter(adapter);
     }
 }

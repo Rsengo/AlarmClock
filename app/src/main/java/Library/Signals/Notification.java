@@ -39,7 +39,7 @@ public class Notification extends RealmObject implements INotification {
     private byte priority = PRIORITY_DEFAULT; //Приоритет
     @Required
     private Date signalTime = new Date(); //Время запуска
-    private long repeatSignalInterval = INTERVAL_DAY; //интервал повтора
+    private long repeatSignalInterval = 0; //интервал повтора
     // (Константа AlarmManager)
     private String description = null; //Описание
     @Required
@@ -52,7 +52,7 @@ public class Notification extends RealmObject implements INotification {
     public static final byte PEREODICITY_EVERYMOUNTH = 4;
     public static final byte PEREODICITY_EVERYYEAR = 5;
 
-    public static final long INTERVAL_DAY = AlarmManager.INTERVAL_DAY;
+    public static final long INTERVAL_NOREPEAT = 0;
     public static final long INTERVAL_HALF_DAY = AlarmManager.INTERVAL_HALF_DAY;
     public static final long FIFITEEN_MINUTES = AlarmManager.INTERVAL_FIFTEEN_MINUTES;
     public static final long INTEVAL_HALF_HOUR = AlarmManager.INTERVAL_HALF_HOUR;
