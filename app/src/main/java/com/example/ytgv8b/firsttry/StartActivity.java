@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import Library.DataHelpers.DataBaseHelper;
+import Library.DataHelpers.FileSystemHelper;
 import Library.DataHelpers.PreferenceHelper;
 import Library.User.User;
 

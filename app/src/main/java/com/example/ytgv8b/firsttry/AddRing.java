@@ -86,7 +86,7 @@ public class AddRing extends AppCompatActivity {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.HOUR,hourOfDay);
+                calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
                 calendar.set(Calendar.MINUTE,minute);
                 Date date  = calendar.getTime();
                 ringBuilder.setSignalTime(date);//Билдер времени
@@ -314,9 +314,9 @@ public class AddRing extends AppCompatActivity {
                     case R.id.radio_simple:
                         ringBuilder.setPuzzle(Ring.PUZZLE_DEFAULT);//Билдер способа выключения
                     case R.id.primer:
-                        ringBuilder.setPuzzle(Ring.PUZZLE_CALCULATE);
+                        ringBuilder.setPuzzle((byte)1);
                     case R.id.head:
-                        ringBuilder.setPuzzle(Ring.PUZZLE_CONNECT);
+                        ringBuilder.setPuzzle((byte)2);
                 }
             }
         });
@@ -365,6 +365,7 @@ public class AddRing extends AppCompatActivity {
                 ringBuilder.setRepeatSignalInterval(numberPicker.getValue());
                 IRing ring = ringBuilder.build();
                 User.getInstance().addRing(ring);
+                ring.turnOn(context);
                 Intent intent = new Intent(getApplicationContext(), MainMenu.class);
                 startActivity(intent);
             }
@@ -453,7 +454,8 @@ public class AddRing extends AppCompatActivity {
                 //Настраиваем отображение поля для ввода текста в открытом диалоге:
                 ListView musiclist = (ListView)promptsView.findViewById(R.id.musiclist);
                 ArrayList<String> namesmusic=FileSystemHelper.getInstance().loadMelodies();
-                ArrayAdapter<String> musicadapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_single_choice, namesmusic);
+                ArrayAdapter<String> musicadapter = new ArrayAdapter<String>(getApplicationContext(),
+                        android.R.layout.simple_list_item_single_choice, namesmusic);
                 musiclist.setAdapter(musicadapter);
                 musiclist.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
                 musiclist.setOnItemClickListener(new AdapterView.OnItemClickListener() {

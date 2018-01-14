@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.view.View.OnClickListener;
@@ -18,15 +19,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 
+import Library.Signals.IRing;
 import Library.Signals.Ring;
+import Library.User.User;
 
 
 public class RingFragment extends Fragment {
@@ -55,23 +62,40 @@ public class RingFragment extends Fragment {
                startActivity(i);
             }
         });
-       listview = (ListView) rootView.findViewById(R.id.listView);
+       ListView listview = (ListView) rootView.findViewById(R.id.listView);
 
-        Ring r1 = new Ring();
-        r1.setDescription("r1");
-        Ring r2 = new Ring();
-        r2.setDescription("r2");
-        Ring r3 = new Ring();
-        r3.setDescription("r3");
-        ArrayList<Ring> list1= new ArrayList<Ring>();
-        list1.add(r1);
-        list1.add(r2);
-        list1.add(r3);
-        ArrayList<String> list2= new ArrayList<String>();
-        for (int i = 0; i<list1.size();i++)
-        {
-            list2.add(list1.get(i).getDescription());
+        ArrayList<IRing> rings =User.getInstance().getRings();
+
+// Упаковываем данные
+        ArrayList<HashMap<String, Object>> data = new ArrayList<>(
+                rings.size());
+        HashMap<String, Object> map;
+        for (int i = 0; i < rings.size(); i++) {
+            map = new HashMap<>();
+            SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+            String time =format.format(rings.get(i).getSignalTime());
+            //Calendar calendar = Calendar.getInstance();
+           // calendar.setTime(rings.get(i).getSignalTime());
+            //String time = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY))+
+            //        ":"+String.valueOf(calendar.get(Calendar.MINUTE));
+            map.put("RingName", time);
+            map.put("IsState", rings.get(i).isOnState());;
+            data.add(map);
         }
+
+// Массив имен атрибутов, из которых будут читаться данные
+        String[] from = {"RingName", "IsState"};
+
+// Массив идентификаторов компонентов, в которые будем вставлять данные
+        int[] to = {R.id.textbox_name, R.id.switch2};
+
+// создаем адаптер
+        SimpleAdapter adapter = new SimpleAdapter(this.getContext(), data, R.layout.list_item,
+                from, to);
+
+// Устанавливаем адаптер для списка
+        listview.setAdapter(adapter);
+
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -80,10 +104,15 @@ public class RingFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
-       ArrayAdapter<String> list = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_list_item_1,list2 ) ;
-        listview.setAdapter(list);
+        listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                User.getInstance().removeRing(i);
+                listview.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
         return rootView;
 
     }

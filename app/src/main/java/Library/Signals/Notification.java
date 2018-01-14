@@ -96,6 +96,7 @@ public class Notification extends RealmObject implements INotification {
         this.specificPeriodicity = specificPeriodicity;
     }
 
+    @Override
     public byte getPriority() {
         return priority;
     }
@@ -104,6 +105,7 @@ public class Notification extends RealmObject implements INotification {
         this.priority = priority;
     }
 
+    @Override
     public Date getSignalTime() {
         return signalTime;
     }

@@ -16,10 +16,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/numberPicker"
-        app:layout_constraintTop_toBottomOf="@+id/music" />
+        app:layout_constraintTop_toBottomOf="@+id/music"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton2"

@@ -12,4 +12,5 @@ public interface IRing extends ISignal {
     String getMelody();
     long getTurnOffTime();
     boolean isDeleteAfterUsing();
+    boolean isOnState();
 }

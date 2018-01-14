@@ -19,7 +19,7 @@ public class PuzzleFactory {
 
     private static void complete() {
         if (puzzles.isEmpty()) {
-            puzzles.put(Ring.PUZZLE_CONNECT, MainActivity.class);
+            puzzles.put(Ring.PUZZLE_DEFAULT, MainActivity.class);
             puzzles.put(Ring.PUZZLE_CALCULATE, DisplayCalculateActivity.class);
             puzzles.put(Ring.PUZZLE_CONNECT, DisplayConnectActivity.class);
         }

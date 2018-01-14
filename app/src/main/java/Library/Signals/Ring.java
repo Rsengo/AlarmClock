@@ -30,7 +30,7 @@ public class Ring extends RealmObject implements IRing{
     @PrimaryKey
     private int id;
 
-    private byte puzzle = PUZZLE_DEFAULT; //головоломка
+    private byte puzzle = PUZZLE_CONNECT; //головоломка
     @Required
     private Date signalTime = null; //Время запуска
     private long repeatSignalInterval = 600000L; //интервал повторного запуска после откладывания
@@ -97,6 +97,7 @@ public class Ring extends RealmObject implements IRing{
         return repeatDays;
     }
 
+    @Override
     public Date getSignalTime() {
         return signalTime;
     }
@@ -140,7 +141,7 @@ public class Ring extends RealmObject implements IRing{
         return turnOffTime;
     }
 
-
+    @Override
     public boolean isOnState() {
         return onState;
     }
