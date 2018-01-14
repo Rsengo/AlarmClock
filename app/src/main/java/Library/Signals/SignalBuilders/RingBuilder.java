@@ -19,7 +19,6 @@ import Library.User.User;
 public class RingBuilder extends SignalFactory {
 
     private Ring signal = new Ring();
-    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     @Override
     protected RingBuilder setId() {
