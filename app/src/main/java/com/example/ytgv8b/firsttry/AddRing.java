@@ -30,6 +30,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+import Kostyly.Kostyl;
 import Library.DataHelpers.FileSystemHelper;
 import Library.Messages.IMessage;
 import Library.Messages.MessageFactory.SMSBuilder;
@@ -274,11 +275,12 @@ public class AddRing extends AppCompatActivity {
                                 alertDialog1.cancel();
                                 break;
                             case R.id.radioButtonChoose:
-                                map.clear();
+                                /*map.clear();
                                 map.put("Name", "Повторять");
                                 map.put("Tel", "...");
                                 repeatDase.setAdapter(adapter1);
-                                alertDialog1.cancel();
+                                alertDialog1.cancel();*/
+                                Kostyl.makeToast(context);
                                 break;
                         }
                     }

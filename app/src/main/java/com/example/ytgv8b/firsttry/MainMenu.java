@@ -11,10 +11,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import Kostyly.Kostyl;
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.FileSystemHelper;
 import Library.DataHelpers.PreferenceHelper;
-import Library.User.User;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -70,22 +70,22 @@ public class MainMenu extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.settings:
-
-                return true;
-            case R.id.settings2:
-
+                Kostyl.makeToast(this);
                 return true;
             case R.id.profil:
+                Kostyl.makeToast(this);
                 return true;
             case R.id.developers:
+                Kostyl.makeToast(this);
                 return true;
             case R.id.instruction:
+                Kostyl.makeToast(this);
                 return true;
             case R.id.sleep:
+                Kostyl.makeToast(this);
                 return true;
-
-
             default:
+                Kostyl.makeToast(this);
                 return super.onOptionsItemSelected(item);
         }
 
