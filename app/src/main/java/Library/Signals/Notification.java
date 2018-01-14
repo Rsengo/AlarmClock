@@ -111,12 +111,16 @@ public class Notification extends RealmObject implements INotification {
     }
 
     public void setSignalTime(Date signalTime) {
-        this.signalTime = signalTime;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(signalTime);
+        calendar.set(Calendar.SECOND, 0);
+
+        this.signalTime = calendar.getTime();
 
         if (System.currentTimeMillis() > signalTime.getTime())
             recountSignalTime();
 
-        closeDate = signalTime;
+        closeDate = calendar.getTime();
     }
 
     public long getRepeatSignalInterval() {

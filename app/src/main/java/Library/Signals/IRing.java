@@ -13,4 +13,5 @@ public interface IRing extends ISignal {
     long getTurnOffTime();
     boolean isDeleteAfterUsing();
     boolean isOnState();
+    boolean isVibrating();
 }

@@ -55,6 +55,7 @@ public class AddRing extends AppCompatActivity {
     private RingBuilder ringBuilder =new RingBuilder();
 
 
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -308,10 +309,31 @@ public class AddRing extends AppCompatActivity {
         });
         // TODO: 14.01.2018 Способо выключения!
         RadioGroup methodGroup = (RadioGroup)findViewById(R.id.radioGroupMethod);
+        RadioButton simple = findViewById(R.id.radio_simple);
+        RadioButton primer = findViewById(R.id.radio_primer);
+        RadioButton head = findViewById(R.id.radio_head);
+        simple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ringBuilder.setPuzzle(Ring.PUZZLE_DEFAULT);
+            }
+        });
+        primer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ringBuilder.setPuzzle(Ring.PUZZLE_CALCULATE);
+            }
+        });
+        head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ringBuilder.setPuzzle(Ring.PUZZLE_CONNECT);
+            }
+        });
         methodGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId)
+                /*switch (checkedId)
                 {
                     case R.id.radio_simple:
                         ringBuilder.setPuzzle(Ring.PUZZLE_DEFAULT);//Билдер способа выключения
@@ -322,7 +344,7 @@ public class AddRing extends AppCompatActivity {
                     case R.id.head:
                         ringBuilder.setPuzzle(Ring.PUZZLE_CONNECT);
                         break;
-                }
+                }*/
             }
         });
         // TODO: 14.01.2018 Вибрация и автоудаление!
@@ -367,7 +389,7 @@ public class AddRing extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ringBuilder.setRepeatSignalInterval(numberPicker.getValue());
+                ringBuilder.setRepeatSignalInterval(numberPicker.getValue()*60000);
                 IRing ring = ringBuilder.build();
                 User.getInstance().addRing(ring);
                 ring.turnOn(context);

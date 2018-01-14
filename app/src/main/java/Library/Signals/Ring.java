@@ -103,7 +103,10 @@ public class Ring extends RealmObject implements IRing{
     }
 
     public void setSignalTime(Date signalTime) {
-        this.signalTime = signalTime;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(signalTime);
+        calendar.set(Calendar.SECOND, 0);
+        this.signalTime = calendar.getTime();
 
         if (repeatDays == null)
             recountUnrepeatable();
@@ -119,6 +122,7 @@ public class Ring extends RealmObject implements IRing{
         this.repeatSignalInterval = repeatSignalInterval;
     }
 
+    @Override
     public boolean isVibrating() {
         return vibrating;
     }

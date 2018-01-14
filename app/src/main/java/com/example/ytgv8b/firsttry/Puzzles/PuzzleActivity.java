@@ -51,10 +51,12 @@ public abstract class PuzzleActivity extends AppCompatActivity {
         _alarmName = ring.getDescription();
 
         musicThread = new MusicThread(this, ring);
-        vibrationThread = new VibrationThread(this);
-
         musicThread.start();
-        vibrationThread.start();
+
+        if (ring.isVibrating()) {
+            vibrationThread = new VibrationThread(this);
+            vibrationThread.start();
+        }
 
         timer = new Timer();
         timerTask = new AutoTurnOffTask(this);
@@ -67,7 +69,9 @@ public abstract class PuzzleActivity extends AppCompatActivity {
         super.onStop();
 
         musicThread.interrupt();
-        vibrationThread.interrupt();
+
+        if (ring.siVibrating())
+            vibrationThread.interrupt();
         //ring.postpound(this);
 
         if (ring.isDeleteAfterUsing()) {
