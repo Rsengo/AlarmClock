@@ -4,13 +4,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_alignParentTop="false"
     tools:context="com.example.ytgv8b.firsttry.AddNotification">
 
+    <RadioGroup
+        android:id="@+id/radioGroupMethod"
+        android:layout_width="0dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="8dp"
+        android:checkedButton="@+id/radio_without"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker2">
+
+        <RadioButton
+            android:id="@+id/radio_without"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_weight="1"
+            android:text="Без повтора"
+            android:theme="@style/MyRadioButton" />
+
+        <RadioButton
+            android:id="@+id/radio_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_weight="1"
+            android:text="День"
+            android:theme="@style/MyRadioButton" />
+
+        <RadioButton
+            android:id="@+id/radio_week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_weight="1"
+            android:text="Неделя"
+            android:theme="@style/MyRadioButton"
+            tools:text="Неделя" />
+
+        <RadioButton
+            android:id="@+id/radio_mounth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_weight="1"
+            android:text="Месяц"
+            android:theme="@style/MyRadioButton"
+            tools:text="Месяц" />
+
+        <RadioButton
+            android:id="@+id/radio_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_weight="1"
+            android:text="Год"
+            android:theme="@style/MyRadioButton"
+            tools:text="Год" />
+    </RadioGroup>
     <DatePicker
         android:id="@+id/datePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:background="@android:color/holo_orange_dark"
+        app:layout_constraintBottom_toTopOf="@+id/space2"
+        app:layout_constraintEnd_toStartOf="@+id/space2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/holo_orange_dark"
+        app:layout_constraintBottom_toTopOf="@+id/space2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/space2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
+        android:id="@+id/space2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.39" />
 </android.support.constraint.ConstraintLayout>
