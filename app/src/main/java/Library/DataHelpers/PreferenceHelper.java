@@ -68,31 +68,23 @@ public final class PreferenceHelper {
     }
 
     public boolean isEmpty() {
-        Map<String, ?> values;
-        try {
-            values = userPreferences.getAll();
-        } catch (Exception ex) {
-            return true;
-        }
+        Map<String, ?> values = userPreferences.getAll();
         if (!values.isEmpty())
             return false;
         return true;
     }
 
     public boolean isFirstStart() {
-        boolean first;
-        try {
-             first = startTimePreferences.getBoolean("isFirst", true);
-        } catch (Exception ex) {
-            return true;
-        }
-        return first;
+        return startTimePreferences.getBoolean("isFirst", true);
     }
 
     public void changeStartTime() {
         if (isFirstStart()) {
             startTimeEditor.clear();
             startTimeEditor.putBoolean("isFirst", false);
+        } else {
+            startTimeEditor.clear();
+            startTimeEditor.putBoolean("isFirst", true);
         }
         startTimeEditor.apply();
     }
@@ -120,14 +112,12 @@ public final class PreferenceHelper {
     }
 
     private void loadPreference() {
-        try {
-            userName = userPreferences.getString("USER_NAME", null);
-            userEmail = userPreferences.getString("USER_EMAIL", null);
-            userMoney = userPreferences.getInt("USER_MONEY", 0);
-            language = (byte) userPreferences.getInt("LANGUAGE", 0);
-            fontSize = (byte) userPreferences.getInt("FONT_SIZE", 0);
-            colorSchemeID = userPreferences.getLong("COLOR_SCHEME_ID", 0);
-        } catch (Exception ex){}
+        userName = userPreferences.getString("USER_NAME", null);
+        userEmail = userPreferences.getString("USER_EMAIL", null);
+        userMoney = userPreferences.getInt("USER_MONEY", 0);
+        language = (byte) userPreferences.getInt("LANGUAGE", 0);
+        fontSize = (byte) userPreferences.getInt("FONT_SIZE", 0);
+        colorSchemeID = userPreferences.getLong("COLOR_SCHEME_ID", 0);
     }
 
     public void clearPreference() {

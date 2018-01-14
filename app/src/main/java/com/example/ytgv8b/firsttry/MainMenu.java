@@ -25,15 +25,17 @@ public class MainMenu extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        PreferenceHelper.init(this);
-        DataBaseHelper.init(this);
-        FileSystemHelper.init(this);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        PreferenceHelper.init(this);
+        DataBaseHelper.init(this);
+        FileSystemHelper.init(this);
+
         PreferenceHelper helper = PreferenceHelper.getInstance();
        if (helper.isFirstStart())
         {

@@ -34,8 +34,10 @@ import Library.DataHelpers.FileSystemHelper;
 import Library.Messages.IMessage;
 import Library.Messages.MessageFactory.SMSBuilder;
 import Library.Messages.SMS;
+import Library.Signals.IRing;
 import Library.Signals.Ring;
 import Library.Signals.SignalBuilders.RingBuilder;
+import Library.User.User;
 
 public class AddRing extends AppCompatActivity {
 
@@ -361,6 +363,10 @@ public class AddRing extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ringBuilder.setRepeatSignalInterval(numberPicker.getValue());
+                IRing ring = ringBuilder.build();
+                User.getInstance().addRing(ring);
+                Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+                startActivity(intent);
             }
         });
         // TODO: 14.01.2018 Кнопка закрытия и отмены
