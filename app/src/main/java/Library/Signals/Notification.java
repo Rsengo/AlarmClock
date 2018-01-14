@@ -46,11 +46,10 @@ public class Notification extends RealmObject implements INotification {
     private String userEmail; //Почта пользователя-владельца
 
     public static final byte PEREODICITY_NOREPEAT = 0;
-    public static final byte PEREODICITY_EVERYHOUR = 1;
-    public static final byte PEREODICITY_EVERYDAY = 2;
-    public static final byte PEREODICITY_EVERYWEEK = 3;
-    public static final byte PEREODICITY_EVERYMOUNTH = 4;
-    public static final byte PEREODICITY_EVERYYEAR = 5;
+    public static final byte PEREODICITY_EVERYDAY = 1;
+    public static final byte PEREODICITY_EVERYWEEK = 2;
+    public static final byte PEREODICITY_EVERYMOUNTH = 3;
+    public static final byte PEREODICITY_EVERYYEAR = 4;
 
     public static final long INTERVAL_NOREPEAT = 0;
     public static final long INTERVAL_HALF_DAY = AlarmManager.INTERVAL_HALF_DAY;
@@ -164,9 +163,6 @@ public class Notification extends RealmObject implements INotification {
 
         switch (generalPeriodicity) {
             case (PEREODICITY_NOREPEAT):
-                break;
-            case (PEREODICITY_EVERYHOUR):
-                calendar.add(Calendar.HOUR, specificPeriodicity);
                 break;
             case (PEREODICITY_EVERYDAY):
                 calendar.add(Calendar.DAY_OF_YEAR, specificPeriodicity);
