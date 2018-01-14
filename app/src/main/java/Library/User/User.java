@@ -29,7 +29,7 @@ public class User implements  IUser {
     private String name; //Имя
     private ArrayList<IRing> rings; //Будильники
     private ArrayList<INotification> notifications; //События
-    private int moneyQuantity; //Число монет
+    private int moneyQuantity = 0; //Число монет
     private ISetting userInterface;
     private String email; //Email пользователя
 
