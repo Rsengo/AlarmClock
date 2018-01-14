@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.ytgv8b.firsttry">
+    package="com.example.ytgv8b.firsttry">
 
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -23,17 +23,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Puzzles.DisplayCalculateActivity"/>
-        <activity android:name=".Puzzles.DisplayConnectActivity"/>
+        <activity android:name=".Puzzles.DisplayCalculateActivity" />
+        <activity android:name=".Puzzles.DisplayConnectActivity" />
         <activity android:name=".AddRing" />
         <activity android:name=".EditRing" />
-        <activity android:name=".StartActivity"></activity>
+        <activity android:name=".StartActivity" />
 
         <receiver
             android:name=".Services.NotificationReceiver"
             android:enabled="true"
-            android:exported="true">
-        </receiver>
+            android:exported="true"></receiver>
+
     </application>
 
 </manifest>

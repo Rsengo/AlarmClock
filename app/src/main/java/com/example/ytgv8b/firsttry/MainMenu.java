@@ -46,6 +46,38 @@ public class MainMenu extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_mainmenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.settings:
+
+                return true;
+            case R.id.settings2:
+
+                return true;
+            case R.id.profil:
+                return true;
+            case R.id.developers:
+                return true;
+            case R.id.instruction:
+                return true;
+            case R.id.sleep:
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new RingFragment(), "Ring");
