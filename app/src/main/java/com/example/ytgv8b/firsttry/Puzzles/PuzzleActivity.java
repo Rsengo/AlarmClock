@@ -70,7 +70,7 @@ public abstract class PuzzleActivity extends AppCompatActivity {
 
         musicThread.interrupt();
 
-        if (ring.siVibrating())
+        if (ring.isVibrating())
             vibrationThread.interrupt();
         //ring.postpound(this);
 
