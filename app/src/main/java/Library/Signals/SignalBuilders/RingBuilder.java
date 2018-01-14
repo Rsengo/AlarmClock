@@ -5,6 +5,7 @@ import android.content.Context;
 
 import java.util.Date;
 
+import Library.DataHelpers.FileSystemHelper;
 import Library.DataHelpers.PreferenceHelper;
 import Library.Messages.IMessage;
 import Library.Signals.IRing;
@@ -90,9 +91,9 @@ public class RingBuilder extends SignalFactory {
 
         setUserEmail();
 
-        if (signal.getMelody() == null)
-        {
-            signal.setMelody(preferenceHelper.loadMelodies().get(0));
+        if (signal.getMelody() == null) {
+            FileSystemHelper helper = FileSystemHelper.getInstance();
+            signal.setMelody(helper.loadMelodies().get(0));
         }
 
         return signal;
