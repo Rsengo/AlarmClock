@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/settings"
+        android:orderInCategory="100"
+        android:title="Настройки"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/settings2"
+        android:orderInCategory="100"
+        android:title="Настройки2"
+        tools:icon="@mipmap/nastr"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/instruction"
+        android:orderInCategory="100"
+        android:title="Инструкция"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/profil"
+        android:orderInCategory="100"
+        android:title="Профиль"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/developers"
+        android:orderInCategory="100"
+        android:title="Разработчики"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/sleep"
+        android:orderInCategory="100"
+        android:title="Сон"
+        app:showAsAction="never"/>
+</menu>

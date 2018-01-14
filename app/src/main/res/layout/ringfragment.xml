@@ -25,7 +25,9 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="12dp"
         android:layout_marginEnd="13dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:srcCompat="@mipmap/plyus" />
 
 
 </RelativeLayout>
