@@ -45,14 +45,14 @@ public class MusicThread extends Thread {
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
         try {
-            volume = audioManager.getStreamVolume(AudioManager.STREAM_RING);
+            volume = audioManager.getStreamVolume(AudioManager.STREAM_ALARM);
         }  catch (NullPointerException ex) {
             volume = 1;
         }
 
         AudioAttributes.Builder audioAttributesBuilder = new AudioAttributes.Builder();
         audioAttributesBuilder.setUsage(AudioAttributes.USAGE_ALARM)
-                .setLegacyStreamType(AudioManager.STREAM_RING)
+                .setLegacyStreamType(AudioManager.STREAM_ALARM)
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                 .setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED); //воспроизв. гарант. системой
         AudioAttributes audioAttributes = audioAttributesBuilder.build();

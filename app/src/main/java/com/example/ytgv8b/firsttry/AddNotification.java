@@ -45,6 +45,14 @@ public class AddNotification extends AppCompatActivity {
     private RadioButton rb1;
     private boolean b1 = false;
     private NotificationBuilder _notificationBuilder = new NotificationBuilder();
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,8 +123,8 @@ public class AddNotification extends AppCompatActivity {
         list1.add(map3);
         HashMap<String, String> map4;
         map4 = new HashMap<>();
-        map4.put("Name", prioritet);
-        map4.put("Tel", "Средний");
+        map4.put("Name", "Приоритет");
+        map4.put("Tel", prioritet);
         list1.add(map4);
         String [] strings = {"Name", "Tel"};
         int [] date = {android.R.id.text1, android.R.id.text2};
@@ -423,6 +431,7 @@ public class AddNotification extends AppCompatActivity {
                 notification.turnOn(context);
                 Intent intent = new Intent(getApplicationContext(), MainMenu.class);
                 startActivity(intent);
+                finish();
             }
         });
         f2.setOnClickListener(new View.OnClickListener() {
@@ -430,6 +439,7 @@ public class AddNotification extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainMenu.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

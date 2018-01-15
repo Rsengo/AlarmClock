@@ -142,19 +142,27 @@ public class User implements  IUser {
     @Override
     public void removeRing(IRing ring) {
         dataBaseHelper.deleteRecursive(ring);
-        rings.remove(ring);
+
+        if (!rings.isEmpty())
+            rings.remove(ring);
     }
 
     @Override
     public void removeNotification(INotification notification) {
         dataBaseHelper.deleteRecursive(notification);
-        notifications.remove(notification);
+
+        if (!notifications.isEmpty())
+            notifications.remove(notification);
     }
 
     @Override
     public void removeRing(int position) {
         IRing ring = rings.get(position);
         removeRing(ring);
+    }
+
+    public void removeRingById(int id) {
+        dataBaseHelper.deleteRecursive(dataBaseHelper.getRing(id));
     }
 
     @Override

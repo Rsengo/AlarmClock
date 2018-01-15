@@ -195,7 +195,7 @@ public class Notification extends RealmObject implements INotification {
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, signalTime,
                         this.repeatSignalInterval, pendingIntent);
             else**/
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, signalTime, pendingIntent);
+                alarmManager.setExact(AlarmManager.RTC, signalTime, pendingIntent);
         } catch (NullPointerException ex) {
             Log.e("Notification turn on", ex.getMessage());
         }
@@ -220,7 +220,7 @@ public class Notification extends RealmObject implements INotification {
         Intent intent = new Intent(context, NotificationReceiver.class);
         intent.putExtra("id", id);
         PendingIntent pendingIntent =
-                PendingIntent.getBroadcast(context, id, intent, 0);
+                PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         return pendingIntent;
     }

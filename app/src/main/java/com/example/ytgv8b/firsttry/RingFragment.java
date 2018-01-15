@@ -63,6 +63,7 @@ public class RingFragment extends Fragment {
             public void onClick(View v) {
                Intent i  =new Intent(v.getContext(),AddRing.class);
                startActivity(i);
+               finish();
             }
         });
        ListView listview = (ListView) rootView.findViewById(R.id.listView);
@@ -79,17 +80,18 @@ public class RingFragment extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(view.getContext(), EditRing.class);
+                Intent intent = new Intent(view.getContext(), AddRing.class);
                 // TODO: 15.01.2018 ring[position]
-                intent.putExtra("id",position);
+                intent.putExtra("position",position);
                 startActivity(intent);
+                finish();
             }
         });
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 User user = User.getInstance();
-                user.getNotifications().get(i).turnOff(context);
+                user.getRings().get(i).turnOff(context);
                 user.removeRing(i);
                 adapter.notifyDataSetChanged();
                 return true;
@@ -99,4 +101,7 @@ public class RingFragment extends Fragment {
 
     }
 
+    public void finish() {
+        getActivity().finish();
+    }
 }

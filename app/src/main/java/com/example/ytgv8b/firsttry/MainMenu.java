@@ -1,6 +1,7 @@
 package com.example.ytgv8b.firsttry;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -24,6 +25,7 @@ public class MainMenu extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        this.setVolumeControlStream(AudioManager.STREAM_ALARM);
     }
 
     @Override

@@ -27,6 +27,7 @@ import android.widget.TimePicker;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import Toasts.ToastMaker;
@@ -51,13 +52,20 @@ public class AddRing extends AppCompatActivity {
     private String phonenumber= "";
     private byte method = 0;
     private RingBuilder ringBuilder =new RingBuilder();
-
+    private IRing tempRing;
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        this.setVolumeControlStream(AudioManager.STREAM_RING);
+        this.setVolumeControlStream(AudioManager.STREAM_ALARM);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -65,9 +73,17 @@ public class AddRing extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ring);
 
+        Intent intent = getIntent();
+        int position = intent.getIntExtra("position", -1);
+
+        if (position != -1) {
+            tempRing = User.getInstance().getRings().get(position);
+        }
+
         // TODO: 14.01.2018 Установка времени!
-        TimePicker tp = (TimePicker)findViewById(R.id.timePicker2);
+        TimePicker tp = findViewById(R.id.timePicker2);
         tp.setIs24HourView(true);
+
 
         // TODO: 13.01.2018 Описание!
         ListView discription = (ListView)findViewById(R.id.discription);
@@ -352,17 +368,24 @@ public class AddRing extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.HOUR_OF_DAY,tp.getCurrentHour());
-                calendar.set(Calendar.MINUTE,tp.getCurrentMinute());
-                Date date  = calendar.getTime();
+                calendar.set(Calendar.HOUR_OF_DAY, tp.getCurrentHour());
+                calendar.set(Calendar.MINUTE, tp.getCurrentMinute());
+                Date date = calendar.getTime();
                 ringBuilder.setSignalTime(date)
-                        .setRepeatSignalInterval(numberPicker.getValue()*60000);
+                        .setRepeatSignalInterval(numberPicker.getValue() * 60000);
 
                 IRing ring = ringBuilder.build();
+
+                if (position != -1) {
+                    ring.setId(tempRing.getId());
+                    User.getInstance().getRings().remove(position);
+                }
+
                 User.getInstance().addRing(ring);
                 ring.turnOn(context);
                 Intent intent = new Intent(getApplicationContext(), MainMenu.class);
                 startActivity(intent);
+                finish();
             }
         });
         // TODO: 14.01.2018 Кнопка закрытия и отмены
@@ -372,6 +395,7 @@ public class AddRing extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainMenu.class);
                 startActivity(intent);
+                finish();
             }
         });
         // TODO: 14.01.2018 Добавление SMS
@@ -434,8 +458,15 @@ public class AddRing extends AppCompatActivity {
         // TODO: 14.01.2018 Добавление музыки!
         Button music = (Button)findViewById(R.id.music);
         TextView melody = (TextView)findViewById(R.id.namemelody) ;
-        FileSystemHelper fileSystemHelper = FileSystemHelper.getInstance();
-        melody.setText(fileSystemHelper.loadMelodies().get(0));
+
+        /**if (position == -1) {**/
+            FileSystemHelper fileSystemHelper = FileSystemHelper.getInstance();
+            melody.setText(fileSystemHelper.loadMelodies().get(0));
+        /**} else {
+            melody.setText(ring.getMelody());
+        }**/
+
+
         music.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

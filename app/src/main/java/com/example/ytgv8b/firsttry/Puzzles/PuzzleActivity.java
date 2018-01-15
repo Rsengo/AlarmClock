@@ -1,7 +1,9 @@
 package com.example.ytgv8b.firsttry.Puzzles;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.WindowManager;
 
 import java.util.Timer;
@@ -36,6 +38,8 @@ public abstract class PuzzleActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        this.setVolumeControlStream(AudioManager.STREAM_RING);
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
@@ -63,6 +67,8 @@ public abstract class PuzzleActivity extends AppCompatActivity {
         timerTask = new AutoTurnOffTask(this);
 
         timer.schedule(timerTask, ring.getTurnOffTime());
+
+
     }
 
     @Override
@@ -82,5 +88,25 @@ public abstract class PuzzleActivity extends AppCompatActivity {
             ring.recountSignalTime(this);
             dataBaseHelper.saveRecursive(ring);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {}
+        return true;
+    }
+
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {}
+        return true;
     }
 }

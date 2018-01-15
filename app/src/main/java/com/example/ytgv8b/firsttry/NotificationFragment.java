@@ -50,6 +50,8 @@ public class NotificationFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class NotificationFragment extends Fragment {
             public void onClick(View v) {
                 Intent i  =new Intent(v.getContext(),AddNotification.class);
                 startActivity(i);
+                finish();
             }
         });
         ListView listview = rootView.findViewById(R.id.listView);
@@ -81,6 +84,7 @@ public class NotificationFragment extends Fragment {
                 // TODO: 15.01.2018 notif[position]
                 intent.putExtra("position",position);
                 startActivity(intent);
+                finish();
             }
         });
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -95,5 +99,9 @@ public class NotificationFragment extends Fragment {
         });
         return rootView;
 
+    }
+
+    public void finish() {
+        getActivity().finish();
     }
 }

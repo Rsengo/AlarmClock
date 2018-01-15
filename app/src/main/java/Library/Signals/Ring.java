@@ -33,7 +33,7 @@ public class Ring extends RealmObject implements IRing{
 
     private byte puzzle = PUZZLE_DEFAULT; //головоломка
     @Required
-    private Date signalTime = null; //Время запуска
+    private Date signalTime =  new Date(); //Время запуска
     private long repeatSignalInterval = 600000L; //интервал повторного запуска после откладывания
     private boolean vibrating = true; //вибрация(Вибрирующий)
     private String melody; //мелодия
@@ -300,7 +300,7 @@ public class Ring extends RealmObject implements IRing{
         intent.putExtra("id", id);
 
         PendingIntent pendingIntent =
-                PendingIntent.getActivity(context, id, intent, 0);
+                PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         return pendingIntent;
     }
