@@ -24,6 +24,7 @@ import java.util.HashMap;
 
 import Library.Messages.IMessage;
 import Library.Messages.MessageFactory.SMSBuilder;
+import Library.Signals.Notification;
 import Library.Signals.SignalBuilders.NotificationBuilder;
 
 public class AddNotification extends AppCompatActivity {
@@ -204,6 +205,7 @@ public class AddNotification extends AppCompatActivity {
                                 switch (checkedRadioButtonId)
                                 {
                                     case R.id.radioNever:
+                                        _notificationBuilder.setGeneralPeriodicity(Notification.PEREODICITY_NOREPEAT);
                                         map3.clear();
                                         map3.put("Name", "Периодичность");
                                         map3.put("Tel", "Никогда");
@@ -211,6 +213,7 @@ public class AddNotification extends AppCompatActivity {
                                         alertDialog1.cancel();
                                         break;
                                     case R.id.radioDay:
+                                        _notificationBuilder.setGeneralPeriodicity(Notification.PEREODICITY_EVERYDAY);
                                         map3.clear();
                                         map3.put("Name", "Периодичность");
                                         map3.put("Tel", "Каждый день");
@@ -219,12 +222,14 @@ public class AddNotification extends AppCompatActivity {
                                         break;
 
                                     case R.id.radioWeek:
+                                        _notificationBuilder.setGeneralPeriodicity(Notification.PEREODICITY_EVERYWEEK);
                                         map3.put("Name", "Периодичность");
                                         map3.put("Tel", "Каждую неделю");
                                         adapter1.notifyDataSetChanged();
                                         alertDialog1.cancel();
                                         break;
                                     case R.id.radioMonth:
+                                        _notificationBuilder.setGeneralPeriodicity(Notification.PEREODICITY_EVERYMOUNTH);
                                         map3.clear();
                                         map3.put("Name", "Периодичность");
                                         map3.put("Tel", "Каждый месяц");
@@ -232,6 +237,7 @@ public class AddNotification extends AppCompatActivity {
                                         alertDialog1.cancel();
                                         break;
                                     case R.id.radioYear:
+                                        _notificationBuilder.setGeneralPeriodicity(Notification.PEREODICITY_EVERYYEAR);
                                         map3.clear();
                                         map3.put("Name", "Периодичность");
                                         map3.put("Tel", "Каждый год");
