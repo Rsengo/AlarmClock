@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
 import android.widget.TimePicker;
 
@@ -20,6 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+import Kostyly.Kostyl;
 import Library.Messages.IMessage;
 import Library.Messages.MessageFactory.SMSBuilder;
 import Library.Signals.SignalBuilders.NotificationBuilder;
@@ -29,6 +32,9 @@ public class AddNotification extends AppCompatActivity {
     private AlertDialog alertDialog1;
     private Context context = this;
     private  Calendar _calendar=Calendar.getInstance();
+    private RadioGroup rg;
+    private RadioButton rb;
+    private boolean b = false;
     private NotificationBuilder _notificationBuilder = new NotificationBuilder();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,9 +169,101 @@ public class AddNotification extends AppCompatActivity {
 
                         //и отображаем его:
                         alertDialog1.show();
+                    case 2:
+                        LayoutInflater li2 = LayoutInflater.from(context);
+                        View repeatView = li2.inflate(R.layout.periodstyle, null);
+
+                        //Создаем AlertDialog
+                        AlertDialog.Builder mDialogBuilder2 = new AlertDialog.Builder(context);
+
+                        //Настраиваем prompt.xml для нашего AlertDialog:
+                        mDialogBuilder2.setView(repeatView);
+
+                        //Настраиваем отображение поля для ввода текста в открытом диалоге:
+                        RadioGroup radioGroup= (RadioGroup)repeatView.findViewById(R.id.group);
+
+                        Button ok2 = (Button)repeatView.findViewById(R.id.ok) ;
+                        Button cancel2 = (Button)repeatView.findViewById(R.id.cancel) ;
+                        RadioButton radioNever = (RadioButton)repeatView.findViewById(R.id.radioNever);
+                        RadioButton radioDay = (RadioButton)repeatView.findViewById(R.id.radioDay);
+                        RadioButton radioWeek = (RadioButton)repeatView.findViewById(R.id.radioWeek);
+                        RadioButton radioMonth = (RadioButton)repeatView.findViewById(R.id.radioMonth);
+                        RadioButton radioYear = (RadioButton)repeatView.findViewById(R.id.radioYear);
+                        rg = (RadioGroup)repeatView.findViewById(R.id.group);
+                        if(b==false)
+                        {
+                            b=true;
+                            rb = radioNever;
+                        }
+                        rg.check(rb.getId());
+                        ok2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                int checkedRadioButtonId =radioGroup.getCheckedRadioButtonId();
+                                RadioButton checked = (RadioButton)repeatView.findViewById(checkedRadioButtonId);
+                                rb = checked;
+                                switch (checkedRadioButtonId)
+                                {
+                                    case R.id.radioNever:
+                                        map3.clear();
+                                        map3.put("Name", "Периодичность");
+                                        map3.put("Tel", "Никогда");
+                                        adapter1.notifyDataSetChanged();
+                                        alertDialog1.cancel();
+                                        break;
+                                    case R.id.radioDay:
+                                        map3.clear();
+                                        map3.put("Name", "Периодичность");
+                                        map3.put("Tel", "Каждый день");
+                                        adapter1.notifyDataSetChanged();
+                                        alertDialog1.cancel();
+                                        break;
+
+                                    case R.id.radioWeek:
+                                        map3.put("Name", "Периодичность");
+                                        map3.put("Tel", "Каждую неделю");
+                                        adapter1.notifyDataSetChanged();
+                                        alertDialog1.cancel();
+                                        break;
+                                    case R.id.radioMonth:
+                                        map3.clear();
+                                        map3.put("Name", "Периодичность");
+                                        map3.put("Tel", "Каждый месяц");
+                                        adapter1.notifyDataSetChanged();
+                                        alertDialog1.cancel();
+                                        break;
+                                    case R.id.radioYear:
+                                        map3.clear();
+                                        map3.put("Name", "Периодичность");
+                                        map3.put("Tel", "Каждый год");
+                                        adapter1.notifyDataSetChanged();
+                                        alertDialog1.cancel();
+                                        break;
+                                }
+                            }
+                        });
+                        cancel2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                alertDialog1.cancel();
+                            }
+                        });
+                        //Настраиваем сообщение в диалоговом окне:
+                        mDialogBuilder2
+                                .setCancelable(true)
+                                .setTitle("Выберите период повтора");
+
+
+                        //Создаем AlertDialog:
+                        alertDialog1 = mDialogBuilder2.create();
+
+
+
+                        //и отображаем его:
+                        alertDialog1.show();
+                }
                 }
 
-            }
         });
     }
 }
