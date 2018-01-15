@@ -17,7 +17,7 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".MainMenu"
-            android:label="Rings"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
