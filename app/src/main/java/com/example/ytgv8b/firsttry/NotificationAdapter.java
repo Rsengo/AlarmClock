@@ -39,7 +39,17 @@ public class NotificationAdapter extends ArrayAdapter<INotification> {
         String time =format.format(notification.getSignalTime());
 
         TextView text1 = convertView.findViewById(android.R.id.text1);
+        text1.setTextSize(36);
+        text1.setTextColor(getContext()
+                .getResources()
+                .getColor(android.R.color.darker_gray)
+        );
         TextView text2 = convertView.findViewById(android.R.id.text2);
+        text2.setTextSize(14);
+        text1.setTextColor(getContext()
+                .getResources()
+                .getColor(R.color.progress_gray_dark)
+        );
 
         text1.setText(notification.getName());
         text2.setText(time);
