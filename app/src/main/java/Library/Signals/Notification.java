@@ -74,7 +74,7 @@ public class Notification extends RealmObject implements INotification {
         this.name = name;
     }
 
-
+    @Override
     public byte getGeneralPeriodicity() {
         return generalPeriodicity;
     }

@@ -49,6 +49,53 @@ public class AddNotification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_notification);
+        Intent intent1 = getIntent();
+        String editdate = "";
+        String edittime = "";
+        String periods="Никогда";
+        String prioritet="Средний";
+        int position = intent1.getIntExtra("position",-1);
+        if(position!=-1)
+        {
+            EditText edit = findViewById(R.id.editText3);
+            MultiAutoCompleteTextView auto = findViewById((R.id.multiAutoCompleteTextView));
+            edit.setText(User.getInstance().getNotifications().get(position).getName());
+            auto.setText(User.getInstance().getNotifications().get(position).getDescription());
+            Date d =User.getInstance().getNotifications().get(position).getSignalTime();
+            _calendar.setTime(d);
+            _notificationBuilder.setGeneralPeriodicity(User.getInstance().getNotifications().get(position).getGeneralPeriodicity());
+            _notificationBuilder.setPriority(User.getInstance().getNotifications().get(position).getPriority());
+            switch (User.getInstance().getNotifications().get(position).getGeneralPeriodicity())
+            {
+                case 0:
+                    periods = "Никогда";
+                    break;
+                case 1:
+                    periods = "Каждый день";
+                    break;
+                case 2:
+                    periods = "Каждую неделю";
+                    break;
+                case 3:
+                    periods = "Каждый месяц";
+                    break;
+                case 4:
+                    periods = "Каждый год";
+                    break;
+            }
+            switch (User.getInstance().getNotifications().get(position).getPriority())
+            {
+                case 0:
+                    prioritet = "Низкий";
+                    break;
+                case 1:
+                    prioritet = "Средний";
+                    break;
+                case 2:
+                    prioritet = "Высокий";
+                    break;
+            }
+        }
         ListView listnotif = findViewById(R.id.listnotif);
         ArrayList<HashMap<String, String>> list1 = new ArrayList<>();
         HashMap<String, String> map1;
@@ -64,11 +111,11 @@ public class AddNotification extends AppCompatActivity {
         HashMap<String, String> map3;
         map3 = new HashMap<>();
         map3.put("Name", "Периодичность");
-        map3.put("Tel", "Никогда");
+        map3.put("Tel", periods);
         list1.add(map3);
         HashMap<String, String> map4;
         map4 = new HashMap<>();
-        map4.put("Name", "Приоритет");
+        map4.put("Name", prioritet);
         map4.put("Tel", "Средний");
         list1.add(map4);
         String [] strings = {"Name", "Tel"};
@@ -367,6 +414,11 @@ public class AddNotification extends AppCompatActivity {
                 _notificationBuilder.setDescription(auto.getText().toString());
                 _notificationBuilder.setSignalTime(_calendar.getTime());
                 INotification notification = _notificationBuilder.build();
+                if (position!=-1)
+                {
+                    notification.setId(User.getInstance().getNotifications().get(position).getId());
+                    User.getInstance().getNotifications().remove(position);
+                }
                 User.getInstance().addNotification(notification);
                 notification.turnOn(context);
                 Intent intent = new Intent(getApplicationContext(), MainMenu.class);

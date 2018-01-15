@@ -75,9 +75,9 @@ public class NotificationFragment extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(view.getContext(), EditRing.class);
+                Intent intent = new Intent(view.getContext(), AddNotification.class);
                 // TODO: 15.01.2018 notif[position]
-                intent.putExtra("id",position);
+                intent.putExtra("position",position);
                 startActivity(intent);
             }
         });
