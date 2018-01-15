@@ -26,8 +26,6 @@ import io.realm.annotations.Required;
  */
 
 public class Notification extends RealmObject implements INotification {
-    /****Методы интерфейсов****/
-    /***Обратная связь с юзером***/
 
     @PrimaryKey
     private int id;
@@ -156,8 +154,6 @@ public class Notification extends RealmObject implements INotification {
         calendar.setTime(signalTime);
 
         switch (generalPeriodicity) {
-            case (PEREODICITY_NOREPEAT):
-                return;
             case (PEREODICITY_EVERYDAY):
                 calendar.add(Calendar.DAY_OF_YEAR, specificPeriodicity);
                 break;
@@ -178,9 +174,14 @@ public class Notification extends RealmObject implements INotification {
 
     @Override
     public void recountSignalTime(Context context) {
-        recountSignalTime();
-        turnOn(context);
+        if (generalPeriodicity != PEREODICITY_NOREPEAT) {
+            recountSignalTime();
+            turnOn(context);
+        } else {
+            turnOff(context);
+        }
     }
+
 
     @Override
     public void turnOn(Context context) {
