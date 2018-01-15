@@ -3,7 +3,6 @@ package com.example.ytgv8b.firsttry;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,11 +29,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-import Kostyly.Kostyl;
+import Toasts.ToastMaker;
 import Library.DataHelpers.FileSystemHelper;
 import Library.Messages.IMessage;
 import Library.Messages.MessageFactory.SMSBuilder;
-import Library.Messages.SMS;
 import Library.Signals.IRing;
 import Library.Signals.Ring;
 import Library.Signals.SignalBuilders.RingBuilder;
@@ -281,7 +279,7 @@ public class AddRing extends AppCompatActivity {
                                 map.put("Tel", "...");
                                 repeatDase.setAdapter(adapter1);
                                 alertDialog1.cancel();*/
-                                Kostyl.makeToast(context);
+                                ToastMaker.kostyl(context);
                                 break;
                         }
                     }

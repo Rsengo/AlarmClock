@@ -17,7 +17,6 @@ public abstract class SignalFactory {
 
     protected abstract SignalFactory setId();
     public abstract SignalFactory setSignalTime(Date signalTime);
-    public abstract SignalFactory setRepeatSignalInterval(long repeatSignalInterval);
     public abstract SignalFactory setDescription(String description);
     protected abstract SignalFactory setUserEmail();
     public abstract ISignal build();

@@ -2,17 +2,15 @@ package com.example.ytgv8b.firsttry;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import Kostyly.Kostyl;
+import Toasts.ToastMaker;
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.FileSystemHelper;
 import Library.DataHelpers.PreferenceHelper;
@@ -71,22 +69,22 @@ public class MainMenu extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.settings:
-                Kostyl.makeToast(this);
+                ToastMaker.kostyl(this);
                 return true;
             case R.id.profil:
-                Kostyl.makeToast(this);
+                ToastMaker.kostyl(this);
                 return true;
             case R.id.developers:
-                Kostyl.makeToast(this);
+                ToastMaker.kostyl(this);
                 return true;
             case R.id.instruction:
-                Kostyl.makeToast(this);
+                ToastMaker.kostyl(this);
                 return true;
             case R.id.sleep:
-                Kostyl.makeToast(this);
+                ToastMaker.kostyl(this);
                 return true;
             default:
-                Kostyl.makeToast(this);
+                ToastMaker.kostyl(this);
                 return super.onOptionsItemSelected(item);
         }
 

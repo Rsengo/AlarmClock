@@ -66,32 +66,9 @@ public class RingFragment extends Fragment {
 
         ArrayList<IRing> rings =User.getInstance().getRings();
 
-// Упаковываем данные
-        ArrayList<HashMap<String, Object>> data = new ArrayList<>(
-                rings.size());
-        HashMap<String, Object> map;
-        for (int i = 0; i < rings.size(); i++) {
-            map = new HashMap<>();
-            SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-            String time =format.format(rings.get(i).getSignalTime());
-            //Calendar calendar = Calendar.getInstance();
-           // calendar.setTime(rings.get(i).getSignalTime());
-            //String time = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY))+
-            //        ":"+String.valueOf(calendar.get(Calendar.MINUTE));
-            map.put("RingName", time);
-            map.put("IsState", rings.get(i).isOnState());;
-            data.add(map);
-        }
-
-// Массив имен атрибутов, из которых будут читаться данные
-        String[] from = {"RingName", "IsState"};
-
-// Массив идентификаторов компонентов, в которые будем вставлять данные
-        int[] to = {R.id.textbox_name, R.id.switch2};
-
 // создаем адаптер
-        SimpleAdapter adapter = new SimpleAdapter(this.getContext(), data, R.layout.list_item,
-                from, to);
+        RingAdapter adapter = new RingAdapter(getContext(), rings);
+
 
 // Устанавливаем адаптер для списка
         listview.setAdapter(adapter);
@@ -100,6 +77,7 @@ public class RingFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(view.getContext(), EditRing.class);
+                // TODO: 15.01.2018 ring[position]
                 intent.putExtra("id",position);
                 startActivity(intent);
             }
@@ -108,7 +86,6 @@ public class RingFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 User.getInstance().removeRing(i);
-                listview.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 return true;
             }
