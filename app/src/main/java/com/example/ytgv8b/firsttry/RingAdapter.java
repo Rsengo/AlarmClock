@@ -51,8 +51,8 @@ public class RingAdapter extends ArrayAdapter<IRing> {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         String time =format.format(ring.getSignalTime());
 
-        TextView textView = convertView.findViewById(R.id.textbox_name);
-        textView.setText(time);
+        TextView timeView = convertView.findViewById(R.id.textbox_name);
+        timeView.setText(time);
 
         Switch switcher = convertView.findViewById(R.id.switch2);
         switcher.setChecked(ring.isOnState());
@@ -63,6 +63,24 @@ public class RingAdapter extends ArrayAdapter<IRing> {
                 else
                     ring.turnOff(getContext());
         });
+
+        TextView informationView = convertView.findViewById(R.id.textbox_description);
+
+        String days = "";
+
+        if (ring.getRepeatDays() == null) {
+            days = "Без повтора";
+        } else {
+            for (int i = 0; i < 7; i++)
+                if (ring.getRepeatDays()[i] == 1)
+                    days += daysOfWeek.get(i) +", ";
+            days = days.substring(0, days.length()-2);
+        }
+
+
+        String description = ring.getDescription() +"\r\n" + days;
+
+        informationView.setText(description);
 
         return convertView;
     }

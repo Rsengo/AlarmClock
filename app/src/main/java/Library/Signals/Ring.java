@@ -93,6 +93,7 @@ public class Ring extends RealmObject implements IRing{
         this.message = message;
     }
 
+    @Override
     public byte[] getRepeatDays() {
         return repeatDays;
     }
