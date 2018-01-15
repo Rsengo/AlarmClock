@@ -65,23 +65,9 @@ public class AddRing extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ring);
 
-        // TODO: 14.01.2018 Установка времени! 
-        TextView textView = (TextView)findViewById(R.id.textView2);
+        // TODO: 14.01.2018 Установка времени!
         TimePicker tp = (TimePicker)findViewById(R.id.timePicker2);
         tp.setIs24HourView(true);
-        String time = "";
-        if(tp.getCurrentHour()<10)
-        {
-            time+="0"+tp.getCurrentHour()+":";
-        }
-        else
-            time+=tp.getCurrentHour()+":";
-        if (tp.getCurrentMinute()<10){
-            time+="0"+tp.getCurrentMinute();
-        }
-        else
-            time+=tp.getCurrentMinute();
-        textView.setText(time);
         tp.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
@@ -90,19 +76,6 @@ public class AddRing extends AppCompatActivity {
                 calendar.set(Calendar.MINUTE,minute);
                 Date date  = calendar.getTime();
                 ringBuilder.setSignalTime(date);//Билдер времени
-                String time = "";
-                if(tp.getCurrentHour()<10)
-                {
-                    time+="0"+tp.getCurrentHour()+":";
-                }
-                else
-                    time+=tp.getCurrentHour()+":";
-                if (tp.getCurrentMinute()<10){
-                    time+="0"+tp.getCurrentMinute();
-                }
-                else
-                    time+=tp.getCurrentMinute();
-                textView.setText(time);
             }
         });
         // TODO: 13.01.2018 Описание!
