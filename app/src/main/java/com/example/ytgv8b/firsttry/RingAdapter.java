@@ -77,8 +77,12 @@ public class RingAdapter extends ArrayAdapter<IRing> {
             days = days.substring(0, days.length()-2);
         }
 
+        String information = ring.getDescription();
 
-        String description = ring.getDescription() +"\r\n" + days;
+        if (information.length() > 20)
+            information = information.substring(0, 17) +"...";
+
+        String description = information +"\r\n" + days;
 
         informationView.setText(description);
 
