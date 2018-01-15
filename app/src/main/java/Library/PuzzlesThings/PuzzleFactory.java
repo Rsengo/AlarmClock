@@ -14,7 +14,6 @@ import Library.Signals.Ring;
  */
 
 public class PuzzleFactory {
-    // TODO: 13.01.2018 add default puzzle
 
     private static HashMap<Byte, Class> puzzles = new HashMap<>();
 

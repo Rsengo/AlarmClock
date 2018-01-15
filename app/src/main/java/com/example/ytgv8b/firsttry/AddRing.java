@@ -464,6 +464,8 @@ public class AddRing extends AppCompatActivity {
         // TODO: 14.01.2018 Добавление музыки!
         Button music = (Button)findViewById(R.id.music);
         TextView melody = (TextView)findViewById(R.id.namemelody) ;
+        FileSystemHelper fileSystemHelper = FileSystemHelper.getInstance();
+        melody.setText(fileSystemHelper.loadMelodies().get(0));
         music.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
