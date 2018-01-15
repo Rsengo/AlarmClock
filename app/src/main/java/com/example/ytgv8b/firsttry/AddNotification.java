@@ -1,16 +1,20 @@
 package com.example.ytgv8b.firsttry;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
@@ -24,8 +28,10 @@ import java.util.HashMap;
 
 import Library.Messages.IMessage;
 import Library.Messages.MessageFactory.SMSBuilder;
+import Library.Signals.INotification;
 import Library.Signals.Notification;
 import Library.Signals.SignalBuilders.NotificationBuilder;
+import Library.User.User;
 
 public class AddNotification extends AppCompatActivity {
 
@@ -35,6 +41,9 @@ public class AddNotification extends AppCompatActivity {
     private RadioGroup rg;
     private RadioButton rb;
     private boolean b = false;
+    private RadioGroup rg1;
+    private RadioButton rb1;
+    private boolean b1 = false;
     private NotificationBuilder _notificationBuilder = new NotificationBuilder();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +68,8 @@ public class AddNotification extends AppCompatActivity {
         list1.add(map3);
         HashMap<String, String> map4;
         map4 = new HashMap<>();
-        map4.put("Name", "Интервал уведомлений");
-        map4.put("Tel", "Нет");
+        map4.put("Name", "Приоритет");
+        map4.put("Tel", "Средний");
         list1.add(map4);
         String [] strings = {"Name", "Tel"};
         int [] date = {android.R.id.text1, android.R.id.text2};
@@ -169,6 +178,7 @@ public class AddNotification extends AppCompatActivity {
 
                         //и отображаем его:
                         alertDialog1.show();
+                        break;
                     case 2:
                         LayoutInflater li2 = LayoutInflater.from(context);
                         View repeatView = li2.inflate(R.layout.periodstyle, null);
@@ -258,17 +268,116 @@ public class AddNotification extends AppCompatActivity {
                                 .setCancelable(true)
                                 .setTitle("Выберите период повтора");
 
-
                         //Создаем AlertDialog:
                         alertDialog1 = mDialogBuilder2.create();
 
+                        //и отображаем его:
+                        alertDialog1.show();
+                        break;
+                    case 3:
+                        LayoutInflater li3 = LayoutInflater.from(context);
+                        View repeatView3 = li3.inflate(R.layout.prioritetstyle, null);
 
+                        //Создаем AlertDialog
+                        AlertDialog.Builder mDialogBuilder3 = new AlertDialog.Builder(context);
+
+                        //Настраиваем prompt.xml для нашего AlertDialog:
+                        mDialogBuilder3.setView(repeatView3);
+
+                        //Настраиваем отображение поля для ввода текста в открытом диалоге:
+                        RadioGroup radioGroup3= (RadioGroup)repeatView3.findViewById(R.id.group);
+
+                        Button ok3 = (Button)repeatView3.findViewById(R.id.ok) ;
+                        Button cancel3 = (Button)repeatView3.findViewById(R.id.cancel) ;
+                        RadioButton radioHight = (RadioButton)repeatView3.findViewById(R.id.radioHight);
+                        RadioButton radioMedium = (RadioButton)repeatView3.findViewById(R.id.radioMedium);
+                        RadioButton radioLow = (RadioButton)repeatView3.findViewById(R.id.radioLow);
+                        rg1 = (RadioGroup)repeatView3.findViewById(R.id.group);
+                        if(b1==false)
+                        {
+                            b1=true;
+                            rb1 = radioMedium;
+                        }
+                        rg1.check(rb1.getId());
+                        ok3.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                int checkedRadioButtonId =radioGroup3.getCheckedRadioButtonId();
+                                RadioButton checked = (RadioButton)repeatView3.findViewById(checkedRadioButtonId);
+                                rb1 = checked;
+                                switch (checkedRadioButtonId)
+                                {
+                                    case R.id.radioHight:
+                                        _notificationBuilder.setPriority(Notification.PRIORITY_HIGH);
+                                        map4.clear();
+                                        map4.put("Name", "Приоритет");
+                                        map4.put("Tel", "Высокий");
+                                        adapter1.notifyDataSetChanged();
+                                        alertDialog1.cancel();
+                                        break;
+                                    case R.id.radioMedium:
+                                        _notificationBuilder.setPriority(Notification.PRIORITY_DEFAULT);
+                                        map4.clear();
+                                        map4.put("Name", "Приоритет");
+                                        map4.put("Tel", "Средний");
+                                        adapter1.notifyDataSetChanged();
+                                        alertDialog1.cancel();
+                                        break;
+
+                                    case R.id.radioLow:
+                                        _notificationBuilder.setPriority(Notification.PRIORITY_LOW);
+                                        map4.clear();
+                                        map4.put("Name", "Приоритет");
+                                        map4.put("Tel", "Низкий");
+                                        adapter1.notifyDataSetChanged();
+                                        alertDialog1.cancel();
+                                        break;
+                                }
+                            }
+                        });
+                        cancel3.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                alertDialog1.cancel();
+                            }
+                        });
+                        //Настраиваем сообщение в диалоговом окне:
+                        mDialogBuilder3
+                                .setCancelable(true)
+                                .setTitle("Выберите период повтора");
+
+                        //Создаем AlertDialog:
+                        alertDialog1 = mDialogBuilder3.create();
 
                         //и отображаем его:
                         alertDialog1.show();
-                }
-                }
+                        break;
 
+                }
+                }
+        });
+        EditText edit = findViewById(R.id.editText3);
+        MultiAutoCompleteTextView auto = findViewById((R.id.multiAutoCompleteTextView));
+        FloatingActionButton f1 = findViewById(R.id.floatingActionButton);
+        FloatingActionButton f2 = findViewById(R.id.floatingActionButton2);
+        f1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _notificationBuilder.setName(edit.getText().toString());
+                _notificationBuilder.setDescription(auto.getText().toString());
+                INotification notification = _notificationBuilder.build();
+                User.getInstance().addNotification(notification);
+                notification.turnOn(context);
+                Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+                startActivity(intent);
+            }
+        });
+        f2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+                startActivity(intent);
+            }
         });
     }
 }
