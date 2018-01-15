@@ -15,6 +15,7 @@ import java.util.GregorianCalendar;
 import Library.DataHelpers.DataBaseHelper;
 import Library.Messages.IMessage;
 import Library.PuzzlesThings.PuzzleFactory;
+import Toasts.ToastMaker;
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
@@ -81,18 +82,18 @@ public class Ring extends RealmObject implements IRing{
     }
 
     public IMessage getMessage() { //Null obj pattern
-        if (message == null)
-        {
-            DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
-            message = dataBaseHelper.loadMesssage(id);
-        }
         return message;
     }
 
     public void setMessage (IMessage message) {
+        if (this.message != null && message == null) {
+            DataBaseHelper dataBaseHelper = DataBaseHelper.getInstance();
+            dataBaseHelper.deleteRecursive(this.message);
+        }
         this.message = message;
     }
 
+    @Override
     public byte[] getRepeatDays() {
         return repeatDays;
     }
@@ -265,6 +266,8 @@ public class Ring extends RealmObject implements IRing{
         } catch (NullPointerException ex) {
             Log.e("Ring turn on", ex.getMessage());
         }
+
+        ToastMaker.showRemainingTime(context, this);
     }
 
     @Override

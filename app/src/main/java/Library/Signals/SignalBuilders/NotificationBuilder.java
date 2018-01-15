@@ -43,10 +43,10 @@ public class NotificationBuilder extends SignalFactory {
         return this;
     }
 
-    public NotificationBuilder setSpecificPeriodicity(byte specificPeriodicity) {
+    /**public NotificationBuilder setSpecificPeriodicity(byte specificPeriodicity) {
         signal.setSpecificPeriodicity(specificPeriodicity);
         return this;
-    }
+    }**/
 
 
     public NotificationBuilder setName(String name) {
@@ -60,11 +60,11 @@ public class NotificationBuilder extends SignalFactory {
         return this;
     }
 
-    @Override
+    /**@Override
     public NotificationBuilder setRepeatSignalInterval(long repeatSignalInterval) {
         signal.setRepeatSignalInterval(repeatSignalInterval);
         return this;
-    }
+    }**/
 
     @Override
     public NotificationBuilder setDescription(String description) {

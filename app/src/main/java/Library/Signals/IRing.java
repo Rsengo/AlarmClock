@@ -14,4 +14,5 @@ public interface IRing extends ISignal {
     boolean isDeleteAfterUsing();
     boolean isOnState();
     boolean isVibrating();
+    byte[] getRepeatDays();
 }

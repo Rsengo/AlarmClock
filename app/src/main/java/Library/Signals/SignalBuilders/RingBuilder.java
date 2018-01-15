@@ -29,7 +29,6 @@ public class RingBuilder extends SignalFactory {
         return this;
     }
 
-    @Override
     public RingBuilder setRepeatSignalInterval(long repeatSignalInterval) {
         signal.setRepeatSignalInterval(repeatSignalInterval);
         return this;

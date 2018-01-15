@@ -34,12 +34,12 @@ public class Notification extends RealmObject implements INotification {
     @Required
     private String name = ""; //Имя
     private byte generalPeriodicity = Notification.PEREODICITY_NOREPEAT; //Общая переодичность
-    private byte specificPeriodicity = 0; //Подробная
+    private byte specificPeriodicity = 1; //Подробная
     private Date closeDate = null; //Ближайшая дата
     private byte priority = PRIORITY_DEFAULT; //Приоритет
     @Required
     private Date signalTime = new Date(); //Время запуска
-    private long repeatSignalInterval = 0; //интервал повтора
+    /**private long repeatSignalInterval = 0; //интервал повтора**/
     // (Константа AlarmManager)
     private String description = null; //Описание
     @Required
@@ -87,13 +87,13 @@ public class Notification extends RealmObject implements INotification {
         this.generalPeriodicity = generalPeriodicity;
     }
 
-    public byte getSpecificPeriodicity() {
+    /*public byte getSpecificPeriodicity() {
         return specificPeriodicity;
     }
 
     public void setSpecificPeriodicity(byte specificPeriodicity) {
         this.specificPeriodicity = specificPeriodicity;
-    }
+    }*/
 
     @Override
     public byte getPriority() {
@@ -122,13 +122,13 @@ public class Notification extends RealmObject implements INotification {
         closeDate = calendar.getTime();
     }
 
-    public long getRepeatSignalInterval() {
+    /**public long getRepeatSignalInterval() {
         return repeatSignalInterval;
     }
 
     public void setRepeatSignalInterval(long repeatSignalInterval) {
         this.repeatSignalInterval = repeatSignalInterval;
-    }
+    }**/
 
     @Override
     public String getDescription() {
@@ -167,6 +167,9 @@ public class Notification extends RealmObject implements INotification {
             case (PEREODICITY_EVERYDAY):
                 calendar.add(Calendar.DAY_OF_YEAR, specificPeriodicity);
                 break;
+            case (PEREODICITY_EVERYWEEK):
+                calendar.add(Calendar.WEEK_OF_YEAR, specificPeriodicity);
+                break;
             case (PEREODICITY_EVERYMOUNTH):
                 calendar.add(Calendar.MONTH, specificPeriodicity);
                 break;
@@ -193,10 +196,10 @@ public class Notification extends RealmObject implements INotification {
         long signalTime = this.closeDate.getTime();
 
         try {
-            if (repeatSignalInterval != 0)
+            /**if (repeatSignalInterval != 0)
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, signalTime,
                         this.repeatSignalInterval, pendingIntent);
-            else
+            else**/
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, signalTime, pendingIntent);
         } catch (NullPointerException ex) {
             Log.e("Notification turn on", ex.getMessage());
