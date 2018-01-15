@@ -1,5 +1,6 @@
 package com.example.ytgv8b.firsttry;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -42,7 +43,7 @@ public class NotificationFragment extends Fragment {
     public TextView textview;
     public ListView listview;
     public FloatingActionButton button;
-
+    private Context context;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class NotificationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        context = getContext();
         View rootView =
                 inflater.inflate(R.layout.ringfragment, container, false);
         button = rootView.findViewById(R.id.addRing);
@@ -84,7 +86,9 @@ public class NotificationFragment extends Fragment {
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                User.getInstance().removeNotification(i);
+                User user = User.getInstance();
+                user.getNotifications().get(i).turnOff(context);
+                user.removeNotification(i);
                 adapter.notifyDataSetChanged();
                 return true;
             }

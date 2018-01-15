@@ -1,5 +1,6 @@
 package com.example.ytgv8b.firsttry;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -42,6 +43,7 @@ public class RingFragment extends Fragment {
     public TextView textview;
     public ListView listview;
     public FloatingActionButton button;
+    public Context context;
 
 
     @Override
@@ -52,6 +54,7 @@ public class RingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        context = getContext();
         View rootView =
                 inflater.inflate(R.layout.ringfragment, container, false);
        button = rootView.findViewById(R.id.addRing);
@@ -85,7 +88,9 @@ public class RingFragment extends Fragment {
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                User.getInstance().removeRing(i);
+                User user = User.getInstance();
+                user.getNotifications().get(i).turnOff(context);
+                user.removeRing(i);
                 adapter.notifyDataSetChanged();
                 return true;
             }

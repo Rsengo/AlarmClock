@@ -178,6 +178,7 @@ public class Notification extends RealmObject implements INotification {
 
     @Override
     public void recountSignalTime(Context context) {
+        recountSignalTime();
         turnOn(context);
     }
 
