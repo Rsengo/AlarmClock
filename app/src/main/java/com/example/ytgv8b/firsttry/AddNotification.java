@@ -365,6 +365,7 @@ public class AddNotification extends AppCompatActivity {
             public void onClick(View view) {
                 _notificationBuilder.setName(edit.getText().toString());
                 _notificationBuilder.setDescription(auto.getText().toString());
+                _notificationBuilder.setSignalTime(_calendar.getTime());
                 INotification notification = _notificationBuilder.build();
                 User.getInstance().addNotification(notification);
                 notification.turnOn(context);

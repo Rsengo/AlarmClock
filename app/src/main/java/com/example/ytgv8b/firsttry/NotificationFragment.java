@@ -84,7 +84,7 @@ public class NotificationFragment extends Fragment {
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                User.getInstance().removeRing(i);
+                User.getInstance().removeNotification(i);
                 adapter.notifyDataSetChanged();
                 return true;
             }
