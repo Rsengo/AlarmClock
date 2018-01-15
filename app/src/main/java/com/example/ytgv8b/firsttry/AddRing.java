@@ -328,7 +328,9 @@ public class AddRing extends AppCompatActivity {
         // TODO: 14.01.2018 Вибрация и автоудаление!
         ListView listView = (ListView)findViewById(R.id.listView)  ;
         String [] list = new String[] {"Вибрация", "Удалить после срабатывания"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, list);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_multiple_choice, list);
+        //VibrationAndAutodeleteAdapter adapter = new VibrationAndAutodeleteAdapter(this, list);
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -337,7 +339,7 @@ public class AddRing extends AppCompatActivity {
                 listView.setItemChecked(position, !listView.isItemChecked(position));
                 if (position==0)
                 {
-                    if(listView.isItemChecked(position)==true)
+                    if(listView.isItemChecked(position))
                     {
                         ringBuilder.setVibrating(true);//Билдер вибрации
                     }
@@ -345,7 +347,7 @@ public class AddRing extends AppCompatActivity {
                 }
                 else
                 {
-                    if(listView.isItemChecked(position)==true)
+                    if(listView.isItemChecked(position))
                     {
                         ringBuilder.setDeleteAfterUsing(true);//Билдер автоудаления
                     }
@@ -373,6 +375,8 @@ public class AddRing extends AppCompatActivity {
                 Date date = calendar.getTime();
                 ringBuilder.setSignalTime(date)
                         .setRepeatSignalInterval(numberPicker.getValue() * 60000);
+                        //.setVibrating(adapter.getBox(0))
+                        //.setDeleteAfterUsing(adapter.getBox(1));
 
                 IRing ring = ringBuilder.build();
 

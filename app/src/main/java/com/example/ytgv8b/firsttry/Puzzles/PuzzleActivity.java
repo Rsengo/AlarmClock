@@ -83,7 +83,7 @@ public abstract class PuzzleActivity extends AppCompatActivity {
 
         if (ring.isDeleteAfterUsing()) {
             ring.turnOff(getApplicationContext());
-            User.getInstance().removeRing(ring);
+            User.removeRingById(ring.getId());
         } else {
             ring.recountSignalTime(this);
             dataBaseHelper.saveRecursive(ring);

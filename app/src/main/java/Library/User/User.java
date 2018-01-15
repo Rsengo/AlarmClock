@@ -161,7 +161,7 @@ public class User implements  IUser {
         removeRing(ring);
     }
 
-    public void removeRingById(int id) {
+    public static void removeRingById(int id) {
         dataBaseHelper.deleteRecursive(dataBaseHelper.getRing(id));
     }
 
