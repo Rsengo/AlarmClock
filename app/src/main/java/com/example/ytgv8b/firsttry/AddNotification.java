@@ -22,7 +22,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-import Kostyly.Kostyl;
 import Library.Messages.IMessage;
 import Library.Messages.MessageFactory.SMSBuilder;
 import Library.Signals.SignalBuilders.NotificationBuilder;
