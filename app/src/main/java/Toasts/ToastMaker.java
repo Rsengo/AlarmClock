@@ -2,6 +2,7 @@ package Toasts;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import Library.Signals.IRing;
@@ -32,5 +33,9 @@ public class ToastMaker {
         toast.show();
     }
 
-
+    public static void showValidate(Context context) {
+        Toast toast = Toast.makeText(context, "введен неверный формат данных", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP, 0, 0);
+        toast.show();
+    }
 }

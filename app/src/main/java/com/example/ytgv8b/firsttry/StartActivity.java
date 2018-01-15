@@ -13,6 +13,7 @@ import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.FileSystemHelper;
 import Library.DataHelpers.PreferenceHelper;
 import Library.User.User;
+import Toasts.ToastMaker;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -27,7 +28,7 @@ public class StartActivity extends AppCompatActivity {
         button.setOnClickListener(view -> {
                 if(editText2.getText().equals("Введите имя")&&editText2.getText().equals(""))
                 {
-
+                    ToastMaker.showValidate(this);
                 }
                 else if(!TextUtils.isEmpty(editText1.getText()) &&
                         android.util.Patterns.EMAIL_ADDRESS.matcher(editText1.getText()).matches())
