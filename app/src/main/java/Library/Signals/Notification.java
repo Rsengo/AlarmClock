@@ -35,7 +35,6 @@ public class Notification extends RealmObject implements INotification {
     private String name = ""; //Имя
     private byte generalPeriodicity = Notification.PEREODICITY_NOREPEAT; //Общая переодичность
     private byte specificPeriodicity = 1; //Подробная
-    private Date closeDate = null; //Ближайшая дата
     private byte priority = PRIORITY_DEFAULT; //Приоритет
     @Required
     private Date signalTime = new Date(); //Время запуска
@@ -75,9 +74,6 @@ public class Notification extends RealmObject implements INotification {
         this.name = name;
     }
 
-    public Date getCloseDate() {
-        return closeDate;
-    }
 
     public byte getGeneralPeriodicity() {
         return generalPeriodicity;
@@ -118,8 +114,6 @@ public class Notification extends RealmObject implements INotification {
 
         if (System.currentTimeMillis() > signalTime.getTime())
             recountSignalTime();
-
-        closeDate = calendar.getTime();
     }
 
     /**public long getRepeatSignalInterval() {
@@ -159,7 +153,7 @@ public class Notification extends RealmObject implements INotification {
 
     private void recountSignalTime() {
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(closeDate);
+        calendar.setTime(signalTime);
 
         switch (generalPeriodicity) {
             case (PEREODICITY_NOREPEAT):
@@ -179,7 +173,7 @@ public class Notification extends RealmObject implements INotification {
                 break;
         }
 
-        closeDate = calendar.getTime();
+        signalTime = calendar.getTime();
     }
 
     @Override
@@ -193,7 +187,7 @@ public class Notification extends RealmObject implements INotification {
 
         PendingIntent pendingIntent = createIntent(context);
 
-        long signalTime = this.closeDate.getTime();
+        long signalTime = this.signalTime.getTime();
 
         try {
             /**if (repeatSignalInterval != 0)
@@ -218,7 +212,7 @@ public class Notification extends RealmObject implements INotification {
     @Override
     public long remainingTimeInMillis() {
         Date tempDate = new Date();
-        return closeDate.getTime() - tempDate.getTime();
+        return signalTime.getTime() - tempDate.getTime();
     }
 
     private PendingIntent createIntent(Context context) {
