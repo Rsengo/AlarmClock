@@ -50,6 +50,8 @@ public class AddRing extends AppCompatActivity {
     private boolean b1 = false;
     private String discriptionstring= "Будильник";
     private String phonenumber= "";
+    private boolean vib =false;
+    private boolean del =false;
     private byte method = 0;
     private RingBuilder ringBuilder =new RingBuilder();
     private IRing tempRing;
@@ -337,28 +339,28 @@ public class AddRing extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 listView.setItemChecked(position, !listView.isItemChecked(position));
-                if (position==0)
-                {
-                    if(listView.isItemChecked(position))
-                    {
-                        ringBuilder.setVibrating(true);//Билдер вибрации
-                    }
-                    else ringBuilder.setVibrating(false);
-                }
-                else
-                {
-                    if(listView.isItemChecked(position))
-                    {
-                        ringBuilder.setDeleteAfterUsing(true);//Билдер автоудаления
-                    }
-                    else ringBuilder.setDeleteAfterUsing(false);
-                }
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i==0)
+                {
+                    vib =!vib;
+                    ringBuilder.setVibrating(vib);//Билдер вибрации
+                }
+                else
+                {
+                    del = !del;
+                    ringBuilder.setDeleteAfterUsing(del);//Билдер автоудаления
+
+                }
             }
         });
         NumberPicker numberPicker = (NumberPicker) findViewById(R.id.numberPicker);
