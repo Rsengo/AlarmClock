@@ -68,16 +68,7 @@ public class AddRing extends AppCompatActivity {
         // TODO: 14.01.2018 Установка времени!
         TimePicker tp = (TimePicker)findViewById(R.id.timePicker2);
         tp.setIs24HourView(true);
-        tp.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                calendar.set(Calendar.MINUTE,minute);
-                Date date  = calendar.getTime();
-                ringBuilder.setSignalTime(date);//Билдер времени
-            }
-        });
+
         // TODO: 13.01.2018 Описание!
         ListView discription = (ListView)findViewById(R.id.discription);
         ArrayList<HashMap<String, String>> listdiscription =new ArrayList<>();
@@ -360,7 +351,13 @@ public class AddRing extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ringBuilder.setRepeatSignalInterval(numberPicker.getValue()*60000);
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.HOUR_OF_DAY,tp.getCurrentHour());
+                calendar.set(Calendar.MINUTE,tp.getCurrentMinute());
+                Date date  = calendar.getTime();
+                ringBuilder.setSignalTime(date)
+                        .setRepeatSignalInterval(numberPicker.getValue()*60000);
+
                 IRing ring = ringBuilder.build();
                 User.getInstance().addRing(ring);
                 ring.turnOn(context);
