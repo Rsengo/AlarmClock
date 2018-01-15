@@ -10,6 +10,7 @@ import java.util.TimerTask;
 import Library.DataHelpers.DataBaseHelper;
 import Library.DataHelpers.PreferenceHelper;
 import Library.Signals.IRing;
+import Library.User.User;
 import Threads.MusicThread;
 import Threads.VibrationThread;
 import Timer.*;
@@ -75,7 +76,8 @@ public abstract class PuzzleActivity extends AppCompatActivity {
         //ring.postpound(this);
 
         if (ring.isDeleteAfterUsing()) {
-            dataBaseHelper.deleteData(ring);
+            ring.turnOff(getApplicationContext());
+            User.getInstance().removeRing(ring);
         } else {
             ring.recountSignalTime(this);
             dataBaseHelper.saveRecursive(ring);
