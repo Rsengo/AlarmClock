@@ -157,7 +157,7 @@ public class Notification extends RealmObject implements INotification {
 
         switch (generalPeriodicity) {
             case (PEREODICITY_NOREPEAT):
-                break;
+                return;
             case (PEREODICITY_EVERYDAY):
                 calendar.add(Calendar.DAY_OF_YEAR, specificPeriodicity);
                 break;
